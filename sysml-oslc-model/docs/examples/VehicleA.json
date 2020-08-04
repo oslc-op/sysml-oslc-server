@@ -1,0 +1,399 @@
+{
+  "@context": "http://schema.org/",
+  "@id": "http://sysml2-sst.intercax.com:9000/elements/a8f6935f-5c95-47d4-be19-c0da76bde5ca",
+  "@type": "Block",
+  "conjugator": null,
+  "containingProject": {
+    "identifier": "e7b4a34d-26b5-434c-8bb1-1e8224e7eb8e"
+  },
+  "endFeature": [],
+  "feature": [
+    {
+      "identifier": "6fa051ae-fdcf-493d-8654-298a3ce5a3a0"
+    },
+    {
+      "identifier": "573928b6-a1d0-4f97-8519-ef7435ca8298"
+    },
+    {
+      "identifier": "b8495f05-98ba-4441-a0dd-4ccf924d1c17"
+    },
+    {
+      "identifier": "eee1c9a9-28e6-4b4b-bed6-803f30e3a029"
+    },
+    {
+      "identifier": "82b6b353-cc7a-49d8-95ab-b19c83208c07"
+    },
+    {
+      "identifier": "9354bac2-4d16-48ed-bc70-5e4a3bf86634"
+    },
+    {
+      "identifier": "7fa32695-74a9-4705-8fd1-1f9ef67fcba0"
+    },
+    {
+      "identifier": "103446e0-dc8b-4773-bffa-cc61b963dc51"
+    },
+    {
+      "identifier": "d08e9fa6-1b3a-4512-83d5-6f60a0f6c132"
+    },
+    {
+      "identifier": "23ec63ef-daac-4a87-8147-4714436b0cc5"
+    }
+  ],
+  "featureMembership": [
+    {
+      "identifier": "7b76f913-efb4-4a54-ab33-0ff43fb4e465"
+    },
+    {
+      "identifier": "e9a0f2d8-d3b7-453b-b5e3-9cdddfd4e736"
+    },
+    {
+      "identifier": "654d310e-f1bb-4760-a1b3-2e8b338bc0a6"
+    },
+    {
+      "identifier": "f2c1abef-3c15-445e-a1f2-ece2e5bfc23b"
+    },
+    {
+      "identifier": "444cd636-4bc6-4618-8473-2b6804760c93"
+    },
+    {
+      "identifier": "133cd268-2feb-4c27-99da-5210fa86070b"
+    },
+    {
+      "identifier": "a9b88d8f-f15d-4ecc-9b34-00097f98fa77"
+    },
+    {
+      "identifier": "8ca63e9b-fcf8-4340-ad95-adc6bf61161b"
+    }
+  ],
+  "flowProperty": [],
+  "identifier": "a8f6935f-5c95-47d4-be19-c0da76bde5ca",
+  "importedMembership": [],
+  "inheritedFeature": [
+    {
+      "identifier": "d08e9fa6-1b3a-4512-83d5-6f60a0f6c132"
+    },
+    {
+      "identifier": "23ec63ef-daac-4a87-8147-4714436b0cc5"
+    }
+  ],
+  "inheritedMembership": [],
+  "input": [],
+  "isAbstract": false,
+  "isConjugated": false,
+  "isSufficient": false,
+  "member": [
+    {
+      "identifier": "6fa051ae-fdcf-493d-8654-298a3ce5a3a0"
+    },
+    {
+      "identifier": "573928b6-a1d0-4f97-8519-ef7435ca8298"
+    },
+    {
+      "identifier": "b8495f05-98ba-4441-a0dd-4ccf924d1c17"
+    },
+    {
+      "identifier": "eee1c9a9-28e6-4b4b-bed6-803f30e3a029"
+    },
+    {
+      "identifier": "82b6b353-cc7a-49d8-95ab-b19c83208c07"
+    },
+    {
+      "identifier": "9354bac2-4d16-48ed-bc70-5e4a3bf86634"
+    },
+    {
+      "identifier": "7fa32695-74a9-4705-8fd1-1f9ef67fcba0"
+    },
+    {
+      "identifier": "103446e0-dc8b-4773-bffa-cc61b963dc51"
+    },
+    {
+      "identifier": "d08e9fa6-1b3a-4512-83d5-6f60a0f6c132"
+    },
+    {
+      "identifier": "23ec63ef-daac-4a87-8147-4714436b0cc5"
+    }
+  ],
+  "membership": [
+    {
+      "identifier": "7b76f913-efb4-4a54-ab33-0ff43fb4e465"
+    },
+    {
+      "identifier": "e9a0f2d8-d3b7-453b-b5e3-9cdddfd4e736"
+    },
+    {
+      "identifier": "654d310e-f1bb-4760-a1b3-2e8b338bc0a6"
+    },
+    {
+      "identifier": "f2c1abef-3c15-445e-a1f2-ece2e5bfc23b"
+    },
+    {
+      "identifier": "444cd636-4bc6-4618-8473-2b6804760c93"
+    },
+    {
+      "identifier": "133cd268-2feb-4c27-99da-5210fa86070b"
+    },
+    {
+      "identifier": "a9b88d8f-f15d-4ecc-9b34-00097f98fa77"
+    },
+    {
+      "identifier": "8ca63e9b-fcf8-4340-ad95-adc6bf61161b"
+    }
+  ],
+  "multiplicity": null,
+  "name": "VehicleA",
+  "output": [],
+  "ownedAction": [
+    {
+      "identifier": "eee1c9a9-28e6-4b4b-bed6-803f30e3a029"
+    },
+    {
+      "identifier": "82b6b353-cc7a-49d8-95ab-b19c83208c07"
+    },
+    {
+      "identifier": "9354bac2-4d16-48ed-bc70-5e4a3bf86634"
+    },
+    {
+      "identifier": "7fa32695-74a9-4705-8fd1-1f9ef67fcba0"
+    }
+  ],
+  "ownedConjugator": null,
+  "ownedConstraint": [],
+  "ownedElement": [
+    {
+      "identifier": "6fa051ae-fdcf-493d-8654-298a3ce5a3a0"
+    },
+    {
+      "identifier": "573928b6-a1d0-4f97-8519-ef7435ca8298"
+    },
+    {
+      "identifier": "b8495f05-98ba-4441-a0dd-4ccf924d1c17"
+    },
+    {
+      "identifier": "eee1c9a9-28e6-4b4b-bed6-803f30e3a029"
+    },
+    {
+      "identifier": "82b6b353-cc7a-49d8-95ab-b19c83208c07"
+    },
+    {
+      "identifier": "9354bac2-4d16-48ed-bc70-5e4a3bf86634"
+    },
+    {
+      "identifier": "7fa32695-74a9-4705-8fd1-1f9ef67fcba0"
+    },
+    {
+      "identifier": "103446e0-dc8b-4773-bffa-cc61b963dc51"
+    }
+  ],
+  "ownedEndFeature": [],
+  "ownedFeature": [
+    {
+      "identifier": "6fa051ae-fdcf-493d-8654-298a3ce5a3a0"
+    },
+    {
+      "identifier": "573928b6-a1d0-4f97-8519-ef7435ca8298"
+    },
+    {
+      "identifier": "b8495f05-98ba-4441-a0dd-4ccf924d1c17"
+    },
+    {
+      "identifier": "eee1c9a9-28e6-4b4b-bed6-803f30e3a029"
+    },
+    {
+      "identifier": "82b6b353-cc7a-49d8-95ab-b19c83208c07"
+    },
+    {
+      "identifier": "9354bac2-4d16-48ed-bc70-5e4a3bf86634"
+    },
+    {
+      "identifier": "7fa32695-74a9-4705-8fd1-1f9ef67fcba0"
+    },
+    {
+      "identifier": "103446e0-dc8b-4773-bffa-cc61b963dc51"
+    }
+  ],
+  "ownedFeatureMembership": [
+    {
+      "identifier": "7b76f913-efb4-4a54-ab33-0ff43fb4e465"
+    },
+    {
+      "identifier": "e9a0f2d8-d3b7-453b-b5e3-9cdddfd4e736"
+    },
+    {
+      "identifier": "654d310e-f1bb-4760-a1b3-2e8b338bc0a6"
+    },
+    {
+      "identifier": "f2c1abef-3c15-445e-a1f2-ece2e5bfc23b"
+    },
+    {
+      "identifier": "444cd636-4bc6-4618-8473-2b6804760c93"
+    },
+    {
+      "identifier": "133cd268-2feb-4c27-99da-5210fa86070b"
+    },
+    {
+      "identifier": "a9b88d8f-f15d-4ecc-9b34-00097f98fa77"
+    },
+    {
+      "identifier": "8ca63e9b-fcf8-4340-ad95-adc6bf61161b"
+    }
+  ],
+  "ownedGeneralization": [
+    {
+      "identifier": "370f9938-65da-4c60-be19-2524b5730135"
+    }
+  ],
+  "ownedImport": [],
+  "ownedMember": [
+    {
+      "identifier": "6fa051ae-fdcf-493d-8654-298a3ce5a3a0"
+    },
+    {
+      "identifier": "573928b6-a1d0-4f97-8519-ef7435ca8298"
+    },
+    {
+      "identifier": "b8495f05-98ba-4441-a0dd-4ccf924d1c17"
+    },
+    {
+      "identifier": "eee1c9a9-28e6-4b4b-bed6-803f30e3a029"
+    },
+    {
+      "identifier": "82b6b353-cc7a-49d8-95ab-b19c83208c07"
+    },
+    {
+      "identifier": "9354bac2-4d16-48ed-bc70-5e4a3bf86634"
+    },
+    {
+      "identifier": "7fa32695-74a9-4705-8fd1-1f9ef67fcba0"
+    },
+    {
+      "identifier": "103446e0-dc8b-4773-bffa-cc61b963dc51"
+    }
+  ],
+  "ownedMembership": [
+    {
+      "identifier": "7b76f913-efb4-4a54-ab33-0ff43fb4e465"
+    },
+    {
+      "identifier": "e9a0f2d8-d3b7-453b-b5e3-9cdddfd4e736"
+    },
+    {
+      "identifier": "654d310e-f1bb-4760-a1b3-2e8b338bc0a6"
+    },
+    {
+      "identifier": "f2c1abef-3c15-445e-a1f2-ece2e5bfc23b"
+    },
+    {
+      "identifier": "444cd636-4bc6-4618-8473-2b6804760c93"
+    },
+    {
+      "identifier": "133cd268-2feb-4c27-99da-5210fa86070b"
+    },
+    {
+      "identifier": "a9b88d8f-f15d-4ecc-9b34-00097f98fa77"
+    },
+    {
+      "identifier": "8ca63e9b-fcf8-4340-ad95-adc6bf61161b"
+    }
+  ],
+  "ownedPort": [],
+  "ownedProperty": [
+    {
+      "identifier": "6fa051ae-fdcf-493d-8654-298a3ce5a3a0"
+    },
+    {
+      "identifier": "573928b6-a1d0-4f97-8519-ef7435ca8298"
+    },
+    {
+      "identifier": "b8495f05-98ba-4441-a0dd-4ccf924d1c17"
+    }
+  ],
+  "ownedRelationship": [
+    {
+      "identifier": "370f9938-65da-4c60-be19-2524b5730135"
+    },
+    {
+      "identifier": "7b76f913-efb4-4a54-ab33-0ff43fb4e465"
+    },
+    {
+      "identifier": "e9a0f2d8-d3b7-453b-b5e3-9cdddfd4e736"
+    },
+    {
+      "identifier": "654d310e-f1bb-4760-a1b3-2e8b338bc0a6"
+    },
+    {
+      "identifier": "f2c1abef-3c15-445e-a1f2-ece2e5bfc23b"
+    },
+    {
+      "identifier": "444cd636-4bc6-4618-8473-2b6804760c93"
+    },
+    {
+      "identifier": "133cd268-2feb-4c27-99da-5210fa86070b"
+    },
+    {
+      "identifier": "a9b88d8f-f15d-4ecc-9b34-00097f98fa77"
+    },
+    {
+      "identifier": "8ca63e9b-fcf8-4340-ad95-adc6bf61161b"
+    }
+  ],
+  "ownedState": [
+    {
+      "identifier": "103446e0-dc8b-4773-bffa-cc61b963dc51"
+    }
+  ],
+  "ownedSuperclassing": [
+    {
+      "identifier": "370f9938-65da-4c60-be19-2524b5730135"
+    }
+  ],
+  "ownedTransition": [],
+  "ownedUsage": [
+    {
+      "identifier": "6fa051ae-fdcf-493d-8654-298a3ce5a3a0"
+    },
+    {
+      "identifier": "573928b6-a1d0-4f97-8519-ef7435ca8298"
+    },
+    {
+      "identifier": "b8495f05-98ba-4441-a0dd-4ccf924d1c17"
+    },
+    {
+      "identifier": "eee1c9a9-28e6-4b4b-bed6-803f30e3a029"
+    },
+    {
+      "identifier": "82b6b353-cc7a-49d8-95ab-b19c83208c07"
+    },
+    {
+      "identifier": "9354bac2-4d16-48ed-bc70-5e4a3bf86634"
+    },
+    {
+      "identifier": "7fa32695-74a9-4705-8fd1-1f9ef67fcba0"
+    },
+    {
+      "identifier": "103446e0-dc8b-4773-bffa-cc61b963dc51"
+    }
+  ],
+  "owner": {
+    "identifier": "4004927c-e8ba-4d94-8374-af3a6b35fdb6"
+  },
+  "owningMembership": {
+    "identifier": "62c96b9a-87b9-42fb-92ea-7cfaef89f2b7"
+  },
+  "owningNamespace": {
+    "identifier": "4004927c-e8ba-4d94-8374-af3a6b35fdb6"
+  },
+  "owningRelationship": {
+    "identifier": "62c96b9a-87b9-42fb-92ea-7cfaef89f2b7"
+  },
+  "property": [
+    {
+      "identifier": "6fa051ae-fdcf-493d-8654-298a3ce5a3a0"
+    },
+    {
+      "identifier": "573928b6-a1d0-4f97-8519-ef7435ca8298"
+    },
+    {
+      "identifier": "b8495f05-98ba-4441-a0dd-4ccf924d1c17"
+    }
+  ]
+}

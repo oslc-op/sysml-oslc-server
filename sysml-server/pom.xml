@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- Start of user code header
+    -->
+    <!-- TODO: Add additional header properties here to avoid them be overrriden upon future re-generation -->
+    <!-- End of user code
+    -->
+    <groupId>org.oasis.oslcop</groupId>
+    <artifactId>sysml-server</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>SysmlServer</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <version.lyo>4.0.0-SNAPSHOT</version.lyo>
+        <!-- Start of user code properties
+        -->
+        <!-- TODO: Add additional properties here to avoid them be overrriden upon future re-generation -->
+        <!-- End of user code
+        -->
+    </properties>
+    <repositories>
+        <!-- Start of user code repositories
+        -->
+        <!-- TODO: Add additional repositories here to avoid them be overrriden upon future re-generation -->
+        <!-- End of user code
+        -->
+        <repository>
+            <id>lyo-releases</id>
+            <name>Eclipse Lyo Releases</name>
+            <url>https://repo.eclipse.org/content/repositories/lyo-releases/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>lyo-snapshots</id>
+            <name>Eclipse Lyo Snapshots</name>
+            <url>https://repo.eclipse.org/content/repositories/lyo-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+    <!-- Start of user code pre_dependencies
+    -->
+    <!-- End of user code
+    -->
+    <dependencies>
+        <!-- Specific dependencies -->
+        <!-- Start of user code dependencies
+        -->
+        <!-- TODO: Add additional dependencies here to avoid them be overrriden upon future re-generation -->
+        <dependency>
+            <groupId>org.eclipse.lyo.clients</groupId>
+            <artifactId>oslc4j-client</artifactId>
+            <version>4.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.lyo</groupId>
+    		<artifactId>oslc-domains</artifactId>
+		    <version>4.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+		    <groupId>org.omg.sysml</groupId>
+		    <artifactId>sysml-v2-api-client</artifactId>
+		    <version>2020-03</version>
+        </dependency>
+        <!-- End of user code
+        -->
+        <!-- General dependencies -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.21</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- Servlet dependencies -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>2.25.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>2.25.1</version>
+        </dependency>
+        
+        <!-- Lyo dependencies -->
+        <dependency>
+            <groupId>org.eclipse.lyo.oslc4j.core</groupId>
+            <artifactId>oslc4j-core</artifactId>
+            <version>${version.lyo}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.lyo.oslc4j.core</groupId>
+            <artifactId>oslc4j-jena-provider</artifactId>
+            <version>${version.lyo}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.lyo.oslc4j.core</groupId>
+            <artifactId>oslc4j-json4j-provider</artifactId>
+            <version>${version.lyo}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.lyo.server</groupId>
+            <artifactId>oauth-core</artifactId>
+            <version>${version.lyo}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.lyo.server</groupId>
+            <artifactId>oauth-consumer-store</artifactId>
+            <version>${version.lyo}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.lyo.server</groupId>
+            <artifactId>oauth-webapp</artifactId>
+            <version>${version.lyo}</version>
+            <type>war</type>
+        </dependency>
+        
+        <!-- Swagger dependencies -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-jersey2-jaxrs</artifactId>
+            <version>1.5.22</version>
+        </dependency>
+    </dependencies>
+    <!-- Start of user code post_dependencies
+    -->
+    <!-- End of user code
+    -->
+    <build>
+        <finalName>sysml-server</finalName>
+            <plugins>
+            <!-- Start of user code plugins
+            -->
+            <!-- TODO: Add additional plugins here to avoid them be overrriden upon future re-generation -->
+            <!-- End of user code
+            -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.18.v20190429</version>
+                <configuration>
+                    <webAppConfig>
+                        <contextPath>/sysml</contextPath>
+                    </webAppConfig>
+                    <reload>automatic</reload>
+                    <scanIntervalSeconds>5</scanIntervalSeconds>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>jetty.port</name>
+                            <value>8443</value>
+                        </systemProperty>
+                    </systemProperties>
+                    <stopKey />
+                    <stopPort />
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <!-- Start of user code post_build
+    -->
+    <!-- End of user code
+    -->
+</project>

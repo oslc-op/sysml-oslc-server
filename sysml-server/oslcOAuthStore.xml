@@ -1,0 +1,25 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://eclipse.org/lyo/server/oauth#">
+  <j.0:Consumer>
+    <j.0:consumerName>mxl008784.persistent.co.in:9444/rdm</j.0:consumerName>
+    <j.0:consumerKey>353de74d-e50b-45ac-ae28-6e448f37d49d</j.0:consumerKey>
+    <j.0:consumerSecret>YWRtaW4=</j.0:consumerSecret>
+    <j.0:provisional>false</j.0:provisional>
+    <j.0:trusted>true</j.0:trusted>
+  </j.0:Consumer>
+  <j.0:Consumer>
+    <j.0:consumerName>plumule1.fyre.ibm.com:9443/rm</j.0:consumerName>
+    <j.0:consumerKey>20c1aebc-80e1-4e2e-b232-d41bb8c4bead</j.0:consumerKey>
+    <j.0:consumerSecret>Q2hhamFzM21hdCM=</j.0:consumerSecret>
+    <j.0:provisional>false</j.0:provisional>
+    <j.0:trusted>true</j.0:trusted>
+  </j.0:Consumer>
+  <j.0:Consumer>
+    <j.0:consumerName>plumule1.fyre.ibm.com:9443/ccm</j.0:consumerName>
+    <j.0:consumerKey>01cac463-c63e-4d02-a042-68222ee9f551</j.0:consumerKey>
+    <j.0:consumerSecret>Q2hhamFzM21hdCM=</j.0:consumerSecret>
+    <j.0:provisional>false</j.0:provisional>
+    <j.0:trusted>true</j.0:trusted>
+  </j.0:Consumer>
+</rdf:RDF>

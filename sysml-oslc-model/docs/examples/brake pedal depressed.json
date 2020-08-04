@@ -1,0 +1,123 @@
+{
+  "@type": "ValueProperty",
+  "conjugator": null,
+  "containingProject": {
+    "identifier": "e7b4a34d-26b5-434c-8bb1-1e8224e7eb8e"
+  },
+  "endFeature": [],
+  "endOwningType": null,
+  "feature": [],
+  "featureMembership": [],
+  "identifier": "6fa051ae-fdcf-493d-8654-298a3ce5a3a0",
+  "importedMembership": [],
+  "inheritedFeature": [],
+  "inheritedMembership": [],
+  "input": [],
+  "isAbstract": false,
+  "isComposite": false,
+  "isConjugated": false,
+  "isEnd": false,
+  "isNonunique": false,
+  "isOrdered": false,
+  "isSufficient": false,
+  "isUnique": true,
+  "member": [],
+  "membership": [],
+  "multiplicity": null,
+  "name": "brake pedal depressed",
+  "nestedAction": [],
+  "nestedConstraint": [],
+  "nestedPort": [],
+  "nestedProperty": [],
+  "nestedState": [],
+  "nestedTransition": [],
+  "nestedUsage": [],
+  "output": [],
+  "ownedConjugator": null,
+  "ownedElement": [],
+  "ownedEndFeature": [],
+  "ownedFeature": [],
+  "ownedFeatureMembership": [],
+  "ownedGeneralization": [
+    {
+      "identifier": "fd88e0cb-10a9-4372-b755-1da714326195"
+    },
+    {
+      "identifier": "610d73fa-308b-4fe8-aeba-f59cd0fd965a"
+    }
+  ],
+  "ownedImport": [],
+  "ownedMember": [],
+  "ownedMembership": [],
+  "ownedRedefinition": [],
+  "ownedRelationship": [
+    {
+      "identifier": "fd88e0cb-10a9-4372-b755-1da714326195"
+    },
+    {
+      "identifier": "610d73fa-308b-4fe8-aeba-f59cd0fd965a"
+    }
+  ],
+  "ownedSubsetting": [
+    {
+      "identifier": "610d73fa-308b-4fe8-aeba-f59cd0fd965a"
+    }
+  ],
+  "ownedType": [],
+  "owner": {
+    "identifier": "a8f6935f-5c95-47d4-be19-c0da76bde5ca"
+  },
+  "owningDefinition": {
+    "identifier": "a8f6935f-5c95-47d4-be19-c0da76bde5ca"
+  },
+  "owningFeatureMembership": {
+    "identifier": "7b76f913-efb4-4a54-ab33-0ff43fb4e465"
+  },
+  "owningMembership": {
+    "identifier": "7b76f913-efb4-4a54-ab33-0ff43fb4e465"
+  },
+  "owningNamespace": {
+    "identifier": "a8f6935f-5c95-47d4-be19-c0da76bde5ca"
+  },
+  "owningRelationship": {
+    "identifier": "7b76f913-efb4-4a54-ab33-0ff43fb4e465"
+  },
+  "owningType": {
+    "identifier": "a8f6935f-5c95-47d4-be19-c0da76bde5ca"
+  },
+  "owningUsage": null,
+  "property": [],
+  "propertyOwningDefinition": {
+    "identifier": "a8f6935f-5c95-47d4-be19-c0da76bde5ca"
+  },
+  "propertyOwningUsage": null,
+  "referencedType": [
+    {
+      "identifier": "ecd3a994-eced-4df1-98e2-0a6fe1037141"
+    },
+    {
+      "identifier": "627d2623-0f26-4428-8c48-f6e1d3f83ad2"
+    }
+  ],
+  "type": [
+    {
+      "identifier": "ecd3a994-eced-4df1-98e2-0a6fe1037141"
+    },
+    {
+      "identifier": "627d2623-0f26-4428-8c48-f6e1d3f83ad2"
+    }
+  ],
+  "typing": [
+    {
+      "identifier": "fd88e0cb-10a9-4372-b755-1da714326195"
+    }
+  ],
+  "valueType": [
+    {
+      "identifier": "ecd3a994-eced-4df1-98e2-0a6fe1037141"
+    },
+    {
+      "identifier": "627d2623-0f26-4428-8c48-f6e1d3f83ad2"
+    }
+  ]
+}

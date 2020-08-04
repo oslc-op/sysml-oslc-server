@@ -1,0 +1,136 @@
+{
+    "@type": "ValueProperty",
+    "conjugator": null,
+    "endFeature": [],
+    "endOwningType": null,
+    "feature": [
+        {
+            "identifier": "ab2fa1dc-2c88-4330-b58c-2036ba54cb29"
+        }
+    ],
+    "featureMembership": [],
+    "id": "f89038f3-a7e0-4270-8129-647389cf6157",
+    "identifier": "8006d360-3537-4431-b70a-0c4fe0c4662c",
+    "importedMembership": [],
+    "inheritedFeature": [
+        {
+            "identifier": "ab2fa1dc-2c88-4330-b58c-2036ba54cb29"
+        }
+    ],
+    "inheritedMembership": [],
+    "input": [],
+    "isAbstract": false,
+    "isComposite": false,
+    "isConjugated": false,
+    "isEnd": false,
+    "isNonunique": false,
+    "isOrdered": false,
+    "isSufficient": false,
+    "isUnique": true,
+    "member": [
+        {
+            "identifier": "ab2fa1dc-2c88-4330-b58c-2036ba54cb29"
+        }
+    ],
+    "membership": [],
+    "multiplicity": {
+        "identifier": "ab2fa1dc-2c88-4330-b58c-2036ba54cb29"
+    },
+    "name": "engineTorque",
+    "nestedAction": [],
+    "nestedConstraint": [],
+    "nestedPort": [],
+    "nestedProperty": [],
+    "nestedRequirement": [],
+    "nestedState": [],
+    "nestedTransition": [],
+    "nestedUsage": [],
+    "output": [],
+    "ownedConjugator": null,
+    "ownedElement": [],
+    "ownedEndFeature": [],
+    "ownedFeature": [],
+    "ownedFeatureMembership": [],
+    "ownedGeneralization": [
+        {
+            "identifier": "1f62ae2b-24f5-4c23-9ce5-52db6fb494be"
+        },
+        {
+            "identifier": "093ea84a-a0a9-44ed-83b1-ace7e792b011"
+        }
+    ],
+    "ownedImport": [],
+    "ownedMember": [],
+    "ownedMembership": [],
+    "ownedRedefinition": [],
+    "ownedRelationship": [
+        {
+            "identifier": "1f62ae2b-24f5-4c23-9ce5-52db6fb494be"
+        },
+        {
+            "identifier": "093ea84a-a0a9-44ed-83b1-ace7e792b011"
+        }
+    ],
+    "ownedSubsetting": [
+        {
+            "identifier": "093ea84a-a0a9-44ed-83b1-ace7e792b011"
+        }
+    ],
+    "ownedType": [],
+    "owner": {
+        "identifier": "ad15819f-9c6f-4fb6-8006-0b5906645d97"
+    },
+    "owningDefinition": null,
+    "owningFeatureMembership": {
+        "identifier": "d44258e7-02ea-4964-8c8f-2dee51099e65"
+    },
+    "owningMembership": {
+        "identifier": "d44258e7-02ea-4964-8c8f-2dee51099e65"
+    },
+    "owningNamespace": {
+        "identifier": "ad15819f-9c6f-4fb6-8006-0b5906645d97"
+    },
+    "owningRelationship": {
+        "identifier": "d44258e7-02ea-4964-8c8f-2dee51099e65"
+    },
+    "owningType": {
+        "identifier": "ad15819f-9c6f-4fb6-8006-0b5906645d97"
+    },
+    "owningUsage": {
+        "identifier": "ad15819f-9c6f-4fb6-8006-0b5906645d97"
+    },
+    "property": [],
+    "propertyOwningDefinition": null,
+    "propertyOwningUsage": {
+        "identifier": "ad15819f-9c6f-4fb6-8006-0b5906645d97"
+    },
+    "referencedType": [
+        {
+            "identifier": "71100b0a-4e16-43b1-a7a6-f23112383311"
+        },
+        {
+            "identifier": "181a03a3-c0f7-47a2-a5bb-93f28b08237b"
+        }
+    ],
+    "type": [
+        {
+            "identifier": "71100b0a-4e16-43b1-a7a6-f23112383311"
+        },
+        {
+            "identifier": "181a03a3-c0f7-47a2-a5bb-93f28b08237b"
+        }
+    ],
+    "typing": [
+        {
+            "identifier": "1f62ae2b-24f5-4c23-9ce5-52db6fb494be"
+        }
+    ],
+    "valueType": [
+        {
+            "identifier": "71100b0a-4e16-43b1-a7a6-f23112383311"
+        },
+        {
+            "identifier": "181a03a3-c0f7-47a2-a5bb-93f28b08237b"
+        }
+    ]
+}
