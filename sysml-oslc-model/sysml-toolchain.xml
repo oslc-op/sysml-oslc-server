@@ -38,7 +38,7 @@
     </configuration>
   </adaptorInterfaces>
   <specification>
-    <domainSpecifications name="SysML" namespaceURI="http://oasis.oslc-op/ns/sysml#" namespacePrefix="//@specification/@domainPrefixes[name='sysml']">
+    <domainSpecifications name="SysML" namespaceURI="http://omg.org/ns/sysml#" namespacePrefix="//@specification/@domainPrefixes[name='sysml']">
       <resources name="Element" resourceProperties="//@specification/@domainSpecifications[name='SysML']/@resourceProperties[name='ownedRelationship']">
         <extends href="../../org.eclipse.lyo.tools.domainmodels/oslcDomainSpecifications.xml#//@domainSpecifications[name='Architecture%20Management']/@resources[name='Resource']"/>
       </resources>

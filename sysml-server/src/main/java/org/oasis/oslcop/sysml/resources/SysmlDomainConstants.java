@@ -36,8 +36,8 @@ public interface SysmlDomainConstants
     // Start of user code user constants
     // End of user code
 
-    public static String SYSML_DOMAIN = "http://oasis.oslc-op/ns/sysml#";
-    public static String SYSML_NAMSPACE = "http://oasis.oslc-op/ns/sysml#";
+    public static String SYSML_DOMAIN = "http://omg.org/ns/sysml#";
+    public static String SYSML_NAMSPACE = "http://omg.org/ns/sysml#";
     public static String SYSML_NAMSPACE_PREFIX = "sysml";
 
     public static String ELEMENT_PATH = "element";
