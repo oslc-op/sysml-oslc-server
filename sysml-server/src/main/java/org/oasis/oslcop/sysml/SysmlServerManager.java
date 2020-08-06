@@ -52,6 +52,8 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.Response;
 import org.apache.http.HttpStatus;
+import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
+import javax.xml.namespace.QName;
 
 // End of user code
 
@@ -246,13 +248,13 @@ public class SysmlServerManager {
             if (commit == null) return aResource; // There are no elements in this project
             String head = commit.getAsJsonObject().get("id").getAsString();
 			url = apiClient.getBasePath() + "/projects/"+projectId+"/commits/"+head+"/elements/"+id;
-			//JsonElement elementE = apiClient.readSysMLResource(url);
-			//if (elementE == null) return aResource;
-			//aResource = new Element(httpServletRequest, info, id, elementE);
 			Response response = apiClient.getResource(url, "application/ld+json");
 			if (response != null && response.getStatus() == HttpStatus.SC_OK) {
-				response.getHeaders().putSingle("Content-Type", "application/ld+json");
+				// Because SysML v2 Services REST API is returning SysML specific subtypes for
+				// @type, not including Element
+				OSLC4JUtils.setUseBeanClassForParsing("true");
 				aResource = response.readEntity(Element.class);
+				aResource.setIdentifier((String)aResource.getExtendedProperties().get(new QName("http://omg.org/ns/sysml#","identifier")));
 			} else {
 				throw new WebApplicationException(response.getStatus());
 			}
