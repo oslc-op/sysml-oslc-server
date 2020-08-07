@@ -138,7 +138,7 @@ public class SysMLClient extends OslcClient {
 	public SysMLClient(String userId, String password) {
 
         basePath = System.getProperty("api.client.base.path");
-    	if (basePath == null) basePath = "http://sysml2-sst.intercax.com:9000";
+    	if (basePath == null) basePath = "http://sysml2-dev.intercax.com:9000";
 		this.user = userId;
 		this.password = password;
 		

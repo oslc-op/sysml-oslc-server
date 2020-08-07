@@ -55,6 +55,16 @@ import org.apache.http.HttpStatus;
 import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
 import javax.xml.namespace.QName;
 
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.RDFReader;
+import org.eclipse.lyo.oslc4j.provider.jena.JenaModelHelper;
+import org.apache.jena.datatypes.BaseDatatype.TypedValue;
+
+import java.io.InputStream;
+import java.util.Map;
+
 // End of user code
 
 // Start of user code pre_class_code
@@ -241,20 +251,40 @@ public class SysmlServerManager {
 			}
 			final ServiceProviderInfo info = SysmlServerManager.getServiceProviderInfo(httpServletRequest, serviceProviderId);
 			SysMLClient apiClient = (SysMLClient)httpServletRequest.getSession().getAttribute(SysMLClient.APICLIENT_ATTRIBUTE);
-            String projectId = info.serviceProviderId;
-            // Get the head commit /projects/{projectId}/head
+            String projectId = info.serviceProviderId;  // SysML Project is an OSLC ServiceProvider
+            
+            // Get the head commit /projects/{projectId}/head, we're just using the HEAD version for now
             String url = "/projects/"+projectId+"/head";
             JsonElement commit = apiClient.readSysMLResource(url);
             if (commit == null) return aResource; // There are no elements in this project
             String head = commit.getAsJsonObject().get("id").getAsString();
+            
 			url = apiClient.getBasePath() + "/projects/"+projectId+"/commits/"+head+"/elements/"+id;
 			Response response = apiClient.getResource(url, "application/ld+json");
+			
 			if (response != null && response.getStatus() == HttpStatus.SC_OK) {
 				// Because SysML v2 Services REST API is returning SysML specific subtypes for
 				// @type, not including Element
 				OSLC4JUtils.setUseBeanClassForParsing("true");
-				aResource = response.readEntity(Element.class);
-				aResource.setIdentifier((String)aResource.getExtendedProperties().get(new QName("http://omg.org/ns/sysml#","identifier")));
+				final Model model = ModelFactory.createDefaultModel();
+				RDFReader reader = model.getReader("JSON-LD");
+				reader.read(model, (InputStream)response.getEntity(), "");
+				
+				// Get the actual @type that we just ignored
+				org.apache.jena.rdf.model.Resource resource = (org.apache.jena.rdf.model.Resource)model.getResource(url);
+				Property rdfType = model.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#","type");
+				String atType = resource.getProperty(rdfType).getObject().toString();
+				
+				Object[] elements =  JenaModelHelper.unmarshal(model, Element.class);				
+				if (elements.length > 0) aResource = (Element)elements[0]; 
+
+				// add the @type we just ignored 
+				aResource.addType(atType);
+
+				// Add the dcterms:identifier from the sysml:identifier
+				Map<QName,Object>  extProps = aResource.getExtendedProperties();
+				String identifier = ((TypedValue)extProps.get(new QName("http://omg.org/ns/sysml#","identifier"))).lexicalValue;
+				aResource.setIdentifier(identifier);
 			} else {
 				throw new WebApplicationException(response.getStatus());
 			}
