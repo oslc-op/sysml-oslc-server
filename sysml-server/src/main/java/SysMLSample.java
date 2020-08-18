@@ -65,7 +65,7 @@ public class SysMLSample {
 				model.remove(toRemove);
 				model.add(toAdd);
 				
-				// Get the actual @type that we just ignored
+				// Get the actual @type, some SysML subclass of Element
 				Resource resource = (Resource)model.getResource(url);
 				Property rdfType = model.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#","type");
 				String atType = resource.getProperty(rdfType).getObject().toString();
@@ -77,7 +77,7 @@ public class SysMLSample {
 				aResource.setAbout(translate(aResource.getAbout(), fromBase, toBase));
 				
 				//aResource = response.readEntity(Element.class);
-				// add the @type we just ignored 
+				// add the specific @type subclass  
 				aResource.addType(atType);
 
 				// Add the dcterms:identifier

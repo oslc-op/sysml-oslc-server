@@ -58,11 +58,15 @@ import javax.xml.namespace.QName;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.RDFReader;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.StmtIterator;
 import org.eclipse.lyo.oslc4j.provider.jena.JenaModelHelper;
 import org.apache.jena.datatypes.BaseDatatype.TypedValue;
 
 import java.io.InputStream;
+import java.net.URI;
 import java.util.Map;
 
 // End of user code
@@ -74,7 +78,17 @@ public class SysmlServerManager {
 
     // Start of user code class_attributes
 	private static Logger log = LoggerFactory.getLogger(SysmlServerManager.class);
-    // End of user code
+
+	// translates a SysML REST Services URI to an OSLC URI
+	static URI translate(URI uri, URI fromBase, URI toBase) {
+		String newURI = uri.toString();
+		if (newURI.startsWith(fromBase.toString())) {
+			newURI = toBase + uri.getPath();
+			newURI = newURI.replaceFirst("commits/.*/elements", "Element");
+		}
+		return URI.create(newURI);
+	}
+	// End of user code
     
     
     // Start of user code class_methods
@@ -262,29 +276,56 @@ public class SysmlServerManager {
 			url = apiClient.getBasePath() + "/projects/"+projectId+"/commits/"+head+"/elements/"+id;
 			Response response = apiClient.getResource(url, "application/ld+json");
 			
+			URI fromBase = URI.create(apiClient.getBasePath());
+			String temp = OSLC4JUtils.resolveServletUri(httpServletRequest);
+			URI toBase = URI.create(temp+"crud");
+			//URI.create("https://jamsden.rtp.raleigh.ibm.com:8443/sysml/services/crud");
+
+			
 			if (response != null && response.getStatus() == HttpStatus.SC_OK) {
-				// Because SysML v2 Services REST API is returning SysML specific subtypes for
-				// @type, not including Element
 				OSLC4JUtils.setUseBeanClassForParsing("true");
 				final Model model = ModelFactory.createDefaultModel();
 				RDFReader reader = model.getReader("JSON-LD");
+
 				reader.read(model, (InputStream)response.getEntity(), "");
+
+				// Translate the URIs to those of the adapting OSLC server
+				StmtIterator statements = model.listStatements();
+				List<Statement> toRemove = new ArrayList<Statement>();
+				List<Statement> toAdd = new ArrayList<Statement>();
+				for (Statement s; statements.hasNext(); ) {
+					s = statements.next();
+					RDFNode o = s.getObject();
+					if (o.isURIResource()) {
+						URI aURI = URI.create(o.asResource().getURI());
+						String newURI = translate(aURI, fromBase, toBase).toString();
+						toAdd.add(model.createStatement(s.getSubject(), s.getPredicate(), model.createResource(newURI)));
+						toRemove.add(s);
+					}
+				}
+				model.remove(toRemove);
+				model.add(toAdd);
 				
-				// Get the actual @type that we just ignored
+				// Get the actual @type, some SysML subclass of Element
 				org.apache.jena.rdf.model.Resource resource = (org.apache.jena.rdf.model.Resource)model.getResource(url);
 				Property rdfType = model.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#","type");
 				String atType = resource.getProperty(rdfType).getObject().toString();
 				
-				Object[] elements =  JenaModelHelper.unmarshal(model, Element.class);				
-				if (elements.length > 0) aResource = (Element)elements[0]; 
+				Object[] elements =  JenaModelHelper.unmarshal(model, Element.class);
+				
+				if (elements.length > 0) {
+					aResource = (Element)elements[0]; 
+					// Translate the Element URL
+					aResource.setAbout(translate(aResource.getAbout(), fromBase, toBase));
+					
+					// add the specific @type subclass  
+					aResource.addType(atType);
 
-				// add the @type we just ignored 
-				aResource.addType(atType);
-
-				// Add the dcterms:identifier from the sysml:identifier
-				Map<QName,Object>  extProps = aResource.getExtendedProperties();
-				String identifier = ((TypedValue)extProps.get(new QName("http://omg.org/ns/sysml#","identifier"))).lexicalValue;
-				aResource.setIdentifier(identifier);
+					// Add the dcterms:identifier
+					Map<QName,Object> extProps = aResource.getExtendedProperties();
+					String identifier = ((TypedValue)extProps.get(new QName("http://omg.org/ns/sysml#","identifier"))).lexicalValue;
+					aResource.setIdentifier(identifier);
+				}
 			} else {
 				throw new WebApplicationException(response.getStatus());
 			}

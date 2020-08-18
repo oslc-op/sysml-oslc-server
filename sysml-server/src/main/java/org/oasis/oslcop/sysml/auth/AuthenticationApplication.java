@@ -28,8 +28,6 @@ import org.eclipse.lyo.server.oauth.core.AuthenticationException;
 
 // Start of user code imports
 import org.oasis.oslcop.sysml.api.SysMLClient;
-import org.omg.sysml.ApiException;
-import org.omg.sysml.Configuration;
 import org.oasis.oslcop.sysml.SysmlServerConstants;
 // End of user code
 
