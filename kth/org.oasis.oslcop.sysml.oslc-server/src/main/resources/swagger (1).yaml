@@ -1,0 +1,930 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: ""
+host: "jamsden.rtp.raleigh.ibm.com:8443"
+basePath: "/sysml"
+tags:
+- name: "OSLC Service for {Element, Requirement, Resource}"
+- name: "Web Service for {Element, Requirement, Relationship}"
+schemes:
+- "https"
+paths:
+  /serviceProviders/projects/{serviceProviderId}/resources/query:
+    get:
+      tags:
+      - "OSLC Service for {Element, Requirement, Resource}"
+      summary: "Query capability for resources of type {Element, Requirement}"
+      description: "Query capability for resources of type {<a href=\"http://oasis.oslc-op/ns/sysml#Element\"\
+        >Element</a>, <a href=\"http://open-services.net/ns/rm#Requirement\">Requirement</a>},\
+        \ with respective resource shapes {<a href=\"../services/resourceShapes/element\"\
+        >Element</a>, <a href=\"../services/resourceShapes/requirement\">Requirement</a>}"
+      operationId: "queryElementsAndRequirementsAsHtml"
+      produces:
+      - "application/rdf+xml"
+      - "application/xml"
+      - "application/json"
+      - "text/turtle"
+      - "text/html"
+      parameters:
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "oslc.where"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "page"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "limit"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        default:
+          description: "successful operation"
+  /serviceProviders/projects/{serviceProviderId}/resources/selector:
+    get:
+      tags:
+      - "OSLC Service for {Element, Requirement, Resource}"
+      operationId: "ElementAndResourceAndRequirementSelector"
+      consumes:
+      - "text/html"
+      - "*/*"
+      parameters:
+      - name: "terms"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        default:
+          description: "successful operation"
+  /serviceProviders/projects/{serviceProviderId}/resources/create:
+    post:
+      tags:
+      - "OSLC Service for {Element, Requirement, Resource}"
+      summary: "Creation factory for resources of type {Element, Requirement}"
+      description: "Creation factory for resources of type {<a href=\"http://oasis.oslc-op/ns/sysml#Element\"\
+        >Element</a>, <a href=\"http://open-services.net/ns/rm#Requirement\">Requirement</a>},\
+        \ with respective resource shapes {<a href=\"../services/resourceShapes/element\"\
+        >Element</a>, <a href=\"../services/resourceShapes/requirement\">Requirement</a>}"
+      operationId: "createElementAndRequirement"
+      consumes:
+      - "application/rdf+xml"
+      - "application/ld+json"
+      - "text/turtle"
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/rdf+xml"
+      - "application/xml"
+      - "application/json"
+      - "text/turtle"
+      parameters:
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/AbstractResource"
+      responses:
+        default:
+          description: "successful operation"
+  /serviceProviders/projects/{serviceProviderId}/resources/creator:
+    get:
+      tags:
+      - "OSLC Service for {Element, Requirement, Resource}"
+      operationId: "ElementAndResourceAndRequirementCreator"
+      consumes:
+      - "*/*"
+      parameters:
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        default:
+          description: "successful operation"
+    post:
+      tags:
+      - "OSLC Service for {Element, Requirement, Resource}"
+      operationId: "createElementAndResourceAndRequirementFromDialog"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        default:
+          description: "successful operation"
+  /crud/projects/{serviceProviderId}/Element/{id}:
+    get:
+      tags:
+      - "Web Service for {Element, Requirement, Relationship}"
+      summary: "GET for resources of type {'Element'}"
+      description: "GET for resources of type {'<a href=\"http://oasis.oslc-op/ns/sysml#Element\"\
+        >Element</a>'}, with respective resource shapes {'<a href=\"../services/resourceShapes/element\"\
+        >Element</a>'}"
+      operationId: "getElementCompact"
+      produces:
+      - "application/rdf+xml"
+      - "application/xml"
+      - "application/json"
+      - "text/turtle"
+      - "text/html"
+      - "application/x-oslc-compact+xml"
+      parameters:
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Compact"
+    put:
+      tags:
+      - "Web Service for {Element, Requirement, Relationship}"
+      summary: "PUT for resources of type {'Element'}"
+      description: "PUT for resources of type {'<a href=\"http://oasis.oslc-op/ns/sysml#Element\"\
+        >Element</a>'}, with respective resource shapes {'<a href=\"../services/resourceShapes/element\"\
+        >Element</a>'}"
+      operationId: "updateElement"
+      consumes:
+      - "application/rdf+xml"
+      - "application/ld+json"
+      - "text/turtle"
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/rdf+xml"
+      - "application/xml"
+      - "application/json"
+      - "text/turtle"
+      - "text/html"
+      - "application/x-oslc-compact+xml"
+      parameters:
+      - name: "If-Match"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/Element"
+      responses:
+        default:
+          description: "successful operation"
+    delete:
+      tags:
+      - "Web Service for {Element, Requirement, Relationship}"
+      summary: "DELETE for resources of type {'Element'}"
+      description: "DELETE for resources of type {'<a href=\"http://oasis.oslc-op/ns/sysml#Element\"\
+        >Element</a>'}, with respective resource shapes {'<a href=\"../services/resourceShapes/element\"\
+        >Element</a>'}"
+      operationId: "deleteElement"
+      produces:
+      - "application/rdf+xml"
+      - "application/xml"
+      - "application/json"
+      - "text/turtle"
+      - "text/html"
+      - "application/x-oslc-compact+xml"
+      parameters:
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        default:
+          description: "successful operation"
+  /crud/projects/{serviceProviderId}/Element/{id}/smallPreview:
+    get:
+      tags:
+      - "Web Service for {Element, Requirement, Relationship}"
+      operationId: "getElementAsHtmlSmallPreview"
+      produces:
+      - "text/html"
+      parameters:
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        default:
+          description: "successful operation"
+  /crud/projects/{serviceProviderId}/Element/{id}/largePreview:
+    get:
+      tags:
+      - "Web Service for {Element, Requirement, Relationship}"
+      operationId: "getElementAsHtmlLargePreview"
+      produces:
+      - "text/html"
+      parameters:
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        default:
+          description: "successful operation"
+  /crud/projects/{serviceProviderId}/Requirement/{id}:
+    get:
+      tags:
+      - "Web Service for {Element, Requirement, Relationship}"
+      summary: "GET for resources of type {'Requirement'}"
+      description: "GET for resources of type {'<a href=\"http://open-services.net/ns/rm#Requirement\"\
+        >Requirement</a>'}, with respective resource shapes {'<a href=\"../services/resourceShapes/requirement\"\
+        >Requirement</a>'}"
+      operationId: "getRequirementCompact"
+      produces:
+      - "application/rdf+xml"
+      - "application/xml"
+      - "application/json"
+      - "text/turtle"
+      - "text/html"
+      - "application/x-oslc-compact+xml"
+      parameters:
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Compact"
+    put:
+      tags:
+      - "Web Service for {Element, Requirement, Relationship}"
+      summary: "PUT for resources of type {'Requirement'}"
+      description: "PUT for resources of type {'<a href=\"http://open-services.net/ns/rm#Requirement\"\
+        >Requirement</a>'}, with respective resource shapes {'<a href=\"../services/resourceShapes/requirement\"\
+        >Requirement</a>'}"
+      operationId: "updateRequirement"
+      consumes:
+      - "application/rdf+xml"
+      - "application/ld+json"
+      - "text/turtle"
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/rdf+xml"
+      - "application/xml"
+      - "application/json"
+      - "text/turtle"
+      - "text/html"
+      - "application/x-oslc-compact+xml"
+      parameters:
+      - name: "If-Match"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/Requirement"
+      responses:
+        default:
+          description: "successful operation"
+    delete:
+      tags:
+      - "Web Service for {Element, Requirement, Relationship}"
+      summary: "DELETE for resources of type {'Requirement'}"
+      description: "DELETE for resources of type {'<a href=\"http://open-services.net/ns/rm#Requirement\"\
+        >Requirement</a>'}, with respective resource shapes {'<a href=\"../services/resourceShapes/requirement\"\
+        >Requirement</a>'}"
+      operationId: "deleteRequirement"
+      produces:
+      - "application/rdf+xml"
+      - "application/xml"
+      - "application/json"
+      - "text/turtle"
+      - "text/html"
+      - "application/x-oslc-compact+xml"
+      parameters:
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        default:
+          description: "successful operation"
+  /crud/projects/{serviceProviderId}/Requirement/{id}/smallPreview:
+    get:
+      tags:
+      - "Web Service for {Element, Requirement, Relationship}"
+      operationId: "getRequirementAsHtmlSmallPreview"
+      produces:
+      - "text/html"
+      parameters:
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        default:
+          description: "successful operation"
+  /crud/projects/{serviceProviderId}/Requirement/{id}/largePreview:
+    get:
+      tags:
+      - "Web Service for {Element, Requirement, Relationship}"
+      operationId: "getRequirementAsHtmlLargePreview"
+      produces:
+      - "text/html"
+      parameters:
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        default:
+          description: "successful operation"
+  /crud/projects/{serviceProviderId}/Relationship/{id}:
+    get:
+      tags:
+      - "Web Service for {Element, Requirement, Relationship}"
+      summary: "GET for resources of type {'Relationship'}"
+      description: "GET for resources of type {'<a href=\"http://oasis.oslc-op/ns/sysml#Relationship\"\
+        >Relationship</a>'}, with respective resource shapes {'<a href=\"../services/resourceShapes/relationship\"\
+        >Relationship</a>'}"
+      operationId: "getRelationshipCompact"
+      produces:
+      - "application/rdf+xml"
+      - "application/xml"
+      - "application/json"
+      - "text/turtle"
+      - "text/html"
+      - "application/x-oslc-compact+xml"
+      parameters:
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Compact"
+    put:
+      tags:
+      - "Web Service for {Element, Requirement, Relationship}"
+      summary: "PUT for resources of type {'Relationship'}"
+      description: "PUT for resources of type {'<a href=\"http://oasis.oslc-op/ns/sysml#Relationship\"\
+        >Relationship</a>'}, with respective resource shapes {'<a href=\"../services/resourceShapes/relationship\"\
+        >Relationship</a>'}"
+      operationId: "updateRelationship"
+      consumes:
+      - "application/rdf+xml"
+      - "application/ld+json"
+      - "text/turtle"
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/rdf+xml"
+      - "application/xml"
+      - "application/json"
+      - "text/turtle"
+      - "text/html"
+      - "application/x-oslc-compact+xml"
+      parameters:
+      - name: "If-Match"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/Relationship"
+      responses:
+        default:
+          description: "successful operation"
+    delete:
+      tags:
+      - "Web Service for {Element, Requirement, Relationship}"
+      summary: "DELETE for resources of type {'Relationship'}"
+      description: "DELETE for resources of type {'<a href=\"http://oasis.oslc-op/ns/sysml#Relationship\"\
+        >Relationship</a>'}, with respective resource shapes {'<a href=\"../services/resourceShapes/relationship\"\
+        >Relationship</a>'}"
+      operationId: "deleteRelationship"
+      produces:
+      - "application/rdf+xml"
+      - "application/xml"
+      - "application/json"
+      - "text/turtle"
+      - "text/html"
+      - "application/x-oslc-compact+xml"
+      parameters:
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        default:
+          description: "successful operation"
+  /crud/projects/{serviceProviderId}/Relationship/{id}/smallPreview:
+    get:
+      tags:
+      - "Web Service for {Element, Requirement, Relationship}"
+      operationId: "getRelationshipAsHtmlSmallPreview"
+      produces:
+      - "text/html"
+      parameters:
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        default:
+          description: "successful operation"
+  /crud/projects/{serviceProviderId}/Relationship/{id}/largePreview:
+    get:
+      tags:
+      - "Web Service for {Element, Requirement, Relationship}"
+      operationId: "getRelationshipAsHtmlLargePreview"
+      produces:
+      - "text/html"
+      parameters:
+      - name: "serviceProviderId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        default:
+          description: "successful operation"
+definitions:
+  AbstractResource:
+    type: "object"
+    properties:
+      about:
+        type: "string"
+        format: "uri"
+      types:
+        type: "array"
+        items:
+          type: "string"
+          format: "uri"
+      extendedProperties:
+        type: "object"
+        additionalProperties:
+          type: "object"
+  Element:
+    type: "object"
+    properties:
+      about:
+        type: "string"
+        format: "uri"
+      types:
+        type: "array"
+        items:
+          type: "string"
+          format: "uri"
+      extendedProperties:
+        type: "object"
+        additionalProperties:
+          type: "object"
+      contributor:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      created:
+        type: "string"
+        format: "date-time"
+      creator:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      description:
+        type: "string"
+      identifier:
+        type: "string"
+      modified:
+        type: "string"
+        format: "date-time"
+      source:
+        type: "string"
+        format: "uri"
+      title:
+        type: "string"
+      type:
+        type: "array"
+        uniqueItems: true
+        items:
+          type: "string"
+      instanceShape:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      serviceProvider:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      shortTitle:
+        type: "string"
+      external:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      trace:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      refine:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      derives:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      elaborates:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      satisfy:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      ownedRelationship:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+  Link:
+    type: "object"
+    properties:
+      value:
+        type: "string"
+        format: "uri"
+      label:
+        type: "string"
+  Compact:
+    type: "object"
+    properties:
+      about:
+        type: "string"
+        format: "uri"
+      types:
+        type: "array"
+        items:
+          type: "string"
+          format: "uri"
+      extendedProperties:
+        type: "object"
+        additionalProperties:
+          type: "object"
+      icon:
+        type: "string"
+        format: "uri"
+      largePreview:
+        $ref: "#/definitions/Preview"
+      shortTitle:
+        type: "string"
+      smallPreview:
+        $ref: "#/definitions/Preview"
+      title:
+        type: "string"
+  Preview:
+    type: "object"
+    properties:
+      about:
+        type: "string"
+        format: "uri"
+      types:
+        type: "array"
+        items:
+          type: "string"
+          format: "uri"
+      extendedProperties:
+        type: "object"
+        additionalProperties:
+          type: "object"
+      document:
+        type: "string"
+        format: "uri"
+      hintHeight:
+        type: "string"
+      hintWidth:
+        type: "string"
+      initialHeight:
+        type: "string"
+  Requirement:
+    type: "object"
+    properties:
+      about:
+        type: "string"
+        format: "uri"
+      types:
+        type: "array"
+        items:
+          type: "string"
+          format: "uri"
+      extendedProperties:
+        type: "object"
+        additionalProperties:
+          type: "object"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      identifier:
+        type: "string"
+      shortTitle:
+        type: "string"
+      subject:
+        type: "array"
+        uniqueItems: true
+        items:
+          type: "string"
+      creator:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      contributor:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      created:
+        type: "string"
+        format: "date-time"
+      modified:
+        type: "string"
+        format: "date-time"
+      serviceProvider:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      instanceShape:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      elaboratedBy:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      elaborates:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      specifiedBy:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      specifies:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      affectedBy:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      trackedBy:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      implementedBy:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      validatedBy:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      satisfiedBy:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      satisfies:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      decomposedBy:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      decomposes:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      constrainedBy:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      constrains:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+  Relationship:
+    type: "object"
+    properties:
+      about:
+        type: "string"
+        format: "uri"
+      types:
+        type: "array"
+        items:
+          type: "string"
+          format: "uri"
+      extendedProperties:
+        type: "object"
+        additionalProperties:
+          type: "object"
+      contributor:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      created:
+        type: "string"
+        format: "date-time"
+      creator:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      description:
+        type: "string"
+      identifier:
+        type: "string"
+      modified:
+        type: "string"
+        format: "date-time"
+      source:
+        type: "string"
+        format: "uri"
+      title:
+        type: "string"
+      type:
+        type: "array"
+        uniqueItems: true
+        items:
+          type: "string"
+      instanceShape:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      serviceProvider:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      shortTitle:
+        type: "string"
+      external:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      trace:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      refine:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      derives:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      elaborates:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      satisfy:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      ownedRelationship:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
+      target:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"

@@ -1,0 +1,489 @@
+swagger: "2.0"
+info:
+  title: SysML v2 API and Services
+  description: REST/HTTP binding (PSM) for the SysML v2 standard API.
+  version: 1.0.0
+tags:
+  - name: Project
+  - name: Commit
+  - name: Element
+  - name: Relationship
+
+paths:
+  /projects:
+    get:
+      tags:
+        - Project
+      operationId: getProjects
+      summary: Get projects
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Project'
+        415:
+          $ref: '#/responses/BadContentType'
+        500:
+          $ref: '#/responses/InternalServerError'
+        default:
+          $ref: '#/responses/Default'
+    post:
+      tags:
+        - Project
+      operationId: postProject
+      summary: Create project
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Project'
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/Project'
+        415:
+          $ref: '#/responses/BadContentType'
+        500:
+          $ref: '#/responses/InternalServerError'
+        default:
+          $ref: '#/responses/Default'
+  /projects/{projectId}:
+    parameters:
+      - name: projectId
+        in: path
+        description: ID of the project
+        type: string
+        format: uuid
+        required: true
+    get:
+      tags:
+        - Project
+      operationId: getProjectById
+      summary: Get project by ID
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Project'
+        404:
+          $ref: '#/responses/NotFound'
+        415:
+          $ref: '#/responses/BadContentType'
+        500:
+          $ref: '#/responses/InternalServerError'
+        default:
+          $ref: '#/responses/Default'
+  /projects/{projectId}/commits:
+    parameters:
+      - name: projectId
+        in: path
+        description: ID of the project
+        type: string
+        format: uuid
+        required: true
+    get:
+      tags:
+        - Commit
+      operationId: getCommitsByProject
+      summary: Get commits by project
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Commit'
+        404:
+          $ref: '#/responses/NotFound'
+        415:
+          $ref: '#/responses/BadContentType'
+        500:
+          $ref: '#/responses/InternalServerError'
+        default:
+          $ref: '#/responses/Default'
+    post:
+      tags:
+        - Commit
+      operationId: postCommitByProject
+      summary: Create commit by project
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Commit'
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/Commit'
+        415:
+          $ref: '#/responses/BadContentType'
+        500:
+          $ref: '#/responses/InternalServerError'
+        default:
+          $ref: '#/responses/Default'
+  /projects/{projectId}/commits/{commitId}:
+    parameters:
+      - name: projectId
+        in: path
+        description: ID of the project
+        type: string
+        format: uuid
+        required: true
+      - name: commitId
+        in: path
+        description: ID of the commit
+        type: string
+        format: uuid
+        required: true
+    get:
+      tags:
+        - Commit
+      operationId: getCommitByProjectAndId
+      summary: Get commit by project and ID
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Commit'
+        404:
+          $ref: '#/responses/NotFound'
+        415:
+          $ref: '#/responses/BadContentType'
+        500:
+          $ref: '#/responses/InternalServerError'
+        default:
+          $ref: '#/responses/Default'
+  /projects/{projectId}/head:
+    parameters:
+      - name: projectId
+        in: path
+        description: ID of the project
+        type: string
+        format: uuid
+        required: true
+    get:
+      tags:
+        - Commit
+      operationId: getHeadCommitByProject
+      summary: Get head commit by project
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Commit'
+        404:
+          $ref: '#/responses/NotFound'
+        415:
+          $ref: '#/responses/BadContentType'
+        500:
+          $ref: '#/responses/InternalServerError'
+        default:
+          $ref: '#/responses/Default'
+  /projects/{projectId}/commits/{commitId}/elements:
+    parameters:
+      - name: projectId
+        in: path
+        description: ID of the project
+        type: string
+        format: uuid
+        required: true
+      - name: commitId
+        in: path
+        description: ID of the commit
+        type: string
+        format: uuid
+        required: true
+    get:
+      tags:
+        - Element
+      operationId: getElementsByProjectCommit
+      summary: Get elements by project and commit
+      produces:
+        - application/ld+json
+        - application/json
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Element'
+        404:
+          $ref: '#/responses/NotFound'
+        415:
+          $ref: '#/responses/BadContentType'
+        500:
+          $ref: '#/responses/InternalServerError'
+        default:
+          $ref: '#/responses/Default'
+  /projects/{projectId}/commits/{commitId}/elements/{elementId}:
+    parameters:
+      - name: projectId
+        in: path
+        description: ID of the project
+        type: string
+        format: uuid
+        required: true
+      - name: commitId
+        in: path
+        description: ID of the commit
+        type: string
+        format: uuid
+        required: true
+      - name: elementId
+        in: path
+        description: ID of the element
+        type: string
+        format: uuid
+        required: true
+    get:
+      tags:
+        - Element
+      operationId: getElementByProjectCommitId
+      summary: Get element by project, commit and ID
+      produces:
+        - application/ld+json
+        - application/json
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Element'
+        404:
+          $ref: '#/responses/NotFound'
+        415:
+          $ref: '#/responses/BadContentType'
+        500:
+          $ref: '#/responses/InternalServerError'
+        default:
+          $ref: '#/responses/Default'
+  /projects/{projectId}/commits/{commitId}/roots:
+    parameters:
+      - name: projectId
+        in: path
+        description: ID of the project
+        type: string
+        format: uuid
+        required: true
+      - name: commitId
+        in: path
+        description: ID of the commit
+        type: string
+        format: uuid
+        required: true
+    get:
+      tags:
+        - Element
+      operationId: getRootsByProjectCommit
+      summary: Get root elements by project and commit
+      produces:
+        - application/ld+json
+        - application/json
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Element'
+        404:
+          $ref: '#/responses/NotFound'
+        415:
+          $ref: '#/responses/BadContentType'
+        500:
+          $ref: '#/responses/InternalServerError'
+        default:
+          $ref: '#/responses/Default'
+  /projects/{projectId}/commits/{commitId}/elements/{relatedElementId}/relationships:
+    parameters:
+      - name: projectId
+        in: path
+        description: ID of the project
+        type: string
+        format: uuid
+        required: true
+      - name: commitId
+        in: path
+        description: ID of the commit
+        type: string
+        format: uuid
+        required: true
+      - name: relatedElementId
+        in: path
+        description: ID of the related element
+        type: string
+        format: uuid
+        required: true
+      - name: direction
+        in: query
+        description: Filter for relationships that are incoming (in), outgoing (out), or both relative to the related element
+        type: string
+        enum:
+          - 'in'
+          - 'out'
+          - 'both'
+        default: 'both'
+        required: false
+    get:
+      tags:
+        - Relationship
+      operationId: getRelationshipsByProjectCommitRelatedElement
+      summary: Get relationships by project, commit, and related element.
+      produces:
+        - application/ld+json
+        - application/json
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Relationship'
+        415:
+          $ref: '#/responses/BadContentType'
+        500:
+          $ref: '#/responses/InternalServerError'
+        default:
+          $ref: '#/responses/Default'
+definitions:
+  Record:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+  Project:
+    type: object
+    properties:
+      '@type':
+        type: string
+        enum:
+          - 'Project'
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+  Commit:
+    type: object
+    properties:
+      '@type':
+        type: string
+        enum:
+          - 'Commit'
+      changes:
+        type: array
+        items:
+          $ref: '#/definitions/ElementVersion'
+      id:
+        type: string
+        format: uuid
+      previousCommit:
+        $ref: '#/definitions/Record'
+  ElementVersion:
+    type: object
+    properties:
+      '@type':
+        type: string
+        enum:
+          - 'ElementVersion'
+      data:
+        $ref: '#/definitions/Element'
+      id:
+        type: string
+        format: uuid
+      identity:
+        $ref: '#/definitions/ElementIdentity'
+  ElementIdentity:
+    type: object
+    properties:
+      '@type':
+        type: string
+        enum:
+          - 'ElementIdentity'
+      id:
+        type: string
+        format: uuid
+  Identified:
+    type: object
+    properties:
+      '@id':
+        type: string
+        format: uuid
+  Element:
+    type: object
+    properties:
+      '@type':
+        type: string
+      '@id':
+        type: string
+        format: uuid
+      identifier:
+        type: string
+        format: uuid
+    additionalProperties:
+      type: object
+  Relationship:
+    type: object
+    properties:
+      '@type':
+        type: string
+      '@id':
+        type: string
+        format: uuid
+      identifier:
+        type: string
+        format: uuid
+      source:
+        type: array
+        items:
+          $ref: '#/definitions/Identified'
+      target:
+        type: array
+        items:
+          $ref: '#/definitions/Identified'
+  Error:
+    type: object
+    properties:
+      error:
+        type: string
+responses:
+  NoContent:
+    description: No Content
+  Ok:
+    description: Ok
+  BadContentType:
+    description: The requested content type is not acceptable.
+    schema:
+      $ref: '#/definitions/Error'
+  NotFound:
+    description: Not found.
+  InternalServerError:
+    description: Internal server error.
+    schema:
+      $ref: '#/definitions/Error'
+  Default:
+    description: Unexpected response.
