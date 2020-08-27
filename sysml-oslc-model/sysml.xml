@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<oscl4j_vocabulary:Vocabularies xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:oscl4j_vocabulary="http://org.eclipse.lyo/oslc4j/vocabulary">
-  <vocabularies namespaceURI="http://your.organisation.domain/vocab1#" label="SysML-v2" preferredNamespacePrefix="vocab1">
-    <classes name="Element" label="Element"/>
-  </vocabularies>
-</oscl4j_vocabulary:Vocabularies>
