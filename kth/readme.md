@@ -11,4 +11,8 @@
 1. If the first time you are running the server, populate the database by calling http://localhost:8085/sysml_oslc_server/services/populate
 1. Browse the data starting with the catalog http://localhost:8085/sysml_oslc_server/services/catalog/singleton
 
-#
+# Info
+
+The domain-classes are based on the ecore file, located underhttps
+* Repo: https://github.com/ModelDriven/SysML-v2-Pilot-Implementation.git
+* filePath: org.omg.sysml\model\SysML.ecore
