@@ -16,3 +16,5 @@
 The domain-classes are based on the ecore file, located underhttps
 * Repo: https://github.com/ModelDriven/SysML-v2-Pilot-Implementation.git
 * filePath: org.omg.sysml\model\SysML.ecore
+
+The Swagger Docs for the REST server has base: http://sysml2-dev.intercax.com:9000/ 
