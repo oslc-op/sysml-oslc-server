@@ -8,17 +8,19 @@
     <!-- TODO: Add additional header properties here to avoid them be overrriden upon future re-generation -->
     <!-- End of user code
     -->
-    <groupId>org.oasis.oslcop</groupId>
-    <artifactId>sysml-server</artifactId>
+    <groupId>org.oasis.oslcop.sysml</groupId>
+    <artifactId>sysml_oslc_server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>SysmlServer</name>
+    <name>Sysml Server</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <version.lyo>4.0.0-SNAPSHOT</version.lyo>
+        <swagger.version>1.5.22</swagger.version>
+        <swagger-ui.version>3.25.0</swagger-ui.version>
         <!-- Start of user code properties
         -->
         <!-- TODO: Add additional properties here to avoid them be overrriden upon future re-generation -->
@@ -58,20 +60,15 @@
         -->
         <!-- TODO: Add additional dependencies here to avoid them be overrriden upon future re-generation -->
         <dependency>
+		    <groupId>org.oasis.oslcop.sysml</groupId>
+		    <artifactId>sysml-oslc-domain</artifactId>
+		    <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.eclipse.lyo.clients</groupId>
             <artifactId>oslc4j-client</artifactId>
             <version>4.0.0-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>org.eclipse.lyo</groupId>
-    		<artifactId>oslc-domains</artifactId>
-		    <version>4.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-	    	<groupId>com.google.code.gson</groupId>
-	    	<artifactId>gson</artifactId>
-	    	<version>2.8.6</version>
-		</dependency>
         <!-- End of user code
         -->
         <!-- General dependencies -->
@@ -121,36 +118,16 @@
             <version>${version.lyo}</version>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.lyo.server</groupId>
-            <artifactId>oauth-core</artifactId>
+            <groupId>org.eclipse.lyo.store</groupId>
+            <artifactId>store-core</artifactId>
             <version>${version.lyo}</version>
         </dependency>
-        <dependency>
-            <groupId>org.eclipse.lyo.server</groupId>
-            <artifactId>oauth-consumer-store</artifactId>
-            <version>${version.lyo}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.lyo.server</groupId>
-            <artifactId>oauth-webapp</artifactId>
-            <version>${version.lyo}</version>
-            <type>war</type>
-        </dependency>
-        <dependency>
-    		<groupId>org.oasis.oslcop.sysml</groupId>
-            <artifactId>sysml-oslc-domain</artifactId>
-    		<version>0.0.1-SNAPSHOT</version>
-        </dependency>
-		<dependency>
-		    <groupId>org.eclipse.lyo.store</groupId>
-		    <artifactId>store-core</artifactId>
-		    <version>${version.lyo}</version>
-		</dependency>        
+        
         <!-- Swagger dependencies -->
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-jersey2-jaxrs</artifactId>
-            <version>1.5.22</version>
+            <version>${swagger.version}</version>
         </dependency>
     </dependencies>
     <!-- Start of user code post_dependencies
@@ -158,8 +135,8 @@
     <!-- End of user code
     -->
     <build>
-        <finalName>sysml-server</finalName>
-            <plugins>
+        <finalName>sysml_oslc_server</finalName>
+        <plugins>
             <!-- Start of user code plugins
             -->
             <!-- TODO: Add additional plugins here to avoid them be overrriden upon future re-generation -->
@@ -171,18 +148,60 @@
                 <version>9.4.18.v20190429</version>
                 <configuration>
                     <webAppConfig>
-                        <contextPath>/sysml</contextPath>
+                        <contextPath>/sysml_oslc_server</contextPath>
                     </webAppConfig>
                     <reload>automatic</reload>
                     <scanIntervalSeconds>5</scanIntervalSeconds>
                     <systemProperties>
                         <systemProperty>
                             <name>jetty.port</name>
-                            <value>8443</value>
+                            <value>8085</value>
                         </systemProperty>
                     </systemProperties>
                     <stopKey />
                     <stopPort />
+                </configuration>
+            </plugin>
+            <!-- Swagger-ui -->
+            <plugin>
+                <!-- Download Swagger UI webjar. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.webjars</groupId>
+                                    <artifactId>swagger-ui</artifactId>
+                                    <version>${swagger-ui.version}</version>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>${project.build.directory}/swagger-ui</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <!-- Add Swagger UI resources to the war file. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.3</version>
+                <configuration>
+                    <webResources combine.children="append">
+                        <resource>
+                            <directory>${project.build.directory}/swagger-ui/META-INF/resources/webjars/swagger-ui/${swagger-ui.version}</directory>
+                            <includes>
+                                <include>**/*.*</include>
+                            </includes>
+                            <targetPath>/swagger-ui/dist</targetPath>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
         </plugins>
