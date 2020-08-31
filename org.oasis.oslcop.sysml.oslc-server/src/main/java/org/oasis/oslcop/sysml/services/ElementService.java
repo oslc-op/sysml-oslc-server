@@ -88,6 +88,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 // Start of user code imports
+import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.Generalization;
+import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.Subsetting;
+import org.oasis.oslcop.sysml.SysmlClass;
 // End of user code
 
 // Start of user code pre_class_code
@@ -172,6 +177,14 @@ public class ElementService
         if (aElement != null) {
             httpServletRequest.setAttribute("aElement", aElement);
             // Start of user code getElementAsHtml_setAttributes
+            List<Class> servicedDomainClasses = new ArrayList<Class>(Arrays.asList(SysmlClass.class, Subsetting.class, Relationship.class, Generalization.class));
+            if (servicedDomainClasses.contains(aElement.getClass())) {
+                httpServletRequest.setAttribute("a" + aElement.getClass().getSimpleName(), aElement);
+                RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/" + aElement.getClass().getSimpleName().toLowerCase() + ".jsp");
+                rd.forward(httpServletRequest,httpServletResponse);
+                return;
+            }
+            
             // End of user code
 
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/element.jsp");
