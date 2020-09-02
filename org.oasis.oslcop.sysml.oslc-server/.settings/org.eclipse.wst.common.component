@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="sysml-server">
+    <wb-module deploy-name="sysml_oslc_server">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
@@ -7,13 +7,25 @@
         <dependent-module archiveName="sysml-oslc-domain-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/sysml-oslc-domain/sysml-oslc-domain">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module deploy-path="/" handle="module:/overlay/prj/oauth-webapp?includes=**/**&amp;excludes=META-INF/MANIFEST.MF">
-            <dependency-type>consumes</dependency-type>
+        <dependent-module archiveName="oslc4j-client-4.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/oslc4j-client/oslc4j-client">
+            <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module deploy-path="/" handle="module:/overlay/slf/?includes=**/**&amp;excludes=META-INF/MANIFEST.MF">
-            <dependency-type>consumes</dependency-type>
+        <dependent-module archiveName="oslc4j-core-4.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/oslc4j-core/oslc4j-core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="oslc4j-jena-provider-4.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/oslc4j-jena-provider/oslc4j-jena-provider">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="oslc4j-json4j-provider-4.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/oslc4j-json4j-provider/oslc4j-json4j-provider">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="store-core-4.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/store-core/store-core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="oslc-query-4.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/oslc-query/oslc-query">
+            <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/se.kth.itm.mda.sysml.oslc-server/target/classes"/>
-        <property name="context-root" value="sysml-server"/>
+        <property name="context-root" value="sysml_oslc_server"/>
     </wb-module>
 </project-modules>

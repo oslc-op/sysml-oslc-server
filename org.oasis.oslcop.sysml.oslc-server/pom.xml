@@ -69,6 +69,11 @@
             <artifactId>oslc4j-client</artifactId>
             <version>4.0.0-SNAPSHOT</version>
         </dependency>
+        <dependency> 
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-jdk14</artifactId>
+          <version>1.7.30</version>
+        </dependency>
         <!-- End of user code
         -->
         <!-- General dependencies -->

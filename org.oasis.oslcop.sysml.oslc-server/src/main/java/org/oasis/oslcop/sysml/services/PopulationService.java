@@ -65,13 +65,20 @@ public class PopulationService
 
     //TODO: Throughout this class, need better way to construct the URIs. Use UriBuilder.
     
+    private static final String JSON_SERVER_SCHEME = "http";
     private static final String JSON_SERVER_HOSTNAME = "sysml2-dev.intercax.com";
     private static final int JSON_SERVER_PORT = 9000;
 
     //TODO: Of course, this shoul be replaced with code
+    private static final String OSLC_SERVER_SCHEME = "http";
     private static final String OSLC_SERVER_HOSTNAME = "localhost";
     private static final int OSLC_SERVER_PORT = 8085;
-    private static final String OSLC_SERVER_XXX = "sysml_oslc_server/services";
+
+    //private static final String OSLC_SERVER_SCHEME = "https";
+    //private static final String OSLC_SERVER_HOSTNAME = "aide.md.kth.se";
+    //private static final int OSLC_SERVER_PORT = -1; //If we want the default 80/443 port, we need to unset the port. JENA otherwise complains that it is a bad IRI
+    
+    private static final String OSLC_SERVER_APPLICATION_PATH = "sysml_oslc_server/services";
     
 
     public PopulationService()
@@ -87,8 +94,9 @@ public class PopulationService
 		}
 		
 		String oldPath = uri.getPath();
-		String newPath = oldPath.substring(OSLC_SERVER_XXX.length() + 1, oldPath.length());
+		String newPath = oldPath.substring(OSLC_SERVER_APPLICATION_PATH.length() + 1, oldPath.length());
 		URI translated = UriBuilder.fromUri(uri)
+		        .scheme(JSON_SERVER_SCHEME)
 				.host(JSON_SERVER_HOSTNAME)
 				.port(JSON_SERVER_PORT)
 				.replacePath(newPath)
@@ -102,9 +110,10 @@ public class PopulationService
 		}
 		String oldPath = uri.getPath();
 		URI translated = UriBuilder.fromUri(uri)
+                .scheme(OSLC_SERVER_SCHEME)
 				.host(OSLC_SERVER_HOSTNAME)
 				.port(OSLC_SERVER_PORT)
-				.replacePath(OSLC_SERVER_XXX)
+				.replacePath(OSLC_SERVER_APPLICATION_PATH)
 				.path(oldPath)
 				.build();
 		return translated;
@@ -171,25 +180,22 @@ public class PopulationService
         return projectCommits;
     }
 
-	public static List<ObjectNode> getElements(String projectCommitElementsUrl) throws ClientProtocolException, IOException {
+	public static List<ObjectNode> getElements(String projectCommitElementsUrl) {
         List<ObjectNode> elements = new ArrayList<ObjectNode>();
     	ObjectMapper mapper = new ObjectMapper();
         Boolean readFromFile = false;
-        if (readFromFile) {
-			File f = new File("src/main/resources/elements.json");
-		    InputStream content = new FileInputStream(f);
-			elements = mapper.readValue(content, new TypeReference<List<ObjectNode>>() {});
-        }
-        else {
-    		CloseableHttpClient httpclient = HttpClients.createDefault();
-    		HttpGet httpget = new HttpGet(projectCommitElementsUrl);
-    		CloseableHttpResponse response = httpclient.execute(httpget);
-    		if (response != null && response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-    			InputStream content = response.getEntity().getContent();
-    			elements = mapper.readValue(content, new TypeReference<List<ObjectNode>>() {});
-    		} else {
-    			throw new WebApplicationException(response.getStatusLine().getStatusCode());
-    		}
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpGet httpget = new HttpGet(projectCommitElementsUrl);
+        try {
+            CloseableHttpResponse response = httpclient.execute(httpget);
+            if (response != null && response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                InputStream content = response.getEntity().getContent();
+                elements = mapper.readValue(content, new TypeReference<List<ObjectNode>>() {});
+            } else {
+                log.error("Could not run GET query on the REST server. Server returns status:" + response.getStatusLine().getStatusCode());
+            }
+        } catch (IOException e) {
+            log.error("Could not run GET query on the REST server", e);
         }
         return elements;
     }
@@ -201,11 +207,7 @@ public class PopulationService
     	List<Element> resources = new ArrayList<Element>();
     	List<ObjectNode> elementsAsJson = new ArrayList<ObjectNode>();
     	ObjectMapper mapper = new ObjectMapper();
-		try {
-			elementsAsJson = getElements(projectCommitElementsUrl);
-		} catch (IOException e) {
-			log.error("Could not get the elements", e);
-		}
+		elementsAsJson = getElements(projectCommitElementsUrl);
 		int count = 0;
 		for (ObjectNode elementAsJson : elementsAsJson) {
 			count++;
@@ -236,7 +238,7 @@ public class PopulationService
 			} catch (Exception e) {
 				//TODO: I am getting exceptions because the class property is meant to be Boolean, yet the RDF is NOT boolean? 
 				//WHY? I think I am ignoring mapping of enum attributes, which then default to Boolean in the adaptormodel.
-				log.error("Could not unmarshal model. Skipping element for now. Problem to be solved. See comments in code");
+				log.error("Could not unmarshal model. Skipping element for now. Problem to be solved. See comments in code", e);
 				continue;
 			}
 		}
@@ -246,21 +248,26 @@ public class PopulationService
     @GET
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_JSON_LD, OslcMediaType.TEXT_TURTLE, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
     public Response storeElements() throws IOException, ServletException {
-   	
-    	int serviceProviderLimit = 99;
+
+        int serviceProviderLimit = 99;
 		int count = 0;
+
+        log.info("Starting to populate.");
 
 		//TODO: This will fail unless the SPC is already initialized. But will do for now.
     	ServiceProvider[] serviceProviders = ServiceProviderCatalogSingleton.getServiceProviders(null);
     	for (ServiceProvider serviceProvider : serviceProviders) {
+            log.info("Populating on ServiceProvider:" + serviceProvider.getAbout());
 			count++;
 			if (count > serviceProviderLimit) {
 				break;
 			}
     		//"http://sysml2-dev.intercax.com:9000/projects/aa593ac6-f6f8-4794-926f-6911f1966dff/commits/21bda0aa-92da-416d-8f03-2b7c7f5a3de5/elements";
     		String projectCommitElementsUrl = translateBack(serviceProvider.getAbout()).toString() + "/elements";
-        	storeElements(projectCommitElementsUrl);
+            storeElements(projectCommitElementsUrl);
+            log.info("Ended populating on ServiceProvider:" + serviceProvider.getAbout());
 		}
+        log.info("Ended population.");
         return Response.ok().build();
     }
 }
