@@ -65,6 +65,7 @@ import org.apache.wink.json4j.JSONObject;
 import org.eclipse.lyo.oslc4j.provider.json4j.JsonHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.eclipse.lyo.oslc4j.core.OSLC4JConstants;
 import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
 import org.eclipse.lyo.oslc4j.core.annotation.OslcCreationFactory;
 import org.eclipse.lyo.oslc4j.core.annotation.OslcDialog;
@@ -94,8 +95,10 @@ import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.SysmlPackage;
+import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
+import org.eclipse.lyo.oslc.domains.am.Resource;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.Type;
 import io.swagger.annotations.Api;
@@ -158,22 +161,29 @@ public class ServiceProviderService1
                                                     @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId ,
                                                      @QueryParam("oslc.where") final String where,
                                                      @QueryParam("page") final String pageString,
-                                                    @QueryParam("limit") final String limitString) throws IOException, ServletException
+                                                    @QueryParam("oslc.pageSize") final String pageSizeString) throws IOException, ServletException
     {
         int page=0;
-        int limit=20;
+        int pageSize=20;
         if (null != pageString) {
             page = Integer.parseInt(pageString);
         }
-        if (null != limitString) {
-            limit = Integer.parseInt(limitString);
+        if (null != pageSizeString) {
+            pageSize = Integer.parseInt(pageSizeString);
         }
 
         // Start of user code querySubsettings
         // Here additional logic can be implemented that complements main action taken in SysmlServerManager
         // End of user code
 
-        final List<Subsetting> resources = SysmlServerManager.querySubsettings(httpServletRequest, projectId, commitId, where, page, limit);
+        final List<Subsetting> resources = SysmlServerManager.querySubsettings(httpServletRequest, projectId, commitId, where, page, pageSize);
+        httpServletRequest.setAttribute("queryUri",
+                uriInfo.getAbsolutePath().toString() + "?oslc.paging=true");
+        if (resources.size() > pageSize) {
+            resources.remove(resources.size() - 1);
+            httpServletRequest.setAttribute(OSLC4JConstants.OSLC4J_NEXT_PAGE,
+                    uriInfo.getAbsolutePath().toString() + "?oslc.paging=true&oslc.pageSize=" + pageSize + "&page=" + (page + 1));
+        }
         return resources.toArray(new Subsetting [resources.size()]);
     }
 
@@ -190,21 +200,21 @@ public class ServiceProviderService1
                                     @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId ,
                                        @QueryParam("oslc.where") final String where,
                                        @QueryParam("page") final String pageString,
-                                    @QueryParam("limit") final String limitString) throws ServletException, IOException
+                                    @QueryParam("oslc.pageSize") final String pageSizeString) throws ServletException, IOException
     {
         int page=0;
-        int limit=20;
+        int pageSize=20;
         if (null != pageString) {
             page = Integer.parseInt(pageString);
         }
-        if (null != limitString) {
-            limit = Integer.parseInt(limitString);
+        if (null != pageSizeString) {
+            pageSize = Integer.parseInt(pageSizeString);
         }
 
         // Start of user code querySubsettingsAsHtml
         // End of user code
 
-        final List<Subsetting> resources = SysmlServerManager.querySubsettings(httpServletRequest, projectId, commitId, where, page, limit);
+        final List<Subsetting> resources = SysmlServerManager.querySubsettings(httpServletRequest, projectId, commitId, where, page, pageSize);
 
         if (resources!= null) {
             httpServletRequest.setAttribute("resources", resources);
@@ -213,10 +223,10 @@ public class ServiceProviderService1
 
             httpServletRequest.setAttribute("queryUri",
                     uriInfo.getAbsolutePath().toString() + "?oslc.paging=true");
-            if (resources.size() > limit) {
+            if (resources.size() > pageSize) {
                 resources.remove(resources.size() - 1);
-                httpServletRequest.setAttribute("nextPageUri",
-                        uriInfo.getAbsolutePath().toString() + "?oslc.paging=true&amp;page=" + (page + 1));
+                httpServletRequest.setAttribute(OSLC4JConstants.OSLC4J_NEXT_PAGE,
+                        uriInfo.getAbsolutePath().toString() + "?oslc.paging=true&oslc.pageSize=" + pageSize + "&page=" + (page + 1));
             }
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/subsettingscollection.jsp");
             rd.forward(httpServletRequest,httpServletResponse);

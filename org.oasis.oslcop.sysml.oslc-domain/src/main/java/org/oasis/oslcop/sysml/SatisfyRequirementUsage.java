@@ -102,6 +102,7 @@ import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.SysmlPackage;
 import org.oasis.oslcop.sysml.Parameter;
 import org.oasis.oslcop.sysml.PartUsage;
+import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
 import org.oasis.oslcop.sysml.Predicate;
 import org.oasis.oslcop.sysml.Redefinition;
@@ -142,21 +143,21 @@ public class SatisfyRequirementUsage
     // Start of user code attributeAnnotation:result
     // End of user code
     private Link result;
-    // Start of user code attributeAnnotation:assertedConstraint
-    // End of user code
-    private Link assertedConstraint;
-    // Start of user code attributeAnnotation:predicate
-    // End of user code
-    private Link predicate;
-    // Start of user code attributeAnnotation:assertionConnector
-    // End of user code
-    private Link assertionConnector;
     // Start of user code attributeAnnotation:behavior
     // End of user code
     private Set<Link> behavior = new HashSet<Link>();
     // Start of user code attributeAnnotation:parameter
     // End of user code
     private Set<Link> parameter = new HashSet<Link>();
+    // Start of user code attributeAnnotation:predicate
+    // End of user code
+    private Link predicate;
+    // Start of user code attributeAnnotation:assertedConstraint
+    // End of user code
+    private Link assertedConstraint;
+    // Start of user code attributeAnnotation:assertionConnector
+    // End of user code
+    private Link assertionConnector;
     
     // Start of user code classAttributes
     // End of user code
@@ -207,6 +208,7 @@ public class SatisfyRequirementUsage
         }
     
         // Start of user code toString_finalize
+        result = getIdentifier() + " (" + (null == getShortTitle() ? "No Short Title Defined" : getShortTitle()) + ")";
         // End of user code
     
         return result;
@@ -283,51 +285,6 @@ public class SatisfyRequirementUsage
         return result;
     }
     
-    // Start of user code getterAnnotation:assertedConstraint
-    // End of user code
-    @OslcName("assertedConstraint")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "assertedConstraint")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.CONSTRAINTUSAGE_TYPE})
-    @OslcReadOnly(false)
-    public Link getAssertedConstraint()
-    {
-        // Start of user code getterInit:assertedConstraint
-        // End of user code
-        return assertedConstraint;
-    }
-    
-    // Start of user code getterAnnotation:predicate
-    // End of user code
-    @OslcName("predicate")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "predicate")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PREDICATE_TYPE})
-    @OslcReadOnly(false)
-    public Link getPredicate()
-    {
-        // Start of user code getterInit:predicate
-        // End of user code
-        return predicate;
-    }
-    
-    // Start of user code getterAnnotation:assertionConnector
-    // End of user code
-    @OslcName("assertionConnector")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "assertionConnector")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.BINDINGCONNECTOR_TYPE})
-    @OslcReadOnly(false)
-    public Link getAssertionConnector()
-    {
-        // Start of user code getterInit:assertionConnector
-        // End of user code
-        return assertionConnector;
-    }
-    
     // Start of user code getterAnnotation:behavior
     // End of user code
     @OslcName("behavior")
@@ -356,6 +313,51 @@ public class SatisfyRequirementUsage
         // Start of user code getterInit:parameter
         // End of user code
         return parameter;
+    }
+    
+    // Start of user code getterAnnotation:predicate
+    // End of user code
+    @OslcName("predicate")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "predicate")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.PREDICATE_TYPE})
+    @OslcReadOnly(false)
+    public Link getPredicate()
+    {
+        // Start of user code getterInit:predicate
+        // End of user code
+        return predicate;
+    }
+    
+    // Start of user code getterAnnotation:assertedConstraint
+    // End of user code
+    @OslcName("assertedConstraint")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "assertedConstraint")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.CONSTRAINTUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Link getAssertedConstraint()
+    {
+        // Start of user code getterInit:assertedConstraint
+        // End of user code
+        return assertedConstraint;
+    }
+    
+    // Start of user code getterAnnotation:assertionConnector
+    // End of user code
+    @OslcName("assertionConnector")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "assertionConnector")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.BINDINGCONNECTOR_TYPE})
+    @OslcReadOnly(false)
+    public Link getAssertionConnector()
+    {
+        // Start of user code getterInit:assertionConnector
+        // End of user code
+        return assertionConnector;
     }
     
     
@@ -407,42 +409,6 @@ public class SatisfyRequirementUsage
         // End of user code
     }
     
-    // Start of user code setterAnnotation:assertedConstraint
-    // End of user code
-    public void setAssertedConstraint(final Link assertedConstraint )
-    {
-        // Start of user code setterInit:assertedConstraint
-        // End of user code
-        this.assertedConstraint = assertedConstraint;
-    
-        // Start of user code setterFinalize:assertedConstraint
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:predicate
-    // End of user code
-    public void setPredicate(final Link predicate )
-    {
-        // Start of user code setterInit:predicate
-        // End of user code
-        this.predicate = predicate;
-    
-        // Start of user code setterFinalize:predicate
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:assertionConnector
-    // End of user code
-    public void setAssertionConnector(final Link assertionConnector )
-    {
-        // Start of user code setterInit:assertionConnector
-        // End of user code
-        this.assertionConnector = assertionConnector;
-    
-        // Start of user code setterFinalize:assertionConnector
-        // End of user code
-    }
-    
     // Start of user code setterAnnotation:behavior
     // End of user code
     public void setBehavior(final Set<Link> behavior )
@@ -472,6 +438,42 @@ public class SatisfyRequirementUsage
         }
     
         // Start of user code setterFinalize:parameter
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:predicate
+    // End of user code
+    public void setPredicate(final Link predicate )
+    {
+        // Start of user code setterInit:predicate
+        // End of user code
+        this.predicate = predicate;
+    
+        // Start of user code setterFinalize:predicate
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:assertedConstraint
+    // End of user code
+    public void setAssertedConstraint(final Link assertedConstraint )
+    {
+        // Start of user code setterInit:assertedConstraint
+        // End of user code
+        this.assertedConstraint = assertedConstraint;
+    
+        // Start of user code setterFinalize:assertedConstraint
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:assertionConnector
+    // End of user code
+    public void setAssertionConnector(final Link assertionConnector )
+    {
+        // Start of user code setterInit:assertionConnector
+        // End of user code
+        this.assertionConnector = assertionConnector;
+    
+        // Start of user code setterFinalize:assertionConnector
         // End of user code
     }
     

@@ -82,6 +82,7 @@ import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.SysmlPackage;
+import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.Subsetting;
@@ -122,9 +123,9 @@ public class Feature
     // Start of user code attributeAnnotation:owningType
     // End of user code
     private Link owningType;
-    // Start of user code attributeAnnotation:type
+    // Start of user code attributeAnnotation:sysmlType
     // End of user code
-    private Set<Link> type = new HashSet<Link>();
+    private Set<Link> sysmlType = new HashSet<Link>();
     // Start of user code attributeAnnotation:ownedType
     // End of user code
     private Set<Link> ownedType = new HashSet<Link>();
@@ -193,6 +194,7 @@ public class Feature
         }
     
         // Start of user code toString_finalize
+        result = getIdentifier() + " (" + (null == getShortTitle() ? "No Short Title Defined" : getShortTitle()) + ")";
         // End of user code
     
         return result;
@@ -203,9 +205,9 @@ public class Feature
         this.referencedType.add(referencedType);
     }
     
-    public void addType(final Link type)
+    public void addSysmlType(final Link type)
     {
-        this.type.add(type);
+        this.sysmlType.add(type);
     }
     
     public void addOwnedType(final Link ownedType)
@@ -329,7 +331,7 @@ public class Feature
         return owningType;
     }
     
-    // Start of user code getterAnnotation:type
+    // Start of user code getterAnnotation:sysmlType
     // End of user code
     @OslcName("type")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "type")
@@ -337,11 +339,11 @@ public class Feature
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.TYPE_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getType()
+    public Set<Link> getSysmlType()
     {
-        // Start of user code getterInit:type
+        // Start of user code getterInit:sysmlType
         // End of user code
-        return type;
+        return sysmlType;
     }
     
     // Start of user code getterAnnotation:ownedType
@@ -523,19 +525,19 @@ public class Feature
         // End of user code
     }
     
-    // Start of user code setterAnnotation:type
+    // Start of user code setterAnnotation:sysmlType
     // End of user code
-    public void setType(final Set<Link> type )
+    public void setSysmlType(final Set<Link> type )
     {
-        // Start of user code setterInit:type
+        // Start of user code setterInit:sysmlType
         // End of user code
-        this.type.clear();
+        this.sysmlType.clear();
         if (type != null)
         {
-            this.type.addAll(type);
+            this.sysmlType.addAll(type);
         }
     
-        // Start of user code setterFinalize:type
+        // Start of user code setterFinalize:sysmlType
         // End of user code
     }
     

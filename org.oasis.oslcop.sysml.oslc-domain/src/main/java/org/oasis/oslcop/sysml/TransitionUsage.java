@@ -97,6 +97,7 @@ import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.SysmlPackage;
 import org.oasis.oslcop.sysml.PartUsage;
+import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.ReferenceUsage;
@@ -124,9 +125,9 @@ public class TransitionUsage
     extends ActionUsage
     implements ITransitionUsage
 {
-    // Start of user code attributeAnnotation:source
+    // Start of user code attributeAnnotation:sysmlSource
     // End of user code
-    private Link source;
+    private Link sysmlSource;
     // Start of user code attributeAnnotation:target
     // End of user code
     private Link target;
@@ -192,6 +193,7 @@ public class TransitionUsage
         }
     
         // Start of user code toString_finalize
+        result = getIdentifier() + " (" + (null == getShortTitle() ? "No Short Title Defined" : getShortTitle()) + ")";
         // End of user code
     
         return result;
@@ -213,7 +215,7 @@ public class TransitionUsage
     }
     
     
-    // Start of user code getterAnnotation:source
+    // Start of user code getterAnnotation:sysmlSource
     // End of user code
     @OslcName("source")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "source")
@@ -221,11 +223,11 @@ public class TransitionUsage
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.ACTIONUSAGE_TYPE})
     @OslcReadOnly(false)
-    public Link getSource()
+    public Link getSysmlSource()
     {
-        // Start of user code getterInit:source
+        // Start of user code getterInit:sysmlSource
         // End of user code
-        return source;
+        return sysmlSource;
     }
     
     // Start of user code getterAnnotation:target
@@ -304,15 +306,15 @@ public class TransitionUsage
     }
     
     
-    // Start of user code setterAnnotation:source
+    // Start of user code setterAnnotation:sysmlSource
     // End of user code
-    public void setSource(final Link source )
+    public void setSysmlSource(final Link source )
     {
-        // Start of user code setterInit:source
+        // Start of user code setterInit:sysmlSource
         // End of user code
-        this.source = source;
+        this.sysmlSource = source;
     
-        // Start of user code setterFinalize:source
+        // Start of user code setterFinalize:sysmlSource
         // End of user code
     }
     

@@ -67,6 +67,7 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.IType;
 // Start of user code imports

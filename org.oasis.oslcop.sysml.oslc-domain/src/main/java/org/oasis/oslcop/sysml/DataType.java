@@ -81,6 +81,7 @@ import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.SysmlPackage;
+import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.Superclassing;
 // Start of user code imports
@@ -148,6 +149,7 @@ public class DataType
         }
     
         // Start of user code toString_finalize
+        result = getIdentifier() + " (" + (null == getShortTitle() ? "No Short Title Defined" : getShortTitle()) + ")";
         // End of user code
     
         return result;

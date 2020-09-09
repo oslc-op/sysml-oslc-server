@@ -179,12 +179,12 @@
         </dd>
     </dl>
     <dl class="dl-horizontal">
-        <% method = Generalization.class.getMethod("getSource"); %>
+        <% method = Generalization.class.getMethod("getSysmlSource"); %>
         <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <ul>
         <%
-        for(Link next : aGeneralization.getSource()) {
+        for(Link next : aGeneralization.getSysmlSource()) {
             if (next.getValue() == null) {
                 out.write("<li>" + "<em>null</em>" + "</li>");
             }
@@ -273,15 +273,15 @@
         </dd>
     </dl>
     <dl class="dl-horizontal">
-        <% method = Generalization.class.getMethod("getIdentifier"); %>
+        <% method = Generalization.class.getMethod("getSysmlIdentifier"); %>
         <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
-        if (aGeneralization.getIdentifier() == null) {
+        if (aGeneralization.getSysmlIdentifier() == null) {
             out.write("<em>null</em>");
         }
         else {
-            out.write(aGeneralization.getIdentifier().toString());
+            out.write(aGeneralization.getSysmlIdentifier().toString());
         }
         %>
         
@@ -446,6 +446,328 @@
                     </jsp:include>
                 </li>
                 <%
+            }
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getContributor"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        for(Link next : aGeneralization.getContributor()) {
+            if (next.getValue() == null) {
+                out.write("<li>" + "<em>null</em>" + "</li>");
+            }
+            else {
+                %>
+                <li>
+                <jsp:include page="/org/oasis/oslcop/sysml/persontohtml.jsp">
+                    <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                    </jsp:include>
+                </li>
+                <%
+            }
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getCreated"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <%
+        if (aGeneralization.getCreated() == null) {
+            out.write("<em>null</em>");
+        }
+        else {
+            out.write(aGeneralization.getCreated().toString());
+        }
+        %>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getCreator"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        for(Link next : aGeneralization.getCreator()) {
+            if (next.getValue() == null) {
+                out.write("<li>" + "<em>null</em>" + "</li>");
+            }
+            else {
+                %>
+                <li>
+                <jsp:include page="/org/oasis/oslcop/sysml/persontohtml.jsp">
+                    <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                    </jsp:include>
+                </li>
+                <%
+            }
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getDescription"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <%
+        if (aGeneralization.getDescription() == null) {
+            out.write("<em>null</em>");
+        }
+        else {
+            out.write(aGeneralization.getDescription().toString());
+        }
+        %>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getIdentifier"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <%
+        if (aGeneralization.getIdentifier() == null) {
+            out.write("<em>null</em>");
+        }
+        else {
+            out.write(aGeneralization.getIdentifier().toString());
+        }
+        %>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getModified"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <%
+        if (aGeneralization.getModified() == null) {
+            out.write("<em>null</em>");
+        }
+        else {
+            out.write(aGeneralization.getModified().toString());
+        }
+        %>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getSource"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <%
+        if (aGeneralization.getSource() == null) {
+            out.write("<em>null</em>");
+        }
+        else {
+            out.write(aGeneralization.getSource().toString());
+        }
+        %>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getTitle"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <%
+        if (aGeneralization.getTitle() == null) {
+            out.write("<em>null</em>");
+        }
+        else {
+            out.write(aGeneralization.getTitle().toString());
+        }
+        %>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getType"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        Iterator<String> typeItr = aGeneralization.getType().iterator();
+        while(typeItr.hasNext()) {
+            out.write("<li>" + typeItr.next().toString() + "</li>");
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getInstanceShape"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        for(Link next : aGeneralization.getInstanceShape()) {
+            if (next.getValue() == null) {
+                out.write("<li>" + "<em>null</em>" + "</li>");
+            }
+            else {
+                out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+            }
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getServiceProvider"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        for(Link next : aGeneralization.getServiceProvider()) {
+            if (next.getValue() == null) {
+                out.write("<li>" + "<em>null</em>" + "</li>");
+            }
+            else {
+                out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+            }
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getShortTitle"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <%
+        if (aGeneralization.getShortTitle() == null) {
+            out.write("<em>null</em>");
+        }
+        else {
+            out.write(aGeneralization.getShortTitle().toString());
+        }
+        %>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getExternal"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        for(Link next : aGeneralization.getExternal()) {
+            if (next.getValue() == null) {
+                out.write("<li>" + "<em>null</em>" + "</li>");
+            }
+            else {
+                out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+            }
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getTrace"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        for(Link next : aGeneralization.getTrace()) {
+            if (next.getValue() == null) {
+                out.write("<li>" + "<em>null</em>" + "</li>");
+            }
+            else {
+                out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+            }
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getRefine"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        for(Link next : aGeneralization.getRefine()) {
+            if (next.getValue() == null) {
+                out.write("<li>" + "<em>null</em>" + "</li>");
+            }
+            else {
+                out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+            }
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getDerives"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        for(Link next : aGeneralization.getDerives()) {
+            if (next.getValue() == null) {
+                out.write("<li>" + "<em>null</em>" + "</li>");
+            }
+            else {
+                out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+            }
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getElaborates"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        for(Link next : aGeneralization.getElaborates()) {
+            if (next.getValue() == null) {
+                out.write("<li>" + "<em>null</em>" + "</li>");
+            }
+            else {
+                out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+            }
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Generalization.class.getMethod("getSatisfy"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        for(Link next : aGeneralization.getSatisfy()) {
+            if (next.getValue() == null) {
+                out.write("<li>" + "<em>null</em>" + "</li>");
+            }
+            else {
+                out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
             }
         }
         %>

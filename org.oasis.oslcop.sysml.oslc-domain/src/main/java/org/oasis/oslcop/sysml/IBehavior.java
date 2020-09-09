@@ -74,6 +74,7 @@ import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
 import org.oasis.oslcop.sysml.ISysmlPackage;
 import org.oasis.oslcop.sysml.IParameter;
+import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.IStep;
 import org.oasis.oslcop.sysml.ISuperclassing;

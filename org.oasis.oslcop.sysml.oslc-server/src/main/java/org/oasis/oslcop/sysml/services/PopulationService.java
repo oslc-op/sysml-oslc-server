@@ -231,7 +231,11 @@ public class PopulationService
 			translateObjectUris(model);
 			try {
 				Element element =  JenaModelHelper.unmarshalSingle(model, Element.class);
+				//Manipulate the element so that it has a URI on this server.
+				//Also add any missing properties that we expect. For example, the AM:resource properties, such as am:identifier.
 				element.setAbout(translate(element.getAbout()));
+				element.setIdentifier(element.getSysmlIdentifier());
+				element.setShortTitle(element.getName());
 				resources.add(element);
 				store.insertResources(SysmlServerManager.getStorePool().getDefaultNamedGraphUri(), element);
 				log.info("resource inserted into store:" + element.getAbout());

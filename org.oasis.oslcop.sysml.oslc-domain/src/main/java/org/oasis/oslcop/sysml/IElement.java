@@ -67,6 +67,7 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
 // Start of user code imports
 // End of user code
@@ -86,7 +87,7 @@ public interface IElement
     @OslcOccurs(Occurs.ZeroOrOne)
     @OslcValueType(ValueType.String)
     @OslcReadOnly(false)
-    public String getIdentifier();
+    public String getSysmlIdentifier();
 
     @OslcName("name")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "name")
@@ -152,7 +153,7 @@ public interface IElement
     public Set<Link> getOwnedRelationship();
 
 
-    public void setIdentifier(final String identifier );
+    public void setSysmlIdentifier(final String identifier );
     public void setName(final String name );
     public void setOwningMembership(final Link owningMembership );
     public void setOwnedRelationship_comp(final Set<Link> ownedRelationship_comp );

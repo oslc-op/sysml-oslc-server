@@ -68,6 +68,7 @@ import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IFeature;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.IType;
 // Start of user code imports
@@ -86,7 +87,7 @@ public interface IFeatureTyping
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.TYPE_TYPE})
     @OslcReadOnly(false)
-    public Link getType();
+    public Link getSysmlType();
 
     @OslcName("typedFeature")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "typedFeature")
@@ -97,7 +98,7 @@ public interface IFeatureTyping
     public Link getTypedFeature();
 
 
-    public void setType(final Link type );
+    public void setSysmlType(final Link type );
     public void setTypedFeature(final Link typedFeature );
 }
 

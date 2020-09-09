@@ -67,6 +67,7 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
 // Start of user code imports
 // End of user code
@@ -79,7 +80,7 @@ public interface IRelationship
 
     public void addRelatedElement(final Link relatedElement );
     public void addTarget(final Link target );
-    public void addSource(final Link source );
+    public void addSysmlSource(final Link source );
     public void addOwnedRelatedElement_comp(final Link ownedRelatedElement_comp );
     public void addOwnedRelatedElement(final Link ownedRelatedElement );
 
@@ -105,7 +106,7 @@ public interface IRelationship
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getSource();
+    public Set<Link> getSysmlSource();
 
     @OslcName("owningRelatedElement")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningRelatedElement")
@@ -134,7 +135,7 @@ public interface IRelationship
 
     public void setRelatedElement(final Set<Link> relatedElement );
     public void setTarget(final Set<Link> target );
-    public void setSource(final Set<Link> source );
+    public void setSysmlSource(final Set<Link> source );
     public void setOwningRelatedElement(final Link owningRelatedElement );
     public void setOwnedRelatedElement_comp(final Set<Link> ownedRelatedElement_comp );
     public void setOwnedRelatedElement(final Set<Link> ownedRelatedElement );

@@ -68,6 +68,7 @@ import org.oasis.oslcop.sysml.IConditionalImport;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IPredicate;
 import org.oasis.oslcop.sysml.IRelationship;
 // Start of user code imports

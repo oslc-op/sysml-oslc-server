@@ -74,6 +74,7 @@ import org.oasis.oslcop.sysml.ISysmlImport;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
 import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRedefinition;
 import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.ISubsetting;
@@ -88,7 +89,7 @@ public interface IFeature
 {
 
     public void addReferencedType(final Link referencedType );
-    public void addType(final Link type );
+    public void addSysmlType(final Link type );
     public void addOwnedType(final Link ownedType );
     public void addOwnedRedefinition(final Link ownedRedefinition );
     public void addOwnedSubsetting(final Link ownedSubsetting );
@@ -151,7 +152,7 @@ public interface IFeature
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.TYPE_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getType();
+    public Set<Link> getSysmlType();
 
     @OslcName("ownedType")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedType")
@@ -209,7 +210,7 @@ public interface IFeature
     public void setIsNonunique(final Boolean isNonunique );
     public void setReferencedType(final Set<Link> referencedType );
     public void setOwningType(final Link owningType );
-    public void setType(final Set<Link> type );
+    public void setSysmlType(final Set<Link> type );
     public void setOwnedType(final Set<Link> ownedType );
     public void setOwnedRedefinition(final Set<Link> ownedRedefinition );
     public void setOwnedSubsetting(final Set<Link> ownedSubsetting );

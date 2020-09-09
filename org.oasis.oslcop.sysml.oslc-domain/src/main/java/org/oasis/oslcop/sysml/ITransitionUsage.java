@@ -89,6 +89,7 @@ import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
 import org.oasis.oslcop.sysml.ISysmlPackage;
 import org.oasis.oslcop.sysml.IPartUsage;
+import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IPortUsage;
 import org.oasis.oslcop.sysml.IRedefinition;
 import org.oasis.oslcop.sysml.IReferenceUsage;
@@ -120,7 +121,7 @@ public interface ITransitionUsage
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.ACTIONUSAGE_TYPE})
     @OslcReadOnly(false)
-    public Link getSource();
+    public Link getSysmlSource();
 
     @OslcName("target")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "target")
@@ -163,7 +164,7 @@ public interface ITransitionUsage
     public Link getSuccession();
 
 
-    public void setSource(final Link source );
+    public void setSysmlSource(final Link source );
     public void setTarget(final Link target );
     public void setTriggerAction(final Set<Link> triggerAction );
     public void setGuardExpression(final Set<Link> guardExpression );

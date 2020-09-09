@@ -98,6 +98,7 @@ import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.SysmlPackage;
 import org.oasis.oslcop.sysml.PartDefinition;
 import org.oasis.oslcop.sysml.PartUsage;
+import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.ReferenceUsage;
@@ -124,24 +125,6 @@ public class ConnectionUsage
     extends PartUsage
     implements IConnectionUsage, IConnector, IRelationship
 {
-    // Start of user code attributeAnnotation:relatedElement
-    // End of user code
-    private Set<Link> relatedElement = new HashSet<Link>();
-    // Start of user code attributeAnnotation:target
-    // End of user code
-    private Set<Link> target = new HashSet<Link>();
-    // Start of user code attributeAnnotation:source
-    // End of user code
-    private Set<Link> source = new HashSet<Link>();
-    // Start of user code attributeAnnotation:owningRelatedElement
-    // End of user code
-    private Link owningRelatedElement;
-    // Start of user code attributeAnnotation:ownedRelatedElement_comp
-    // End of user code
-    private Set<Link> ownedRelatedElement_comp = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedRelatedElement
-    // End of user code
-    private Set<Link> ownedRelatedElement = new HashSet<Link>();
     // Start of user code attributeAnnotation:isDirected
     // End of user code
     private Boolean isDirected;
@@ -157,6 +140,24 @@ public class ConnectionUsage
     // Start of user code attributeAnnotation:ownedAssociationType
     // End of user code
     private Set<Link> ownedAssociationType = new HashSet<Link>();
+    // Start of user code attributeAnnotation:relatedElement
+    // End of user code
+    private Set<Link> relatedElement = new HashSet<Link>();
+    // Start of user code attributeAnnotation:target
+    // End of user code
+    private Set<Link> target = new HashSet<Link>();
+    // Start of user code attributeAnnotation:sysmlSource
+    // End of user code
+    private Set<Link> sysmlSource = new HashSet<Link>();
+    // Start of user code attributeAnnotation:owningRelatedElement
+    // End of user code
+    private Link owningRelatedElement;
+    // Start of user code attributeAnnotation:ownedRelatedElement_comp
+    // End of user code
+    private Set<Link> ownedRelatedElement_comp = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedRelatedElement
+    // End of user code
+    private Set<Link> ownedRelatedElement = new HashSet<Link>();
     
     // Start of user code classAttributes
     // End of user code
@@ -207,34 +208,10 @@ public class ConnectionUsage
         }
     
         // Start of user code toString_finalize
+        result = getIdentifier() + " (" + (null == getShortTitle() ? "No Short Title Defined" : getShortTitle()) + ")";
         // End of user code
     
         return result;
-    }
-    
-    public void addRelatedElement(final Link relatedElement)
-    {
-        this.relatedElement.add(relatedElement);
-    }
-    
-    public void addTarget(final Link target)
-    {
-        this.target.add(target);
-    }
-    
-    public void addSource(final Link source)
-    {
-        this.source.add(source);
-    }
-    
-    public void addOwnedRelatedElement_comp(final Link ownedRelatedElement_comp)
-    {
-        this.ownedRelatedElement_comp.add(ownedRelatedElement_comp);
-    }
-    
-    public void addOwnedRelatedElement(final Link ownedRelatedElement)
-    {
-        this.ownedRelatedElement.add(ownedRelatedElement);
     }
     
     public void addRelatedFeature(final Link relatedFeature)
@@ -257,96 +234,31 @@ public class ConnectionUsage
         this.ownedAssociationType.add(ownedAssociationType);
     }
     
-    
-    // Start of user code getterAnnotation:relatedElement
-    // End of user code
-    @OslcName("relatedElement")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "relatedElement")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getRelatedElement()
+    public void addRelatedElement(final Link relatedElement)
     {
-        // Start of user code getterInit:relatedElement
-        // End of user code
-        return relatedElement;
+        this.relatedElement.add(relatedElement);
     }
     
-    // Start of user code getterAnnotation:target
-    // End of user code
-    @OslcName("target")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "target")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getTarget()
+    public void addTarget(final Link target)
     {
-        // Start of user code getterInit:target
-        // End of user code
-        return target;
+        this.target.add(target);
     }
     
-    // Start of user code getterAnnotation:source
-    // End of user code
-    @OslcName("source")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "source")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getSource()
+    public void addSysmlSource(final Link source)
     {
-        // Start of user code getterInit:source
-        // End of user code
-        return source;
+        this.sysmlSource.add(source);
     }
     
-    // Start of user code getterAnnotation:owningRelatedElement
-    // End of user code
-    @OslcName("owningRelatedElement")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningRelatedElement")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwningRelatedElement()
+    public void addOwnedRelatedElement_comp(final Link ownedRelatedElement_comp)
     {
-        // Start of user code getterInit:owningRelatedElement
-        // End of user code
-        return owningRelatedElement;
+        this.ownedRelatedElement_comp.add(ownedRelatedElement_comp);
     }
     
-    // Start of user code getterAnnotation:ownedRelatedElement_comp
-    // End of user code
-    @OslcName("ownedRelatedElement_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelatedElement_comp")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedRelatedElement_comp()
+    public void addOwnedRelatedElement(final Link ownedRelatedElement)
     {
-        // Start of user code getterInit:ownedRelatedElement_comp
-        // End of user code
-        return ownedRelatedElement_comp;
+        this.ownedRelatedElement.add(ownedRelatedElement);
     }
     
-    // Start of user code getterAnnotation:ownedRelatedElement
-    // End of user code
-    @OslcName("ownedRelatedElement")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelatedElement")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedRelatedElement()
-    {
-        // Start of user code getterInit:ownedRelatedElement
-        // End of user code
-        return ownedRelatedElement;
-    }
     
     // Start of user code getterAnnotation:isDirected
     // End of user code
@@ -422,98 +334,96 @@ public class ConnectionUsage
         return ownedAssociationType;
     }
     
-    
-    // Start of user code setterAnnotation:relatedElement
+    // Start of user code getterAnnotation:relatedElement
     // End of user code
-    public void setRelatedElement(final Set<Link> relatedElement )
+    @OslcName("relatedElement")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "relatedElement")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getRelatedElement()
     {
-        // Start of user code setterInit:relatedElement
+        // Start of user code getterInit:relatedElement
         // End of user code
-        this.relatedElement.clear();
-        if (relatedElement != null)
-        {
-            this.relatedElement.addAll(relatedElement);
-        }
-    
-        // Start of user code setterFinalize:relatedElement
-        // End of user code
+        return relatedElement;
     }
     
-    // Start of user code setterAnnotation:target
+    // Start of user code getterAnnotation:target
     // End of user code
-    public void setTarget(final Set<Link> target )
+    @OslcName("target")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "target")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getTarget()
     {
-        // Start of user code setterInit:target
+        // Start of user code getterInit:target
         // End of user code
-        this.target.clear();
-        if (target != null)
-        {
-            this.target.addAll(target);
-        }
-    
-        // Start of user code setterFinalize:target
-        // End of user code
+        return target;
     }
     
-    // Start of user code setterAnnotation:source
+    // Start of user code getterAnnotation:sysmlSource
     // End of user code
-    public void setSource(final Set<Link> source )
+    @OslcName("source")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "source")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getSysmlSource()
     {
-        // Start of user code setterInit:source
+        // Start of user code getterInit:sysmlSource
         // End of user code
-        this.source.clear();
-        if (source != null)
-        {
-            this.source.addAll(source);
-        }
-    
-        // Start of user code setterFinalize:source
-        // End of user code
+        return sysmlSource;
     }
     
-    // Start of user code setterAnnotation:owningRelatedElement
+    // Start of user code getterAnnotation:owningRelatedElement
     // End of user code
-    public void setOwningRelatedElement(final Link owningRelatedElement )
+    @OslcName("owningRelatedElement")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningRelatedElement")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
+    @OslcReadOnly(false)
+    public Link getOwningRelatedElement()
     {
-        // Start of user code setterInit:owningRelatedElement
+        // Start of user code getterInit:owningRelatedElement
         // End of user code
-        this.owningRelatedElement = owningRelatedElement;
-    
-        // Start of user code setterFinalize:owningRelatedElement
-        // End of user code
+        return owningRelatedElement;
     }
     
-    // Start of user code setterAnnotation:ownedRelatedElement_comp
+    // Start of user code getterAnnotation:ownedRelatedElement_comp
     // End of user code
-    public void setOwnedRelatedElement_comp(final Set<Link> ownedRelatedElement_comp )
+    @OslcName("ownedRelatedElement_comp")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelatedElement_comp")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedRelatedElement_comp()
     {
-        // Start of user code setterInit:ownedRelatedElement_comp
+        // Start of user code getterInit:ownedRelatedElement_comp
         // End of user code
-        this.ownedRelatedElement_comp.clear();
-        if (ownedRelatedElement_comp != null)
-        {
-            this.ownedRelatedElement_comp.addAll(ownedRelatedElement_comp);
-        }
-    
-        // Start of user code setterFinalize:ownedRelatedElement_comp
-        // End of user code
+        return ownedRelatedElement_comp;
     }
     
-    // Start of user code setterAnnotation:ownedRelatedElement
+    // Start of user code getterAnnotation:ownedRelatedElement
     // End of user code
-    public void setOwnedRelatedElement(final Set<Link> ownedRelatedElement )
+    @OslcName("ownedRelatedElement")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelatedElement")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedRelatedElement()
     {
-        // Start of user code setterInit:ownedRelatedElement
+        // Start of user code getterInit:ownedRelatedElement
         // End of user code
-        this.ownedRelatedElement.clear();
-        if (ownedRelatedElement != null)
-        {
-            this.ownedRelatedElement.addAll(ownedRelatedElement);
-        }
-    
-        // Start of user code setterFinalize:ownedRelatedElement
-        // End of user code
+        return ownedRelatedElement;
     }
+    
     
     // Start of user code setterAnnotation:isDirected
     // End of user code
@@ -588,6 +498,98 @@ public class ConnectionUsage
         }
     
         // Start of user code setterFinalize:ownedAssociationType
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:relatedElement
+    // End of user code
+    public void setRelatedElement(final Set<Link> relatedElement )
+    {
+        // Start of user code setterInit:relatedElement
+        // End of user code
+        this.relatedElement.clear();
+        if (relatedElement != null)
+        {
+            this.relatedElement.addAll(relatedElement);
+        }
+    
+        // Start of user code setterFinalize:relatedElement
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:target
+    // End of user code
+    public void setTarget(final Set<Link> target )
+    {
+        // Start of user code setterInit:target
+        // End of user code
+        this.target.clear();
+        if (target != null)
+        {
+            this.target.addAll(target);
+        }
+    
+        // Start of user code setterFinalize:target
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:sysmlSource
+    // End of user code
+    public void setSysmlSource(final Set<Link> source )
+    {
+        // Start of user code setterInit:sysmlSource
+        // End of user code
+        this.sysmlSource.clear();
+        if (source != null)
+        {
+            this.sysmlSource.addAll(source);
+        }
+    
+        // Start of user code setterFinalize:sysmlSource
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:owningRelatedElement
+    // End of user code
+    public void setOwningRelatedElement(final Link owningRelatedElement )
+    {
+        // Start of user code setterInit:owningRelatedElement
+        // End of user code
+        this.owningRelatedElement = owningRelatedElement;
+    
+        // Start of user code setterFinalize:owningRelatedElement
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedRelatedElement_comp
+    // End of user code
+    public void setOwnedRelatedElement_comp(final Set<Link> ownedRelatedElement_comp )
+    {
+        // Start of user code setterInit:ownedRelatedElement_comp
+        // End of user code
+        this.ownedRelatedElement_comp.clear();
+        if (ownedRelatedElement_comp != null)
+        {
+            this.ownedRelatedElement_comp.addAll(ownedRelatedElement_comp);
+        }
+    
+        // Start of user code setterFinalize:ownedRelatedElement_comp
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedRelatedElement
+    // End of user code
+    public void setOwnedRelatedElement(final Set<Link> ownedRelatedElement )
+    {
+        // Start of user code setterInit:ownedRelatedElement
+        // End of user code
+        this.ownedRelatedElement.clear();
+        if (ownedRelatedElement != null)
+        {
+            this.ownedRelatedElement.addAll(ownedRelatedElement);
+        }
+    
+        // Start of user code setterFinalize:ownedRelatedElement
         // End of user code
     }
     

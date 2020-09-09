@@ -73,6 +73,7 @@ import org.oasis.oslcop.sysml.ISysmlImport;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
 import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
 // Start of user code imports
 // End of user code

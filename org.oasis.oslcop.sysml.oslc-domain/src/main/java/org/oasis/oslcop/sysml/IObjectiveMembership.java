@@ -68,6 +68,7 @@ import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IFeature;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.IRequirementUsage;
 import org.oasis.oslcop.sysml.IType;

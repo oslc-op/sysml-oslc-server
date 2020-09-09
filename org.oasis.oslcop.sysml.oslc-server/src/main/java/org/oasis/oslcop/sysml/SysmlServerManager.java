@@ -26,9 +26,8 @@ package org.oasis.oslcop.sysml;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.ServletContextEvent;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,8 +47,10 @@ import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.SysmlPackage;
+import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
+import org.eclipse.lyo.oslc.domains.am.Resource;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.Superclassing;
 import org.oasis.oslcop.sysml.Type;
@@ -99,7 +100,6 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.RDFReader;
 import org.apache.jena.rdf.model.ResIterator;
-import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.vocabulary.RDF;

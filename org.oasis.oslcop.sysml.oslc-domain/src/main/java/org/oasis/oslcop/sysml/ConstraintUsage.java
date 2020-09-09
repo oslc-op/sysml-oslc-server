@@ -99,6 +99,7 @@ import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.SysmlPackage;
 import org.oasis.oslcop.sysml.Parameter;
 import org.oasis.oslcop.sysml.PartUsage;
+import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
 import org.oasis.oslcop.sysml.Predicate;
 import org.oasis.oslcop.sysml.Redefinition;
@@ -135,15 +136,15 @@ public class ConstraintUsage
     // Start of user code attributeAnnotation:result
     // End of user code
     private Link result;
-    // Start of user code attributeAnnotation:predicate
-    // End of user code
-    private Link predicate;
     // Start of user code attributeAnnotation:behavior
     // End of user code
     private Set<Link> behavior = new HashSet<Link>();
     // Start of user code attributeAnnotation:parameter
     // End of user code
     private Set<Link> parameter = new HashSet<Link>();
+    // Start of user code attributeAnnotation:predicate
+    // End of user code
+    private Link predicate;
     
     // Start of user code classAttributes
     // End of user code
@@ -194,6 +195,7 @@ public class ConstraintUsage
         }
     
         // Start of user code toString_finalize
+        result = getIdentifier() + " (" + (null == getShortTitle() ? "No Short Title Defined" : getShortTitle()) + ")";
         // End of user code
     
         return result;
@@ -255,21 +257,6 @@ public class ConstraintUsage
         return result;
     }
     
-    // Start of user code getterAnnotation:predicate
-    // End of user code
-    @OslcName("predicate")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "predicate")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PREDICATE_TYPE})
-    @OslcReadOnly(false)
-    public Link getPredicate()
-    {
-        // Start of user code getterInit:predicate
-        // End of user code
-        return predicate;
-    }
-    
     // Start of user code getterAnnotation:behavior
     // End of user code
     @OslcName("behavior")
@@ -298,6 +285,21 @@ public class ConstraintUsage
         // Start of user code getterInit:parameter
         // End of user code
         return parameter;
+    }
+    
+    // Start of user code getterAnnotation:predicate
+    // End of user code
+    @OslcName("predicate")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "predicate")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.PREDICATE_TYPE})
+    @OslcReadOnly(false)
+    public Link getPredicate()
+    {
+        // Start of user code getterInit:predicate
+        // End of user code
+        return predicate;
     }
     
     
@@ -337,18 +339,6 @@ public class ConstraintUsage
         // End of user code
     }
     
-    // Start of user code setterAnnotation:predicate
-    // End of user code
-    public void setPredicate(final Link predicate )
-    {
-        // Start of user code setterInit:predicate
-        // End of user code
-        this.predicate = predicate;
-    
-        // Start of user code setterFinalize:predicate
-        // End of user code
-    }
-    
     // Start of user code setterAnnotation:behavior
     // End of user code
     public void setBehavior(final Set<Link> behavior )
@@ -378,6 +368,18 @@ public class ConstraintUsage
         }
     
         // Start of user code setterFinalize:parameter
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:predicate
+    // End of user code
+    public void setPredicate(final Link predicate )
+    {
+        // Start of user code setterInit:predicate
+        // End of user code
+        this.predicate = predicate;
+    
+        // Start of user code setterFinalize:predicate
         // End of user code
     }
     

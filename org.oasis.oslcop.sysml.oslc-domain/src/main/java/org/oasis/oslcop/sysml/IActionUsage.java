@@ -88,6 +88,7 @@ import org.oasis.oslcop.sysml.IMultiplicity;
 import org.oasis.oslcop.sysml.ISysmlPackage;
 import org.oasis.oslcop.sysml.IParameter;
 import org.oasis.oslcop.sysml.IPartUsage;
+import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IPortUsage;
 import org.oasis.oslcop.sysml.IRedefinition;
 import org.oasis.oslcop.sysml.IReferenceUsage;

@@ -28,13 +28,14 @@
 
 <%@page import="org.eclipse.lyo.oslc4j.core.model.ServiceProvider"%>
 <%@page import="org.eclipse.lyo.oslc4j.core.model.AbstractResource"%>
+<%@page import="org.eclipse.lyo.oslc4j.core.OSLC4JConstants"%>
 <%@page import="java.util.List" %>
 <%@page import="org.oasis.oslcop.sysml.SysmlClass"%>
 <%@ page contentType="text/html" language="java" pageEncoding="UTF-8" %>
 <%
   List<SysmlClass> resources = (List<SysmlClass>) request.getAttribute("resources");
   String queryUri = (String)request.getAttribute("queryUri");
-  String nextPageUri = (String)request.getAttribute("nextPageUri");
+  String nextPageUri = (String)request.getAttribute(OSLC4JConstants.OSLC4J_NEXT_PAGE);
 %>
 <html lang="en">
 <head>

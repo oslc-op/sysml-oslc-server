@@ -72,13 +72,16 @@
 </head>
 
 <body>
-
-<nav class="navbar sticky-top navbar-light bg-light">
-  <div class="container">
-  <a class="navbar-brand" href="<c:url value="/services/catalog/singleton"/>">Sysml Server</a>
-  </div>
-</nav>
-
+<!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
+    <div class="container">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="<c:url value="/"/>"><%= application.getServletContextName() %></a></li>
+        <li class="nav-item"><a class="nav-link" href="<c:url value="/services/catalog/singleton"/>">Service Provider Catalog</a></li>
+        <li class="nav-item"><a class="nav-link" href="<c:url value="/swagger-ui/index.jsp"/>">Swagger UI</a></li>
+      </ul>
+    </div>
+  </nav>
 <!-- Begin page content -->
 <div class="container">
     <div class="page-header">
@@ -268,12 +271,12 @@
             </dd>
           </dl>
           <dl class="row">
-            <% method = Subsetting.class.getMethod("getSource"); %>
+            <% method = Subsetting.class.getMethod("getSysmlSource"); %>
             <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
             <ul>
             <%
-            for(Link next : aSubsetting.getSource()) {
+            for(Link next : aSubsetting.getSysmlSource()) {
                 if (next.getValue() == null) {
                     out.write("<li>" + "<em>null</em>" + "</li>");
                 }
@@ -362,15 +365,15 @@
             </dd>
           </dl>
           <dl class="row">
-            <% method = Subsetting.class.getMethod("getIdentifier"); %>
+            <% method = Subsetting.class.getMethod("getSysmlIdentifier"); %>
             <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
             <%
-            if (aSubsetting.getIdentifier() == null) {
+            if (aSubsetting.getSysmlIdentifier() == null) {
                 out.write("<em>null</em>");
             }
             else {
-                out.write(aSubsetting.getIdentifier().toString());
+                out.write(aSubsetting.getSysmlIdentifier().toString());
             }
             %>
             
@@ -535,6 +538,328 @@
                         </jsp:include>
                     </li>
                     <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getContributor"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSubsetting.getContributor()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/persontohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getCreated"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aSubsetting.getCreated() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aSubsetting.getCreated().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getCreator"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSubsetting.getCreator()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/persontohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getDescription"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aSubsetting.getDescription() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aSubsetting.getDescription().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getIdentifier"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aSubsetting.getIdentifier() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aSubsetting.getIdentifier().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getModified"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aSubsetting.getModified() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aSubsetting.getModified().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getSource"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aSubsetting.getSource() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aSubsetting.getSource().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getTitle"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aSubsetting.getTitle() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aSubsetting.getTitle().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getType"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            Iterator<String> typeItr = aSubsetting.getType().iterator();
+            while(typeItr.hasNext()) {
+                out.write("<li>" + typeItr.next().toString() + "</li>");
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getInstanceShape"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSubsetting.getInstanceShape()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getServiceProvider"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSubsetting.getServiceProvider()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getShortTitle"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aSubsetting.getShortTitle() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aSubsetting.getShortTitle().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getExternal"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSubsetting.getExternal()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getTrace"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSubsetting.getTrace()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getRefine"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSubsetting.getRefine()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getDerives"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSubsetting.getDerives()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getElaborates"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSubsetting.getElaborates()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getSatisfy"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSubsetting.getSatisfy()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
                 }
             }
             %>

@@ -68,13 +68,14 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
-
+import org.eclipse.lyo.oslc.domains.am.Resource;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.SysmlPackage;
+import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
 // Start of user code imports
 // End of user code
@@ -88,12 +89,12 @@ import org.oasis.oslcop.sysml.Relationship;
 @OslcName(SysmlDomainConstants.ELEMENT_LOCALNAME)
 @OslcResourceShape(title = "Element Resource Shape", describes = SysmlDomainConstants.ELEMENT_TYPE)
 public class Element
-    extends AbstractResource
+    extends Resource
     implements IElement
 {
-    // Start of user code attributeAnnotation:identifier
+    // Start of user code attributeAnnotation:sysmlIdentifier
     // End of user code
-    private String identifier;
+    private String sysmlIdentifier;
     // Start of user code attributeAnnotation:name
     // End of user code
     private String name;
@@ -168,6 +169,7 @@ public class Element
         }
     
         // Start of user code toString_finalize
+        result = getIdentifier() + " (" + (null == getShortTitle() ? "No Short Title Defined" : getShortTitle()) + ")";
         // End of user code
     
         return result;
@@ -189,18 +191,18 @@ public class Element
     }
     
     
-    // Start of user code getterAnnotation:identifier
+    // Start of user code getterAnnotation:sysmlIdentifier
     // End of user code
     @OslcName("identifier")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "identifier")
     @OslcOccurs(Occurs.ZeroOrOne)
     @OslcValueType(ValueType.String)
     @OslcReadOnly(false)
-    public String getIdentifier()
+    public String getSysmlIdentifier()
     {
-        // Start of user code getterInit:identifier
+        // Start of user code getterInit:sysmlIdentifier
         // End of user code
-        return identifier;
+        return sysmlIdentifier;
     }
     
     // Start of user code getterAnnotation:name
@@ -323,15 +325,15 @@ public class Element
     }
     
     
-    // Start of user code setterAnnotation:identifier
+    // Start of user code setterAnnotation:sysmlIdentifier
     // End of user code
-    public void setIdentifier(final String identifier )
+    public void setSysmlIdentifier(final String identifier )
     {
-        // Start of user code setterInit:identifier
+        // Start of user code setterInit:sysmlIdentifier
         // End of user code
-        this.identifier = identifier;
+        this.sysmlIdentifier = identifier;
     
-        // Start of user code setterFinalize:identifier
+        // Start of user code setterFinalize:sysmlIdentifier
         // End of user code
     }
     

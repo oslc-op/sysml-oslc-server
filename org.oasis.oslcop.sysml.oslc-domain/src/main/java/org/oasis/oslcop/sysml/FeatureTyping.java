@@ -76,6 +76,7 @@ import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.SysmlPackage;
+import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.Type;
 // Start of user code imports
@@ -93,9 +94,9 @@ public class FeatureTyping
     extends Generalization
     implements IFeatureTyping
 {
-    // Start of user code attributeAnnotation:type
+    // Start of user code attributeAnnotation:sysmlType
     // End of user code
-    private Link type;
+    private Link sysmlType;
     // Start of user code attributeAnnotation:typedFeature
     // End of user code
     private Link typedFeature;
@@ -149,13 +150,14 @@ public class FeatureTyping
         }
     
         // Start of user code toString_finalize
+        result = getIdentifier() + " (" + (null == getShortTitle() ? "No Short Title Defined" : getShortTitle()) + ")";
         // End of user code
     
         return result;
     }
     
     
-    // Start of user code getterAnnotation:type
+    // Start of user code getterAnnotation:sysmlType
     // End of user code
     @OslcName("type")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "type")
@@ -163,11 +165,11 @@ public class FeatureTyping
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.TYPE_TYPE})
     @OslcReadOnly(false)
-    public Link getType()
+    public Link getSysmlType()
     {
-        // Start of user code getterInit:type
+        // Start of user code getterInit:sysmlType
         // End of user code
-        return type;
+        return sysmlType;
     }
     
     // Start of user code getterAnnotation:typedFeature
@@ -186,15 +188,15 @@ public class FeatureTyping
     }
     
     
-    // Start of user code setterAnnotation:type
+    // Start of user code setterAnnotation:sysmlType
     // End of user code
-    public void setType(final Link type )
+    public void setSysmlType(final Link type )
     {
-        // Start of user code setterInit:type
+        // Start of user code setterInit:sysmlType
         // End of user code
-        this.type = type;
+        this.sysmlType = type;
     
-        // Start of user code setterFinalize:type
+        // Start of user code setterFinalize:sysmlType
         // End of user code
     }
     

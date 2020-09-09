@@ -98,6 +98,7 @@ import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.SysmlPackage;
 import org.oasis.oslcop.sysml.Parameter;
 import org.oasis.oslcop.sysml.PartUsage;
+import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.ReferenceUsage;
@@ -189,6 +190,7 @@ public class CalculationUsage
         }
     
         // Start of user code toString_finalize
+        result = getIdentifier() + " (" + (null == getShortTitle() ? "No Short Title Defined" : getShortTitle()) + ")";
         // End of user code
     
         return result;

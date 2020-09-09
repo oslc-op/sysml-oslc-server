@@ -119,7 +119,9 @@
     <resources id="_KtCfXeffEeqcYsuDRKrn0Q" name="StateSubactionMembership" extends="_KtB4GuffEeqcYsuDRKrn0Q" resourceProperties="_KtPTfuffEeqcYsuDRKrn0Q _KtPTf-ffEeqcYsuDRKrn0Q _KtPTgOffEeqcYsuDRKrn0Q"/>
     <resources id="_KtB4IeffEeqcYsuDRKrn0Q" name="Superclassing" extends="_KtB4GeffEeqcYsuDRKrn0Q" resourceProperties="_KtPTgeffEeqcYsuDRKrn0Q _KtPTguffEeqcYsuDRKrn0Q _KtPTg-ffEeqcYsuDRKrn0Q"/>
     <resources id="_KtCfXOffEeqcYsuDRKrn0Q" name="ConjugatedPortTyping" extends="_KtB4HuffEeqcYsuDRKrn0Q" resourceProperties="_KtPThOffEeqcYsuDRKrn0Q _KtPTheffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4FeffEeqcYsuDRKrn0Q" name="Element" resourceProperties="_KtPThuffEeqcYsuDRKrn0Q _KtPTh-ffEeqcYsuDRKrn0Q _KtPTiOffEeqcYsuDRKrn0Q _KtPTieffEeqcYsuDRKrn0Q _KtPTiuffEeqcYsuDRKrn0Q _KtPTi-ffEeqcYsuDRKrn0Q _KtPTjOffEeqcYsuDRKrn0Q _KtPTjeffEeqcYsuDRKrn0Q _KtPTjuffEeqcYsuDRKrn0Q"/>
+    <resources id="_KtB4FeffEeqcYsuDRKrn0Q" name="Element" resourceProperties="_KtPThuffEeqcYsuDRKrn0Q _KtPTh-ffEeqcYsuDRKrn0Q _KtPTiOffEeqcYsuDRKrn0Q _KtPTieffEeqcYsuDRKrn0Q _KtPTiuffEeqcYsuDRKrn0Q _KtPTi-ffEeqcYsuDRKrn0Q _KtPTjOffEeqcYsuDRKrn0Q _KtPTjeffEeqcYsuDRKrn0Q _KtPTjuffEeqcYsuDRKrn0Q">
+      <extends href="../org.eclipse.lyo.tools.domainmodels/oslcDomainSpecifications.xml#_popnoJUdEeq-KoPaR9_Cfg"/>
+    </resources>
     <resourceProperties id="_KtHXoOffEeqcYsuDRKrn0Q" name="performedAction" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
     <resourceProperties id="_KtHXoeffEeqcYsuDRKrn0Q" name="originalType" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
     <resourceProperties id="_KtHXouffEeqcYsuDRKrn0Q" name="conjugatedType" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
@@ -438,7 +440,7 @@
   </domainSpecifications>
   <domainPrefixes name="sysml"/>
   <configuration xsi:type="oslc4j_ai:MavenSpecificationConfiguration">
-    <generalConfiguration filesBasePath="../org.oasis.oslcop.sysml.oslc-domain" javaBasePackageName="org.oasis.oslcop.sysml"/>
+    <generalConfiguration doNotGenerateFromImportedModels="true" filesBasePath="../org.oasis.oslcop.sysml.oslc-domain" javaBasePackageName="org.oasis.oslcop.sysml"/>
     <projectConfiguration xsi:type="oslc4j_ai:MavenProjectConfiguration" lyoVersion="4.0.0-SNAPSHOT" groupId="org.oasis.oslcop.sysml" artifactId="sysml-oslc-domain" version="0.0.1-SNAPSHOT"/>
   </configuration>
 </oslc4j_ai:Specification>

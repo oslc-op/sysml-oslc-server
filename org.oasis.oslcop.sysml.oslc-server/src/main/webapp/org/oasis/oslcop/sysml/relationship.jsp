@@ -72,13 +72,16 @@
 </head>
 
 <body>
-
-<nav class="navbar sticky-top navbar-light bg-light">
-  <div class="container">
-  <a class="navbar-brand" href="<c:url value="/services/catalog/singleton"/>">Sysml Server</a>
-  </div>
-</nav>
-
+<!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
+    <div class="container">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="<c:url value="/"/>"><%= application.getServletContextName() %></a></li>
+        <li class="nav-item"><a class="nav-link" href="<c:url value="/services/catalog/singleton"/>">Service Provider Catalog</a></li>
+        <li class="nav-item"><a class="nav-link" href="<c:url value="/swagger-ui/index.jsp"/>">Swagger UI</a></li>
+      </ul>
+    </div>
+  </nav>
 <!-- Begin page content -->
 <div class="container">
     <div class="page-header">
@@ -154,12 +157,12 @@
             </dd>
           </dl>
           <dl class="row">
-            <% method = Relationship.class.getMethod("getSource"); %>
+            <% method = Relationship.class.getMethod("getSysmlSource"); %>
             <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
             <ul>
             <%
-            for(Link next : aRelationship.getSource()) {
+            for(Link next : aRelationship.getSysmlSource()) {
                 if (next.getValue() == null) {
                     out.write("<li>" + "<em>null</em>" + "</li>");
                 }
@@ -248,15 +251,15 @@
             </dd>
           </dl>
           <dl class="row">
-            <% method = Relationship.class.getMethod("getIdentifier"); %>
+            <% method = Relationship.class.getMethod("getSysmlIdentifier"); %>
             <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
             <%
-            if (aRelationship.getIdentifier() == null) {
+            if (aRelationship.getSysmlIdentifier() == null) {
                 out.write("<em>null</em>");
             }
             else {
-                out.write(aRelationship.getIdentifier().toString());
+                out.write(aRelationship.getSysmlIdentifier().toString());
             }
             %>
             
@@ -421,6 +424,328 @@
                         </jsp:include>
                     </li>
                     <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getContributor"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aRelationship.getContributor()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/persontohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getCreated"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aRelationship.getCreated() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aRelationship.getCreated().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getCreator"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aRelationship.getCreator()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/persontohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getDescription"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aRelationship.getDescription() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aRelationship.getDescription().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getIdentifier"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aRelationship.getIdentifier() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aRelationship.getIdentifier().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getModified"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aRelationship.getModified() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aRelationship.getModified().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getSource"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aRelationship.getSource() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aRelationship.getSource().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getTitle"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aRelationship.getTitle() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aRelationship.getTitle().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getType"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            Iterator<String> typeItr = aRelationship.getType().iterator();
+            while(typeItr.hasNext()) {
+                out.write("<li>" + typeItr.next().toString() + "</li>");
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getInstanceShape"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aRelationship.getInstanceShape()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getServiceProvider"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aRelationship.getServiceProvider()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getShortTitle"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aRelationship.getShortTitle() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aRelationship.getShortTitle().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getExternal"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aRelationship.getExternal()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getTrace"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aRelationship.getTrace()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getRefine"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aRelationship.getRefine()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getDerives"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aRelationship.getDerives()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getElaborates"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aRelationship.getElaborates()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Relationship.class.getMethod("getSatisfy"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aRelationship.getSatisfy()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    out.write("<li>" + "<a href=\"" + next.getValue().toString() + "\" class=\"oslc-resource-link\">" + next.getValue().toString() + "</a>" + "</li>");
                 }
             }
             %>

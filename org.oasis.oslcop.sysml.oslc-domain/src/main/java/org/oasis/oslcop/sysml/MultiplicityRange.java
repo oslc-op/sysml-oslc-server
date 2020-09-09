@@ -83,6 +83,7 @@ import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.SysmlPackage;
+import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.Subsetting;
@@ -161,6 +162,7 @@ public class MultiplicityRange
         }
     
         // Start of user code toString_finalize
+        result = getIdentifier() + " (" + (null == getShortTitle() ? "No Short Title Defined" : getShortTitle()) + ")";
         // End of user code
     
         return result;

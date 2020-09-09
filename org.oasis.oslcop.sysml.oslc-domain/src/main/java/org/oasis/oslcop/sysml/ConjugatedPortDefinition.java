@@ -93,6 +93,7 @@ import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.SysmlPackage;
 import org.oasis.oslcop.sysml.PartUsage;
+import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortConjugation;
 import org.oasis.oslcop.sysml.PortDefinition;
 import org.oasis.oslcop.sysml.PortUsage;
@@ -175,6 +176,7 @@ public class ConjugatedPortDefinition
         }
     
         // Start of user code toString_finalize
+        result = getIdentifier() + " (" + (null == getShortTitle() ? "No Short Title Defined" : getShortTitle()) + ")";
         // End of user code
     
         return result;

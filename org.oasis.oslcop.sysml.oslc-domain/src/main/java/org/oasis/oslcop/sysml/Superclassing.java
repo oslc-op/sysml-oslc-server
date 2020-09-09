@@ -76,6 +76,7 @@ import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.SysmlPackage;
+import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.Type;
 // Start of user code imports
@@ -152,6 +153,7 @@ public class Superclassing
         }
     
         // Start of user code toString_finalize
+        result = getIdentifier() + " (" + (null == getShortTitle() ? "No Short Title Defined" : getShortTitle()) + ")";
         // End of user code
     
         return result;

@@ -95,6 +95,7 @@ import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.SysmlPackage;
 import org.oasis.oslcop.sysml.PartUsage;
+import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
 import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
@@ -129,9 +130,9 @@ public class ConnectionDefinition
     // Start of user code attributeAnnotation:target
     // End of user code
     private Set<Link> target = new HashSet<Link>();
-    // Start of user code attributeAnnotation:source
+    // Start of user code attributeAnnotation:sysmlSource
     // End of user code
-    private Set<Link> source = new HashSet<Link>();
+    private Set<Link> sysmlSource = new HashSet<Link>();
     // Start of user code attributeAnnotation:owningRelatedElement
     // End of user code
     private Link owningRelatedElement;
@@ -200,6 +201,7 @@ public class ConnectionDefinition
         }
     
         // Start of user code toString_finalize
+        result = getIdentifier() + " (" + (null == getShortTitle() ? "No Short Title Defined" : getShortTitle()) + ")";
         // End of user code
     
         return result;
@@ -220,9 +222,9 @@ public class ConnectionDefinition
         this.target.add(target);
     }
     
-    public void addSource(final Link source)
+    public void addSysmlSource(final Link source)
     {
-        this.source.add(source);
+        this.sysmlSource.add(source);
     }
     
     public void addOwnedRelatedElement_comp(final Link ownedRelatedElement_comp)
@@ -291,7 +293,7 @@ public class ConnectionDefinition
         return target;
     }
     
-    // Start of user code getterAnnotation:source
+    // Start of user code getterAnnotation:sysmlSource
     // End of user code
     @OslcName("source")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "source")
@@ -299,11 +301,11 @@ public class ConnectionDefinition
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getSource()
+    public Set<Link> getSysmlSource()
     {
-        // Start of user code getterInit:source
+        // Start of user code getterInit:sysmlSource
         // End of user code
-        return source;
+        return sysmlSource;
     }
     
     // Start of user code getterAnnotation:owningRelatedElement
@@ -445,19 +447,19 @@ public class ConnectionDefinition
         // End of user code
     }
     
-    // Start of user code setterAnnotation:source
+    // Start of user code setterAnnotation:sysmlSource
     // End of user code
-    public void setSource(final Set<Link> source )
+    public void setSysmlSource(final Set<Link> source )
     {
-        // Start of user code setterInit:source
+        // Start of user code setterInit:sysmlSource
         // End of user code
-        this.source.clear();
+        this.sysmlSource.clear();
         if (source != null)
         {
-            this.source.addAll(source);
+            this.sysmlSource.addAll(source);
         }
     
-        // Start of user code setterFinalize:source
+        // Start of user code setterFinalize:sysmlSource
         // End of user code
     }
     
