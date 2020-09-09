@@ -203,7 +203,7 @@ public class SysmlServerManager {
         return serviceProviderInfos;
     }
 
-    public static List<Subsetting> querySubsettings(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, int page, int limit)
+    public static List<Subsetting> querySubsettings(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, String prefix, int page, int limit)
     {
         List<Subsetting> resources = null;
         
@@ -211,7 +211,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Subsetting>(store.getResources(storePool.getDefaultNamedGraphUri(), Subsetting.class, "", "", "", limit+1, page*limit));
+            resources = new ArrayList<Subsetting>(store.getResources(storePool.getDefaultNamedGraphUri(), Subsetting.class, prefix, where, "", limit+1, page*limit));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to query resources, with where-string '" + where + "'", e);
             throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
