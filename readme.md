@@ -11,6 +11,14 @@
 1. If the first time you are running the server, populate the database by calling http://localhost:8085/sysml_oslc_server/services/populate
 1. Browse the data starting with the catalog http://localhost:8085/sysml_oslc_server/services/catalog/singleton
 
+# Query
+
+Example queries we can examplify with
+
+https://aide.md.kth.se/sysml_oslc_server/services/projects/585a5a94-61a0-4a60-9731-c2be32b06f89/commits/7cbc0568-1f44-4725-ace0-e7d4e1c046c6/service1/subsettings/query
+* `oslc.where   sysml:identifier="bd51aa62-e8df-474e-931c-f3cb60c17d6b"`
+* `oslc.prefix  sysml=<http://omg.org/ns/sysml%23>`
+
 # Info
 
 The domain-classes are based on the ecore file, located underhttps
