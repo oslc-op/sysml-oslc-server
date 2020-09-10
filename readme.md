@@ -51,4 +51,4 @@ They would have existed if the OSLC AM resources were generated. But because we 
 
 # License
 
-This code is dual-licensed under the terms of Apache License 2.0 and GNU Lesser General Public License v2.1 or (at your option) any later version. The generated code that is provided under the terms of Eclipse Public License v1.0 and Eclipse Distribution License v1.0 is licensed under the terms of Eclipse Distribution License v1.0.
+This code is dual-licensed under the terms of Apache License 2.0 and GNU Lesser General Public License v2.1 or (at your option) any later version. The generated code used in this work that is provided under the terms of Eclipse Public License v1.0 and Eclipse Distribution License v1.0 is licensed under the terms of Eclipse Distribution License v1.0.
