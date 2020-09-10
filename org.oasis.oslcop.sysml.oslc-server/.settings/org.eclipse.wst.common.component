@@ -7,6 +7,9 @@
         <dependent-module archiveName="sysml-oslc-domain-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/sysml-oslc-domain/sysml-oslc-domain">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="oslc-domains-4.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/oslc-domains/oslc-domains">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="oslc4j-client-4.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/oslc4j-client/oslc4j-client">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -17,9 +20,6 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="oslc4j-json4j-provider-4.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/oslc4j-json4j-provider/oslc4j-json4j-provider">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="store-core-4.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/store-core/store-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="oslc-query-4.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/oslc-query/oslc-query">

@@ -151,6 +151,7 @@ public class ServiceProviderService4
     public Relationship[] queryRelationships(
                                                     @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId ,
                                                      @QueryParam("oslc.where") final String where,
+                                                     @QueryParam("oslc.prefix") final String prefix,
                                                      @QueryParam("page") final String pageString,
                                                     @QueryParam("oslc.pageSize") final String pageSizeString) throws IOException, ServletException
     {
@@ -167,7 +168,7 @@ public class ServiceProviderService4
         // Here additional logic can be implemented that complements main action taken in SysmlServerManager
         // End of user code
 
-        final List<Relationship> resources = SysmlServerManager.queryRelationships(httpServletRequest, projectId, commitId, where, page, pageSize);
+        final List<Relationship> resources = SysmlServerManager.queryRelationships(httpServletRequest, projectId, commitId, where, prefix, page, pageSize);
         httpServletRequest.setAttribute("queryUri",
                 uriInfo.getAbsolutePath().toString() + "?oslc.paging=true");
         if (resources.size() > pageSize) {
@@ -190,6 +191,7 @@ public class ServiceProviderService4
     public void queryRelationshipsAsHtml(
                                     @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId ,
                                        @QueryParam("oslc.where") final String where,
+                                       @QueryParam("oslc.prefix") final String prefix,
                                        @QueryParam("page") final String pageString,
                                     @QueryParam("oslc.pageSize") final String pageSizeString) throws ServletException, IOException
     {
@@ -205,7 +207,7 @@ public class ServiceProviderService4
         // Start of user code queryRelationshipsAsHtml
         // End of user code
 
-        final List<Relationship> resources = SysmlServerManager.queryRelationships(httpServletRequest, projectId, commitId, where, page, pageSize);
+        final List<Relationship> resources = SysmlServerManager.queryRelationships(httpServletRequest, projectId, commitId, where, prefix, page, pageSize);
 
         if (resources!= null) {
             httpServletRequest.setAttribute("resources", resources);

@@ -256,7 +256,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<Element> queryElements(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, int page, int limit)
+    public static List<Element> queryElements(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, String prefix, int page, int limit)
     {
         List<Element> resources = null;
         
@@ -264,7 +264,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Element>(store.getResources(storePool.getDefaultNamedGraphUri(), Element.class, "", "", "", limit+1, page*limit));
+            resources = new ArrayList<Element>(store.getResources(storePool.getDefaultNamedGraphUri(), Element.class, prefix, where, "", limit+1, page*limit));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to query resources, with where-string '" + where + "'", e);
             throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -306,7 +306,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<SysmlClass> querySysmlClasss(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, int page, int limit)
+    public static List<SysmlClass> querySysmlClasss(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, String prefix, int page, int limit)
     {
         List<SysmlClass> resources = null;
         
@@ -314,7 +314,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<SysmlClass>(store.getResources(storePool.getDefaultNamedGraphUri(), SysmlClass.class, "", "", "", limit+1, page*limit));
+            resources = new ArrayList<SysmlClass>(store.getResources(storePool.getDefaultNamedGraphUri(), SysmlClass.class, prefix, where, "", limit+1, page*limit));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to query resources, with where-string '" + where + "'", e);
             throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -359,7 +359,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<Relationship> queryRelationships(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, int page, int limit)
+    public static List<Relationship> queryRelationships(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, String prefix, int page, int limit)
     {
         List<Relationship> resources = null;
         
@@ -367,7 +367,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Relationship>(store.getResources(storePool.getDefaultNamedGraphUri(), Relationship.class, "", "", "", limit+1, page*limit));
+            resources = new ArrayList<Relationship>(store.getResources(storePool.getDefaultNamedGraphUri(), Relationship.class, prefix, where, "", limit+1, page*limit));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to query resources, with where-string '" + where + "'", e);
             throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -412,7 +412,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<Generalization> queryGeneralizations(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, int page, int limit)
+    public static List<Generalization> queryGeneralizations(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, String prefix, int page, int limit)
     {
         List<Generalization> resources = null;
         
@@ -420,7 +420,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Generalization>(store.getResources(storePool.getDefaultNamedGraphUri(), Generalization.class, "", "", "", limit+1, page*limit));
+            resources = new ArrayList<Generalization>(store.getResources(storePool.getDefaultNamedGraphUri(), Generalization.class, prefix, where, "", limit+1, page*limit));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to query resources, with where-string '" + where + "'", e);
             throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);

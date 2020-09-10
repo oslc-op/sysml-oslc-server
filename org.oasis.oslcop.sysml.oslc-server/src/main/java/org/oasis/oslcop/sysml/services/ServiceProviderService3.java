@@ -163,6 +163,7 @@ public class ServiceProviderService3
     public SysmlClass[] querySysmlClasss(
                                                     @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId ,
                                                      @QueryParam("oslc.where") final String where,
+                                                     @QueryParam("oslc.prefix") final String prefix,
                                                      @QueryParam("page") final String pageString,
                                                     @QueryParam("oslc.pageSize") final String pageSizeString) throws IOException, ServletException
     {
@@ -179,7 +180,7 @@ public class ServiceProviderService3
         // Here additional logic can be implemented that complements main action taken in SysmlServerManager
         // End of user code
 
-        final List<SysmlClass> resources = SysmlServerManager.querySysmlClasss(httpServletRequest, projectId, commitId, where, page, pageSize);
+        final List<SysmlClass> resources = SysmlServerManager.querySysmlClasss(httpServletRequest, projectId, commitId, where, prefix, page, pageSize);
         httpServletRequest.setAttribute("queryUri",
                 uriInfo.getAbsolutePath().toString() + "?oslc.paging=true");
         if (resources.size() > pageSize) {
@@ -202,6 +203,7 @@ public class ServiceProviderService3
     public void querySysmlClasssAsHtml(
                                     @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId ,
                                        @QueryParam("oslc.where") final String where,
+                                       @QueryParam("oslc.prefix") final String prefix,
                                        @QueryParam("page") final String pageString,
                                     @QueryParam("oslc.pageSize") final String pageSizeString) throws ServletException, IOException
     {
@@ -217,7 +219,7 @@ public class ServiceProviderService3
         // Start of user code querySysmlClasssAsHtml
         // End of user code
 
-        final List<SysmlClass> resources = SysmlServerManager.querySysmlClasss(httpServletRequest, projectId, commitId, where, page, pageSize);
+        final List<SysmlClass> resources = SysmlServerManager.querySysmlClasss(httpServletRequest, projectId, commitId, where, prefix, page, pageSize);
 
         if (resources!= null) {
             httpServletRequest.setAttribute("resources", resources);
