@@ -49,4 +49,6 @@ Use Notepad++ to search/replace on all *.java files.
 In the generated jsp pages, there are calls to getDctermsIdentifier() and getDctermsSource(), but these methods do not exist.
 They would have existed if the OSLC AM resources were generated. But because we are including the library as it is previously generated, the methods should be really getIdentifier() and getSource()
 
+# License
 
+This code is dual-licensed under the terms of Apache License 2.0 and GNU Lesser General Public License v2.1 or (at your option) any later version. The generated code that is provided under the terms of Eclipse Public License v1.0 and Eclipse Distribution License v1.0 is licensed under the terms of Eclipse Distribution License v1.0.
