@@ -17,7 +17,7 @@ Example queries we can examplify with
 
 https://aide.md.kth.se/sysml_oslc_server/services/projects/585a5a94-61a0-4a60-9731-c2be32b06f89/commits/7cbc0568-1f44-4725-ace0-e7d4e1c046c6/service1/subsettings/query
 * `oslc.where   sysml:identifier="bd51aa62-e8df-474e-931c-f3cb60c17d6b"`
-* `oslc.prefix  sysml=<http://omg.org/ns/sysml%23>`
+* `oslc.prefix  sysml=<http://omg.org/ns/sysml#>`
 
 # Info
 
