@@ -604,6 +604,10 @@
               <styles xmi:type="notation:FontStyle" xmi:id="_0mUdZOiTEeq7T9BFSE1Ujg" fontName="Segoe UI" fontHeight="8"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_0mUdZeiTEeq7T9BFSE1Ujg"/>
             </children>
+            <children xmi:type="notation:Node" xmi:id="_UEcwQPbOEeq3fJFR2qDUoQ" type="3010" element="_T_JZgPbOEeq3fJFR2qDUoQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_UEcwQfbOEeq3fJFR2qDUoQ" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_UEcwQvbOEeq3fJFR2qDUoQ"/>
+            </children>
             <styles xmi:type="notation:SortingStyle" xmi:id="_0mNIquiTEeq7T9BFSE1Ujg"/>
             <styles xmi:type="notation:FilteringStyle" xmi:id="_0mNIq-iTEeq7T9BFSE1Ujg"/>
           </children>
@@ -1612,6 +1616,14 @@
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.lyo.tools.toolchain.design/description/ToolChainModel.odesign#//@ownedViewpoints[name='ToolchainViewpoint']/@ownedRepresentations[name='AdaptorInterfaceDiagram']/@defaultLayer/@containerMappings[name='AdaptorInterface.ServerConfiguration']/@subNodeMappings[name='AdaptorInterface.ServerConfiguration.ProjectConfiguration']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.lyo.tools.toolchain.design/description/ToolChainModel.odesign#//@ownedViewpoints[name='ToolchainViewpoint']/@ownedRepresentations[name='AdaptorInterfaceDiagram']/@defaultLayer/@containerMappings[name='AdaptorInterface.ServerConfiguration']/@subNodeMappings[name='AdaptorInterface.ServerConfiguration.ProjectConfiguration']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_T_JZgPbOEeq3fJFR2qDUoQ" name="Authentication">
+        <target xmi:type="oslc4j_ai:AuthenticationConfiguration" href="toolchain.xml#//@adaptorInterfaces.0/@configuration/@authenticationConfiguration"/>
+        <semanticElements xmi:type="oslc4j_ai:AuthenticationConfiguration" href="toolchain.xml#//@adaptorInterfaces.0/@configuration/@authenticationConfiguration"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_T_KAkPbOEeq3fJFR2qDUoQ" showIcon="false" labelAlignment="LEFT" labelPosition="node">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.lyo.tools.toolchain.design/description/ToolChainModel.odesign#//@ownedViewpoints[name='ToolchainViewpoint']/@ownedRepresentations[name='AdaptorInterfaceDiagram']/@defaultLayer/@containerMappings[name='AdaptorInterface.ServerConfiguration']/@subNodeMappings[name='AdaptorInterface.ServerConfiguration.AuthenticationConfiguration']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.lyo.tools.toolchain.design/description/ToolChainModel.odesign#//@ownedViewpoints[name='ToolchainViewpoint']/@ownedRepresentations[name='AdaptorInterfaceDiagram']/@defaultLayer/@containerMappings[name='AdaptorInterface.ServerConfiguration']/@subNodeMappings[name='AdaptorInterface.ServerConfiguration.AuthenticationConfiguration']"/>
       </ownedElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_0l94VOiTEeq7T9BFSE1Ujg" name="serviceProviders" sourceNode="_0l94FOiTEeq7T9BFSE1Ujg" targetNode="_0l94FuiTEeq7T9BFSE1Ujg">
