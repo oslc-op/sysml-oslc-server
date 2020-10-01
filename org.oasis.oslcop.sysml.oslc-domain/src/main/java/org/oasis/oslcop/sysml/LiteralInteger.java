@@ -158,7 +158,7 @@ public class LiteralInteger
         }
     
         // Start of user code toString_finalize
-        result = getIdentifier() + " (" + (null == getShortTitle() ? "No Short Title Defined" : getShortTitle()) + ")";
+        result = getShortTitle();
         // End of user code
     
         return result;
