@@ -33,6 +33,7 @@ import org.slf4j.LoggerFactory;
 
 import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
 import org.eclipse.lyo.oslc4j.core.model.AbstractResource;
+import org.eclipse.lyo.oslc4j.core.model.IResource;
 import org.oasis.oslcop.sysml.servlet.ServiceProviderCatalogSingleton;
 import org.oasis.oslcop.sysml.ServiceProviderInfo;
 import org.oasis.oslcop.sysml.SysmlClass;
@@ -283,10 +284,13 @@ public class SysmlServerManager {
         List<Element> resources = null;
         
         // Start of user code ElementSelector_storeInit
+        String selectType = httpServletRequest.getParameter("selectType");
+        String prefix = "rdf=" + "<" + org.apache.jena.vocabulary.RDF.uri + ">";
+        String where = "rdf:type=" + "<" + SysmlDomainConstants.SYSML_NAMSPACE + selectType + ">";
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Element>(store.getResources(storePool.getDefaultNamedGraphUri(), Element.class, "", "", terms, 20, -1));
+            resources = new ArrayList<Element>(store.getResources(storePool.getDefaultNamedGraphUri(), Element.class, prefix, where, terms, 20, -1));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to search resources, with search-term '" + terms + "'", e);
             throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);

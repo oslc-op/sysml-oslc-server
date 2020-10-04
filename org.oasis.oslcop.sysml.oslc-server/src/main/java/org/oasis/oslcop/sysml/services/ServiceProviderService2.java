@@ -96,6 +96,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 // Start of user code imports
+import java.io.FileInputStream;
+import java.util.Properties;
 // End of user code
 
 // Start of user code pre_class_code
@@ -112,9 +114,25 @@ public class ServiceProviderService2
     private static final Logger log = LoggerFactory.getLogger(ServiceProviderService2.class);
 
     // Start of user code class_attributes
+    private static List<String> servicedResources = null;
     // End of user code
 
     // Start of user code class_methods
+    public static List<String> getServicedResources() {
+        if (null == servicedResources) {
+            Properties servicedResourcesProperties = new Properties();
+            String servicedResourcesPropertiesFile = ServiceProviderService2.class.getResource("/servicedResources.properties").getFile();
+            try {
+                servicedResourcesProperties.load(new FileInputStream(servicedResourcesPropertiesFile));
+            } catch (IOException e) {
+                log.error("Failed to open the 'servicedResources' properties file.", e);
+                throw new RuntimeException(e);
+            }
+            servicedResources = Arrays.asList(servicedResourcesProperties.getProperty("servicedResources").split(";"));
+        }
+        return servicedResources;
+    }
+    
     // End of user code
 
     public ServiceProviderService2()
@@ -248,6 +266,7 @@ public class ServiceProviderService2
         ) throws ServletException, IOException
     {
         // Start of user code ElementSelector_init
+        httpServletRequest.setAttribute("servicedResources", getServicedResources());
         // End of user code
 
         httpServletRequest.setAttribute("selectionUri",UriBuilder.fromUri(OSLC4JUtils.getServletURI()).path(uriInfo.getPath()).build().toString());

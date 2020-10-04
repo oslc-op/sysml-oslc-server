@@ -27,12 +27,13 @@
 <%@page import="org.oasis.oslcop.sysml.Element"%>
 <%@page import="org.eclipse.lyo.oslc4j.core.OSLC4JUtils"%>
 <%@page import="javax.ws.rs.core.UriBuilder"%>
+<%@page import="java.util.List"%>
 
 <%@ page contentType="text/html" language="java" pageEncoding="UTF-8" %>
 
 <%
   String selectionUri = (String) request.getAttribute("selectionUri");
-
+  List<String> servicedResources = (List<String>) request.getAttribute("servicedResources");
 %>
 
 <html>
@@ -43,6 +44,11 @@
   </head>
   <body style="padding: 10px;">
     <div id="selector-body">
+     Type: <select id="selectType">
+        <%for (String r : servicedResources) {%>
+        <option value="<%=r%>"><%=r%></option>
+        <%}%>
+      </select>    
       <p id="searchMessage">Find a specific resource through a free-text search.</p>
 
       <p id="loadingMessage" style="display: none;">Pondering your search. Please stand by ...</p>
