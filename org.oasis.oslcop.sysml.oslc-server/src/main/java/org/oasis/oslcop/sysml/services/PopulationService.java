@@ -7,7 +7,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,6 +47,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
 import org.eclipse.lyo.oslc4j.core.model.OslcMediaType;
 import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
 
@@ -64,28 +68,38 @@ public class PopulationService
     private static final Logger log = LoggerFactory.getLogger(PopulationService.class);
 
     //TODO: Throughout this class, need better way to construct the URIs. Use UriBuilder.
-    
-    private static final String JSON_SERVER_SCHEME = "http";
-    private static final String JSON_SERVER_HOSTNAME = "sysml2-dev.intercax.com";
-    private static final int JSON_SERVER_PORT = 9000;
+    private static String JSON_SERVER_SCHEME;
+    private static String JSON_SERVER_HOSTNAME;
+    private static int JSON_SERVER_PORT;
 
-    //TODO: Of course, this shoul be replaced with code
-    private static final String OSLC_SERVER_SCHEME = "http";
-    private static final String OSLC_SERVER_HOSTNAME = "localhost";
-    private static final int OSLC_SERVER_PORT = 8085;
+    private static String OSLC_SERVER_SCHEME;
+    private static String OSLC_SERVER_HOSTNAME;
+    private static int OSLC_SERVER_PORT;
+    private static String OSLC_SERVER_APPLICATION_PATH;
 
-    //private static final String OSLC_SERVER_SCHEME = "https";
-    //private static final String OSLC_SERVER_HOSTNAME = "aide.md.kth.se";
-    //private static final int OSLC_SERVER_PORT = -1; //If we want the default 80/443 port, we need to unset the port. JENA otherwise complains that it is a bad IRI
+    static {
+        Properties jsonServerProperties = new Properties();
+        String jsonServerPropertiesFile = PopulationService.class.getResource("/jsonServer.properties").getFile();
+        try {
+            jsonServerProperties.load(new FileInputStream(jsonServerPropertiesFile));
+        } catch (IOException e) {
+            log.error("Failed to open the 'jsonServer' properties file.", e);
+            throw new RuntimeException(e);
+        }
+        JSON_SERVER_SCHEME = jsonServerProperties.getProperty("jsonServerScheme");
+        JSON_SERVER_HOSTNAME = jsonServerProperties.getProperty("jsonServerHostname");
+        JSON_SERVER_PORT = Integer.parseInt(jsonServerProperties.getProperty("jsonServerPort"));
+        
+        String servletURI = OSLC4JUtils.getServletURI();
+        OSLC_SERVER_SCHEME = URI.create(servletURI).getScheme();
+        OSLC_SERVER_HOSTNAME = URI.create(servletURI).getHost();
+        OSLC_SERVER_PORT = URI.create(servletURI).getPort();
+        OSLC_SERVER_APPLICATION_PATH = URI.create(servletURI).getPath();
+    }
     
-    private static final String OSLC_SERVER_APPLICATION_PATH = "sysml_oslc_server/services";
-    
-
-    public PopulationService()
-    {
+    public PopulationService() {
         super();
     }
-
 
     //TODO: There are a lot of methods here that need to be made neater. Many hacks and hard-coded constants.
 	static URI translateBack(URI uri) {
@@ -94,7 +108,7 @@ public class PopulationService
 		}
 		
 		String oldPath = uri.getPath();
-		String newPath = oldPath.substring(OSLC_SERVER_APPLICATION_PATH.length() + 1, oldPath.length());
+		String newPath = oldPath.substring(OSLC_SERVER_APPLICATION_PATH.length() - 1, oldPath.length());
 		URI translated = UriBuilder.fromUri(uri)
 		        .scheme(JSON_SERVER_SCHEME)
 				.host(JSON_SERVER_HOSTNAME)
