@@ -97,7 +97,7 @@ import org.oasis.oslcop.sysml.SysmlClass;
 
 // Start of user code pre_class_code
 // End of user code
-@Path("projects/{projectId}/commits/{commitId}/elements")
+@Path("projects/{projectId}/elements")
 @Api(value = "Web Service for {" + SysmlDomainConstants.ELEMENT_LOCALNAME + "}")
 public class ElementService
 {
@@ -137,13 +137,13 @@ public class ElementService
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
     )
     public Element getElement(
-                @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+                @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws IOException, ServletException, URISyntaxException
     {
         // Start of user code getResource_init
         // End of user code
 
-        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, commitId, id);
+        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, id);
 
         if (aElement != null) {
             // Start of user code getElement
@@ -166,13 +166,13 @@ public class ElementService
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
     )
     public void getElementAsHtml(
-        @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+        @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         // Start of user code getElementAsHtml_init
         // End of user code
 
-        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, commitId, id);
+        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, id);
 
         if (aElement != null) {
             httpServletRequest.setAttribute("aElement", aElement);
@@ -205,7 +205,7 @@ public class ElementService
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
     )
     public Compact getElementCompact(
-        @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+        @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         String iconUri = OSLC4JUtils.getPublicURI() + "/images/ui_preview_icon.gif";
@@ -218,7 +218,7 @@ public class ElementService
         //TODO: adjust the preview height & width values from the default values provided above.
         // End of user code
 
-        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, commitId, id);
+        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, id);
 
         if (aElement != null) {
             final Compact compact = new Compact();
@@ -252,13 +252,13 @@ public class ElementService
     @Path("{id}/smallPreview")
     @Produces({ MediaType.TEXT_HTML })
     public void getElementAsHtmlSmallPreview(
-        @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+        @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         // Start of user code getElementAsHtmlSmallPreview_init
         // End of user code
 
-        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, commitId, id);
+        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, id);
 
         if (aElement != null) {
             httpServletRequest.setAttribute("aElement", aElement);
@@ -279,13 +279,13 @@ public class ElementService
     @Path("{id}/largePreview")
     @Produces({ MediaType.TEXT_HTML })
     public void getElementAsHtmlLargePreview(
-        @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+        @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         // Start of user code getElementAsHtmlLargePreview_init
         // End of user code
 
-        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, commitId, id);
+        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, id);
 
         if (aElement != null) {
             httpServletRequest.setAttribute("aElement", aElement);

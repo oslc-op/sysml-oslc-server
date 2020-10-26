@@ -92,7 +92,7 @@ import io.swagger.annotations.ApiOperation;
 
 // Start of user code pre_class_code
 // End of user code
-@Path("projects/{projectId}/commits/{commitId}/classes")
+@Path("projects/{projectId}/classes")
 @Api(value = "Web Service for {" + SysmlDomainConstants.CLASS_LOCALNAME + "}")
 public class ClassService
 {
@@ -132,13 +132,13 @@ public class ClassService
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
     )
     public SysmlClass getSysmlClass(
-                @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+                @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws IOException, ServletException, URISyntaxException
     {
         // Start of user code getResource_init
         // End of user code
 
-        final SysmlClass aSysmlClass = SysmlServerManager.getSysmlClass(httpServletRequest, projectId, commitId, id);
+        final SysmlClass aSysmlClass = SysmlServerManager.getSysmlClass(httpServletRequest, projectId, id);
 
         if (aSysmlClass != null) {
             // Start of user code getSysmlClass
@@ -161,13 +161,13 @@ public class ClassService
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
     )
     public void getSysmlClassAsHtml(
-        @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+        @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         // Start of user code getSysmlClassAsHtml_init
         // End of user code
 
-        final SysmlClass aSysmlClass = SysmlServerManager.getSysmlClass(httpServletRequest, projectId, commitId, id);
+        final SysmlClass aSysmlClass = SysmlServerManager.getSysmlClass(httpServletRequest, projectId, id);
 
         if (aSysmlClass != null) {
             httpServletRequest.setAttribute("aSysmlClass", aSysmlClass);
@@ -192,7 +192,7 @@ public class ClassService
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
     )
     public Compact getSysmlClassCompact(
-        @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+        @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         String iconUri = OSLC4JUtils.getPublicURI() + "/images/ui_preview_icon.gif";
@@ -205,7 +205,7 @@ public class ClassService
         //TODO: adjust the preview height & width values from the default values provided above.
         // End of user code
 
-        final SysmlClass aSysmlClass = SysmlServerManager.getSysmlClass(httpServletRequest, projectId, commitId, id);
+        final SysmlClass aSysmlClass = SysmlServerManager.getSysmlClass(httpServletRequest, projectId, id);
 
         if (aSysmlClass != null) {
             final Compact compact = new Compact();
@@ -239,13 +239,13 @@ public class ClassService
     @Path("{id}/smallPreview")
     @Produces({ MediaType.TEXT_HTML })
     public void getSysmlClassAsHtmlSmallPreview(
-        @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+        @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         // Start of user code getSysmlClassAsHtmlSmallPreview_init
         // End of user code
 
-        final SysmlClass aSysmlClass = SysmlServerManager.getSysmlClass(httpServletRequest, projectId, commitId, id);
+        final SysmlClass aSysmlClass = SysmlServerManager.getSysmlClass(httpServletRequest, projectId, id);
 
         if (aSysmlClass != null) {
             httpServletRequest.setAttribute("aSysmlClass", aSysmlClass);
@@ -266,13 +266,13 @@ public class ClassService
     @Path("{id}/largePreview")
     @Produces({ MediaType.TEXT_HTML })
     public void getSysmlClassAsHtmlLargePreview(
-        @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+        @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         // Start of user code getSysmlClassAsHtmlLargePreview_init
         // End of user code
 
-        final SysmlClass aSysmlClass = SysmlServerManager.getSysmlClass(httpServletRequest, projectId, commitId, id);
+        final SysmlClass aSysmlClass = SysmlServerManager.getSysmlClass(httpServletRequest, projectId, id);
 
         if (aSysmlClass != null) {
             httpServletRequest.setAttribute("aSysmlClass", aSysmlClass);

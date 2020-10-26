@@ -58,6 +58,9 @@
         </p>
         <p>You can also copy <a href="<%= UriBuilder.fromUri(OSLC4JUtils.getServletURI()).path("/swagger.yaml").build() %>">this OpenAPI specification document (yaml file) of this adaptor</a> to a <a href="<%= "https://editor.swagger.io" %>">Swagger Editor</a> to generate client SDK code for a number of languages and platforms.
         </p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="<%= UriBuilder.fromUri(OSLC4JUtils.getServletURI()).path("/store/projectCommits").build() %>" role="button">Selected Project Commits</a>
+        </p>
     </div>
 </div>
 </body>

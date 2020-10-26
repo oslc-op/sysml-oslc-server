@@ -33,7 +33,6 @@ import org.slf4j.LoggerFactory;
 
 import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
 import org.eclipse.lyo.oslc4j.core.model.AbstractResource;
-import org.eclipse.lyo.oslc4j.core.model.IResource;
 import org.oasis.oslcop.sysml.servlet.ServiceProviderCatalogSingleton;
 import org.oasis.oslcop.sysml.ServiceProviderInfo;
 import org.oasis.oslcop.sysml.SysmlClass;
@@ -108,6 +107,7 @@ import org.apache.jena.vocabulary.RDF;
 import org.oasis.oslcop.sysml.json.Project;
 import org.oasis.oslcop.sysml.json.ProjectCommit;
 import org.oasis.oslcop.sysml.services.PopulationService;
+import org.oasis.oslcop.sysml.services.StoreService;
 // End of user code
 
 // Start of user code pre_class_code
@@ -118,6 +118,7 @@ public class SysmlServerManager {
     private static final Logger log = LoggerFactory.getLogger(SysmlServerManager.class);
 
     private static StorePool storePool;
+    private static URI sparqlQueryEndpoint;
     
     // Start of user code class_attributes
     private static ServiceProviderInfo[] serviceProviders = null;
@@ -129,6 +130,9 @@ public class SysmlServerManager {
     public static StorePool getStorePool() {
 		return storePool;
 	}
+    public static URI getSparqlQueryEndpoint() {
+        return sparqlQueryEndpoint;
+    }
     // End of user code
 
     public static void contextInitializeServletListener(final ServletContextEvent servletContextEvent)
@@ -150,7 +154,6 @@ public class SysmlServerManager {
         
         int initialPoolSize = Integer.parseInt(lyoStoreProperties.getProperty("initialPoolSize"));
         URI defaultNamedGraph;
-        URI sparqlQueryEndpoint;
         URI sparqlUpdateEndpoint;
         try {
             defaultNamedGraph = new URI(lyoStoreProperties.getProperty("defaultNamedGraph"));
@@ -183,28 +186,27 @@ public class SysmlServerManager {
         // Start of user code "ServiceProviderInfo[] getServiceProviderInfos(...)"
 
         //TODO: Need to make this logic robust, and thread-safe
-        if (null != serviceProviders) {
-        	return serviceProviders;
-        }
-        List<ServiceProviderInfo> sps = new ArrayList<ServiceProviderInfo>();
-        List<Project> projects = PopulationService.getProjects();
-        for (Project project : projects) {
-        	List<ProjectCommit> projectCommits = PopulationService.getProjectCommits(project);
-            for (ProjectCommit projectCommit : projectCommits) {
-                ServiceProviderInfo r = new ServiceProviderInfo();
-                r.projectId = project.getId();
-                r.commitId = projectCommit.getId();
-                r.name = "Project:" + r.projectId + " Commit:" + r.commitId;
-                sps.add(r);
-    		}
-		}
-        serviceProviders = sps.toArray(new ServiceProviderInfo [sps.size()]);
-        serviceProviderInfos = serviceProviders; 
+//        if (null != serviceProviders) {
+//        	return serviceProviders;
+//        }
+//        List<ServiceProviderInfo> sps = new ArrayList<ServiceProviderInfo>();
+//        List<Project> projects = PopulationService.getProjects();
+//        for (Project project : projects) {
+//        	List<ProjectCommit> projectCommits = PopulationService.getProjectCommits(project);
+//            for (ProjectCommit projectCommit : projectCommits) {
+//                ServiceProviderInfo r = new ServiceProviderInfo();
+//                r.projectId = project.getId();
+//                r.name = "Project:" + r.projectId;
+//                sps.add(r);
+//    		}
+//		}
+//        serviceProviders = sps.toArray(new ServiceProviderInfo [sps.size()]);
+//        serviceProviderInfos = serviceProviders; 
         // End of user code
         return serviceProviderInfos;
     }
 
-    public static List<Subsetting> querySubsettings(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, String prefix, int page, int limit)
+    public static List<Subsetting> querySubsettings(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, int page, int limit)
     {
         List<Subsetting> resources = null;
         
@@ -212,7 +214,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Subsetting>(store.getResources(storePool.getDefaultNamedGraphUri(), Subsetting.class, prefix, where, "", limit+1, page*limit));
+            resources = new ArrayList<Subsetting>(store.getResources(StoreService.getSelectedNamedGraph(), Subsetting.class, prefix, where, "", limit+1, page*limit));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to query resources, with where-string '" + where + "'", e);
             throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -229,7 +231,7 @@ public class SysmlServerManager {
         // End of user code
         return resources;
     }
-    public static List<Subsetting> SubsettingSelector(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String terms)   
+    public static List<Subsetting> SubsettingSelector(HttpServletRequest httpServletRequest, final String projectId, String terms)   
     {
         List<Subsetting> resources = null;
         
@@ -237,7 +239,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Subsetting>(store.getResources(storePool.getDefaultNamedGraphUri(), Subsetting.class, "", "", terms, 20, -1));
+            resources = new ArrayList<Subsetting>(store.getResources(StoreService.getSelectedNamedGraph(), Subsetting.class, "", "", terms, 20, -1));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to search resources, with search-term '" + terms + "'", e);
             throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -257,7 +259,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<Element> queryElements(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, String prefix, int page, int limit)
+    public static List<Element> queryElements(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, int page, int limit)
     {
         List<Element> resources = null;
         
@@ -265,7 +267,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Element>(store.getResources(storePool.getDefaultNamedGraphUri(), Element.class, prefix, where, "", limit+1, page*limit));
+            resources = new ArrayList<Element>(store.getResources(StoreService.getSelectedNamedGraph(), Element.class, prefix, where, "", limit+1, page*limit));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to query resources, with where-string '" + where + "'", e);
             throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -279,7 +281,7 @@ public class SysmlServerManager {
         // End of user code
         return resources;
     }
-    public static List<Element> ElementSelector(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String terms)   
+    public static List<Element> ElementSelector(HttpServletRequest httpServletRequest, final String projectId, String terms)   
     {
         List<Element> resources = null;
         
@@ -290,7 +292,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Element>(store.getResources(storePool.getDefaultNamedGraphUri(), Element.class, prefix, where, terms, 20, -1));
+            resources = new ArrayList<Element>(store.getResources(StoreService.getSelectedNamedGraph(), Element.class, prefix, where, terms, 20, -1));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to search resources, with search-term '" + terms + "'", e);
             throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -310,7 +312,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<SysmlClass> querySysmlClasss(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, String prefix, int page, int limit)
+    public static List<SysmlClass> querySysmlClasss(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, int page, int limit)
     {
         List<SysmlClass> resources = null;
         
@@ -318,7 +320,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<SysmlClass>(store.getResources(storePool.getDefaultNamedGraphUri(), SysmlClass.class, prefix, where, "", limit+1, page*limit));
+            resources = new ArrayList<SysmlClass>(store.getResources(StoreService.getSelectedNamedGraph(), SysmlClass.class, prefix, where, "", limit+1, page*limit));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to query resources, with where-string '" + where + "'", e);
             throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -335,7 +337,7 @@ public class SysmlServerManager {
         // End of user code
         return resources;
     }
-    public static List<SysmlClass> SysmlClassSelector(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String terms)   
+    public static List<SysmlClass> SysmlClassSelector(HttpServletRequest httpServletRequest, final String projectId, String terms)   
     {
         List<SysmlClass> resources = null;
         
@@ -343,7 +345,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<SysmlClass>(store.getResources(storePool.getDefaultNamedGraphUri(), SysmlClass.class, "", "", terms, 20, -1));
+            resources = new ArrayList<SysmlClass>(store.getResources(StoreService.getSelectedNamedGraph(), SysmlClass.class, "", "", terms, 20, -1));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to search resources, with search-term '" + terms + "'", e);
             throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -363,7 +365,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<Relationship> queryRelationships(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, String prefix, int page, int limit)
+    public static List<Relationship> queryRelationships(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, int page, int limit)
     {
         List<Relationship> resources = null;
         
@@ -371,7 +373,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Relationship>(store.getResources(storePool.getDefaultNamedGraphUri(), Relationship.class, prefix, where, "", limit+1, page*limit));
+            resources = new ArrayList<Relationship>(store.getResources(StoreService.getSelectedNamedGraph(), Relationship.class, prefix, where, "", limit+1, page*limit));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to query resources, with where-string '" + where + "'", e);
             throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -388,7 +390,7 @@ public class SysmlServerManager {
         // End of user code
         return resources;
     }
-    public static List<Relationship> RelationshipSelector(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String terms)   
+    public static List<Relationship> RelationshipSelector(HttpServletRequest httpServletRequest, final String projectId, String terms)   
     {
         List<Relationship> resources = null;
         
@@ -396,7 +398,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Relationship>(store.getResources(storePool.getDefaultNamedGraphUri(), Relationship.class, "", "", terms, 20, -1));
+            resources = new ArrayList<Relationship>(store.getResources(StoreService.getSelectedNamedGraph(), Relationship.class, "", "", terms, 20, -1));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to search resources, with search-term '" + terms + "'", e);
             throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -416,7 +418,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<Generalization> queryGeneralizations(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, String prefix, int page, int limit)
+    public static List<Generalization> queryGeneralizations(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, int page, int limit)
     {
         List<Generalization> resources = null;
         
@@ -424,7 +426,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Generalization>(store.getResources(storePool.getDefaultNamedGraphUri(), Generalization.class, prefix, where, "", limit+1, page*limit));
+            resources = new ArrayList<Generalization>(store.getResources(StoreService.getSelectedNamedGraph(), Generalization.class, prefix, where, "", limit+1, page*limit));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to query resources, with where-string '" + where + "'", e);
             throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -441,7 +443,7 @@ public class SysmlServerManager {
         // End of user code
         return resources;
     }
-    public static List<Generalization> GeneralizationSelector(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String terms)   
+    public static List<Generalization> GeneralizationSelector(HttpServletRequest httpServletRequest, final String projectId, String terms)   
     {
         List<Generalization> resources = null;
         
@@ -449,7 +451,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Generalization>(store.getResources(storePool.getDefaultNamedGraphUri(), Generalization.class, "", "", terms, 20, -1));
+            resources = new ArrayList<Generalization>(store.getResources(StoreService.getSelectedNamedGraph(), Generalization.class, "", "", terms, 20, -1));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to search resources, with search-term '" + terms + "'", e);
             throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -470,16 +472,16 @@ public class SysmlServerManager {
 
 
 
-    public static Subsetting getSubsetting(HttpServletRequest httpServletRequest, final String projectId, final String commitId, final String id)
+    public static Subsetting getSubsetting(HttpServletRequest httpServletRequest, final String projectId, final String id)
     {
         Subsetting aResource = null;
         
         // Start of user code getSubsetting_storeInit
         // End of user code
         Store store = storePool.getStore();
-        URI uri = SysmlServerResourcesFactory.constructURIForSubsetting(projectId, commitId, id);
+        URI uri = SysmlServerResourcesFactory.constructURIForSubsetting(projectId, id);
         try {
-            aResource = store.getResource(storePool.getDefaultNamedGraphUri(), uri, Subsetting.class);
+            aResource = store.getResource(StoreService.getSelectedNamedGraph(), uri, Subsetting.class);
         } catch (NoSuchElementException e) {
             log.error("Resource: '" + uri + "' not found");
             throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
@@ -498,16 +500,16 @@ public class SysmlServerManager {
     }
 
 
-    public static Element getElement(HttpServletRequest httpServletRequest, final String projectId, final String commitId, final String id)
+    public static Element getElement(HttpServletRequest httpServletRequest, final String projectId, final String id)
     {
         Element aResource = null;
         
         // Start of user code getElement_storeInit
         // End of user code
         Store store = storePool.getStore();
-        URI uri = SysmlServerResourcesFactory.constructURIForElement(projectId, commitId, id);
+        URI uri = SysmlServerResourcesFactory.constructURIForElement(projectId, id);
         try {
-            aResource = store.getResource(storePool.getDefaultNamedGraphUri(), uri, Element.class);
+            aResource = store.getResource(StoreService.getSelectedNamedGraph(), uri, Element.class);
         } catch (NoSuchElementException e) {
             log.error("Resource: '" + uri + "' not found");
             throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
@@ -526,16 +528,16 @@ public class SysmlServerManager {
     }
 
 
-    public static SysmlClass getSysmlClass(HttpServletRequest httpServletRequest, final String projectId, final String commitId, final String id)
+    public static SysmlClass getSysmlClass(HttpServletRequest httpServletRequest, final String projectId, final String id)
     {
         SysmlClass aResource = null;
         
         // Start of user code getSysmlClass_storeInit
         // End of user code
         Store store = storePool.getStore();
-        URI uri = SysmlServerResourcesFactory.constructURIForSysmlClass(projectId, commitId, id);
+        URI uri = SysmlServerResourcesFactory.constructURIForSysmlClass(projectId, id);
         try {
-            aResource = store.getResource(storePool.getDefaultNamedGraphUri(), uri, SysmlClass.class);
+            aResource = store.getResource(StoreService.getSelectedNamedGraph(), uri, SysmlClass.class);
         } catch (NoSuchElementException e) {
             log.error("Resource: '" + uri + "' not found");
             throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
@@ -558,16 +560,16 @@ public class SysmlServerManager {
     }
 
 
-    public static Relationship getRelationship(HttpServletRequest httpServletRequest, final String projectId, final String commitId, final String id)
+    public static Relationship getRelationship(HttpServletRequest httpServletRequest, final String projectId, final String id)
     {
         Relationship aResource = null;
         
         // Start of user code getRelationship_storeInit
         // End of user code
         Store store = storePool.getStore();
-        URI uri = SysmlServerResourcesFactory.constructURIForRelationship(projectId, commitId, id);
+        URI uri = SysmlServerResourcesFactory.constructURIForRelationship(projectId, id);
         try {
-            aResource = store.getResource(storePool.getDefaultNamedGraphUri(), uri, Relationship.class);
+            aResource = store.getResource(StoreService.getSelectedNamedGraph(), uri, Relationship.class);
         } catch (NoSuchElementException e) {
             log.error("Resource: '" + uri + "' not found");
             throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
@@ -590,16 +592,16 @@ public class SysmlServerManager {
     }
 
 
-    public static Generalization getGeneralization(HttpServletRequest httpServletRequest, final String projectId, final String commitId, final String id)
+    public static Generalization getGeneralization(HttpServletRequest httpServletRequest, final String projectId, final String id)
     {
         Generalization aResource = null;
         
         // Start of user code getGeneralization_storeInit
         // End of user code
         Store store = storePool.getStore();
-        URI uri = SysmlServerResourcesFactory.constructURIForGeneralization(projectId, commitId, id);
+        URI uri = SysmlServerResourcesFactory.constructURIForGeneralization(projectId, id);
         try {
-            aResource = store.getResource(storePool.getDefaultNamedGraphUri(), uri, Generalization.class);
+            aResource = store.getResource(StoreService.getSelectedNamedGraph(), uri, Generalization.class);
         } catch (NoSuchElementException e) {
             log.error("Resource: '" + uri + "' not found");
             throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);

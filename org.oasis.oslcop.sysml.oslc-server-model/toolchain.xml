@@ -2,7 +2,7 @@
 <oslc4j_tc:Toolchain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oslc4j_ai="http://org.eclipse.lyo/oslc4j/adaptorInterface" xmlns:oslc4j_tc="http://org.eclipse.lyo/oslc4j/toolChain">
   <adaptorInterfaces name="Sysml Server">
     <serviceProviderCatalog title="Service Provider Catalog" description="Service Provider Catalog">
-      <serviceProviders title="Sysml Project Commit" description="Sysml Project Commit" serviceNamespace="projects" instanceID="{projectId}/commits/{commitId}">
+      <serviceProviders title="Sysml Project Commit" description="Sysml Project Commit" serviceNamespace="projects" instanceID="{projectId}">
         <services serviceNamespace="relativeToServiceProvider">
           <domainSpecification href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#//@domainSpecifications[name='sysml']"/>
           <queryCapabilities title="QueryCapability1" label="QueryCapability1" queryBaseURI="query">
@@ -55,23 +55,23 @@
         </services>
       </serviceProviders>
     </serviceProviderCatalog>
-    <webServices name="SubsettingService" serviceUrlPattern="projects/{projectId}/commits/{commitId}/subsettings" resourceUrlPattern="{id}">
+    <webServices name="SubsettingService" serviceUrlPattern="projects/{projectId}/subsettings" resourceUrlPattern="{id}">
       <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_KtB4HeffEeqcYsuDRKrn0Q"/>
       <persistence store="//@adaptorInterfaces.0/@stores.0"/>
     </webServices>
-    <webServices name="ElementService" serviceUrlPattern="projects/{projectId}/commits/{commitId}/elements" resourceUrlPattern="{id}">
+    <webServices name="ElementService" serviceUrlPattern="projects/{projectId}/elements" resourceUrlPattern="{id}">
       <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_KtB4FeffEeqcYsuDRKrn0Q"/>
       <persistence store="//@adaptorInterfaces.0/@stores.0"/>
     </webServices>
-    <webServices name="ClassService" serviceUrlPattern="projects/{projectId}/commits/{commitId}/classes" resourceUrlPattern="{id}">
+    <webServices name="ClassService" serviceUrlPattern="projects/{projectId}/classes" resourceUrlPattern="{id}">
       <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_KtB4EeffEeqcYsuDRKrn0Q"/>
       <persistence store="//@adaptorInterfaces.0/@stores.0"/>
     </webServices>
-    <webServices name="RelationshipService" serviceUrlPattern="projects/{projectId}/commits/{commitId}/relationships" resourceUrlPattern="{id}">
+    <webServices name="RelationshipService" serviceUrlPattern="projects/{projectId}/relationships" resourceUrlPattern="{id}">
       <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_KtB4F-ffEeqcYsuDRKrn0Q"/>
       <persistence store="//@adaptorInterfaces.0/@stores.0"/>
     </webServices>
-    <webServices name="GeneralizationService" serviceUrlPattern="projects/{projectId}/commits/{commitId}/generalizations" resourceUrlPattern="{id}">
+    <webServices name="GeneralizationService" serviceUrlPattern="projects/{projectId}/generalizations" resourceUrlPattern="{id}">
       <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_KtB4GeffEeqcYsuDRKrn0Q"/>
       <persistence store="//@adaptorInterfaces.0/@stores.0"/>
     </webServices>

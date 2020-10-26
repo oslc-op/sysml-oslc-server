@@ -113,7 +113,7 @@ import io.swagger.annotations.ApiOperation;
 // Start of user code pre_class_code
 // End of user code
 @OslcService(SysmlDomainConstants.SYSML_DOMAIN)
-@Path("projects/{projectId}/commits/{commitId}/service3/sysmlClasss")
+@Path("projects/{projectId}/service3/sysmlClasss")
 @Api(value = "OSLC Service for {" + SysmlDomainConstants.CLASS_LOCALNAME + "}")
 public class ServiceProviderService3
 {
@@ -161,7 +161,7 @@ public class ServiceProviderService3
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML
     )
     public SysmlClass[] querySysmlClasss(
-                                                    @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId ,
+                                                    @PathParam("projectId") final String projectId ,
                                                      @QueryParam("oslc.where") final String where,
                                                      @QueryParam("oslc.prefix") final String prefix,
                                                      @QueryParam("page") final String pageString,
@@ -180,7 +180,7 @@ public class ServiceProviderService3
         // Here additional logic can be implemented that complements main action taken in SysmlServerManager
         // End of user code
 
-        final List<SysmlClass> resources = SysmlServerManager.querySysmlClasss(httpServletRequest, projectId, commitId, where, prefix, page, pageSize);
+        final List<SysmlClass> resources = SysmlServerManager.querySysmlClasss(httpServletRequest, projectId, where, prefix, page, pageSize);
         httpServletRequest.setAttribute("queryUri",
                 uriInfo.getAbsolutePath().toString() + "?oslc.paging=true");
         if (resources.size() > pageSize) {
@@ -201,7 +201,7 @@ public class ServiceProviderService3
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML
     )
     public void querySysmlClasssAsHtml(
-                                    @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId ,
+                                    @PathParam("projectId") final String projectId ,
                                        @QueryParam("oslc.where") final String where,
                                        @QueryParam("oslc.prefix") final String prefix,
                                        @QueryParam("page") final String pageString,
@@ -219,7 +219,7 @@ public class ServiceProviderService3
         // Start of user code querySysmlClasssAsHtml
         // End of user code
 
-        final List<SysmlClass> resources = SysmlServerManager.querySysmlClasss(httpServletRequest, projectId, commitId, where, prefix, page, pageSize);
+        final List<SysmlClass> resources = SysmlServerManager.querySysmlClasss(httpServletRequest, projectId, where, prefix, page, pageSize);
 
         if (resources!= null) {
             httpServletRequest.setAttribute("resources", resources);
@@ -245,7 +245,7 @@ public class ServiceProviderService3
     (
          title = "SelectionDialog1",
          label = "SelectionDialog1",
-         uri = "projects/{projectId}/commits/{commitId}/service3/sysmlClasss/selector",
+         uri = "projects/{projectId}/service3/sysmlClasss/selector",
          hintWidth = "250px",
          hintHeight = "250px",
          resourceTypes = {SysmlDomainConstants.CLASS_TYPE},
@@ -256,7 +256,7 @@ public class ServiceProviderService3
     @Consumes({ MediaType.TEXT_HTML, MediaType.WILDCARD })
     public void SysmlClassSelector(
         @QueryParam("terms") final String terms
-        , @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId
+        , @PathParam("projectId") final String projectId
         ) throws ServletException, IOException
     {
         // Start of user code SysmlClassSelector_init
@@ -268,7 +268,7 @@ public class ServiceProviderService3
 
         if (terms != null ) {
             httpServletRequest.setAttribute("terms", terms);
-            final List<SysmlClass> resources = SysmlServerManager.SysmlClassSelector(httpServletRequest, projectId, commitId, terms);
+            final List<SysmlClass> resources = SysmlServerManager.SysmlClassSelector(httpServletRequest, projectId, terms);
             if (resources!= null) {
                         httpServletRequest.setAttribute("resources", resources);
                         RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/sysmlclassselectorresults.jsp");

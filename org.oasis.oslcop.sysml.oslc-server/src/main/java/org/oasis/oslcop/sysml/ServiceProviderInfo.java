@@ -28,7 +28,6 @@ package org.oasis.oslcop.sysml;
 public class ServiceProviderInfo {
     public String name;
     public String projectId;
-    public String commitId;
 
     // Start of user code class_attributes
     // End of user code

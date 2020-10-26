@@ -92,7 +92,7 @@ import io.swagger.annotations.ApiOperation;
 
 // Start of user code pre_class_code
 // End of user code
-@Path("projects/{projectId}/commits/{commitId}/relationships")
+@Path("projects/{projectId}/relationships")
 @Api(value = "Web Service for {" + SysmlDomainConstants.RELATIONSHIP_LOCALNAME + "}")
 public class RelationshipService
 {
@@ -132,13 +132,13 @@ public class RelationshipService
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
     )
     public Relationship getRelationship(
-                @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+                @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws IOException, ServletException, URISyntaxException
     {
         // Start of user code getResource_init
         // End of user code
 
-        final Relationship aRelationship = SysmlServerManager.getRelationship(httpServletRequest, projectId, commitId, id);
+        final Relationship aRelationship = SysmlServerManager.getRelationship(httpServletRequest, projectId, id);
 
         if (aRelationship != null) {
             // Start of user code getRelationship
@@ -161,13 +161,13 @@ public class RelationshipService
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
     )
     public void getRelationshipAsHtml(
-        @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+        @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         // Start of user code getRelationshipAsHtml_init
         // End of user code
 
-        final Relationship aRelationship = SysmlServerManager.getRelationship(httpServletRequest, projectId, commitId, id);
+        final Relationship aRelationship = SysmlServerManager.getRelationship(httpServletRequest, projectId, id);
 
         if (aRelationship != null) {
             httpServletRequest.setAttribute("aRelationship", aRelationship);
@@ -192,7 +192,7 @@ public class RelationshipService
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
     )
     public Compact getRelationshipCompact(
-        @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+        @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         String iconUri = OSLC4JUtils.getPublicURI() + "/images/ui_preview_icon.gif";
@@ -205,7 +205,7 @@ public class RelationshipService
         //TODO: adjust the preview height & width values from the default values provided above.
         // End of user code
 
-        final Relationship aRelationship = SysmlServerManager.getRelationship(httpServletRequest, projectId, commitId, id);
+        final Relationship aRelationship = SysmlServerManager.getRelationship(httpServletRequest, projectId, id);
 
         if (aRelationship != null) {
             final Compact compact = new Compact();
@@ -239,13 +239,13 @@ public class RelationshipService
     @Path("{id}/smallPreview")
     @Produces({ MediaType.TEXT_HTML })
     public void getRelationshipAsHtmlSmallPreview(
-        @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+        @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         // Start of user code getRelationshipAsHtmlSmallPreview_init
         // End of user code
 
-        final Relationship aRelationship = SysmlServerManager.getRelationship(httpServletRequest, projectId, commitId, id);
+        final Relationship aRelationship = SysmlServerManager.getRelationship(httpServletRequest, projectId, id);
 
         if (aRelationship != null) {
             httpServletRequest.setAttribute("aRelationship", aRelationship);
@@ -266,13 +266,13 @@ public class RelationshipService
     @Path("{id}/largePreview")
     @Produces({ MediaType.TEXT_HTML })
     public void getRelationshipAsHtmlLargePreview(
-        @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+        @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         // Start of user code getRelationshipAsHtmlLargePreview_init
         // End of user code
 
-        final Relationship aRelationship = SysmlServerManager.getRelationship(httpServletRequest, projectId, commitId, id);
+        final Relationship aRelationship = SysmlServerManager.getRelationship(httpServletRequest, projectId, id);
 
         if (aRelationship != null) {
             httpServletRequest.setAttribute("aRelationship", aRelationship);

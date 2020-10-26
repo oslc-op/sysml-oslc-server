@@ -103,7 +103,7 @@ import java.util.Properties;
 // Start of user code pre_class_code
 // End of user code
 @OslcService(SysmlDomainConstants.SYSML_DOMAIN)
-@Path("projects/{projectId}/commits/{commitId}/service2/elements")
+@Path("projects/{projectId}/service2/elements")
 @Api(value = "OSLC Service for {" + SysmlDomainConstants.ELEMENT_LOCALNAME + "}")
 public class ServiceProviderService2
 {
@@ -167,7 +167,7 @@ public class ServiceProviderService2
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML
     )
     public Element[] queryElements(
-                                                    @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId ,
+                                                    @PathParam("projectId") final String projectId ,
                                                      @QueryParam("oslc.where") final String where,
                                                      @QueryParam("oslc.prefix") final String prefix,
                                                      @QueryParam("page") final String pageString,
@@ -186,7 +186,7 @@ public class ServiceProviderService2
         // Here additional logic can be implemented that complements main action taken in SysmlServerManager
         // End of user code
 
-        final List<Element> resources = SysmlServerManager.queryElements(httpServletRequest, projectId, commitId, where, prefix, page, pageSize);
+        final List<Element> resources = SysmlServerManager.queryElements(httpServletRequest, projectId, where, prefix, page, pageSize);
         httpServletRequest.setAttribute("queryUri",
                 uriInfo.getAbsolutePath().toString() + "?oslc.paging=true");
         if (resources.size() > pageSize) {
@@ -207,7 +207,7 @@ public class ServiceProviderService2
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML
     )
     public void queryElementsAsHtml(
-                                    @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId ,
+                                    @PathParam("projectId") final String projectId ,
                                        @QueryParam("oslc.where") final String where,
                                        @QueryParam("oslc.prefix") final String prefix,
                                        @QueryParam("page") final String pageString,
@@ -225,7 +225,7 @@ public class ServiceProviderService2
         // Start of user code queryElementsAsHtml
         // End of user code
 
-        final List<Element> resources = SysmlServerManager.queryElements(httpServletRequest, projectId, commitId, where, prefix, page, pageSize);
+        final List<Element> resources = SysmlServerManager.queryElements(httpServletRequest, projectId, where, prefix, page, pageSize);
 
         if (resources!= null) {
             httpServletRequest.setAttribute("resources", resources);
@@ -251,7 +251,7 @@ public class ServiceProviderService2
     (
          title = "SelectionDialog1",
          label = "SelectionDialog1",
-         uri = "projects/{projectId}/commits/{commitId}/service2/elements/selector",
+         uri = "projects/{projectId}/service2/elements/selector",
          hintWidth = "250px",
          hintHeight = "250px",
          resourceTypes = {SysmlDomainConstants.ELEMENT_TYPE},
@@ -262,7 +262,7 @@ public class ServiceProviderService2
     @Consumes({ MediaType.TEXT_HTML, MediaType.WILDCARD })
     public void ElementSelector(
         @QueryParam("terms") final String terms
-        , @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId
+        , @PathParam("projectId") final String projectId
         ) throws ServletException, IOException
     {
         // Start of user code ElementSelector_init
@@ -275,7 +275,7 @@ public class ServiceProviderService2
 
         if (terms != null ) {
             httpServletRequest.setAttribute("terms", terms);
-            final List<Element> resources = SysmlServerManager.ElementSelector(httpServletRequest, projectId, commitId, terms);
+            final List<Element> resources = SysmlServerManager.ElementSelector(httpServletRequest, projectId, terms);
             if (resources!= null) {
                         httpServletRequest.setAttribute("resources", resources);
                         RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/elementselectorresults.jsp");

@@ -92,7 +92,7 @@ import io.swagger.annotations.ApiOperation;
 
 // Start of user code pre_class_code
 // End of user code
-@Path("projects/{projectId}/commits/{commitId}/subsettings")
+@Path("projects/{projectId}/subsettings")
 @Api(value = "Web Service for {" + SysmlDomainConstants.SUBSETTING_LOCALNAME + "}")
 public class SubsettingService
 {
@@ -132,13 +132,13 @@ public class SubsettingService
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
     )
     public Subsetting getSubsetting(
-                @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+                @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws IOException, ServletException, URISyntaxException
     {
         // Start of user code getResource_init
         // End of user code
 
-        final Subsetting aSubsetting = SysmlServerManager.getSubsetting(httpServletRequest, projectId, commitId, id);
+        final Subsetting aSubsetting = SysmlServerManager.getSubsetting(httpServletRequest, projectId, id);
 
         if (aSubsetting != null) {
             // Start of user code getSubsetting
@@ -161,13 +161,13 @@ public class SubsettingService
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
     )
     public void getSubsettingAsHtml(
-        @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+        @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         // Start of user code getSubsettingAsHtml_init
         // End of user code
 
-        final Subsetting aSubsetting = SysmlServerManager.getSubsetting(httpServletRequest, projectId, commitId, id);
+        final Subsetting aSubsetting = SysmlServerManager.getSubsetting(httpServletRequest, projectId, id);
 
         if (aSubsetting != null) {
             httpServletRequest.setAttribute("aSubsetting", aSubsetting);
@@ -192,7 +192,7 @@ public class SubsettingService
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
     )
     public Compact getSubsettingCompact(
-        @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+        @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         String iconUri = OSLC4JUtils.getPublicURI() + "/images/ui_preview_icon.gif";
@@ -205,7 +205,7 @@ public class SubsettingService
         //TODO: adjust the preview height & width values from the default values provided above.
         // End of user code
 
-        final Subsetting aSubsetting = SysmlServerManager.getSubsetting(httpServletRequest, projectId, commitId, id);
+        final Subsetting aSubsetting = SysmlServerManager.getSubsetting(httpServletRequest, projectId, id);
 
         if (aSubsetting != null) {
             final Compact compact = new Compact();
@@ -239,13 +239,13 @@ public class SubsettingService
     @Path("{id}/smallPreview")
     @Produces({ MediaType.TEXT_HTML })
     public void getSubsettingAsHtmlSmallPreview(
-        @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+        @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         // Start of user code getSubsettingAsHtmlSmallPreview_init
         // End of user code
 
-        final Subsetting aSubsetting = SysmlServerManager.getSubsetting(httpServletRequest, projectId, commitId, id);
+        final Subsetting aSubsetting = SysmlServerManager.getSubsetting(httpServletRequest, projectId, id);
 
         if (aSubsetting != null) {
             httpServletRequest.setAttribute("aSubsetting", aSubsetting);
@@ -266,13 +266,13 @@ public class SubsettingService
     @Path("{id}/largePreview")
     @Produces({ MediaType.TEXT_HTML })
     public void getSubsettingAsHtmlLargePreview(
-        @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId, @PathParam("id") final String id
+        @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         // Start of user code getSubsettingAsHtmlLargePreview_init
         // End of user code
 
-        final Subsetting aSubsetting = SysmlServerManager.getSubsetting(httpServletRequest, projectId, commitId, id);
+        final Subsetting aSubsetting = SysmlServerManager.getSubsetting(httpServletRequest, projectId, id);
 
         if (aSubsetting != null) {
             httpServletRequest.setAttribute("aSubsetting", aSubsetting);

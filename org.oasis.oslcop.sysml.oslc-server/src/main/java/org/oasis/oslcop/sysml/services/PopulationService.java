@@ -6,9 +6,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.ServletException;
@@ -16,9 +20,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
@@ -39,15 +45,18 @@ import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.vocabulary.RDF;
 import org.eclipse.lyo.oslc4j.provider.jena.JenaModelHelper;
 import org.eclipse.lyo.store.Store;
+import org.glassfish.jersey.uri.UriTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
+import org.eclipse.lyo.oslc4j.core.exception.OslcCoreApplicationException;
 import org.eclipse.lyo.oslc4j.core.model.OslcMediaType;
 import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
 
@@ -56,7 +65,9 @@ import org.oasis.oslcop.sysml.SysmlServerManager;
 import org.oasis.oslcop.sysml.json.Project;
 import org.oasis.oslcop.sysml.json.ProjectCommit;
 import org.oasis.oslcop.sysml.servlet.ServiceProviderCatalogSingleton;
+import org.oasis.oslcop.sysml.servlet.ServiceProvidersFactory;
 import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.ServiceProviderInfo;
 
 @Path("populate")
 public class PopulationService
@@ -102,34 +113,40 @@ public class PopulationService
     }
 
     //TODO: There are a lot of methods here that need to be made neater. Many hacks and hard-coded constants.
-	static URI translateBack(URI uri) {
-		if (!uri.getHost().equalsIgnoreCase(OSLC_SERVER_HOSTNAME)) {
-			return uri;
-		}
-		
-		String oldPath = uri.getPath();
-		String newPath = oldPath.substring(OSLC_SERVER_APPLICATION_PATH.length() - 1, oldPath.length());
-		URI translated = UriBuilder.fromUri(uri)
-		        .scheme(JSON_SERVER_SCHEME)
-				.host(JSON_SERVER_HOSTNAME)
-				.port(JSON_SERVER_PORT)
-				.replacePath(newPath)
-				.build();
-		return translated;
-	}
+//	static URI translateBack(URI uri) {
+//		if (!uri.getHost().equalsIgnoreCase(OSLC_SERVER_HOSTNAME)) {
+//			return uri;
+//		}
+//		
+//		String oldPath = uri.getPath();
+//		String newPath = oldPath.substring(OSLC_SERVER_APPLICATION_PATH.length() - 1, oldPath.length());
+//		URI translated = UriBuilder.fromUri(uri)
+//		        .scheme(JSON_SERVER_SCHEME)
+//				.host(JSON_SERVER_HOSTNAME)
+//				.port(JSON_SERVER_PORT)
+//				.replacePath(newPath)
+//				.build();
+//		return translated;
+//	}
 
 	static URI translate(URI uri) {
 		if (!uri.getHost().equalsIgnoreCase(JSON_SERVER_HOSTNAME)) {
 			return uri;
 		}
-		String oldPath = uri.getPath();
-		URI translated = UriBuilder.fromUri(uri)
+		
+	    String template = "http://" + JSON_SERVER_HOSTNAME + ":" + JSON_SERVER_PORT + "/projects/{projectId}/commits/{commitId}/{elementType}/{elementId}";
+	    UriTemplate uriTemplate = new UriTemplate(template);
+	    Map<String, String> parameters = new HashMap<>();
+
+	    uriTemplate.match(uri.toString(), parameters);
+
+        String newTemplate = OSLC_SERVER_APPLICATION_PATH + "projects/{projectId}/{elementType}/{elementId}";
+
+		URI translated = UriBuilder.fromPath(newTemplate)
                 .scheme(OSLC_SERVER_SCHEME)
 				.host(OSLC_SERVER_HOSTNAME)
 				.port(OSLC_SERVER_PORT)
-				.replacePath(OSLC_SERVER_APPLICATION_PATH)
-				.path(oldPath)
-				.build();
+				.buildFromMap(parameters);
 		return translated;
 	}
 
@@ -194,7 +211,7 @@ public class PopulationService
         return projectCommits;
     }
 
-	public static List<ObjectNode> getElements(String projectCommitElementsUrl) {
+    public static List<ObjectNode> getElements(String projectCommitElementsUrl) {
         List<ObjectNode> elements = new ArrayList<ObjectNode>();
     	ObjectMapper mapper = new ObjectMapper();
         Boolean readFromFile = false;
@@ -214,16 +231,18 @@ public class PopulationService
         return elements;
     }
 
-    private List<Element> storeElements(String projectCommitElementsUrl) throws IOException, ServletException {
-    	int elementsLimit = 99999;
-    	Store store = SysmlServerManager.getStorePool().getStore();
+    private List<Element> storeElements(Project project, ProjectCommit projectCommit) throws IOException, ServletException {
+        int elementsLimit = 99999;
+        Store store = SysmlServerManager.getStorePool().getStore();
+        
+        String projectCommitElementsUrl = "http://" + JSON_SERVER_HOSTNAME + ":" + JSON_SERVER_PORT + "/projects/" + project.getId() + "/commits/" + projectCommit.getId() + "/elements";
     	
-    	List<Element> resources = new ArrayList<Element>();
-    	List<ObjectNode> elementsAsJson = new ArrayList<ObjectNode>();
-    	ObjectMapper mapper = new ObjectMapper();
-		elementsAsJson = getElements(projectCommitElementsUrl);
-		int count = 0;
-		for (ObjectNode elementAsJson : elementsAsJson) {
+        List<Element> resources = new ArrayList<Element>();
+        List<ObjectNode> elementsAsJson = new ArrayList<ObjectNode>();
+        ObjectMapper mapper = new ObjectMapper();
+        elementsAsJson = getElements(projectCommitElementsUrl);
+        int count = 0;
+        for (ObjectNode elementAsJson : elementsAsJson) {
 			count++;
 			if (count > elementsLimit) {
 				break;
@@ -257,7 +276,7 @@ public class PopulationService
 	                element.setShortTitle(element.getName());
 				}
 				resources.add(element);
-				store.insertResources(SysmlServerManager.getStorePool().getDefaultNamedGraphUri(), element);
+				store.insertResources(StoreService.constructNamedGraphUri(projectCommit.getId()), element);
 				log.info("resource inserted into store:" + element.getAbout());
 			} catch (Exception e) {
 				//TODO: I am getting exceptions because the class property is meant to be Boolean, yet the RDF is NOT boolean? 
@@ -278,20 +297,33 @@ public class PopulationService
 
         log.info("Starting to populate.");
 
-		//TODO: This will fail unless the SPC is already initialized. But will do for now.
-    	ServiceProvider[] serviceProviders = ServiceProviderCatalogSingleton.getServiceProviders(null);
-    	for (ServiceProvider serviceProvider : serviceProviders) {
-            log.info("Populating on ServiceProvider:" + serviceProvider.getAbout());
-			count++;
-			if (count > serviceProviderLimit) {
-				break;
-			}
-    		//"http://sysml2-dev.intercax.com:9000/projects/aa593ac6-f6f8-4794-926f-6911f1966dff/commits/21bda0aa-92da-416d-8f03-2b7c7f5a3de5/elements";
-    		String projectCommitElementsUrl = translateBack(serviceProvider.getAbout()).toString() + "/elements";
-            storeElements(projectCommitElementsUrl);
-            log.info("Ended populating on ServiceProvider:" + serviceProvider.getAbout());
-		}
-        log.info("Ended population.");
+        
+        Store store = SysmlServerManager.getStorePool().getStore();
+
+        List<Project> projects = getProjects();
+        for (Project project : projects) {
+            List<ProjectCommit> projectCommits = getProjectCommits(project);
+            for (ProjectCommit projectCommit : projectCommits) {
+                log.info("Populating on ProjectCommit:" + projectCommit.getId());
+                count++;
+                if (count > serviceProviderLimit) {
+                    break;
+                }
+                
+                ServiceProviderInfo r = new ServiceProviderInfo();
+                r.projectId = project.getId();
+                r.name = "Project:" + r.projectId;
+                try {
+                    ServiceProvider aServiceProvider = ServiceProvidersFactory.createServiceProvider(r);
+                    store.insertResources(StoreService.constructNamedGraphUri(projectCommit.getId()), aServiceProvider);
+                } catch (Exception e) {
+                    log.error("Could not handle the SP.", e);
+                }
+                storeElements(project, projectCommit);
+                log.info("Ended populating on ProjectCommit:" + projectCommit.getId());
+            }
+        }
+    	log.info("Ended population.");
         return Response.ok().build();
     }
 }

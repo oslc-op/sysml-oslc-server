@@ -110,7 +110,7 @@ import io.swagger.annotations.ApiOperation;
 // Start of user code pre_class_code
 // End of user code
 @OslcService(SysmlDomainConstants.SYSML_DOMAIN)
-@Path("projects/{projectId}/commits/{commitId}/service5/generalizations")
+@Path("projects/{projectId}/service5/generalizations")
 @Api(value = "OSLC Service for {" + SysmlDomainConstants.GENERALIZATION_LOCALNAME + "}")
 public class ServiceProviderService5
 {
@@ -158,7 +158,7 @@ public class ServiceProviderService5
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML
     )
     public Generalization[] queryGeneralizations(
-                                                    @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId ,
+                                                    @PathParam("projectId") final String projectId ,
                                                      @QueryParam("oslc.where") final String where,
                                                      @QueryParam("oslc.prefix") final String prefix,
                                                      @QueryParam("page") final String pageString,
@@ -177,7 +177,7 @@ public class ServiceProviderService5
         // Here additional logic can be implemented that complements main action taken in SysmlServerManager
         // End of user code
 
-        final List<Generalization> resources = SysmlServerManager.queryGeneralizations(httpServletRequest, projectId, commitId, where, prefix, page, pageSize);
+        final List<Generalization> resources = SysmlServerManager.queryGeneralizations(httpServletRequest, projectId, where, prefix, page, pageSize);
         httpServletRequest.setAttribute("queryUri",
                 uriInfo.getAbsolutePath().toString() + "?oslc.paging=true");
         if (resources.size() > pageSize) {
@@ -198,7 +198,7 @@ public class ServiceProviderService5
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML
     )
     public void queryGeneralizationsAsHtml(
-                                    @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId ,
+                                    @PathParam("projectId") final String projectId ,
                                        @QueryParam("oslc.where") final String where,
                                        @QueryParam("oslc.prefix") final String prefix,
                                        @QueryParam("page") final String pageString,
@@ -216,7 +216,7 @@ public class ServiceProviderService5
         // Start of user code queryGeneralizationsAsHtml
         // End of user code
 
-        final List<Generalization> resources = SysmlServerManager.queryGeneralizations(httpServletRequest, projectId, commitId, where, prefix, page, pageSize);
+        final List<Generalization> resources = SysmlServerManager.queryGeneralizations(httpServletRequest, projectId, where, prefix, page, pageSize);
 
         if (resources!= null) {
             httpServletRequest.setAttribute("resources", resources);
@@ -242,7 +242,7 @@ public class ServiceProviderService5
     (
          title = "SelectionDialog1",
          label = "SelectionDialog1",
-         uri = "projects/{projectId}/commits/{commitId}/service5/generalizations/selector",
+         uri = "projects/{projectId}/service5/generalizations/selector",
          hintWidth = "250px",
          hintHeight = "250px",
          resourceTypes = {SysmlDomainConstants.GENERALIZATION_TYPE},
@@ -253,7 +253,7 @@ public class ServiceProviderService5
     @Consumes({ MediaType.TEXT_HTML, MediaType.WILDCARD })
     public void GeneralizationSelector(
         @QueryParam("terms") final String terms
-        , @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId
+        , @PathParam("projectId") final String projectId
         ) throws ServletException, IOException
     {
         // Start of user code GeneralizationSelector_init
@@ -265,7 +265,7 @@ public class ServiceProviderService5
 
         if (terms != null ) {
             httpServletRequest.setAttribute("terms", terms);
-            final List<Generalization> resources = SysmlServerManager.GeneralizationSelector(httpServletRequest, projectId, commitId, terms);
+            final List<Generalization> resources = SysmlServerManager.GeneralizationSelector(httpServletRequest, projectId, terms);
             if (resources!= null) {
                         httpServletRequest.setAttribute("resources", resources);
                         RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/generalizationselectorresults.jsp");

@@ -101,7 +101,7 @@ import io.swagger.annotations.ApiOperation;
 // Start of user code pre_class_code
 // End of user code
 @OslcService(SysmlDomainConstants.SYSML_DOMAIN)
-@Path("projects/{projectId}/commits/{commitId}/service4/relationships")
+@Path("projects/{projectId}/service4/relationships")
 @Api(value = "OSLC Service for {" + SysmlDomainConstants.RELATIONSHIP_LOCALNAME + "}")
 public class ServiceProviderService4
 {
@@ -149,7 +149,7 @@ public class ServiceProviderService4
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML
     )
     public Relationship[] queryRelationships(
-                                                    @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId ,
+                                                    @PathParam("projectId") final String projectId ,
                                                      @QueryParam("oslc.where") final String where,
                                                      @QueryParam("oslc.prefix") final String prefix,
                                                      @QueryParam("page") final String pageString,
@@ -168,7 +168,7 @@ public class ServiceProviderService4
         // Here additional logic can be implemented that complements main action taken in SysmlServerManager
         // End of user code
 
-        final List<Relationship> resources = SysmlServerManager.queryRelationships(httpServletRequest, projectId, commitId, where, prefix, page, pageSize);
+        final List<Relationship> resources = SysmlServerManager.queryRelationships(httpServletRequest, projectId, where, prefix, page, pageSize);
         httpServletRequest.setAttribute("queryUri",
                 uriInfo.getAbsolutePath().toString() + "?oslc.paging=true");
         if (resources.size() > pageSize) {
@@ -189,7 +189,7 @@ public class ServiceProviderService4
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML
     )
     public void queryRelationshipsAsHtml(
-                                    @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId ,
+                                    @PathParam("projectId") final String projectId ,
                                        @QueryParam("oslc.where") final String where,
                                        @QueryParam("oslc.prefix") final String prefix,
                                        @QueryParam("page") final String pageString,
@@ -207,7 +207,7 @@ public class ServiceProviderService4
         // Start of user code queryRelationshipsAsHtml
         // End of user code
 
-        final List<Relationship> resources = SysmlServerManager.queryRelationships(httpServletRequest, projectId, commitId, where, prefix, page, pageSize);
+        final List<Relationship> resources = SysmlServerManager.queryRelationships(httpServletRequest, projectId, where, prefix, page, pageSize);
 
         if (resources!= null) {
             httpServletRequest.setAttribute("resources", resources);
@@ -233,7 +233,7 @@ public class ServiceProviderService4
     (
          title = "SelectionDialog1",
          label = "SelectionDialog1",
-         uri = "projects/{projectId}/commits/{commitId}/service4/relationships/selector",
+         uri = "projects/{projectId}/service4/relationships/selector",
          hintWidth = "250px",
          hintHeight = "250px",
          resourceTypes = {SysmlDomainConstants.RELATIONSHIP_TYPE},
@@ -244,7 +244,7 @@ public class ServiceProviderService4
     @Consumes({ MediaType.TEXT_HTML, MediaType.WILDCARD })
     public void RelationshipSelector(
         @QueryParam("terms") final String terms
-        , @PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId
+        , @PathParam("projectId") final String projectId
         ) throws ServletException, IOException
     {
         // Start of user code RelationshipSelector_init
@@ -256,7 +256,7 @@ public class ServiceProviderService4
 
         if (terms != null ) {
             httpServletRequest.setAttribute("terms", terms);
-            final List<Relationship> resources = SysmlServerManager.RelationshipSelector(httpServletRequest, projectId, commitId, terms);
+            final List<Relationship> resources = SysmlServerManager.RelationshipSelector(httpServletRequest, projectId, terms);
             if (resources!= null) {
                         httpServletRequest.setAttribute("resources", resources);
                         RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/relationshipselectorresults.jsp");

@@ -72,14 +72,12 @@ public class ServiceProvidersFactory
         super();
     }
 
-    public static URI constructURI(final String projectId, final String commitId)
+    public static URI constructURI(final String projectId)
     {
         String basePath = OSLC4JUtils.getServletURI();
         Map<String, Object> pathParameters = new HashMap<String, Object>();
         pathParameters.put("projectId", projectId);
-
-        pathParameters.put("commitId", commitId);
-        String instanceURI = "projects/{projectId}/commits/{commitId}";
+        String instanceURI = "projects/{projectId}";
 
         final UriBuilder builder = UriBuilder.fromUri(basePath);
         return builder.path(instanceURI).buildFromMap(pathParameters);
@@ -87,17 +85,17 @@ public class ServiceProvidersFactory
 
     public static URI constructURI(final ServiceProviderInfo serviceProviderInfo)
     {
-        return constructURI(serviceProviderInfo.projectId, serviceProviderInfo.commitId);
+        return constructURI(serviceProviderInfo.projectId);
     }
 
-    public static String constructIdentifier(final String projectId, final String commitId)
+    public static String constructIdentifier(final String projectId)
     {
-        return projectId + "/" + commitId;
+        return projectId;
     }
 
     public static String constructIdentifier(final ServiceProviderInfo serviceProviderInfo)
     {
-        return constructIdentifier(serviceProviderInfo.projectId, serviceProviderInfo.commitId);
+        return constructIdentifier(serviceProviderInfo.projectId);
     }
 
     public static ServiceProvider createServiceProvider(final ServiceProviderInfo serviceProviderInfo) 
@@ -115,8 +113,6 @@ public class ServiceProvidersFactory
         Publisher publisher = null;
         Map<String, Object> parameterMap = new HashMap<String, Object>();
         parameterMap.put("projectId", serviceProviderInfo.projectId);
-
-        parameterMap.put("commitId", serviceProviderInfo.commitId);
 
         ServiceProvider serviceProvider = ServiceProviderFactory.createServiceProvider(basePath,
                                                     "",

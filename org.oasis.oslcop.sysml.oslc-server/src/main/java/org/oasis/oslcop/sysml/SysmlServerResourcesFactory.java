@@ -63,156 +63,151 @@ public class SysmlServerResourcesFactory {
 
     //methods for SysmlClass resource
     
-    public static SysmlClass createSysmlClass(final String projectId, final String commitId, final String id)
+    public static SysmlClass createSysmlClass(final String projectId, final String id)
     {
-        return new SysmlClass(constructURIForSysmlClass(projectId, commitId, id));
+        return new SysmlClass(constructURIForSysmlClass(projectId, id));
     }
     
-    public static URI constructURIForSysmlClass(final String projectId, final String commitId, final String id)
+    public static URI constructURIForSysmlClass(final String projectId, final String id)
     {
         String basePath = OSLC4JUtils.getServletURI();
         Map<String, Object> pathParameters = new HashMap<String, Object>();
         pathParameters.put("projectId", projectId);
-        pathParameters.put("commitId", commitId);
         pathParameters.put("id", id);
-        String instanceURI = "projects/{projectId}/commits/{commitId}/classes/{id}";
+        String instanceURI = "projects/{projectId}/classes/{id}";
     
         final UriBuilder builder = UriBuilder.fromUri(basePath);
         return builder.path(instanceURI).buildFromMap(pathParameters);
     }
     
-    public static Link constructLinkForSysmlClass(final String projectId, final String commitId, final String id , final String label)
+    public static Link constructLinkForSysmlClass(final String projectId, final String id , final String label)
     {
-        return new Link(constructURIForSysmlClass(projectId, commitId, id), label);
+        return new Link(constructURIForSysmlClass(projectId, id), label);
     }
     
-    public static Link constructLinkForSysmlClass(final String projectId, final String commitId, final String id)
+    public static Link constructLinkForSysmlClass(final String projectId, final String id)
     {
-        return new Link(constructURIForSysmlClass(projectId, commitId, id));
+        return new Link(constructURIForSysmlClass(projectId, id));
     }
     
 
     //methods for Element resource
     
-    public static Element createElement(final String projectId, final String commitId, final String id)
+    public static Element createElement(final String projectId, final String id)
     {
-        return new Element(constructURIForElement(projectId, commitId, id));
+        return new Element(constructURIForElement(projectId, id));
     }
     
-    public static URI constructURIForElement(final String projectId, final String commitId, final String id)
+    public static URI constructURIForElement(final String projectId, final String id)
     {
         String basePath = OSLC4JUtils.getServletURI();
         Map<String, Object> pathParameters = new HashMap<String, Object>();
         pathParameters.put("projectId", projectId);
-        pathParameters.put("commitId", commitId);
         pathParameters.put("id", id);
-        String instanceURI = "projects/{projectId}/commits/{commitId}/elements/{id}";
+        String instanceURI = "projects/{projectId}/elements/{id}";
     
         final UriBuilder builder = UriBuilder.fromUri(basePath);
         return builder.path(instanceURI).buildFromMap(pathParameters);
     }
     
-    public static Link constructLinkForElement(final String projectId, final String commitId, final String id , final String label)
+    public static Link constructLinkForElement(final String projectId, final String id , final String label)
     {
-        return new Link(constructURIForElement(projectId, commitId, id), label);
+        return new Link(constructURIForElement(projectId, id), label);
     }
     
-    public static Link constructLinkForElement(final String projectId, final String commitId, final String id)
+    public static Link constructLinkForElement(final String projectId, final String id)
     {
-        return new Link(constructURIForElement(projectId, commitId, id));
+        return new Link(constructURIForElement(projectId, id));
     }
     
 
     //methods for Generalization resource
     
-    public static Generalization createGeneralization(final String projectId, final String commitId, final String id)
+    public static Generalization createGeneralization(final String projectId, final String id)
     {
-        return new Generalization(constructURIForGeneralization(projectId, commitId, id));
+        return new Generalization(constructURIForGeneralization(projectId, id));
     }
     
-    public static URI constructURIForGeneralization(final String projectId, final String commitId, final String id)
+    public static URI constructURIForGeneralization(final String projectId, final String id)
     {
         String basePath = OSLC4JUtils.getServletURI();
         Map<String, Object> pathParameters = new HashMap<String, Object>();
         pathParameters.put("projectId", projectId);
-        pathParameters.put("commitId", commitId);
         pathParameters.put("id", id);
-        String instanceURI = "projects/{projectId}/commits/{commitId}/generalizations/{id}";
+        String instanceURI = "projects/{projectId}/generalizations/{id}";
     
         final UriBuilder builder = UriBuilder.fromUri(basePath);
         return builder.path(instanceURI).buildFromMap(pathParameters);
     }
     
-    public static Link constructLinkForGeneralization(final String projectId, final String commitId, final String id , final String label)
+    public static Link constructLinkForGeneralization(final String projectId, final String id , final String label)
     {
-        return new Link(constructURIForGeneralization(projectId, commitId, id), label);
+        return new Link(constructURIForGeneralization(projectId, id), label);
     }
     
-    public static Link constructLinkForGeneralization(final String projectId, final String commitId, final String id)
+    public static Link constructLinkForGeneralization(final String projectId, final String id)
     {
-        return new Link(constructURIForGeneralization(projectId, commitId, id));
+        return new Link(constructURIForGeneralization(projectId, id));
     }
     
 
     //methods for Relationship resource
     
-    public static Relationship createRelationship(final String projectId, final String commitId, final String id)
+    public static Relationship createRelationship(final String projectId, final String id)
     {
-        return new Relationship(constructURIForRelationship(projectId, commitId, id));
+        return new Relationship(constructURIForRelationship(projectId, id));
     }
     
-    public static URI constructURIForRelationship(final String projectId, final String commitId, final String id)
+    public static URI constructURIForRelationship(final String projectId, final String id)
     {
         String basePath = OSLC4JUtils.getServletURI();
         Map<String, Object> pathParameters = new HashMap<String, Object>();
         pathParameters.put("projectId", projectId);
-        pathParameters.put("commitId", commitId);
         pathParameters.put("id", id);
-        String instanceURI = "projects/{projectId}/commits/{commitId}/relationships/{id}";
+        String instanceURI = "projects/{projectId}/relationships/{id}";
     
         final UriBuilder builder = UriBuilder.fromUri(basePath);
         return builder.path(instanceURI).buildFromMap(pathParameters);
     }
     
-    public static Link constructLinkForRelationship(final String projectId, final String commitId, final String id , final String label)
+    public static Link constructLinkForRelationship(final String projectId, final String id , final String label)
     {
-        return new Link(constructURIForRelationship(projectId, commitId, id), label);
+        return new Link(constructURIForRelationship(projectId, id), label);
     }
     
-    public static Link constructLinkForRelationship(final String projectId, final String commitId, final String id)
+    public static Link constructLinkForRelationship(final String projectId, final String id)
     {
-        return new Link(constructURIForRelationship(projectId, commitId, id));
+        return new Link(constructURIForRelationship(projectId, id));
     }
     
 
     //methods for Subsetting resource
     
-    public static Subsetting createSubsetting(final String projectId, final String commitId, final String id)
+    public static Subsetting createSubsetting(final String projectId, final String id)
     {
-        return new Subsetting(constructURIForSubsetting(projectId, commitId, id));
+        return new Subsetting(constructURIForSubsetting(projectId, id));
     }
     
-    public static URI constructURIForSubsetting(final String projectId, final String commitId, final String id)
+    public static URI constructURIForSubsetting(final String projectId, final String id)
     {
         String basePath = OSLC4JUtils.getServletURI();
         Map<String, Object> pathParameters = new HashMap<String, Object>();
         pathParameters.put("projectId", projectId);
-        pathParameters.put("commitId", commitId);
         pathParameters.put("id", id);
-        String instanceURI = "projects/{projectId}/commits/{commitId}/subsettings/{id}";
+        String instanceURI = "projects/{projectId}/subsettings/{id}";
     
         final UriBuilder builder = UriBuilder.fromUri(basePath);
         return builder.path(instanceURI).buildFromMap(pathParameters);
     }
     
-    public static Link constructLinkForSubsetting(final String projectId, final String commitId, final String id , final String label)
+    public static Link constructLinkForSubsetting(final String projectId, final String id , final String label)
     {
-        return new Link(constructURIForSubsetting(projectId, commitId, id), label);
+        return new Link(constructURIForSubsetting(projectId, id), label);
     }
     
-    public static Link constructLinkForSubsetting(final String projectId, final String commitId, final String id)
+    public static Link constructLinkForSubsetting(final String projectId, final String id)
     {
-        return new Link(constructURIForSubsetting(projectId, commitId, id));
+        return new Link(constructURIForSubsetting(projectId, id));
     }
     
 
