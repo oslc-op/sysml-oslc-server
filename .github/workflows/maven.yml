@@ -21,6 +21,6 @@ jobs:
       with:
         java-version: 1.8
     - name: Build SysML domain
-      run: mvn -B package --file pom.xml org.oasis.oslcop.sysml.oslc-domain/pom.xml
+      run: mvn -B package --file org.oasis.oslcop.sysml.oslc-domain/pom.xml
     - name: Build SysML OSLC server
-      run: mvn -B package --file pom.xml org.oasis.oslcop.sysml.oslc-server/pom.xml
+      run: mvn -B package --file org.oasis.oslcop.sysml.oslc-server/pom.xml
