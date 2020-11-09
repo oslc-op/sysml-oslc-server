@@ -1,7 +1,7 @@
 # SysML OSLC Server
 
 ![CI](https://github.com/oslc-op/sysml-oslc-server/workflows/CI/badge.svg)
-[![](https://img.shields.io/badge/misc-discourse-lightgrey.svg)](https://forum.open-services.net/)
+[![](https://img.shields.io/badge/talk-discourse-lightgrey.svg)](https://forum.open-services.net/)
 
 Sample code to demonstrate how to use Lyo Designer to create an OSLC server for the SysML v2 REST API. 
 
