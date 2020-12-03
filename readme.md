@@ -50,7 +50,11 @@ Before generating the java classes, the generated Lyo model is manually modified
 
 ### 2. 
 After generating the domain classes, we need to change the "toString()" method on each resource to make it print the resources better.
-Use Notepad++ to search/replace on all *.java files.
+
+Tips: Use Notepad++ to search/replace on all *.java files.
+
+* Find:        // Start of user code toString_finalize\n        // End of user code
+* Replace:        // Start of user code toString_finalize\n        result = getShortTitle();\n        // End of user code
 
 ### 3. 
 In the generated jsp pages, there are calls to getDctermsIdentifier() and getDctermsSource(), but these methods do not exist.
