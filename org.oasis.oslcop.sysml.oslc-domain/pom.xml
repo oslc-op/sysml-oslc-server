@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <!-- Start of user code header
     -->
@@ -18,7 +17,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <version.lyo>4.0.0-SNAPSHOT</version.lyo>
+        <version.lyo>4.0.0</version.lyo>
         <!-- Start of user code properties
         -->
         <!-- TODO: Add additional properties here to avoid them be overrriden upon future re-generation -->
@@ -57,9 +56,9 @@
         <!-- Start of user code dependencies
         -->
         <dependency>
-	        <groupId>org.eclipse.lyo</groupId>
-	        <artifactId>oslc-domains</artifactId>
-	        <version>4.0.0-SNAPSHOT</version>
+            <groupId>org.eclipse.lyo</groupId>
+            <artifactId>oslc-domains</artifactId>
+            <version>${version.lyo}</version>
         </dependency>
         <!-- End of user code
         -->
@@ -82,14 +81,14 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-        
+
         <!-- Lyo dependencies -->
         <dependency>
             <groupId>org.eclipse.lyo.oslc4j.core</groupId>
             <artifactId>oslc4j-core</artifactId>
             <version>${version.lyo}</version>
         </dependency>
-        
+
     </dependencies>
     <!-- Start of user code post_dependencies
     -->
