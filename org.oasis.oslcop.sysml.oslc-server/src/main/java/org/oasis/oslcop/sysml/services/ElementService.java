@@ -172,6 +172,8 @@ public class ElementService
         if (aElement != null) {
             httpServletRequest.setAttribute("aElement", aElement);
             // Start of user code getElementAsHtml_setAttributes
+            URI sourceUri = PopulationService.translateBack(uriInfo.getAbsolutePath());
+            httpServletRequest.setAttribute("sourceUri", sourceUri.toString());
             List<Class> servicedDomainClasses = new ArrayList<Class>(Arrays.asList(SysmlClass.class, Subsetting.class, Relationship.class, Generalization.class));
             if (servicedDomainClasses.contains(aElement.getClass())) {
                 httpServletRequest.setAttribute("a" + aElement.getClass().getSimpleName(), aElement);

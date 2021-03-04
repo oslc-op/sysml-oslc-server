@@ -112,24 +112,35 @@ public class PopulationService
         super();
     }
 
-    //TODO: There are a lot of methods here that need to be made neater. Many hacks and hard-coded constants.
-//	static URI translateBack(URI uri) {
-//		if (!uri.getHost().equalsIgnoreCase(OSLC_SERVER_HOSTNAME)) {
-//			return uri;
-//		}
-//		
-//		String oldPath = uri.getPath();
-//		String newPath = oldPath.substring(OSLC_SERVER_APPLICATION_PATH.length() - 1, oldPath.length());
-//		URI translated = UriBuilder.fromUri(uri)
-//		        .scheme(JSON_SERVER_SCHEME)
-//				.host(JSON_SERVER_HOSTNAME)
-//				.port(JSON_SERVER_PORT)
-//				.replacePath(newPath)
-//				.build();
-//		return translated;
-//	}
+    public static URI translateBack(URI uri) {
+        if (!uri.getHost().equalsIgnoreCase(OSLC_SERVER_HOSTNAME)) {
+            return uri;
+        }
+        
+        String template = UriBuilder.fromPath(OSLC_SERVER_APPLICATION_PATH)
+                .scheme(OSLC_SERVER_SCHEME)
+                .host(OSLC_SERVER_HOSTNAME)
+                .port(OSLC_SERVER_PORT)
+                .build().toString();
+        template = template + "projects/{projectId}/{elementType}/{elementId}";
+        UriTemplate uriTemplate = new UriTemplate(template);
+        Map<String, String> parameters = new HashMap<>();
 
-	static URI translate(URI uri) {
+        uriTemplate.match(uri.toString(), parameters);
+        parameters.put("commitId", StoreService.getSelectedProjectCommit());
+
+        String newTemplate = "projects/{projectId}/commits/{commitId}/{elementType}/{elementId}";
+
+        URI translated = UriBuilder.fromPath(newTemplate)
+                .scheme(JSON_SERVER_SCHEME)
+                .host(JSON_SERVER_HOSTNAME)
+                .port(JSON_SERVER_PORT)
+                .buildFromMap(parameters);
+        return translated;
+    }
+
+    //TODO: Build the URL the same way I build it in translateBack function above.
+    static URI translate(URI uri) {
 		if (!uri.getHost().equalsIgnoreCase(JSON_SERVER_HOSTNAME)) {
 			return uri;
 		}
@@ -301,10 +312,12 @@ public class PopulationService
         Store store = SysmlServerManager.getStorePool().getStore();
 
         List<Project> projects = getProjects();
+        log.info("Projects:" + projects.size());
         for (Project project : projects) {
             List<ProjectCommit> projectCommits = getProjectCommits(project);
+            log.info("Populating on Project:" + project.getId() + " with commits:" + projectCommits.size());
             for (ProjectCommit projectCommit : projectCommits) {
-                log.info("Populating on ProjectCommit:" + projectCommit.getId());
+                log.info("    Populating on ProjectCommit:" + projectCommit.getId());
                 count++;
                 if (count > serviceProviderLimit) {
                     break;
@@ -315,7 +328,10 @@ public class PopulationService
                 r.name = "Project:" + r.projectId;
                 try {
                     ServiceProvider aServiceProvider = ServiceProvidersFactory.createServiceProvider(r);
-                    store.insertResources(StoreService.constructNamedGraphUri(projectCommit.getId()), aServiceProvider);
+                    //It could be that the SP already exists from previous project commits. So, we only added it if it does not yet exist 
+                    if (!store.resourceExists(StoreService.constructNamedGraphUri(projectCommit.getId()), aServiceProvider.getAbout())) {
+                        store.updateResources(StoreService.constructNamedGraphUri(projectCommit.getId()), aServiceProvider);
+                    }
                 } catch (Exception e) {
                     log.error("Could not handle the SP.", e);
                 }

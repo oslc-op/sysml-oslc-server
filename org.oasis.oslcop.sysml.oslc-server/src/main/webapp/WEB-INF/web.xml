@@ -8,7 +8,7 @@
         <description>Base URI for the adaptor.</description>
         <param-name>org.oasis.oslcop.sysml.servlet.baseurl</param-name>
         <param-value>http://localhost:8085/</param-value>
-        <!-- <param-value>https://aide.md.kth.se</param-value> -->
+        <!-- <param-value>http://sysml2-oslc-dev.intercax.com:8080/</param-value> -->
     </context-param>
     <!-- Start of user code webxml1
     -->
@@ -61,7 +61,7 @@
         <init-param>
             <param-name>swagger.api.basepath</param-name>
             <param-value>http://localhost:8085/sysml_oslc_server/services</param-value>
-            <!-- <param-value>https://aide.md.kth.se/sysml_oslc_server/services</param-value> -->
+            <!-- <param-value>http://sysml2-oslc-dev.intercax.com:8080/sysml_oslc_server/services</param-value> -->
         </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>

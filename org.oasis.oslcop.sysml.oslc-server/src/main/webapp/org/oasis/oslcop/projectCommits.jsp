@@ -10,6 +10,10 @@
 <%@page import="org.eclipse.lyo.oslc4j.core.OSLC4JUtils"%>
 <%@page import="javax.ws.rs.core.UriBuilder"%>
 
+<%@page import="org.eclipse.lyo.store.Store"%>
+<%@page import="org.oasis.oslcop.sysml.SysmlServerManager"%>
+<%@page import="org.eclipse.lyo.oslc4j.core.model.ServiceProvider"%>
+<%@page import="org.oasis.oslcop.sysml.services.StoreService"%>
 
 <%@ page contentType="text/html" language="java" pageEncoding="UTF-8" %>
 
@@ -52,7 +56,9 @@ List<String> projectCommits = (List<String>) request.getAttribute("projectCommit
         <p>Selected ProjectCommit: <%=selectedProjectCommit%></p>
         <p>All Project Commits:</p>
         <ul>
-        <%for (String id : projectCommits) {
+        <%
+        Store store = SysmlServerManager.getStorePool().getStore();
+        for (String id : projectCommits) {
             if (id.equals(selectedProjectCommit)) {
             %>
                 <li><%=id%> - Current</li>
@@ -63,7 +69,16 @@ List<String> projectCommits = (List<String>) request.getAttribute("projectCommit
                 <li><%=id%> - <a href="<%= UriBuilder.fromUri(OSLC4JUtils.getServletURI()).path("/store/projectCommits/" + id).build() %>"><%="Switch"%></a></li>
             <%
             }
+            %><ul><%
+            List<ServiceProvider> serviceProviders =  store.getResources(StoreService.constructNamedGraphUri(id), ServiceProvider.class); //new ArrayList<ServiceProvider>();
+            for (ServiceProvider sp : serviceProviders) {
+                %>
+                <li><%=sp.getIdentifier()%></li>
+                <%
+            }
+            %></ul><%
         }
+        SysmlServerManager.getStorePool().releaseStore(store);
         %>
         </ul>
     </div>

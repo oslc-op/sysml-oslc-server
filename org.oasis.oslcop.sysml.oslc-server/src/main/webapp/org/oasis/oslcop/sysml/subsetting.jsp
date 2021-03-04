@@ -42,6 +42,7 @@
 
 <%
   Subsetting aSubsetting = (Subsetting) request.getAttribute("aSubsetting");
+  String sourceUri = (String) request.getAttribute("sourceUri");
 %>
 <html lang="en">
 <head>
@@ -94,6 +95,9 @@
         <li><a href="<%=type%>"><%=type%></a></li>
         <%}%>
         </ul>
+        <p class="lead">Source:&nbsp;
+        <a href="<%=sourceUri%>"><%=sourceUri%></a>
+        </p>
     </div>
         <h2>Properties</h2>
         <div>
