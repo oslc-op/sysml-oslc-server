@@ -61,10 +61,13 @@ import org.oasis.oslcop.sysml.Connector;
 import org.oasis.oslcop.sysml.IStep;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.Association;
 import org.oasis.oslcop.sysml.Behavior;
 import org.oasis.oslcop.sysml.Classifier;
+import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
@@ -76,13 +79,14 @@ import org.oasis.oslcop.sysml.ItemFlowEnd;
 import org.oasis.oslcop.sysml.ItemFlowFeature;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
-import org.oasis.oslcop.sysml.SysmlPackage;
-import org.oasis.oslcop.sysml.Parameter;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.Subsetting;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
+import org.oasis.oslcop.sysml.TypeFeaturing;
 // Start of user code imports
 // End of user code
 
@@ -110,12 +114,12 @@ public class ItemFlow
     // Start of user code attributeAnnotation:itemFlowEnd
     // End of user code
     private Set<Link> itemFlowEnd = new HashSet<Link>();
-    // Start of user code attributeAnnotation:itemFlowFeature
-    // End of user code
-    private Set<Link> itemFlowFeature = new HashSet<Link>();
     // Start of user code attributeAnnotation:itemFeature
     // End of user code
     private Set<Link> itemFeature = new HashSet<Link>();
+    // Start of user code attributeAnnotation:itemFlowFeature
+    // End of user code
+    private Set<Link> itemFlowFeature = new HashSet<Link>();
     // Start of user code attributeAnnotation:behavior
     // End of user code
     private Set<Link> behavior = new HashSet<Link>();
@@ -198,14 +202,14 @@ public class ItemFlow
         this.itemFlowEnd.add(itemFlowEnd);
     }
     
-    public void addItemFlowFeature(final Link itemFlowFeature)
-    {
-        this.itemFlowFeature.add(itemFlowFeature);
-    }
-    
     public void addItemFeature(final Link itemFeature)
     {
         this.itemFeature.add(itemFeature);
+    }
+    
+    public void addItemFlowFeature(final Link itemFlowFeature)
+    {
+        this.itemFlowFeature.add(itemFlowFeature);
     }
     
     public void addBehavior(final Link behavior)
@@ -279,21 +283,6 @@ public class ItemFlow
         return itemFlowEnd;
     }
     
-    // Start of user code getterAnnotation:itemFlowFeature
-    // End of user code
-    @OslcName("itemFlowFeature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "itemFlowFeature")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ITEMFLOWFEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getItemFlowFeature()
-    {
-        // Start of user code getterInit:itemFlowFeature
-        // End of user code
-        return itemFlowFeature;
-    }
-    
     // Start of user code getterAnnotation:itemFeature
     // End of user code
     @OslcName("itemFeature")
@@ -307,6 +296,21 @@ public class ItemFlow
         // Start of user code getterInit:itemFeature
         // End of user code
         return itemFeature;
+    }
+    
+    // Start of user code getterAnnotation:itemFlowFeature
+    // End of user code
+    @OslcName("itemFlowFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "itemFlowFeature")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ITEMFLOWFEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getItemFlowFeature()
+    {
+        // Start of user code getterInit:itemFlowFeature
+        // End of user code
+        return itemFlowFeature;
     }
     
     // Start of user code getterAnnotation:behavior
@@ -330,7 +334,7 @@ public class ItemFlow
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "parameter")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
     public Set<Link> getParameter()
     {
@@ -404,22 +408,6 @@ public class ItemFlow
         // End of user code
     }
     
-    // Start of user code setterAnnotation:itemFlowFeature
-    // End of user code
-    public void setItemFlowFeature(final Set<Link> itemFlowFeature )
-    {
-        // Start of user code setterInit:itemFlowFeature
-        // End of user code
-        this.itemFlowFeature.clear();
-        if (itemFlowFeature != null)
-        {
-            this.itemFlowFeature.addAll(itemFlowFeature);
-        }
-    
-        // Start of user code setterFinalize:itemFlowFeature
-        // End of user code
-    }
-    
     // Start of user code setterAnnotation:itemFeature
     // End of user code
     public void setItemFeature(final Set<Link> itemFeature )
@@ -433,6 +421,22 @@ public class ItemFlow
         }
     
         // Start of user code setterFinalize:itemFeature
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:itemFlowFeature
+    // End of user code
+    public void setItemFlowFeature(final Set<Link> itemFlowFeature )
+    {
+        // Start of user code setterInit:itemFlowFeature
+        // End of user code
+        this.itemFlowFeature.clear();
+        if (itemFlowFeature != null)
+        {
+            this.itemFlowFeature.addAll(itemFlowFeature);
+        }
+    
+        // Start of user code setterFinalize:itemFlowFeature
         // End of user code
     }
     

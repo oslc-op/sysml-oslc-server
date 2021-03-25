@@ -61,12 +61,15 @@ import org.oasis.oslcop.sysml.Membership;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
-import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Membership;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Usage;
 // Start of user code imports
 // End of user code
@@ -83,12 +86,6 @@ public class VariantMembership
     extends Membership
     implements IVariantMembership
 {
-    // Start of user code attributeAnnotation:owningVariationDefinition
-    // End of user code
-    private Link owningVariationDefinition;
-    // Start of user code attributeAnnotation:owningVariationUsage
-    // End of user code
-    private Link owningVariationUsage;
     // Start of user code attributeAnnotation:ownedVariantUsage_comp
     // End of user code
     private Link ownedVariantUsage_comp;
@@ -152,36 +149,6 @@ public class VariantMembership
     }
     
     
-    // Start of user code getterAnnotation:owningVariationDefinition
-    // End of user code
-    @OslcName("owningVariationDefinition")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningVariationDefinition")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.DEFINITION_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwningVariationDefinition()
-    {
-        // Start of user code getterInit:owningVariationDefinition
-        // End of user code
-        return owningVariationDefinition;
-    }
-    
-    // Start of user code getterAnnotation:owningVariationUsage
-    // End of user code
-    @OslcName("owningVariationUsage")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningVariationUsage")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.USAGE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwningVariationUsage()
-    {
-        // Start of user code getterInit:owningVariationUsage
-        // End of user code
-        return owningVariationUsage;
-    }
-    
     // Start of user code getterAnnotation:ownedVariantUsage_comp
     // End of user code
     @OslcName("ownedVariantUsage_comp")
@@ -212,30 +179,6 @@ public class VariantMembership
         return ownedVariantUsage;
     }
     
-    
-    // Start of user code setterAnnotation:owningVariationDefinition
-    // End of user code
-    public void setOwningVariationDefinition(final Link owningVariationDefinition )
-    {
-        // Start of user code setterInit:owningVariationDefinition
-        // End of user code
-        this.owningVariationDefinition = owningVariationDefinition;
-    
-        // Start of user code setterFinalize:owningVariationDefinition
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:owningVariationUsage
-    // End of user code
-    public void setOwningVariationUsage(final Link owningVariationUsage )
-    {
-        // Start of user code setterInit:owningVariationUsage
-        // End of user code
-        this.owningVariationUsage = owningVariationUsage;
-    
-        // Start of user code setterFinalize:owningVariationUsage
-        // End of user code
-    }
     
     // Start of user code setterAnnotation:ownedVariantUsage_comp
     // End of user code

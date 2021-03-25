@@ -240,6 +240,51 @@
         </dd>
     </dl>
     <dl class="dl-horizontal">
+        <% method = Relationship.class.getMethod("getQualifiedName"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <%
+        if (aRelationship.getQualifiedName() == null) {
+            out.write("<em>null</em>");
+        }
+        else {
+            out.write(aRelationship.getQualifiedName().toString());
+        }
+        %>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Relationship.class.getMethod("getAliasId"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        Iterator<String> aliasIdItr = aRelationship.getAliasId().iterator();
+        while(aliasIdItr.hasNext()) {
+            out.write("<li>" + aliasIdItr.next().toString() + "</li>");
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Relationship.class.getMethod("getHumanId"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <%
+        if (aRelationship.getHumanId() == null) {
+            out.write("<em>null</em>");
+        }
+        else {
+            out.write(aRelationship.getHumanId().toString());
+        }
+        %>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
         <% method = Relationship.class.getMethod("getOwningMembership"); %>
         <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
@@ -312,7 +357,7 @@
         }
         else {
             %>
-            <jsp:include page="/org/oasis/oslcop/sysml/sysmlpackagetohtml.jsp">
+            <jsp:include page="/org/oasis/oslcop/sysml/namespacetohtml.jsp">
                 <jsp:param name="resourceUri" value="<%=aRelationship.getOwningNamespace().getValue()%>"/> 
                 </jsp:include>
             <%
@@ -366,6 +411,106 @@
         </dd>
     </dl>
     <dl class="dl-horizontal">
+        <% method = Relationship.class.getMethod("getDocumentation_comp"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        for(Link next : aRelationship.getDocumentation_comp()) {
+            if (next.getValue() == null) {
+                out.write("<li>" + "<em>null</em>" + "</li>");
+            }
+            else {
+                %>
+                <li>
+                <jsp:include page="/org/oasis/oslcop/sysml/documentationtohtml.jsp">
+                    <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                    </jsp:include>
+                </li>
+                <%
+            }
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Relationship.class.getMethod("getOwnedAnnotation_comp"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        for(Link next : aRelationship.getOwnedAnnotation_comp()) {
+            if (next.getValue() == null) {
+                out.write("<li>" + "<em>null</em>" + "</li>");
+            }
+            else {
+                %>
+                <li>
+                <jsp:include page="/org/oasis/oslcop/sysml/annotationtohtml.jsp">
+                    <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                    </jsp:include>
+                </li>
+                <%
+            }
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Relationship.class.getMethod("getDocumentationComment"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        for(Link next : aRelationship.getDocumentationComment()) {
+            if (next.getValue() == null) {
+                out.write("<li>" + "<em>null</em>" + "</li>");
+            }
+            else {
+                %>
+                <li>
+                <jsp:include page="/org/oasis/oslcop/sysml/commenttohtml.jsp">
+                    <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                    </jsp:include>
+                </li>
+                <%
+            }
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Relationship.class.getMethod("getOwnedTextualRepresentation"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        for(Link next : aRelationship.getOwnedTextualRepresentation()) {
+            if (next.getValue() == null) {
+                out.write("<li>" + "<em>null</em>" + "</li>");
+            }
+            else {
+                %>
+                <li>
+                <jsp:include page="/org/oasis/oslcop/sysml/textualrepresentationtohtml.jsp">
+                    <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                    </jsp:include>
+                </li>
+                <%
+            }
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
         <% method = Relationship.class.getMethod("getOwnedRelationship"); %>
         <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
@@ -379,6 +524,56 @@
                 %>
                 <li>
                 <jsp:include page="/org/oasis/oslcop/sysml/relationshiptohtml.jsp">
+                    <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                    </jsp:include>
+                </li>
+                <%
+            }
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Relationship.class.getMethod("getDocumentation"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        for(Link next : aRelationship.getDocumentation()) {
+            if (next.getValue() == null) {
+                out.write("<li>" + "<em>null</em>" + "</li>");
+            }
+            else {
+                %>
+                <li>
+                <jsp:include page="/org/oasis/oslcop/sysml/documentationtohtml.jsp">
+                    <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                    </jsp:include>
+                </li>
+                <%
+            }
+        }
+        %>
+        </ul>
+        
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <% method = Relationship.class.getMethod("getOwnedAnnotation"); %>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dd>
+        <ul>
+        <%
+        for(Link next : aRelationship.getOwnedAnnotation()) {
+            if (next.getValue() == null) {
+                out.write("<li>" + "<em>null</em>" + "</li>");
+            }
+            else {
+                %>
+                <li>
+                <jsp:include page="/org/oasis/oslcop/sysml/annotationtohtml.jsp">
                     <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
                     </jsp:include>
                 </li>

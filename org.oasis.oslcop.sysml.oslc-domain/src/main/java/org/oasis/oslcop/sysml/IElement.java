@@ -55,11 +55,15 @@ import org.eclipse.lyo.oslc4j.core.model.ValueType;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.IAnnotation;
+import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IMembership;
-import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 // Start of user code imports
 // End of user code
 
@@ -69,13 +73,20 @@ import org.oasis.oslcop.sysml.IRelationship;
 public interface IElement
 {
 
+    public void addAliasId(final String aliasId );
     public void addOwnedRelationship_comp(final Link ownedRelationship_comp );
     public void addOwnedElement(final Link ownedElement );
+    public void addDocumentation_comp(final Link documentation_comp );
+    public void addOwnedAnnotation_comp(final Link ownedAnnotation_comp );
+    public void addDocumentationComment(final Link documentationComment );
+    public void addOwnedTextualRepresentation(final Link ownedTextualRepresentation );
     public void addOwnedRelationship(final Link ownedRelationship );
+    public void addDocumentation(final Link documentation );
+    public void addOwnedAnnotation(final Link ownedAnnotation );
 
     @OslcName("identifier")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "identifier")
-    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.String)
     @OslcReadOnly(false)
     public String getSysmlIdentifier();
@@ -86,6 +97,27 @@ public interface IElement
     @OslcValueType(ValueType.String)
     @OslcReadOnly(false)
     public String getName();
+
+    @OslcName("qualifiedName")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "qualifiedName")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.String)
+    @OslcReadOnly(false)
+    public String getQualifiedName();
+
+    @OslcName("aliasId")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "aliasId")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.String)
+    @OslcReadOnly(false)
+    public Set<String> getAliasId();
+
+    @OslcName("humanId")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "humanId")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.String)
+    @OslcReadOnly(false)
+    public String getHumanId();
 
     @OslcName("owningMembership")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningMembership")
@@ -115,7 +147,7 @@ public interface IElement
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningNamespace")
     @OslcOccurs(Occurs.ZeroOrOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PACKAGE_TYPE})
+    @OslcRange({SysmlDomainConstants.NAMESPACE_TYPE})
     @OslcReadOnly(false)
     public Link getOwningNamespace();
 
@@ -135,6 +167,38 @@ public interface IElement
     @OslcReadOnly(false)
     public Set<Link> getOwnedElement();
 
+    @OslcName("documentation_comp")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "documentation_comp")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.DOCUMENTATION_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getDocumentation_comp();
+
+    @OslcName("ownedAnnotation_comp")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedAnnotation_comp")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ANNOTATION_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedAnnotation_comp();
+
+    @OslcName("documentationComment")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "documentationComment")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.COMMENT_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getDocumentationComment();
+
+    @OslcName("ownedTextualRepresentation")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedTextualRepresentation")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TEXTUALREPRESENTATION_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedTextualRepresentation();
+
     @OslcName("ownedRelationship")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelationship")
     @OslcOccurs(Occurs.ZeroOrMany)
@@ -143,15 +207,40 @@ public interface IElement
     @OslcReadOnly(false)
     public Set<Link> getOwnedRelationship();
 
+    @OslcName("documentation")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "documentation")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.DOCUMENTATION_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getDocumentation();
+
+    @OslcName("ownedAnnotation")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedAnnotation")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ANNOTATION_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedAnnotation();
+
 
     public void setSysmlIdentifier(final String identifier );
     public void setName(final String name );
+    public void setQualifiedName(final String qualifiedName );
+    public void setAliasId(final Set<String> aliasId );
+    public void setHumanId(final String humanId );
     public void setOwningMembership(final Link owningMembership );
     public void setOwnedRelationship_comp(final Set<Link> ownedRelationship_comp );
     public void setOwningRelationship(final Link owningRelationship );
     public void setOwningNamespace(final Link owningNamespace );
     public void setOwner(final Link owner );
     public void setOwnedElement(final Set<Link> ownedElement );
+    public void setDocumentation_comp(final Set<Link> documentation_comp );
+    public void setOwnedAnnotation_comp(final Set<Link> ownedAnnotation_comp );
+    public void setDocumentationComment(final Set<Link> documentationComment );
+    public void setOwnedTextualRepresentation(final Set<Link> ownedTextualRepresentation );
     public void setOwnedRelationship(final Set<Link> ownedRelationship );
+    public void setDocumentation(final Set<Link> documentation );
+    public void setOwnedAnnotation(final Set<Link> ownedAnnotation );
 }
 

@@ -55,8 +55,11 @@ import org.eclipse.lyo.oslc4j.core.model.ValueType;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IAssociation;
+import org.oasis.oslcop.sysml.IComment;
 import org.oasis.oslcop.sysml.IConjugation;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IFeature;
 import org.oasis.oslcop.sysml.IFeatureMembership;
@@ -65,12 +68,14 @@ import org.oasis.oslcop.sysml.IGeneralization;
 import org.oasis.oslcop.sysml.ISysmlImport;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
-import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRedefinition;
 import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.ISubsetting;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 import org.oasis.oslcop.sysml.IType;
+import org.oasis.oslcop.sysml.ITypeFeaturing;
 // Start of user code imports
 // End of user code
 
@@ -83,7 +88,7 @@ public interface IConnector
     public void addRelatedFeature(final Link relatedFeature );
     public void addAssociation(final Link association );
     public void addConnectorEnd(final Link connectorEnd );
-    public void addOwnedAssociationType(final Link ownedAssociationType );
+    public void addTargetFeature(final Link targetFeature );
 
     @OslcName("isDirected")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isDirected")
@@ -116,19 +121,28 @@ public interface IConnector
     @OslcReadOnly(false)
     public Set<Link> getConnectorEnd();
 
-    @OslcName("ownedAssociationType")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedAssociationType")
-    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcName("sourceFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "sourceFeature")
+    @OslcOccurs(Occurs.ZeroOrOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ASSOCIATION_TYPE})
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedAssociationType();
+    public Link getSourceFeature();
+
+    @OslcName("targetFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "targetFeature")
+    @OslcOccurs(Occurs.OneOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getTargetFeature();
 
 
     public void setIsDirected(final Boolean isDirected );
     public void setRelatedFeature(final Set<Link> relatedFeature );
     public void setAssociation(final Set<Link> association );
     public void setConnectorEnd(final Set<Link> connectorEnd );
-    public void setOwnedAssociationType(final Set<Link> ownedAssociationType );
+    public void setSourceFeature(final Link sourceFeature );
+    public void setTargetFeature(final Set<Link> targetFeature );
 }
 

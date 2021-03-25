@@ -57,17 +57,19 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
-import org.oasis.oslcop.sysml.SysmlImport;
+import org.oasis.oslcop.sysml.AnnotatingElement;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
-import org.oasis.oslcop.sysml.ImportCondition;
 import org.oasis.oslcop.sysml.Membership;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
-import org.oasis.oslcop.sysml.Predicate;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 // Start of user code imports
 // End of user code
 
@@ -76,28 +78,28 @@ import org.oasis.oslcop.sysml.Relationship;
 
 // Start of user code classAnnotations
 // End of user code
-@OslcNamespace(SysmlDomainConstants.CONDITIONALIMPORT_NAMESPACE)
-@OslcName(SysmlDomainConstants.CONDITIONALIMPORT_LOCALNAME)
-@OslcResourceShape(title = "ConditionalImport Resource Shape", describes = SysmlDomainConstants.CONDITIONALIMPORT_TYPE)
-public class ConditionalImport
-    extends SysmlImport
-    implements IConditionalImport
+@OslcNamespace(SysmlDomainConstants.TEXTUALREPRESENTATION_NAMESPACE)
+@OslcName(SysmlDomainConstants.TEXTUALREPRESENTATION_LOCALNAME)
+@OslcResourceShape(title = "TextualRepresentation Resource Shape", describes = SysmlDomainConstants.TEXTUALREPRESENTATION_TYPE)
+public class TextualRepresentation
+    extends AnnotatingElement
+    implements ITextualRepresentation
 {
-    // Start of user code attributeAnnotation:selector
+    // Start of user code attributeAnnotation:language
     // End of user code
-    private Link selector;
-    // Start of user code attributeAnnotation:condition_comp
+    private String language;
+    // Start of user code attributeAnnotation:body
     // End of user code
-    private Link condition_comp;
-    // Start of user code attributeAnnotation:condition
+    private String body;
+    // Start of user code attributeAnnotation:representedElement
     // End of user code
-    private Link condition;
+    private Link representedElement;
     
     // Start of user code classAttributes
     // End of user code
     // Start of user code classMethods
     // End of user code
-    public ConditionalImport()
+    public TextualRepresentation()
     {
         super();
     
@@ -105,7 +107,7 @@ public class ConditionalImport
         // End of user code
     }
     
-    public ConditionalImport(final URI about)
+    public TextualRepresentation(final URI about)
     {
         super(about);
     
@@ -116,8 +118,8 @@ public class ConditionalImport
     public static ResourceShape createResourceShape() throws OslcCoreApplicationException, URISyntaxException {
         return ResourceShapeFactory.createResourceShape(OSLC4JUtils.getServletURI(),
         OslcConstants.PATH_RESOURCE_SHAPES,
-        SysmlDomainConstants.CONDITIONALIMPORT_PATH,
-        ConditionalImport.class);
+        SysmlDomainConstants.TEXTUALREPRESENTATION_PATH,
+        TextualRepresentation.class);
     }
     
     
@@ -133,7 +135,7 @@ public class ConditionalImport
         // End of user code
     
         if (asLocalResource) {
-            result = result + "{a Local ConditionalImport Resource} - update ConditionalImport.toString() to present resource as desired.";
+            result = result + "{a Local TextualRepresentation Resource} - update TextualRepresentation.toString() to present resource as desired.";
             // Start of user code toString_bodyForLocalResource
             // End of user code
         }
@@ -149,85 +151,83 @@ public class ConditionalImport
     }
     
     
-    // Start of user code getterAnnotation:selector
+    // Start of user code getterAnnotation:language
     // End of user code
-    @OslcName("selector")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "selector")
+    @OslcName("language")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "language")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.String)
+    @OslcReadOnly(false)
+    public String getLanguage()
+    {
+        // Start of user code getterInit:language
+        // End of user code
+        return language;
+    }
+    
+    // Start of user code getterAnnotation:body
+    // End of user code
+    @OslcName("body")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "body")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.String)
+    @OslcReadOnly(false)
+    public String getBody()
+    {
+        // Start of user code getterInit:body
+        // End of user code
+        return body;
+    }
+    
+    // Start of user code getterAnnotation:representedElement
+    // End of user code
+    @OslcName("representedElement")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "representedElement")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PREDICATE_TYPE})
+    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
     @OslcReadOnly(false)
-    public Link getSelector()
+    public Link getRepresentedElement()
     {
-        // Start of user code getterInit:selector
+        // Start of user code getterInit:representedElement
         // End of user code
-        return selector;
-    }
-    
-    // Start of user code getterAnnotation:condition_comp
-    // End of user code
-    @OslcName("condition_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "condition_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.IMPORTCONDITION_TYPE})
-    @OslcReadOnly(false)
-    public Link getCondition_comp()
-    {
-        // Start of user code getterInit:condition_comp
-        // End of user code
-        return condition_comp;
-    }
-    
-    // Start of user code getterAnnotation:condition
-    // End of user code
-    @OslcName("condition")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "condition")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.IMPORTCONDITION_TYPE})
-    @OslcReadOnly(false)
-    public Link getCondition()
-    {
-        // Start of user code getterInit:condition
-        // End of user code
-        return condition;
+        return representedElement;
     }
     
     
-    // Start of user code setterAnnotation:selector
+    // Start of user code setterAnnotation:language
     // End of user code
-    public void setSelector(final Link selector )
+    public void setLanguage(final String language )
     {
-        // Start of user code setterInit:selector
+        // Start of user code setterInit:language
         // End of user code
-        this.selector = selector;
+        this.language = language;
     
-        // Start of user code setterFinalize:selector
+        // Start of user code setterFinalize:language
         // End of user code
     }
     
-    // Start of user code setterAnnotation:condition_comp
+    // Start of user code setterAnnotation:body
     // End of user code
-    public void setCondition_comp(final Link condition_comp )
+    public void setBody(final String body )
     {
-        // Start of user code setterInit:condition_comp
+        // Start of user code setterInit:body
         // End of user code
-        this.condition_comp = condition_comp;
+        this.body = body;
     
-        // Start of user code setterFinalize:condition_comp
+        // Start of user code setterFinalize:body
         // End of user code
     }
     
-    // Start of user code setterAnnotation:condition
+    // Start of user code setterAnnotation:representedElement
     // End of user code
-    public void setCondition(final Link condition )
+    public void setRepresentedElement(final Link representedElement )
     {
-        // Start of user code setterInit:condition
+        // Start of user code setterInit:representedElement
         // End of user code
-        this.condition = condition;
+        this.representedElement = representedElement;
     
-        // Start of user code setterFinalize:condition
+        // Start of user code setterFinalize:representedElement
         // End of user code
     }
     

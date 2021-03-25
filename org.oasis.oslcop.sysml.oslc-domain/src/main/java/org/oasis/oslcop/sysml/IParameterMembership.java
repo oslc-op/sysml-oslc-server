@@ -55,13 +55,16 @@ import org.eclipse.lyo.oslc4j.core.model.ValueType;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.IAnnotation;
+import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IFeature;
 import org.oasis.oslcop.sysml.IMembership;
-import org.oasis.oslcop.sysml.ISysmlPackage;
-import org.oasis.oslcop.sysml.IParameter;
+import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 import org.oasis.oslcop.sysml.IType;
 // Start of user code imports
 // End of user code
@@ -73,33 +76,33 @@ public interface IParameterMembership
 {
 
 
-    @OslcName("memberParameter")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "memberParameter")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
-    @OslcReadOnly(false)
-    public Link getMemberParameter();
-
     @OslcName("ownedMemberParameter_comp")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberParameter_comp")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
     public Link getOwnedMemberParameter_comp();
+
+    @OslcName("memberParameter")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "memberParameter")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Link getMemberParameter();
 
     @OslcName("ownedMemberParameter")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberParameter")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
     public Link getOwnedMemberParameter();
 
 
-    public void setMemberParameter(final Link memberParameter );
     public void setOwnedMemberParameter_comp(final Link ownedMemberParameter_comp );
+    public void setMemberParameter(final Link memberParameter );
     public void setOwnedMemberParameter(final Link ownedMemberParameter );
 }
 

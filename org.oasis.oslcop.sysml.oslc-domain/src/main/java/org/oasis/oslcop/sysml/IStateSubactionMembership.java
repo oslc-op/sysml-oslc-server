@@ -56,12 +56,16 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.IActionUsage;
+import org.oasis.oslcop.sysml.IAnnotation;
+import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IFeature;
 import org.oasis.oslcop.sysml.IMembership;
-import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 import org.oasis.oslcop.sysml.IType;
 // Start of user code imports
 // End of user code

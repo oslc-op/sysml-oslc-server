@@ -55,12 +55,16 @@ import org.eclipse.lyo.oslc4j.core.model.ValueType;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.IAnnotatingElement;
+import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IMembership;
-import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 // Start of user code imports
 // End of user code
 
@@ -71,13 +75,13 @@ public interface IAnnotation
 {
 
 
-    @OslcName("annotatingComment")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "annotatingComment")
+    @OslcName("annotatingElement")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "annotatingElement")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.COMMENT_TYPE})
+    @OslcRange({SysmlDomainConstants.ANNOTATINGELEMENT_TYPE})
     @OslcReadOnly(false)
-    public Link getAnnotatingComment();
+    public Link getAnnotatingElement();
 
     @OslcName("annotatedElement")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "annotatedElement")
@@ -87,8 +91,17 @@ public interface IAnnotation
     @OslcReadOnly(false)
     public Link getAnnotatedElement();
 
+    @OslcName("owningAnnotatedElement")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningAnnotatedElement")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
+    @OslcReadOnly(false)
+    public Link getOwningAnnotatedElement();
 
-    public void setAnnotatingComment(final Link annotatingComment );
+
+    public void setAnnotatingElement(final Link annotatingElement );
     public void setAnnotatedElement(final Link annotatedElement );
+    public void setOwningAnnotatedElement(final Link owningAnnotatedElement );
 }
 

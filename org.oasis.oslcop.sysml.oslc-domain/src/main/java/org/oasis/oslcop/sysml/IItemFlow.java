@@ -55,10 +55,13 @@ import org.eclipse.lyo.oslc4j.core.model.ValueType;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IAssociation;
 import org.oasis.oslcop.sysml.IBehavior;
 import org.oasis.oslcop.sysml.IClassifier;
+import org.oasis.oslcop.sysml.IComment;
 import org.oasis.oslcop.sysml.IConjugation;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IFeature;
 import org.oasis.oslcop.sysml.IFeatureMembership;
@@ -70,13 +73,14 @@ import org.oasis.oslcop.sysml.IItemFlowEnd;
 import org.oasis.oslcop.sysml.IItemFlowFeature;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
-import org.oasis.oslcop.sysml.ISysmlPackage;
-import org.oasis.oslcop.sysml.IParameter;
+import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRedefinition;
 import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.ISubsetting;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 import org.oasis.oslcop.sysml.IType;
+import org.oasis.oslcop.sysml.ITypeFeaturing;
 // Start of user code imports
 // End of user code
 
@@ -90,8 +94,8 @@ public interface IItemFlow
     public void addTargetInputFeature(final Link targetInputFeature );
     public void addSourceOutputFeature(final Link sourceOutputFeature );
     public void addItemFlowEnd(final Link itemFlowEnd );
-    public void addItemFlowFeature(final Link itemFlowFeature );
     public void addItemFeature(final Link itemFeature );
+    public void addItemFlowFeature(final Link itemFlowFeature );
 
     @OslcName("itemType")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "itemType")
@@ -125,14 +129,6 @@ public interface IItemFlow
     @OslcReadOnly(false)
     public Set<Link> getItemFlowEnd();
 
-    @OslcName("itemFlowFeature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "itemFlowFeature")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ITEMFLOWFEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getItemFlowFeature();
-
     @OslcName("itemFeature")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "itemFeature")
     @OslcOccurs(Occurs.OneOrMany)
@@ -141,12 +137,20 @@ public interface IItemFlow
     @OslcReadOnly(false)
     public Set<Link> getItemFeature();
 
+    @OslcName("itemFlowFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "itemFlowFeature")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ITEMFLOWFEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getItemFlowFeature();
+
 
     public void setItemType(final Set<Link> itemType );
     public void setTargetInputFeature(final Set<Link> targetInputFeature );
     public void setSourceOutputFeature(final Set<Link> sourceOutputFeature );
     public void setItemFlowEnd(final Set<Link> itemFlowEnd );
-    public void setItemFlowFeature(final Set<Link> itemFlowFeature );
     public void setItemFeature(final Set<Link> itemFeature );
+    public void setItemFlowFeature(final Set<Link> itemFlowFeature );
 }
 

@@ -57,19 +57,22 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
-import org.oasis.oslcop.sysml.FeatureMembership;
+import org.oasis.oslcop.sysml.Membership;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.BindingConnector;
+import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Expression;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.Membership;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
-import org.oasis.oslcop.sysml.Type;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 // Start of user code imports
 // End of user code
 
@@ -82,18 +85,18 @@ import org.oasis.oslcop.sysml.Type;
 @OslcName(SysmlDomainConstants.FEATUREVALUE_LOCALNAME)
 @OslcResourceShape(title = "FeatureValue Resource Shape", describes = SysmlDomainConstants.FEATUREVALUE_TYPE)
 public class FeatureValue
-    extends FeatureMembership
+    extends Membership
     implements IFeatureValue
 {
     // Start of user code attributeAnnotation:featureWithValue
     // End of user code
     private Link featureWithValue;
-    // Start of user code attributeAnnotation:valueConnector
-    // End of user code
-    private Link valueConnector;
     // Start of user code attributeAnnotation:value_comp
     // End of user code
     private Link value_comp;
+    // Start of user code attributeAnnotation:valueConnector
+    // End of user code
+    private Link valueConnector;
     // Start of user code attributeAnnotation:value
     // End of user code
     private Link value;
@@ -169,21 +172,6 @@ public class FeatureValue
         return featureWithValue;
     }
     
-    // Start of user code getterAnnotation:valueConnector
-    // End of user code
-    @OslcName("valueConnector")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "valueConnector")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.BINDINGCONNECTOR_TYPE})
-    @OslcReadOnly(false)
-    public Link getValueConnector()
-    {
-        // Start of user code getterInit:valueConnector
-        // End of user code
-        return valueConnector;
-    }
-    
     // Start of user code getterAnnotation:value_comp
     // End of user code
     @OslcName("value_comp")
@@ -197,6 +185,21 @@ public class FeatureValue
         // Start of user code getterInit:value_comp
         // End of user code
         return value_comp;
+    }
+    
+    // Start of user code getterAnnotation:valueConnector
+    // End of user code
+    @OslcName("valueConnector")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "valueConnector")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.BINDINGCONNECTOR_TYPE})
+    @OslcReadOnly(false)
+    public Link getValueConnector()
+    {
+        // Start of user code getterInit:valueConnector
+        // End of user code
+        return valueConnector;
     }
     
     // Start of user code getterAnnotation:value
@@ -227,18 +230,6 @@ public class FeatureValue
         // End of user code
     }
     
-    // Start of user code setterAnnotation:valueConnector
-    // End of user code
-    public void setValueConnector(final Link valueConnector )
-    {
-        // Start of user code setterInit:valueConnector
-        // End of user code
-        this.valueConnector = valueConnector;
-    
-        // Start of user code setterFinalize:valueConnector
-        // End of user code
-    }
-    
     // Start of user code setterAnnotation:value_comp
     // End of user code
     public void setValue_comp(final Link value_comp )
@@ -248,6 +239,18 @@ public class FeatureValue
         this.value_comp = value_comp;
     
         // Start of user code setterFinalize:value_comp
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:valueConnector
+    // End of user code
+    public void setValueConnector(final Link valueConnector )
+    {
+        // Start of user code setterInit:valueConnector
+        // End of user code
+        this.valueConnector = valueConnector;
+    
+        // Start of user code setterFinalize:valueConnector
         // End of user code
     }
     

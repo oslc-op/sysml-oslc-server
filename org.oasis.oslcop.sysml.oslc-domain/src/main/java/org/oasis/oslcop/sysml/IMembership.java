@@ -55,11 +55,15 @@ import org.eclipse.lyo.oslc4j.core.model.ValueType;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.IAnnotation;
+import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IMembership;
-import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 // Start of user code imports
 // End of user code
 
@@ -93,13 +97,13 @@ public interface IMembership
     @OslcReadOnly(false)
     public Link getMemberElement();
 
-    @OslcName("membershipOwningPackage")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "membershipOwningPackage")
+    @OslcName("membershipOwningNamespace")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "membershipOwningNamespace")
     @OslcOccurs(Occurs.ZeroOrOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PACKAGE_TYPE})
+    @OslcRange({SysmlDomainConstants.NAMESPACE_TYPE})
     @OslcReadOnly(false)
-    public Link getMembershipOwningPackage();
+    public Link getMembershipOwningNamespace();
 
     @OslcName("ownedMemberElement_comp")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberElement_comp")
@@ -121,7 +125,7 @@ public interface IMembership
     public void setMemberName(final String memberName );
     public void setVisibility(final String visibility );
     public void setMemberElement(final Link memberElement );
-    public void setMembershipOwningPackage(final Link membershipOwningPackage );
+    public void setMembershipOwningNamespace(final Link membershipOwningNamespace );
     public void setOwnedMemberElement_comp(final Link ownedMemberElement_comp );
     public void setOwnedMemberElement(final Link ownedMemberElement );
 }

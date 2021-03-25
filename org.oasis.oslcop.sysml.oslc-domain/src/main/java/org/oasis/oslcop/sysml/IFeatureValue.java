@@ -55,15 +55,18 @@ import org.eclipse.lyo.oslc4j.core.model.ValueType;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IBindingConnector;
+import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IExpression;
 import org.oasis.oslcop.sysml.IFeature;
 import org.oasis.oslcop.sysml.IMembership;
-import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
-import org.oasis.oslcop.sysml.IType;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 // Start of user code imports
 // End of user code
 
@@ -82,14 +85,6 @@ public interface IFeatureValue
     @OslcReadOnly(false)
     public Link getFeatureWithValue();
 
-    @OslcName("valueConnector")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "valueConnector")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.BINDINGCONNECTOR_TYPE})
-    @OslcReadOnly(false)
-    public Link getValueConnector();
-
     @OslcName("value_comp")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "value_comp")
     @OslcOccurs(Occurs.ExactlyOne)
@@ -97,6 +92,14 @@ public interface IFeatureValue
     @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
     @OslcReadOnly(false)
     public Link getValue_comp();
+
+    @OslcName("valueConnector")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "valueConnector")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.BINDINGCONNECTOR_TYPE})
+    @OslcReadOnly(false)
+    public Link getValueConnector();
 
     @OslcName("value")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "value")
@@ -108,8 +111,8 @@ public interface IFeatureValue
 
 
     public void setFeatureWithValue(final Link featureWithValue );
-    public void setValueConnector(final Link valueConnector );
     public void setValue_comp(final Link value_comp );
+    public void setValueConnector(final Link valueConnector );
     public void setValue(final Link value );
 }
 

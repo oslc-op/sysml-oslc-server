@@ -64,16 +64,21 @@ import org.oasis.oslcop.sysml.IStep;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.ActionUsage;
+import org.oasis.oslcop.sysml.AllocationUsage;
 import org.oasis.oslcop.sysml.AnalysisCaseUsage;
+import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.Behavior;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
 import org.oasis.oslcop.sysml.ConnectionUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
 import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
@@ -85,8 +90,7 @@ import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
-import org.oasis.oslcop.sysml.SysmlPackage;
-import org.oasis.oslcop.sysml.Parameter;
+import org.oasis.oslcop.sysml.Namespace;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
@@ -94,13 +98,19 @@ import org.oasis.oslcop.sysml.Predicate;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
 import org.oasis.oslcop.sysml.StateUsage;
 import org.oasis.oslcop.sysml.Subsetting;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
+import org.oasis.oslcop.sysml.TypeFeaturing;
 import org.oasis.oslcop.sysml.Usage;
 import org.oasis.oslcop.sysml.VariantMembership;
+import org.oasis.oslcop.sysml.VerificationCaseUsage;
+import org.oasis.oslcop.sysml.ViewUsage;
+import org.oasis.oslcop.sysml.ViewpointUsage;
 // Start of user code imports
 // End of user code
 
@@ -125,15 +135,18 @@ public class ConstraintUsage
     // Start of user code attributeAnnotation:parameter
     // End of user code
     private Set<Link> parameter = new HashSet<Link>();
+    // Start of user code attributeAnnotation:predicate
+    // End of user code
+    private Link predicate;
+    // Start of user code attributeAnnotation:isModelLevelEvaluable
+    // End of user code
+    private Boolean isModelLevelEvaluable;
     // Start of user code attributeAnnotation:function
     // End of user code
     private Link function;
     // Start of user code attributeAnnotation:result
     // End of user code
     private Link result;
-    // Start of user code attributeAnnotation:predicate
-    // End of user code
-    private Link predicate;
     
     // Start of user code classAttributes
     // End of user code
@@ -237,13 +250,42 @@ public class ConstraintUsage
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "parameter")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
     public Set<Link> getParameter()
     {
         // Start of user code getterInit:parameter
         // End of user code
         return parameter;
+    }
+    
+    // Start of user code getterAnnotation:predicate
+    // End of user code
+    @OslcName("predicate")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "predicate")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.PREDICATE_TYPE})
+    @OslcReadOnly(false)
+    public Link getPredicate()
+    {
+        // Start of user code getterInit:predicate
+        // End of user code
+        return predicate;
+    }
+    
+    // Start of user code getterAnnotation:isModelLevelEvaluable
+    // End of user code
+    @OslcName("isModelLevelEvaluable")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isModelLevelEvaluable")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsModelLevelEvaluable()
+    {
+        // Start of user code getterInit:isModelLevelEvaluable
+        // End of user code
+        return isModelLevelEvaluable;
     }
     
     // Start of user code getterAnnotation:function
@@ -267,28 +309,13 @@ public class ConstraintUsage
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "result")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
     public Link getResult()
     {
         // Start of user code getterInit:result
         // End of user code
         return result;
-    }
-    
-    // Start of user code getterAnnotation:predicate
-    // End of user code
-    @OslcName("predicate")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "predicate")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PREDICATE_TYPE})
-    @OslcReadOnly(false)
-    public Link getPredicate()
-    {
-        // Start of user code getterInit:predicate
-        // End of user code
-        return predicate;
     }
     
     
@@ -336,6 +363,30 @@ public class ConstraintUsage
         // End of user code
     }
     
+    // Start of user code setterAnnotation:predicate
+    // End of user code
+    public void setPredicate(final Link predicate )
+    {
+        // Start of user code setterInit:predicate
+        // End of user code
+        this.predicate = predicate;
+    
+        // Start of user code setterFinalize:predicate
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:isModelLevelEvaluable
+    // End of user code
+    public void setIsModelLevelEvaluable(final Boolean isModelLevelEvaluable )
+    {
+        // Start of user code setterInit:isModelLevelEvaluable
+        // End of user code
+        this.isModelLevelEvaluable = isModelLevelEvaluable;
+    
+        // Start of user code setterFinalize:isModelLevelEvaluable
+        // End of user code
+    }
+    
     // Start of user code setterAnnotation:function
     // End of user code
     public void setFunction(final Link function )
@@ -357,18 +408,6 @@ public class ConstraintUsage
         this.result = result;
     
         // Start of user code setterFinalize:result
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:predicate
-    // End of user code
-    public void setPredicate(final Link predicate )
-    {
-        // Start of user code setterInit:predicate
-        // End of user code
-        this.predicate = predicate;
-    
-        // Start of user code setterFinalize:predicate
         // End of user code
     }
     

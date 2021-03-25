@@ -55,11 +55,15 @@ import org.eclipse.lyo.oslc4j.core.model.ValueType;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.IAnnotation;
+import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IMembership;
-import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 // Start of user code imports
 // End of user code
 
@@ -78,25 +82,33 @@ public interface ISysmlImport
     @OslcAllowedValue({"public", "private", "protected", "package"})
     public String getVisibility();
 
-    @OslcName("importedPackage")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "importedPackage")
+    @OslcName("isRecursive")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isRecursive")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsRecursive();
+
+    @OslcName("importedNamespace")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "importedNamespace")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PACKAGE_TYPE})
+    @OslcRange({SysmlDomainConstants.NAMESPACE_TYPE})
     @OslcReadOnly(false)
-    public Link getImportedPackage();
+    public Link getImportedNamespace();
 
-    @OslcName("importOwningPackage")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "importOwningPackage")
+    @OslcName("importOwningNamespace")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "importOwningNamespace")
     @OslcOccurs(Occurs.ZeroOrOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PACKAGE_TYPE})
+    @OslcRange({SysmlDomainConstants.NAMESPACE_TYPE})
     @OslcReadOnly(false)
-    public Link getImportOwningPackage();
+    public Link getImportOwningNamespace();
 
 
     public void setVisibility(final String visibility );
-    public void setImportedPackage(final Link importedPackage );
-    public void setImportOwningPackage(final Link importOwningPackage );
+    public void setIsRecursive(final Boolean isRecursive );
+    public void setImportedNamespace(final Link importedNamespace );
+    public void setImportOwningNamespace(final Link importOwningNamespace );
 }
 

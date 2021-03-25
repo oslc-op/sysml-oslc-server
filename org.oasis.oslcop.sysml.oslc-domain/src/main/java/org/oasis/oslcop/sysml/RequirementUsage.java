@@ -62,15 +62,20 @@ import org.oasis.oslcop.sysml.ConstraintUsage;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.ActionUsage;
+import org.oasis.oslcop.sysml.AllocationUsage;
 import org.oasis.oslcop.sysml.AnalysisCaseUsage;
+import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
 import org.oasis.oslcop.sysml.ConnectionUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
 import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
@@ -81,8 +86,7 @@ import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
-import org.oasis.oslcop.sysml.SysmlPackage;
-import org.oasis.oslcop.sysml.Parameter;
+import org.oasis.oslcop.sysml.Namespace;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
@@ -90,14 +94,20 @@ import org.oasis.oslcop.sysml.Predicate;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementDefinition;
 import org.oasis.oslcop.sysml.RequirementUsage;
 import org.oasis.oslcop.sysml.StateUsage;
 import org.oasis.oslcop.sysml.Subsetting;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
+import org.oasis.oslcop.sysml.TypeFeaturing;
 import org.oasis.oslcop.sysml.Usage;
 import org.oasis.oslcop.sysml.VariantMembership;
+import org.oasis.oslcop.sysml.VerificationCaseUsage;
+import org.oasis.oslcop.sysml.ViewUsage;
+import org.oasis.oslcop.sysml.ViewpointUsage;
 // Start of user code imports
 // End of user code
 
@@ -118,19 +128,19 @@ public class RequirementUsage
     private String reqId;
     // Start of user code attributeAnnotation:text
     // End of user code
-    private String text;
+    private Set<String> text = new HashSet<String>();
     // Start of user code attributeAnnotation:requirementDefinition
     // End of user code
     private Link requirementDefinition;
-    // Start of user code attributeAnnotation:subjectParameter
-    // End of user code
-    private Link subjectParameter;
     // Start of user code attributeAnnotation:requiredConstraint
     // End of user code
     private Set<Link> requiredConstraint = new HashSet<Link>();
     // Start of user code attributeAnnotation:assumedConstraint
     // End of user code
     private Set<Link> assumedConstraint = new HashSet<Link>();
+    // Start of user code attributeAnnotation:subjectParameter
+    // End of user code
+    private Link subjectParameter;
     
     // Start of user code classAttributes
     // End of user code
@@ -187,6 +197,11 @@ public class RequirementUsage
         return result;
     }
     
+    public void addText(final String text)
+    {
+        this.text.add(text);
+    }
+    
     public void addRequiredConstraint(final Link requiredConstraint)
     {
         this.requiredConstraint.add(requiredConstraint);
@@ -216,10 +231,10 @@ public class RequirementUsage
     // End of user code
     @OslcName("text")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "text")
-    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.String)
     @OslcReadOnly(false)
-    public String getText()
+    public Set<String> getText()
     {
         // Start of user code getterInit:text
         // End of user code
@@ -239,21 +254,6 @@ public class RequirementUsage
         // Start of user code getterInit:requirementDefinition
         // End of user code
         return requirementDefinition;
-    }
-    
-    // Start of user code getterAnnotation:subjectParameter
-    // End of user code
-    @OslcName("subjectParameter")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "subjectParameter")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
-    @OslcReadOnly(false)
-    public Link getSubjectParameter()
-    {
-        // Start of user code getterInit:subjectParameter
-        // End of user code
-        return subjectParameter;
     }
     
     // Start of user code getterAnnotation:requiredConstraint
@@ -286,6 +286,21 @@ public class RequirementUsage
         return assumedConstraint;
     }
     
+    // Start of user code getterAnnotation:subjectParameter
+    // End of user code
+    @OslcName("subjectParameter")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "subjectParameter")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.USAGE_TYPE})
+    @OslcReadOnly(false)
+    public Link getSubjectParameter()
+    {
+        // Start of user code getterInit:subjectParameter
+        // End of user code
+        return subjectParameter;
+    }
+    
     
     // Start of user code setterAnnotation:reqId
     // End of user code
@@ -301,11 +316,15 @@ public class RequirementUsage
     
     // Start of user code setterAnnotation:text
     // End of user code
-    public void setText(final String text )
+    public void setText(final Set<String> text )
     {
         // Start of user code setterInit:text
         // End of user code
-        this.text = text;
+        this.text.clear();
+        if (text != null)
+        {
+            this.text.addAll(text);
+        }
     
         // Start of user code setterFinalize:text
         // End of user code
@@ -320,18 +339,6 @@ public class RequirementUsage
         this.requirementDefinition = requirementDefinition;
     
         // Start of user code setterFinalize:requirementDefinition
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:subjectParameter
-    // End of user code
-    public void setSubjectParameter(final Link subjectParameter )
-    {
-        // Start of user code setterInit:subjectParameter
-        // End of user code
-        this.subjectParameter = subjectParameter;
-    
-        // Start of user code setterFinalize:subjectParameter
         // End of user code
     }
     
@@ -364,6 +371,18 @@ public class RequirementUsage
         }
     
         // Start of user code setterFinalize:assumedConstraint
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:subjectParameter
+    // End of user code
+    public void setSubjectParameter(final Link subjectParameter )
+    {
+        // Start of user code setterInit:subjectParameter
+        // End of user code
+        this.subjectParameter = subjectParameter;
+    
+        // Start of user code setterFinalize:subjectParameter
         // End of user code
     }
     

@@ -1,446 +1,528 @@
 <?xml version="1.0" encoding="ASCII"?>
 <oslc4j_ai:Specification xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oslc4j_ai="http://org.eclipse.lyo/oslc4j/adaptorInterface">
   <domainSpecifications name="sysml" namespaceURI="http://omg.org/ns/sysml#" namespacePrefix="//@domainPrefixes[name='sysml']">
-    <resources id="_KtCfWOffEeqcYsuDRKrn0Q" name="PerformActionUsage" extends="_KtCfOuffEeqcYsuDRKrn0Q" resourceProperties="_KtHXoOffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4H-ffEeqcYsuDRKrn0Q" name="Conjugation" extends="_KtB4F-ffEeqcYsuDRKrn0Q" resourceProperties="_KtHXoeffEeqcYsuDRKrn0Q _KtHXouffEeqcYsuDRKrn0Q _KtHXo-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfPuffEeqcYsuDRKrn0Q" name="AcceptActionUsage" extends="_KtCfP-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4NOffEeqcYsuDRKrn0Q" name="NullExpression" extends="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4G-ffEeqcYsuDRKrn0Q" name="Feature" extends="_KtB4E-ffEeqcYsuDRKrn0Q" resourceProperties="_KtHXpOffEeqcYsuDRKrn0Q _KtHXpeffEeqcYsuDRKrn0Q _KtHXpuffEeqcYsuDRKrn0Q _KtHXp-ffEeqcYsuDRKrn0Q _KtHXqOffEeqcYsuDRKrn0Q _KtHXqeffEeqcYsuDRKrn0Q _KtHXquffEeqcYsuDRKrn0Q _KtHXq-ffEeqcYsuDRKrn0Q _KtHXrOffEeqcYsuDRKrn0Q _KtHXreffEeqcYsuDRKrn0Q _KtHXruffEeqcYsuDRKrn0Q _KtHXr-ffEeqcYsuDRKrn0Q _KtHXsOffEeqcYsuDRKrn0Q _KtHXseffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfMOffEeqcYsuDRKrn0Q" name="LifeClass" extends="_KtB4EeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfN-ffEeqcYsuDRKrn0Q" name="PortDefinition" extends="_KtCfNOffEeqcYsuDRKrn0Q" resourceProperties="_KtHXsuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfQ-ffEeqcYsuDRKrn0Q" name="CalculationUsage" extends="_KtCfOuffEeqcYsuDRKrn0Q _KtB4K-ffEeqcYsuDRKrn0Q" resourceProperties="_KtH-sOffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4N-ffEeqcYsuDRKrn0Q" name="LiteralReal" extends="_KtB4M-ffEeqcYsuDRKrn0Q" resourceProperties="_KtH-seffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfZeffEeqcYsuDRKrn0Q" name="SubjectMembership" extends="_KtB4I-ffEeqcYsuDRKrn0Q" resourceProperties="_KtH-suffEeqcYsuDRKrn0Q _KtH-s-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4LOffEeqcYsuDRKrn0Q" name="Function" extends="_KtB4JeffEeqcYsuDRKrn0Q" resourceProperties="_KtH-tOffEeqcYsuDRKrn0Q _KtH-teffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfUuffEeqcYsuDRKrn0Q" name="InterfaceDefinition" extends="_KtCfU-ffEeqcYsuDRKrn0Q" resourceProperties="_KtH-tuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4HOffEeqcYsuDRKrn0Q" name="Redefinition" extends="_KtB4HeffEeqcYsuDRKrn0Q" resourceProperties="_KtH-t-ffEeqcYsuDRKrn0Q _KtH-uOffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfLOffEeqcYsuDRKrn0Q" name="ConditionalImport" extends="_KtB4GOffEeqcYsuDRKrn0Q" resourceProperties="_KtH-ueffEeqcYsuDRKrn0Q _KtH-uuffEeqcYsuDRKrn0Q _KtH-u-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfYuffEeqcYsuDRKrn0Q" name="RequirementConstraintMembership" extends="_KtB4GuffEeqcYsuDRKrn0Q" resourceProperties="_KtH-vOffEeqcYsuDRKrn0Q _KtIlwOffEeqcYsuDRKrn0Q _KtIlweffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4MuffEeqcYsuDRKrn0Q" name="LiteralBoolean" extends="_KtB4M-ffEeqcYsuDRKrn0Q" resourceProperties="_KtIlwuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4IuffEeqcYsuDRKrn0Q" name="Connector" extends="_KtB4G-ffEeqcYsuDRKrn0Q _KtB4F-ffEeqcYsuDRKrn0Q" resourceProperties="_KtJM0OffEeqcYsuDRKrn0Q _KtJM0effEeqcYsuDRKrn0Q _KtJM0uffEeqcYsuDRKrn0Q _KtJM0-ffEeqcYsuDRKrn0Q _KtJM1OffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfOOffEeqcYsuDRKrn0Q" name="ConjugatedPortDefinition" extends="_KtCfN-ffEeqcYsuDRKrn0Q" resourceProperties="_KtJM1effEeqcYsuDRKrn0Q _KtJM1uffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4OeffEeqcYsuDRKrn0Q" name="Predicate" extends="_KtB4LOffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfVOffEeqcYsuDRKrn0Q" name="AttributeUsage" extends="_KtCfNeffEeqcYsuDRKrn0Q" resourceProperties="_KtJM1-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfJuffEeqcYsuDRKrn0Q" name="Interaction" extends="_KtB4EOffEeqcYsuDRKrn0Q _KtB4JeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4JuffEeqcYsuDRKrn0Q" name="Step" extends="_KtB4G-ffEeqcYsuDRKrn0Q" resourceProperties="_KtJM2OffEeqcYsuDRKrn0Q _KtJM2effEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfL-ffEeqcYsuDRKrn0Q" name="TimeSliceFeature" extends="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4I-ffEeqcYsuDRKrn0Q" name="ParameterMembership" extends="_KtB4GuffEeqcYsuDRKrn0Q" resourceProperties="_KtJM2uffEeqcYsuDRKrn0Q _KtJM2-ffEeqcYsuDRKrn0Q _KtJM3OffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4E-ffEeqcYsuDRKrn0Q" name="Type" extends="_KtB4FOffEeqcYsuDRKrn0Q" resourceProperties="_KtJM3effEeqcYsuDRKrn0Q _KtJM3uffEeqcYsuDRKrn0Q _KtJM3-ffEeqcYsuDRKrn0Q _KtJM4OffEeqcYsuDRKrn0Q _KtJM4effEeqcYsuDRKrn0Q _KtJM4uffEeqcYsuDRKrn0Q _KtJM4-ffEeqcYsuDRKrn0Q _KtJM5OffEeqcYsuDRKrn0Q _KtJM5effEeqcYsuDRKrn0Q _KtJM5uffEeqcYsuDRKrn0Q _KtJM5-ffEeqcYsuDRKrn0Q _KtJM6OffEeqcYsuDRKrn0Q _KtJM6effEeqcYsuDRKrn0Q _KtJM6uffEeqcYsuDRKrn0Q _KtJM6-ffEeqcYsuDRKrn0Q _KtJM7OffEeqcYsuDRKrn0Q _KtJM7effEeqcYsuDRKrn0Q _KtJM7uffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfNeffEeqcYsuDRKrn0Q" name="Usage" extends="_KtB4G-ffEeqcYsuDRKrn0Q" resourceProperties="_KtJM7-ffEeqcYsuDRKrn0Q _KtJM8OffEeqcYsuDRKrn0Q _KtJM8effEeqcYsuDRKrn0Q _KtJM8uffEeqcYsuDRKrn0Q _KtJM8-ffEeqcYsuDRKrn0Q _KtJM9OffEeqcYsuDRKrn0Q _KtJM9effEeqcYsuDRKrn0Q _KtJM9uffEeqcYsuDRKrn0Q _KtJM9-ffEeqcYsuDRKrn0Q _KtJM-OffEeqcYsuDRKrn0Q _KtJM-effEeqcYsuDRKrn0Q _KtJM-uffEeqcYsuDRKrn0Q _KtJM--ffEeqcYsuDRKrn0Q _KtJM_OffEeqcYsuDRKrn0Q _KtJM_effEeqcYsuDRKrn0Q _KtJM_uffEeqcYsuDRKrn0Q _KtJM_-ffEeqcYsuDRKrn0Q _KtJNAOffEeqcYsuDRKrn0Q _KtJNAeffEeqcYsuDRKrn0Q _KtJNAuffEeqcYsuDRKrn0Q _KtJNA-ffEeqcYsuDRKrn0Q _KtJNBOffEeqcYsuDRKrn0Q _KtJNBeffEeqcYsuDRKrn0Q _KtJNBuffEeqcYsuDRKrn0Q _KtJNB-ffEeqcYsuDRKrn0Q _KtJNCOffEeqcYsuDRKrn0Q _KtJNCeffEeqcYsuDRKrn0Q _KtJNCuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfROffEeqcYsuDRKrn0Q" name="CaseUsage" extends="_KtCfQ-ffEeqcYsuDRKrn0Q" resourceProperties="_KtJNC-ffEeqcYsuDRKrn0Q _KtJNDOffEeqcYsuDRKrn0Q _KtJNDeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4O-ffEeqcYsuDRKrn0Q" name="Invariant" extends="_KtB4OuffEeqcYsuDRKrn0Q" resourceProperties="_KtJNDuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4HeffEeqcYsuDRKrn0Q" name="Subsetting" extends="_KtB4GeffEeqcYsuDRKrn0Q" resourceProperties="_KtJND-ffEeqcYsuDRKrn0Q _KtJNEOffEeqcYsuDRKrn0Q _KtJNEeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4OOffEeqcYsuDRKrn0Q" name="LiteralInteger" extends="_KtB4M-ffEeqcYsuDRKrn0Q" resourceProperties="_KtJNEuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfIeffEeqcYsuDRKrn0Q" name="FeatureValue" extends="_KtB4GuffEeqcYsuDRKrn0Q" resourceProperties="_KtJNE-ffEeqcYsuDRKrn0Q _KtJNFOffEeqcYsuDRKrn0Q _KtJNFeffEeqcYsuDRKrn0Q _KtJNFuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4LuffEeqcYsuDRKrn0Q" name="FeatureReferenceExpression" extends="_KtB4K-ffEeqcYsuDRKrn0Q" resourceProperties="_KtJNF-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfQOffEeqcYsuDRKrn0Q" name="RequirementUsage" extends="_KtCfPOffEeqcYsuDRKrn0Q" resourceProperties="_KtJNGOffEeqcYsuDRKrn0Q _KtJNGeffEeqcYsuDRKrn0Q _KtJNGuffEeqcYsuDRKrn0Q _KtJNG-ffEeqcYsuDRKrn0Q _KtJNHOffEeqcYsuDRKrn0Q _KtJNHeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfZOffEeqcYsuDRKrn0Q" name="AssertConstraintUsage" extends="_KtCfPOffEeqcYsuDRKrn0Q _KtB4O-ffEeqcYsuDRKrn0Q" resourceProperties="_KtJz4OffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfSeffEeqcYsuDRKrn0Q" name="AnalysisCaseUsage" extends="_KtCfROffEeqcYsuDRKrn0Q" resourceProperties="_KtJz4effEeqcYsuDRKrn0Q _KtJz4uffEeqcYsuDRKrn0Q _KtJz4-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfQuffEeqcYsuDRKrn0Q" name="ConstraintDefinition" extends="_KtCfNOffEeqcYsuDRKrn0Q _KtB4OeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4K-ffEeqcYsuDRKrn0Q" name="Expression" extends="_KtB4JuffEeqcYsuDRKrn0Q" resourceProperties="_KtJz5OffEeqcYsuDRKrn0Q _KtJz5effEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfJOffEeqcYsuDRKrn0Q" name="ItemFeature" extends="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4JOffEeqcYsuDRKrn0Q" name="Parameter" extends="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4EuffEeqcYsuDRKrn0Q" name="Classifier" extends="_KtB4E-ffEeqcYsuDRKrn0Q" resourceProperties="_KtJz5uffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4HuffEeqcYsuDRKrn0Q" name="FeatureTyping" extends="_KtB4GeffEeqcYsuDRKrn0Q" resourceProperties="_KtJz5-ffEeqcYsuDRKrn0Q _KtJz6OffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfVeffEeqcYsuDRKrn0Q" name="ControlNode" extends="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfZuffEeqcYsuDRKrn0Q" name="ObjectiveMembership" extends="_KtB4GuffEeqcYsuDRKrn0Q" resourceProperties="_KtJz6effEeqcYsuDRKrn0Q _KtJz6uffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4KuffEeqcYsuDRKrn0Q" name="InvocationExpression" extends="_KtB4K-ffEeqcYsuDRKrn0Q" resourceProperties="_KtJz6-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfLeffEeqcYsuDRKrn0Q" name="TargetEnd" extends="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfVuffEeqcYsuDRKrn0Q" name="MergeNode" extends="_KtCfVeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfS-ffEeqcYsuDRKrn0Q" name="ReferenceUsage" extends="_KtCfNeffEeqcYsuDRKrn0Q" resourceProperties="_KtJz7OffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4OuffEeqcYsuDRKrn0Q" name="BooleanExpression" extends="_KtB4K-ffEeqcYsuDRKrn0Q" resourceProperties="_KtJz7effEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfReffEeqcYsuDRKrn0Q" name="CaseDefinition" extends="_KtCfRuffEeqcYsuDRKrn0Q" resourceProperties="_KtJz7uffEeqcYsuDRKrn0Q _KtJz7-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfW-ffEeqcYsuDRKrn0Q" name="ForkNode" extends="_KtCfVeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfO-ffEeqcYsuDRKrn0Q" name="StateUsage" extends="_KtCfOuffEeqcYsuDRKrn0Q" resourceProperties="_KtJz8OffEeqcYsuDRKrn0Q _KtJz8effEeqcYsuDRKrn0Q _KtJz8uffEeqcYsuDRKrn0Q _KtJz8-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4GOffEeqcYsuDRKrn0Q" name="Import" extends="_KtB4F-ffEeqcYsuDRKrn0Q" resourceProperties="_KtJz9OffEeqcYsuDRKrn0Q _KtJz9effEeqcYsuDRKrn0Q _KtJz9uffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfR-ffEeqcYsuDRKrn0Q" name="ActionDefinition" extends="_KtCfNOffEeqcYsuDRKrn0Q _KtB4JeffEeqcYsuDRKrn0Q" resourceProperties="_KtJz9-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4FuffEeqcYsuDRKrn0Q" name="Membership" extends="_KtB4F-ffEeqcYsuDRKrn0Q" resourceProperties="_KtJz-OffEeqcYsuDRKrn0Q _KtJz-effEeqcYsuDRKrn0Q _KtJz-uffEeqcYsuDRKrn0Q _KtJz--ffEeqcYsuDRKrn0Q _KtJz_OffEeqcYsuDRKrn0Q _KtJz_effEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfY-ffEeqcYsuDRKrn0Q" name="SatisfyRequirementUsage" extends="_KtCfQOffEeqcYsuDRKrn0Q _KtCfZOffEeqcYsuDRKrn0Q" resourceProperties="_KtJz_uffEeqcYsuDRKrn0Q _KtJz_-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfIOffEeqcYsuDRKrn0Q" name="BindingConnector" extends="_KtB4IuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfPeffEeqcYsuDRKrn0Q" name="TransitionUsage" extends="_KtCfOuffEeqcYsuDRKrn0Q" resourceProperties="_KtJ0AOffEeqcYsuDRKrn0Q _KtJ0AeffEeqcYsuDRKrn0Q _KtJ0AuffEeqcYsuDRKrn0Q _KtJ0A-ffEeqcYsuDRKrn0Q _KtJ0BOffEeqcYsuDRKrn0Q _KtJ0BeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfV-ffEeqcYsuDRKrn0Q" name="DecisionNode" extends="_KtCfVeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4KOffEeqcYsuDRKrn0Q" name="QueryQualifierExpression" extends="_KtB4KeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4NuffEeqcYsuDRKrn0Q" name="LiteralUnbounded" extends="_KtB4M-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfKOffEeqcYsuDRKrn0Q" name="SuccessionItemFlow" extends="_KtCfJ-ffEeqcYsuDRKrn0Q _KtCfKeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4J-ffEeqcYsuDRKrn0Q" name="ReturnParameterMembership" extends="_KtB4I-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfJeffEeqcYsuDRKrn0Q" name="ItemFlowEnd" extends="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfTuffEeqcYsuDRKrn0Q" name="ItemUsage" extends="_KtCfNeffEeqcYsuDRKrn0Q" resourceProperties="_KtJ0BuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4L-ffEeqcYsuDRKrn0Q" name="InstanceCreationExpression" extends="_KtB4KuffEeqcYsuDRKrn0Q" resourceProperties="_KtJ0B-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfYOffEeqcYsuDRKrn0Q" name="ExhibitStateUsage" extends="_KtCfO-ffEeqcYsuDRKrn0Q" resourceProperties="_KtJ0COffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfTeffEeqcYsuDRKrn0Q" name="PartUsage" extends="_KtCfTuffEeqcYsuDRKrn0Q" resourceProperties="_KtJ0CeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4LeffEeqcYsuDRKrn0Q" name="QueryPathExpression" extends="_KtB4LuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfRuffEeqcYsuDRKrn0Q" name="CalculationDefinition" extends="_KtCfR-ffEeqcYsuDRKrn0Q _KtB4LOffEeqcYsuDRKrn0Q" resourceProperties="_KtJ0CuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfKeffEeqcYsuDRKrn0Q" name="Succession" extends="_KtB4IuffEeqcYsuDRKrn0Q" resourceProperties="_KtJ0C-ffEeqcYsuDRKrn0Q _KtJ0DOffEeqcYsuDRKrn0Q _KtJ0DeffEeqcYsuDRKrn0Q _KtJ0DuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfNuffEeqcYsuDRKrn0Q" name="PortUsage" extends="_KtCfNeffEeqcYsuDRKrn0Q" resourceProperties="_KtJ0D-ffEeqcYsuDRKrn0Q _KtJ0EOffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfU-ffEeqcYsuDRKrn0Q" name="ConnectionDefinition" extends="_KtCfT-ffEeqcYsuDRKrn0Q _KtB4EOffEeqcYsuDRKrn0Q" resourceProperties="_KtJ0EeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfT-ffEeqcYsuDRKrn0Q" name="PartDefinition" extends="_KtCfM-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4JeffEeqcYsuDRKrn0Q" name="Behavior" extends="_KtB4EuffEeqcYsuDRKrn0Q" resourceProperties="_KtKa8OffEeqcYsuDRKrn0Q _KtKa8effEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4F-ffEeqcYsuDRKrn0Q" name="Relationship" extends="_KtB4FeffEeqcYsuDRKrn0Q" resourceProperties="_KtKa8uffEeqcYsuDRKrn0Q _KtKa8-ffEeqcYsuDRKrn0Q _KtKa9OffEeqcYsuDRKrn0Q _KtKa9effEeqcYsuDRKrn0Q _KtKa9uffEeqcYsuDRKrn0Q _KtKa9-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4M-ffEeqcYsuDRKrn0Q" name="LiteralExpression" extends="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfI-ffEeqcYsuDRKrn0Q" name="ItemFlowFeature" extends="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfaeffEeqcYsuDRKrn0Q" name="Comment" extends="_KtB4FeffEeqcYsuDRKrn0Q" resourceProperties="_KtKa-OffEeqcYsuDRKrn0Q _KtKa-effEeqcYsuDRKrn0Q _KtKa-uffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4GeffEeqcYsuDRKrn0Q" name="Generalization" extends="_KtB4F-ffEeqcYsuDRKrn0Q" resourceProperties="_KtKa--ffEeqcYsuDRKrn0Q _KtKa_OffEeqcYsuDRKrn0Q _KtKa_effEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfWeffEeqcYsuDRKrn0Q" name="SendActionUsage" extends="_KtCfP-ffEeqcYsuDRKrn0Q" resourceProperties="_KtKa_uffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4NeffEeqcYsuDRKrn0Q" name="LiteralString" extends="_KtB4M-ffEeqcYsuDRKrn0Q" resourceProperties="_KtKa_-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4MeffEeqcYsuDRKrn0Q" name="QueryPathStepExpression" extends="_KtB4KeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfQeffEeqcYsuDRKrn0Q" name="RequirementDefinition" extends="_KtCfQuffEeqcYsuDRKrn0Q" resourceProperties="_KtKbAOffEeqcYsuDRKrn0Q _KtKbAeffEeqcYsuDRKrn0Q _KtKbAuffEeqcYsuDRKrn0Q _KtKbA-ffEeqcYsuDRKrn0Q _KtKbBOffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfTOffEeqcYsuDRKrn0Q" name="ConnectionUsage" extends="_KtCfTeffEeqcYsuDRKrn0Q _KtB4IuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4IOffEeqcYsuDRKrn0Q" name="Multiplicity" extends="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4EeffEeqcYsuDRKrn0Q" name="Class" extends="_KtB4EuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4KeffEeqcYsuDRKrn0Q" name="OperatorExpression" extends="_KtB4KuffEeqcYsuDRKrn0Q" resourceProperties="_KtKbBeffEeqcYsuDRKrn0Q _KtKbBuffEeqcYsuDRKrn0Q _KtKbB-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfMuffEeqcYsuDRKrn0Q" name="IndividualDefinition" extends="_KtCfM-ffEeqcYsuDRKrn0Q" resourceProperties="_KtKbCOffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfPOffEeqcYsuDRKrn0Q" name="ConstraintUsage" extends="_KtCfNeffEeqcYsuDRKrn0Q _KtB4OuffEeqcYsuDRKrn0Q" resourceProperties="_KtKbCeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4GuffEeqcYsuDRKrn0Q" name="FeatureMembership" extends="_KtB4FuffEeqcYsuDRKrn0Q" resourceProperties="_KtKbCuffEeqcYsuDRKrn0Q _KtKbC-ffEeqcYsuDRKrn0Q _KtKbDOffEeqcYsuDRKrn0Q _KtKbDeffEeqcYsuDRKrn0Q _KtKbDuffEeqcYsuDRKrn0Q _KtKbD-ffEeqcYsuDRKrn0Q _KtKbEOffEeqcYsuDRKrn0Q _KtKbEeffEeqcYsuDRKrn0Q _KtKbEuffEeqcYsuDRKrn0Q _KtKbE-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfXuffEeqcYsuDRKrn0Q" name="StateDefinition" extends="_KtCfR-ffEeqcYsuDRKrn0Q" resourceProperties="_KtKbFOffEeqcYsuDRKrn0Q _KtKbFeffEeqcYsuDRKrn0Q _KtKbFuffEeqcYsuDRKrn0Q _KtKbF-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfMeffEeqcYsuDRKrn0Q" name="SnapshotFeature" extends="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfNOffEeqcYsuDRKrn0Q" name="Definition" extends="_KtB4EuffEeqcYsuDRKrn0Q" resourceProperties="_KtKbGOffEeqcYsuDRKrn0Q _KtKbGeffEeqcYsuDRKrn0Q _KtKbGuffEeqcYsuDRKrn0Q _KtKbG-ffEeqcYsuDRKrn0Q _KtKbHOffEeqcYsuDRKrn0Q _KtKbHeffEeqcYsuDRKrn0Q _KtKbHuffEeqcYsuDRKrn0Q _KtKbH-ffEeqcYsuDRKrn0Q _KtKbIOffEeqcYsuDRKrn0Q _KtKbIeffEeqcYsuDRKrn0Q _KtKbIuffEeqcYsuDRKrn0Q _KtKbI-ffEeqcYsuDRKrn0Q _KtKbJOffEeqcYsuDRKrn0Q _KtKbJeffEeqcYsuDRKrn0Q _KtKbJuffEeqcYsuDRKrn0Q _KtKbJ-ffEeqcYsuDRKrn0Q _KtKbKOffEeqcYsuDRKrn0Q _KtKbKeffEeqcYsuDRKrn0Q _KtKbKuffEeqcYsuDRKrn0Q _KtOsYOffEeqcYsuDRKrn0Q _KtOsYeffEeqcYsuDRKrn0Q _KtOsYuffEeqcYsuDRKrn0Q _KtOsY-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfX-ffEeqcYsuDRKrn0Q" name="TransitionFeatureMembership" extends="_KtB4GuffEeqcYsuDRKrn0Q" resourceProperties="_KtOsZOffEeqcYsuDRKrn0Q _KtOsZeffEeqcYsuDRKrn0Q _KtOsZuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfK-ffEeqcYsuDRKrn0Q" name="ImportCondition" extends="_KtB4F-ffEeqcYsuDRKrn0Q" resourceProperties="_KtOsZ-ffEeqcYsuDRKrn0Q _KtOsaOffEeqcYsuDRKrn0Q _KtOsaeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfM-ffEeqcYsuDRKrn0Q" name="ItemDefinition" extends="_KtCfNOffEeqcYsuDRKrn0Q _KtB4EeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfZ-ffEeqcYsuDRKrn0Q" name="Ownership" extends="_KtB4F-ffEeqcYsuDRKrn0Q" resourceProperties="_KtOsauffEeqcYsuDRKrn0Q _KtOsa-ffEeqcYsuDRKrn0Q _KtOsbOffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfLuffEeqcYsuDRKrn0Q" name="SourceEnd" extends="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfYeffEeqcYsuDRKrn0Q" name="AttributeDefinition" extends="_KtCfNOffEeqcYsuDRKrn0Q _KtCfKuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfOeffEeqcYsuDRKrn0Q" name="PortConjugation" extends="_KtB4H-ffEeqcYsuDRKrn0Q" resourceProperties="_KtOsbeffEeqcYsuDRKrn0Q _KtOsbuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4MOffEeqcYsuDRKrn0Q" name="BlockExpression" extends="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfWuffEeqcYsuDRKrn0Q" name="JoinNode" extends="_KtCfVeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfSuffEeqcYsuDRKrn0Q" name="AnalysisCaseDefinition" extends="_KtCfReffEeqcYsuDRKrn0Q" resourceProperties="_KtOsb-ffEeqcYsuDRKrn0Q _KtOscOffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfUOffEeqcYsuDRKrn0Q" name="IndividualUsage" extends="_KtCfTuffEeqcYsuDRKrn0Q" resourceProperties="_KtOsceffEeqcYsuDRKrn0Q _KtOscuffEeqcYsuDRKrn0Q _KtOsc-ffEeqcYsuDRKrn0Q _KtOsdOffEeqcYsuDRKrn0Q _KtOsdeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4EOffEeqcYsuDRKrn0Q" name="Association" extends="_KtB4EeffEeqcYsuDRKrn0Q _KtB4F-ffEeqcYsuDRKrn0Q" resourceProperties="_KtOsduffEeqcYsuDRKrn0Q _KtOsd-ffEeqcYsuDRKrn0Q _KtOseOffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfaOffEeqcYsuDRKrn0Q" name="Annotation" extends="_KtB4F-ffEeqcYsuDRKrn0Q" resourceProperties="_KtOseeffEeqcYsuDRKrn0Q _KtOseuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfKuffEeqcYsuDRKrn0Q" name="DataType" extends="_KtB4EuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfIuffEeqcYsuDRKrn0Q" name="MultiplicityRange" extends="_KtB4IOffEeqcYsuDRKrn0Q" resourceProperties="_KtOse-ffEeqcYsuDRKrn0Q _KtOsfOffEeqcYsuDRKrn0Q _KtOsfeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfP-ffEeqcYsuDRKrn0Q" name="TransferActionUsage" extends="_KtCfOuffEeqcYsuDRKrn0Q" resourceProperties="_KtOsfuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4FOffEeqcYsuDRKrn0Q" name="Package" extends="_KtB4FeffEeqcYsuDRKrn0Q" resourceProperties="_KtOsf-ffEeqcYsuDRKrn0Q _KtOsgOffEeqcYsuDRKrn0Q _KtOsgeffEeqcYsuDRKrn0Q _KtOsguffEeqcYsuDRKrn0Q _KtOsg-ffEeqcYsuDRKrn0Q _KtOshOffEeqcYsuDRKrn0Q _KtPTcOffEeqcYsuDRKrn0Q _KtPTceffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfUeffEeqcYsuDRKrn0Q" name="InterfaceUsage" extends="_KtCfTOffEeqcYsuDRKrn0Q" resourceProperties="_KtPTcuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfauffEeqcYsuDRKrn0Q" name="EndFeatureMembership" extends="_KtB4GuffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfSOffEeqcYsuDRKrn0Q" name="VariantMembership" extends="_KtB4FuffEeqcYsuDRKrn0Q" resourceProperties="_KtPTc-ffEeqcYsuDRKrn0Q _KtPTdOffEeqcYsuDRKrn0Q _KtPTdeffEeqcYsuDRKrn0Q _KtPTduffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfOuffEeqcYsuDRKrn0Q" name="ActionUsage" extends="_KtCfNeffEeqcYsuDRKrn0Q _KtB4JuffEeqcYsuDRKrn0Q" resourceProperties="_KtPTd-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfJ-ffEeqcYsuDRKrn0Q" name="ItemFlow" extends="_KtB4IuffEeqcYsuDRKrn0Q _KtB4JuffEeqcYsuDRKrn0Q" resourceProperties="_KtPTeOffEeqcYsuDRKrn0Q _KtPTeeffEeqcYsuDRKrn0Q _KtPTeuffEeqcYsuDRKrn0Q _KtPTe-ffEeqcYsuDRKrn0Q _KtPTfOffEeqcYsuDRKrn0Q _KtPTfeffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfXeffEeqcYsuDRKrn0Q" name="StateSubactionMembership" extends="_KtB4GuffEeqcYsuDRKrn0Q" resourceProperties="_KtPTfuffEeqcYsuDRKrn0Q _KtPTf-ffEeqcYsuDRKrn0Q _KtPTgOffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4IeffEeqcYsuDRKrn0Q" name="Superclassing" extends="_KtB4GeffEeqcYsuDRKrn0Q" resourceProperties="_KtPTgeffEeqcYsuDRKrn0Q _KtPTguffEeqcYsuDRKrn0Q _KtPTg-ffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtCfXOffEeqcYsuDRKrn0Q" name="ConjugatedPortTyping" extends="_KtB4HuffEeqcYsuDRKrn0Q" resourceProperties="_KtPThOffEeqcYsuDRKrn0Q _KtPTheffEeqcYsuDRKrn0Q"/>
-    <resources id="_KtB4FeffEeqcYsuDRKrn0Q" name="Element" resourceProperties="_KtPThuffEeqcYsuDRKrn0Q _KtPTh-ffEeqcYsuDRKrn0Q _KtPTiOffEeqcYsuDRKrn0Q _KtPTieffEeqcYsuDRKrn0Q _KtPTiuffEeqcYsuDRKrn0Q _KtPTi-ffEeqcYsuDRKrn0Q _KtPTjOffEeqcYsuDRKrn0Q _KtPTjeffEeqcYsuDRKrn0Q _KtPTjuffEeqcYsuDRKrn0Q">
+    <resources id="_5ptk2Y1HEeuS5oYDZ6mCNA" name="ViewUsage" extends="_5ptkz41HEeuS5oYDZ6mCNA" resourceProperties="_5px14I1HEeuS5oYDZ6mCNA _5px14Y1HEeuS5oYDZ6mCNA _5px14o1HEeuS5oYDZ6mCNA _5px1441HEeuS5oYDZ6mCNA _5px15I1HEeuS5oYDZ6mCNA _5px15Y1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptke41HEeuS5oYDZ6mCNA" name="TextualRepresentation" extends="_5ptkeY1HEeuS5oYDZ6mCNA" resourceProperties="_5px15o1HEeuS5oYDZ6mCNA _5px1541HEeuS5oYDZ6mCNA _5px16I1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkno1HEeuS5oYDZ6mCNA" name="InstanceCreationExpression" extends="_5ptkn41HEeuS5oYDZ6mCNA" resourceProperties="_5px16Y1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkmo1HEeuS5oYDZ6mCNA" name="AssociationStructure" extends="_5ptkio1HEeuS5oYDZ6mCNA _5ptkm41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLjI1HEeuS5oYDZ6mCNA" name="MergeNode" extends="_5puLiY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkv41HEeuS5oYDZ6mCNA" name="PortConjugation" extends="_5ptkgI1HEeuS5oYDZ6mCNA" resourceProperties="_5px16o1HEeuS5oYDZ6mCNA _5px1641HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkfI1HEeuS5oYDZ6mCNA" name="Import" extends="_5ptkdo1HEeuS5oYDZ6mCNA" resourceProperties="_5px17I1HEeuS5oYDZ6mCNA _5pzEAI1HEeuS5oYDZ6mCNA _5pzEAY1HEeuS5oYDZ6mCNA _5pzEAo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLio1HEeuS5oYDZ6mCNA" name="DecisionNode" extends="_5puLiY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptk241HEeuS5oYDZ6mCNA" name="ViewpointUsage" extends="_5ptkxY1HEeuS5oYDZ6mCNA" resourceProperties="_5pzEA41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkr41HEeuS5oYDZ6mCNA" name="TargetEnd" extends="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkd41HEeuS5oYDZ6mCNA" name="Documentation" extends="_5ptkeI1HEeuS5oYDZ6mCNA" resourceProperties="_5pzEBI1HEeuS5oYDZ6mCNA _5pzEBY1HEeuS5oYDZ6mCNA _5pzEBo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkxY1HEeuS5oYDZ6mCNA" name="RequirementUsage" extends="_5ptkwo1HEeuS5oYDZ6mCNA" resourceProperties="_5pzEB41HEeuS5oYDZ6mCNA _5pzECI1HEeuS5oYDZ6mCNA _5pzECY1HEeuS5oYDZ6mCNA _5pzECo1HEeuS5oYDZ6mCNA _5pzEC41HEeuS5oYDZ6mCNA _5pzEDI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLg41HEeuS5oYDZ6mCNA" name="AllocationUsage" extends="_5ptkzo1HEeuS5oYDZ6mCNA" resourceProperties="_5pzEDY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkho1HEeuS5oYDZ6mCNA" name="ItemFeature" extends="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkl41HEeuS5oYDZ6mCNA" name="ParameterMembership" extends="_5ptkfo1HEeuS5oYDZ6mCNA" resourceProperties="_5pzEDo1HEeuS5oYDZ6mCNA _5pzED41HEeuS5oYDZ6mCNA _5pzEEI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptk141HEeuS5oYDZ6mCNA" name="ConnectionDefinition" extends="_5ptk0Y1HEeuS5oYDZ6mCNA _5ptkmo1HEeuS5oYDZ6mCNA" resourceProperties="_5pzEEY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLmY1HEeuS5oYDZ6mCNA" name="ExhibitStateUsage" extends="_5ptkwY1HEeuS5oYDZ6mCNA" resourceProperties="_5pzEEo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkeI1HEeuS5oYDZ6mCNA" name="Annotation" extends="_5ptkdo1HEeuS5oYDZ6mCNA" resourceProperties="_5pzEE41HEeuS5oYDZ6mCNA _5pzEFI1HEeuS5oYDZ6mCNA _5pzEFY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkio1HEeuS5oYDZ6mCNA" name="Association" extends="_5ptki41HEeuS5oYDZ6mCNA _5ptkdo1HEeuS5oYDZ6mCNA" resourceProperties="_5pzEFo1HEeuS5oYDZ6mCNA _5pzEF41HEeuS5oYDZ6mCNA _5pzEGI1HEeuS5oYDZ6mCNA _5pzEGY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptklY1HEeuS5oYDZ6mCNA" name="Package" extends="_5ptkc41HEeuS5oYDZ6mCNA" resourceProperties="_5pzEGo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkhY1HEeuS5oYDZ6mCNA" name="ItemFlowEnd" extends="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptku41HEeuS5oYDZ6mCNA" name="Usage" extends="_5ptkcY1HEeuS5oYDZ6mCNA" resourceProperties="_5pzEG41HEeuS5oYDZ6mCNA _5pzEHI1HEeuS5oYDZ6mCNA _5pzEHY1HEeuS5oYDZ6mCNA _5pzEHo1HEeuS5oYDZ6mCNA _5pzEH41HEeuS5oYDZ6mCNA _5pzEII1HEeuS5oYDZ6mCNA _5pzEIY1HEeuS5oYDZ6mCNA _5pzEIo1HEeuS5oYDZ6mCNA _5pzEI41HEeuS5oYDZ6mCNA _5pzEJI1HEeuS5oYDZ6mCNA _5pzEJY1HEeuS5oYDZ6mCNA _5pzEJo1HEeuS5oYDZ6mCNA _5pzEJ41HEeuS5oYDZ6mCNA _5p4jkI1HEeuS5oYDZ6mCNA _5p4jkY1HEeuS5oYDZ6mCNA _5p4jko1HEeuS5oYDZ6mCNA _5p4jk41HEeuS5oYDZ6mCNA _5p4jlI1HEeuS5oYDZ6mCNA _5p4jlY1HEeuS5oYDZ6mCNA _5p4jlo1HEeuS5oYDZ6mCNA _5p4jl41HEeuS5oYDZ6mCNA _5p4jmI1HEeuS5oYDZ6mCNA _5p4jmY1HEeuS5oYDZ6mCNA _5p4jmo1HEeuS5oYDZ6mCNA _5p4jm41HEeuS5oYDZ6mCNA _5p4jnI1HEeuS5oYDZ6mCNA _5p4jnY1HEeuS5oYDZ6mCNA _5p4jno1HEeuS5oYDZ6mCNA _5p4jn41HEeuS5oYDZ6mCNA _5p4joI1HEeuS5oYDZ6mCNA _5p4joY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkiI1HEeuS5oYDZ6mCNA" name="Succession" extends="_5ptkiY1HEeuS5oYDZ6mCNA" resourceProperties="_5p4joo1HEeuS5oYDZ6mCNA _5p4jo41HEeuS5oYDZ6mCNA _5p4jpI1HEeuS5oYDZ6mCNA _5p4jpY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptksY1HEeuS5oYDZ6mCNA" name="Invariant" extends="_5ptkso1HEeuS5oYDZ6mCNA" resourceProperties="_5p4jpo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkdY1HEeuS5oYDZ6mCNA" name="Membership" extends="_5ptkdo1HEeuS5oYDZ6mCNA" resourceProperties="_5p4jp41HEeuS5oYDZ6mCNA _5p4jqI1HEeuS5oYDZ6mCNA _5p4jqY1HEeuS5oYDZ6mCNA _5p4jqo1HEeuS5oYDZ6mCNA _5p4jq41HEeuS5oYDZ6mCNA _5p4jrI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkuY1HEeuS5oYDZ6mCNA" name="ActionDefinition" extends="_5ptkuo1HEeuS5oYDZ6mCNA _5ptkjo1HEeuS5oYDZ6mCNA" resourceProperties="_5p4jrY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLhY1HEeuS5oYDZ6mCNA" name="RequirementVerificationMembership" extends="_5puLho1HEeuS5oYDZ6mCNA" resourceProperties="_5p4jro1HEeuS5oYDZ6mCNA _5p4jr41HEeuS5oYDZ6mCNA _5p4jsI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkwI1HEeuS5oYDZ6mCNA" name="ActionUsage" extends="_5ptku41HEeuS5oYDZ6mCNA _5ptkjY1HEeuS5oYDZ6mCNA" resourceProperties="_5p4jsY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLnI1HEeuS5oYDZ6mCNA" name="EndFeatureMembership" extends="_5ptkfo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkwo1HEeuS5oYDZ6mCNA" name="ConstraintUsage" extends="_5ptku41HEeuS5oYDZ6mCNA _5ptkso1HEeuS5oYDZ6mCNA" resourceProperties="_5p4jso1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptknY1HEeuS5oYDZ6mCNA" name="FeatureReferenceExpression" extends="_5ptkkI1HEeuS5oYDZ6mCNA" resourceProperties="_5p4js41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLi41HEeuS5oYDZ6mCNA" name="SendActionUsage" extends="_5ptkwI1HEeuS5oYDZ6mCNA" resourceProperties="_5p4jtI1HEeuS5oYDZ6mCNA _5p4jtY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkj41HEeuS5oYDZ6mCNA" name="Class" extends="_5ptki41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptktI1HEeuS5oYDZ6mCNA" name="ReturnParameterMembership" extends="_5ptkl41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptk3Y1HEeuS5oYDZ6mCNA" name="RenderingUsage" extends="_5ptkz41HEeuS5oYDZ6mCNA" resourceProperties="_5p4jto1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLlo1HEeuS5oYDZ6mCNA" name="StateDefinition" extends="_5ptkuY1HEeuS5oYDZ6mCNA" resourceProperties="_5p4jt41HEeuS5oYDZ6mCNA _5p4juI1HEeuS5oYDZ6mCNA _5p4juY1HEeuS5oYDZ6mCNA _5p4juo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkf41HEeuS5oYDZ6mCNA" name="TypeFeaturing" extends="_5ptkdo1HEeuS5oYDZ6mCNA" resourceProperties="_5p4ju41HEeuS5oYDZ6mCNA _5p4jvI1HEeuS5oYDZ6mCNA _5p4jvY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkxI1HEeuS5oYDZ6mCNA" name="AcceptActionUsage" extends="_5ptkwI1HEeuS5oYDZ6mCNA" resourceProperties="_5p4jvo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptk341HEeuS5oYDZ6mCNA" name="VerificationCaseUsage" extends="_5ptkyY1HEeuS5oYDZ6mCNA" resourceProperties="_5p4jv41HEeuS5oYDZ6mCNA _5p4jwI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkko1HEeuS5oYDZ6mCNA" name="ItemFlow" extends="_5ptkiY1HEeuS5oYDZ6mCNA _5ptkjY1HEeuS5oYDZ6mCNA" resourceProperties="_5p4jwY1HEeuS5oYDZ6mCNA _5p4jwo1HEeuS5oYDZ6mCNA _5p4jw41HEeuS5oYDZ6mCNA _5p4jxI1HEeuS5oYDZ6mCNA _5p4jxY1HEeuS5oYDZ6mCNA _5p4jxo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkvY1HEeuS5oYDZ6mCNA" name="PortDefinition" extends="_5ptkuo1HEeuS5oYDZ6mCNA" resourceProperties="_5p4jx41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkgI1HEeuS5oYDZ6mCNA" name="Conjugation" extends="_5ptkdo1HEeuS5oYDZ6mCNA" resourceProperties="_5p4jyI1HEeuS5oYDZ6mCNA _5p4jyY1HEeuS5oYDZ6mCNA _5p4jyo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkmY1HEeuS5oYDZ6mCNA" name="BindingConnector" extends="_5ptkiY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkzY1HEeuS5oYDZ6mCNA" name="ReferenceUsage" extends="_5ptku41HEeuS5oYDZ6mCNA" resourceProperties="_5p4jy41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkgo1HEeuS5oYDZ6mCNA" name="Redefinition" extends="_5ptkg41HEeuS5oYDZ6mCNA" resourceProperties="_5p4jzI1HEeuS5oYDZ6mCNA _5p4jzY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkkI1HEeuS5oYDZ6mCNA" name="Expression" extends="_5ptkjY1HEeuS5oYDZ6mCNA" resourceProperties="_5p4jzo1HEeuS5oYDZ6mCNA _5p4jz41HEeuS5oYDZ6mCNA _5p4j0I1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkyo1HEeuS5oYDZ6mCNA" name="AnalysisCaseUsage" extends="_5ptkyY1HEeuS5oYDZ6mCNA" resourceProperties="_5p4j0Y1HEeuS5oYDZ6mCNA _5p4j0o1HEeuS5oYDZ6mCNA _5p4j041HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLmI1HEeuS5oYDZ6mCNA" name="StateSubactionMembership" extends="_5ptkfo1HEeuS5oYDZ6mCNA" resourceProperties="_5p4j1I1HEeuS5oYDZ6mCNA _5p4j1Y1HEeuS5oYDZ6mCNA _5p4j1o1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLhI1HEeuS5oYDZ6mCNA" name="AllocationDefinition" extends="_5ptk141HEeuS5oYDZ6mCNA" resourceProperties="_5p4j141HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptk3I1HEeuS5oYDZ6mCNA" name="ViewpointDefinition" extends="_5ptkxo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkxo1HEeuS5oYDZ6mCNA" name="RequirementDefinition" extends="_5ptkx41HEeuS5oYDZ6mCNA" resourceProperties="_5p4j2I1HEeuS5oYDZ6mCNA _5p4j2Y1HEeuS5oYDZ6mCNA _5p4j2o1HEeuS5oYDZ6mCNA _5p4j241HEeuS5oYDZ6mCNA _5p4j3I1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkx41HEeuS5oYDZ6mCNA" name="ConstraintDefinition" extends="_5ptkuo1HEeuS5oYDZ6mCNA _5ptks41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkzo1HEeuS5oYDZ6mCNA" name="ConnectionUsage" extends="_5ptkz41HEeuS5oYDZ6mCNA _5ptkiY1HEeuS5oYDZ6mCNA" resourceProperties="_5p4j3Y1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptks41HEeuS5oYDZ6mCNA" name="Predicate" extends="_5ptkkY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkco1HEeuS5oYDZ6mCNA" name="Type" extends="_5ptkc41HEeuS5oYDZ6mCNA" resourceProperties="_5p4j3o1HEeuS5oYDZ6mCNA _5p4j341HEeuS5oYDZ6mCNA _5p4j4I1HEeuS5oYDZ6mCNA _5p4j4Y1HEeuS5oYDZ6mCNA _5p4j4o1HEeuS5oYDZ6mCNA _5p4j441HEeuS5oYDZ6mCNA _5p4j5I1HEeuS5oYDZ6mCNA _5p4j5Y1HEeuS5oYDZ6mCNA _5p4j5o1HEeuS5oYDZ6mCNA _5p4j541HEeuS5oYDZ6mCNA _5p4j6I1HEeuS5oYDZ6mCNA _5p4j6Y1HEeuS5oYDZ6mCNA _5p4j6o1HEeuS5oYDZ6mCNA _5p4j641HEeuS5oYDZ6mCNA _5p4j7I1HEeuS5oYDZ6mCNA _5p4j7Y1HEeuS5oYDZ6mCNA _5p4j7o1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkvI1HEeuS5oYDZ6mCNA" name="PortUsage" extends="_5ptku41HEeuS5oYDZ6mCNA" resourceProperties="_5p4j741HEeuS5oYDZ6mCNA _5p4j8I1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLjo1HEeuS5oYDZ6mCNA" name="PerformActionUsage" extends="_5ptkwI1HEeuS5oYDZ6mCNA" resourceProperties="_5p4j8Y1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLl41HEeuS5oYDZ6mCNA" name="TransitionFeatureMembership" extends="_5ptkfo1HEeuS5oYDZ6mCNA" resourceProperties="_5p4j8o1HEeuS5oYDZ6mCNA _5p4j841HEeuS5oYDZ6mCNA _5p4j9I1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLgY1HEeuS5oYDZ6mCNA" name="EnumerationDefinition" extends="_5puLgo1HEeuS5oYDZ6mCNA" resourceProperties="_5p4j9Y1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkfY1HEeuS5oYDZ6mCNA" name="Generalization" extends="_5ptkdo1HEeuS5oYDZ6mCNA" resourceProperties="_5p4j9o1HEeuS5oYDZ6mCNA _5p4j941HEeuS5oYDZ6mCNA _5p4j-I1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptk2o1HEeuS5oYDZ6mCNA" name="ViewDefinition" extends="_5ptk0Y1HEeuS5oYDZ6mCNA" resourceProperties="_5p4j-Y1HEeuS5oYDZ6mCNA _5p4j-o1HEeuS5oYDZ6mCNA _5p5KoI1HEeuS5oYDZ6mCNA _5p5KoY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptk3o1HEeuS5oYDZ6mCNA" name="RenderingDefinition" extends="_5ptk0Y1HEeuS5oYDZ6mCNA" resourceProperties="_5p5Koo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkto1HEeuS5oYDZ6mCNA" name="VerificationCaseDefinition" extends="_5ptkt41HEeuS5oYDZ6mCNA" resourceProperties="_5p5Ko41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkpo1HEeuS5oYDZ6mCNA" name="LiteralInteger" extends="_5ptkpY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5KpI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLgo1HEeuS5oYDZ6mCNA" name="AttributeDefinition" extends="_5ptkuo1HEeuS5oYDZ6mCNA _5ptklI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptko41HEeuS5oYDZ6mCNA" name="QueryPathStepExpression" extends="_5ptkoo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkrY1HEeuS5oYDZ6mCNA" name="MetadataFeatureValue" extends="_5ptkmI1HEeuS5oYDZ6mCNA" resourceProperties="_5p5KpY1HEeuS5oYDZ6mCNA _5p5Kpo1HEeuS5oYDZ6mCNA _5p5Kp41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptklI1HEeuS5oYDZ6mCNA" name="DataType" extends="_5ptki41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkuI1HEeuS5oYDZ6mCNA" name="CalculationDefinition" extends="_5ptkuY1HEeuS5oYDZ6mCNA _5ptkkY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5KqI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkkY1HEeuS5oYDZ6mCNA" name="Function" extends="_5ptkjo1HEeuS5oYDZ6mCNA" resourceProperties="_5p5KqY1HEeuS5oYDZ6mCNA _5p5Kqo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkfo1HEeuS5oYDZ6mCNA" name="FeatureMembership" extends="_5ptkdY1HEeuS5oYDZ6mCNA _5ptkf41HEeuS5oYDZ6mCNA" resourceProperties="_5p5Kq41HEeuS5oYDZ6mCNA _5p5KrI1HEeuS5oYDZ6mCNA _5p5KrY1HEeuS5oYDZ6mCNA _5p5Kro1HEeuS5oYDZ6mCNA _5p5Kr41HEeuS5oYDZ6mCNA _5p5KsI1HEeuS5oYDZ6mCNA _5p5KsY1HEeuS5oYDZ6mCNA _5p5Kso1HEeuS5oYDZ6mCNA _5p5Ks41HEeuS5oYDZ6mCNA _5p5KtI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptklo1HEeuS5oYDZ6mCNA" name="ElementFilterMembership" extends="_5ptkdY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5KtY1HEeuS5oYDZ6mCNA _5p5Kto1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLmo1HEeuS5oYDZ6mCNA" name="ConjugatedPortTyping" extends="_5ptkhI1HEeuS5oYDZ6mCNA" resourceProperties="_5p5Kt41HEeuS5oYDZ6mCNA _5p5KuI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLh41HEeuS5oYDZ6mCNA" name="ObjectiveMembership" extends="_5ptkfo1HEeuS5oYDZ6mCNA" resourceProperties="_5p5KuY1HEeuS5oYDZ6mCNA _5p5Kuo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLho1HEeuS5oYDZ6mCNA" name="RequirementConstraintMembership" extends="_5ptkfo1HEeuS5oYDZ6mCNA" resourceProperties="_5p5Ku41HEeuS5oYDZ6mCNA _5p5KvI1HEeuS5oYDZ6mCNA _5p5KvY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptk0Y1HEeuS5oYDZ6mCNA" name="PartDefinition" extends="_5ptk0o1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkqY1HEeuS5oYDZ6mCNA" name="LiteralUnbounded" extends="_5ptkpY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkg41HEeuS5oYDZ6mCNA" name="Subsetting" extends="_5ptkfY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5Kvo1HEeuS5oYDZ6mCNA _5p5Kv41HEeuS5oYDZ6mCNA _5p5KwI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLk41HEeuS5oYDZ6mCNA" name="SubjectMembership" extends="_5ptkl41HEeuS5oYDZ6mCNA" resourceProperties="_5p5KwY1HEeuS5oYDZ6mCNA _5p5Kwo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkm41HEeuS5oYDZ6mCNA" name="Structure" extends="_5ptkj41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkc41HEeuS5oYDZ6mCNA" name="Namespace" extends="_5ptkdI1HEeuS5oYDZ6mCNA" resourceProperties="_5p5Kw41HEeuS5oYDZ6mCNA _5p5KxI1HEeuS5oYDZ6mCNA _5p5KxY1HEeuS5oYDZ6mCNA _5p5Kxo1HEeuS5oYDZ6mCNA _5p5Kx41HEeuS5oYDZ6mCNA _5p5KyI1HEeuS5oYDZ6mCNA _5p5KyY1HEeuS5oYDZ6mCNA _5p5Kyo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkvo1HEeuS5oYDZ6mCNA" name="ConjugatedPortDefinition" extends="_5ptkvY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5Ky41HEeuS5oYDZ6mCNA _5p5KzI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptk041HEeuS5oYDZ6mCNA" name="IndividualUsage" extends="_5ptk0I1HEeuS5oYDZ6mCNA" resourceProperties="_5p5KzY1HEeuS5oYDZ6mCNA _5p5Kzo1HEeuS5oYDZ6mCNA _5p5Kz41HEeuS5oYDZ6mCNA _5p5K0I1HEeuS5oYDZ6mCNA _5p5K0Y1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkt41HEeuS5oYDZ6mCNA" name="CaseDefinition" extends="_5ptkuI1HEeuS5oYDZ6mCNA" resourceProperties="_5p5K0o1HEeuS5oYDZ6mCNA _5p5K041HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptk0o1HEeuS5oYDZ6mCNA" name="ItemDefinition" extends="_5ptkuo1HEeuS5oYDZ6mCNA _5ptkm41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptknI1HEeuS5oYDZ6mCNA" name="QueryPathExpression" extends="_5ptknY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkp41HEeuS5oYDZ6mCNA" name="LiteralBoolean" extends="_5ptkpY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5K1I1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkeo1HEeuS5oYDZ6mCNA" name="Comment" extends="_5ptkeY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5K1Y1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkw41HEeuS5oYDZ6mCNA" name="TransitionUsage" extends="_5ptkwI1HEeuS5oYDZ6mCNA" resourceProperties="_5p5K1o1HEeuS5oYDZ6mCNA _5p5K141HEeuS5oYDZ6mCNA _5p5K2I1HEeuS5oYDZ6mCNA _5p5K2Y1HEeuS5oYDZ6mCNA _5p5K2o1HEeuS5oYDZ6mCNA _5p5K241HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLm41HEeuS5oYDZ6mCNA" name="Expose" extends="_5ptkfI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptk1Y1HEeuS5oYDZ6mCNA" name="InterfaceUsage" extends="_5ptkzo1HEeuS5oYDZ6mCNA" resourceProperties="_5p5K3I1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkcI1HEeuS5oYDZ6mCNA" name="ItemFlowFeature" extends="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLlI1HEeuS5oYDZ6mCNA" name="SatisfyRequirementUsage" extends="_5ptkxY1HEeuS5oYDZ6mCNA _5puLlY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5K3Y1HEeuS5oYDZ6mCNA _5p5K3o1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkmI1HEeuS5oYDZ6mCNA" name="FeatureValue" extends="_5ptkdY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5K341HEeuS5oYDZ6mCNA _5p5K4I1HEeuS5oYDZ6mCNA _5p5K4Y1HEeuS5oYDZ6mCNA _5p5K4o1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLko1HEeuS5oYDZ6mCNA" name="LifeClass" extends="_5ptkj41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkpY1HEeuS5oYDZ6mCNA" name="LiteralExpression" extends="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptksI1HEeuS5oYDZ6mCNA" name="MultiplicityRange" extends="_5ptkgY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5K441HEeuS5oYDZ6mCNA _5p5K5I1HEeuS5oYDZ6mCNA _5p5K5Y1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptky41HEeuS5oYDZ6mCNA" name="AnalysisCaseDefinition" extends="_5ptkt41HEeuS5oYDZ6mCNA" resourceProperties="_5p5K5o1HEeuS5oYDZ6mCNA _5p5K541HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLgI1HEeuS5oYDZ6mCNA" name="EnumerationUsage" extends="_5ptk2I1HEeuS5oYDZ6mCNA" resourceProperties="_5p5K6I1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkzI1HEeuS5oYDZ6mCNA" name="VariantMembership" extends="_5ptkdY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5K6Y1HEeuS5oYDZ6mCNA _5p5K6o1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLkY1HEeuS5oYDZ6mCNA" name="SnapshotFeature" extends="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkq41HEeuS5oYDZ6mCNA" name="AnnotatingFeature" extends="_5ptkcY1HEeuS5oYDZ6mCNA _5ptkeY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5K641HEeuS5oYDZ6mCNA _5p5K7I1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkjY1HEeuS5oYDZ6mCNA" name="Step" extends="_5ptkcY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5K7Y1HEeuS5oYDZ6mCNA _5p5K7o1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkro1HEeuS5oYDZ6mCNA" name="SourceEnd" extends="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptk2I1HEeuS5oYDZ6mCNA" name="AttributeUsage" extends="_5ptku41HEeuS5oYDZ6mCNA" resourceProperties="_5p5K741HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkdI1HEeuS5oYDZ6mCNA" name="Element" resourceProperties="_5p5K8I1HEeuS5oYDZ6mCNA _5p5K8Y1HEeuS5oYDZ6mCNA _5p5K8o1HEeuS5oYDZ6mCNA _5p5K841HEeuS5oYDZ6mCNA _5p5K9I1HEeuS5oYDZ6mCNA _5p5K9Y1HEeuS5oYDZ6mCNA _5p5K9o1HEeuS5oYDZ6mCNA _5p5K941HEeuS5oYDZ6mCNA _5p5K-I1HEeuS5oYDZ6mCNA _5p5K-Y1HEeuS5oYDZ6mCNA _5p5K-o1HEeuS5oYDZ6mCNA _5p5K-41HEeuS5oYDZ6mCNA _5p5K_I1HEeuS5oYDZ6mCNA _5p5K_Y1HEeuS5oYDZ6mCNA _5p5K_o1HEeuS5oYDZ6mCNA _5p5K_41HEeuS5oYDZ6mCNA _5p5LAI1HEeuS5oYDZ6mCNA _5p5LAY1HEeuS5oYDZ6mCNA">
       <extends href="../org.eclipse.lyo.tools.domainmodels/oslcDomainSpecifications.xml#_popnoJUdEeq-KoPaR9_Cfg"/>
     </resources>
-    <resourceProperties id="_KtHXoOffEeqcYsuDRKrn0Q" name="performedAction" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtHXoeffEeqcYsuDRKrn0Q" name="originalType" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtHXouffEeqcYsuDRKrn0Q" name="conjugatedType" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtHXo-ffEeqcYsuDRKrn0Q" name="owningType" occurs="zeroOrOne" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtHXpOffEeqcYsuDRKrn0Q" name="isUnique"/>
-    <resourceProperties id="_KtHXpeffEeqcYsuDRKrn0Q" name="isOrdered"/>
-    <resourceProperties id="_KtHXpuffEeqcYsuDRKrn0Q" name="isComposite"/>
-    <resourceProperties id="_KtHXp-ffEeqcYsuDRKrn0Q" name="isEnd"/>
-    <resourceProperties id="_KtHXqOffEeqcYsuDRKrn0Q" name="isNonunique"/>
-    <resourceProperties id="_KtHXqeffEeqcYsuDRKrn0Q" name="referencedType" occurs="zeroOrMany" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtHXquffEeqcYsuDRKrn0Q" name="owningType" occurs="zeroOrOne" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtHXq-ffEeqcYsuDRKrn0Q" name="type" occurs="oneOrMany" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtHXrOffEeqcYsuDRKrn0Q" name="ownedType" occurs="zeroOrMany" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtHXreffEeqcYsuDRKrn0Q" name="ownedRedefinition" occurs="zeroOrMany" valueType="Resource" range="_KtB4HOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtHXruffEeqcYsuDRKrn0Q" name="ownedSubsetting" occurs="zeroOrMany" valueType="Resource" range="_KtB4HeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtHXr-ffEeqcYsuDRKrn0Q" name="owningFeatureMembership" occurs="zeroOrOne" valueType="Resource" range="_KtB4GuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtHXsOffEeqcYsuDRKrn0Q" name="typing" occurs="zeroOrMany" valueType="Resource" range="_KtB4HuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtHXseffEeqcYsuDRKrn0Q" name="endOwningType" occurs="zeroOrOne" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtHXsuffEeqcYsuDRKrn0Q" name="conjugatedPortDefinition" occurs="zeroOrOne" valueType="Resource" range="_KtCfOOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtH-sOffEeqcYsuDRKrn0Q" name="calculationDefinition" valueType="Resource" range="_KtB4LOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtH-seffEeqcYsuDRKrn0Q" name="value" valueType="Float"/>
-    <resourceProperties id="_KtH-suffEeqcYsuDRKrn0Q" name="ownedSubjectParameter_comp" valueType="Resource" range="_KtB4JOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtH-s-ffEeqcYsuDRKrn0Q" name="ownedSubjectParameter" valueType="Resource" range="_KtB4JOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtH-tOffEeqcYsuDRKrn0Q" name="expression" occurs="zeroOrMany" valueType="Resource" range="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtH-teffEeqcYsuDRKrn0Q" name="result" valueType="Resource" range="_KtB4JOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtH-tuffEeqcYsuDRKrn0Q" name="interfaceEnd" occurs="zeroOrMany" valueType="Resource" range="_KtCfNuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtH-t-ffEeqcYsuDRKrn0Q" name="redefiningFeature" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtH-uOffEeqcYsuDRKrn0Q" name="redefinedFeature" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtH-ueffEeqcYsuDRKrn0Q" name="selector" valueType="Resource" range="_KtB4OeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtH-uuffEeqcYsuDRKrn0Q" name="condition_comp" valueType="Resource" range="_KtCfK-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtH-u-ffEeqcYsuDRKrn0Q" name="condition" valueType="Resource" range="_KtCfK-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtH-vOffEeqcYsuDRKrn0Q" name="kind" valueType="String">
-      <allowedValue>assumption</allowedValue>
-      <allowedValue>requirement</allowedValue>
-    </resourceProperties>
-    <resourceProperties id="_KtIlwOffEeqcYsuDRKrn0Q" name="constraint_comp" valueType="Resource" range="_KtCfPOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtIlweffEeqcYsuDRKrn0Q" name="constraint" valueType="Resource" range="_KtCfPOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtIlwuffEeqcYsuDRKrn0Q" name="value"/>
-    <resourceProperties id="_KtJM0OffEeqcYsuDRKrn0Q" name="isDirected"/>
-    <resourceProperties id="_KtJM0effEeqcYsuDRKrn0Q" name="relatedFeature" occurs="zeroOrMany" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM0uffEeqcYsuDRKrn0Q" name="association" occurs="oneOrMany" valueType="Resource" range="_KtB4EOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM0-ffEeqcYsuDRKrn0Q" name="connectorEnd" occurs="zeroOrMany" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM1OffEeqcYsuDRKrn0Q" name="ownedAssociationType" occurs="zeroOrMany" valueType="Resource" range="_KtB4EOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM1effEeqcYsuDRKrn0Q" name="ownedPortConjugator" valueType="Resource" range="_KtCfOeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM1uffEeqcYsuDRKrn0Q" name="originalPortDefinition" valueType="Resource" range="_KtCfN-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM1-ffEeqcYsuDRKrn0Q" name="attributeDefinition" occurs="oneOrMany" valueType="Resource" range="_KtCfKuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM2OffEeqcYsuDRKrn0Q" name="behavior" occurs="oneOrMany" valueType="Resource" range="_KtB4JeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM2effEeqcYsuDRKrn0Q" name="parameter" occurs="zeroOrMany" valueType="Resource" range="_KtB4JOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM2uffEeqcYsuDRKrn0Q" name="memberParameter" valueType="Resource" range="_KtB4JOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM2-ffEeqcYsuDRKrn0Q" name="ownedMemberParameter_comp" valueType="Resource" range="_KtB4JOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM3OffEeqcYsuDRKrn0Q" name="ownedMemberParameter" valueType="Resource" range="_KtB4JOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM3effEeqcYsuDRKrn0Q" name="isAbstract"/>
-    <resourceProperties id="_KtJM3uffEeqcYsuDRKrn0Q" name="isSufficient"/>
-    <resourceProperties id="_KtJM3-ffEeqcYsuDRKrn0Q" name="isConjugated"/>
-    <resourceProperties id="_KtJM4OffEeqcYsuDRKrn0Q" name="ownedGeneralization" occurs="zeroOrMany" valueType="Resource" range="_KtB4GeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM4effEeqcYsuDRKrn0Q" name="ownedFeatureMembership_comp" occurs="zeroOrMany" valueType="Resource" range="_KtB4GuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM4uffEeqcYsuDRKrn0Q" name="ownedFeature" occurs="zeroOrMany" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM4-ffEeqcYsuDRKrn0Q" name="ownedEndFeature" occurs="zeroOrMany" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM5OffEeqcYsuDRKrn0Q" name="feature" occurs="zeroOrMany" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM5effEeqcYsuDRKrn0Q" name="input" occurs="zeroOrMany" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM5uffEeqcYsuDRKrn0Q" name="output" occurs="zeroOrMany" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM5-ffEeqcYsuDRKrn0Q" name="inheritedMembership" occurs="zeroOrMany" valueType="Resource" range="_KtB4FuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM6OffEeqcYsuDRKrn0Q" name="endFeature" occurs="zeroOrMany" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM6effEeqcYsuDRKrn0Q" name="ownedConjugator" occurs="zeroOrOne" valueType="Resource" range="_KtB4H-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM6uffEeqcYsuDRKrn0Q" name="conjugator" occurs="zeroOrOne" valueType="Resource" range="_KtB4H-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM6-ffEeqcYsuDRKrn0Q" name="featureMembership" occurs="zeroOrMany" valueType="Resource" range="_KtB4GuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM7OffEeqcYsuDRKrn0Q" name="inheritedFeature" occurs="zeroOrMany" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM7effEeqcYsuDRKrn0Q" name="multiplicity" occurs="zeroOrOne" valueType="Resource" range="_KtB4IOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM7uffEeqcYsuDRKrn0Q" name="ownedFeatureMembership" occurs="zeroOrMany" valueType="Resource" range="_KtB4GuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM7-ffEeqcYsuDRKrn0Q" name="isVariation"/>
-    <resourceProperties id="_KtJM8OffEeqcYsuDRKrn0Q" name="nestedUsage" occurs="zeroOrMany" valueType="Resource" range="_KtCfNeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM8effEeqcYsuDRKrn0Q" name="owningUsage" occurs="zeroOrOne" valueType="Resource" range="_KtCfNeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM8uffEeqcYsuDRKrn0Q" name="nestedPort" occurs="zeroOrMany" valueType="Resource" range="_KtCfNuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM8-ffEeqcYsuDRKrn0Q" name="nestedAction" occurs="zeroOrMany" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM9OffEeqcYsuDRKrn0Q" name="nestedState" occurs="zeroOrMany" valueType="Resource" range="_KtCfO-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM9effEeqcYsuDRKrn0Q" name="nestedConstraint" occurs="zeroOrMany" valueType="Resource" range="_KtCfPOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM9uffEeqcYsuDRKrn0Q" name="nestedTransition" occurs="zeroOrMany" valueType="Resource" range="_KtCfPeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM9-ffEeqcYsuDRKrn0Q" name="nestedRequirement" occurs="zeroOrMany" valueType="Resource" range="_KtCfQOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM-OffEeqcYsuDRKrn0Q" name="nestedCalculation" occurs="zeroOrMany" valueType="Resource" range="_KtCfQ-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM-effEeqcYsuDRKrn0Q" name="owningVariationDefinition" occurs="zeroOrOne" valueType="Resource" range="_KtCfNOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM-uffEeqcYsuDRKrn0Q" name="flow" occurs="zeroOrMany" valueType="Resource" range="_KtCfNeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM--ffEeqcYsuDRKrn0Q" name="nestedCase" occurs="zeroOrMany" valueType="Resource" range="_KtCfROffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM_OffEeqcYsuDRKrn0Q" name="owningVariantMembership" occurs="zeroOrOne" valueType="Resource" range="_KtCfSOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM_effEeqcYsuDRKrn0Q" name="variantMembership_comp" occurs="zeroOrMany" valueType="Resource" range="_KtCfSOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM_uffEeqcYsuDRKrn0Q" name="owningVariationUsage" occurs="zeroOrOne" valueType="Resource" range="_KtCfNeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJM_-ffEeqcYsuDRKrn0Q" name="variant" occurs="zeroOrMany" valueType="Resource" range="_KtCfNeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNAOffEeqcYsuDRKrn0Q" name="nestedAnalysisCase" occurs="zeroOrMany" valueType="Resource" range="_KtCfSeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNAeffEeqcYsuDRKrn0Q" name="usage" occurs="zeroOrMany" valueType="Resource" range="_KtCfNeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNAuffEeqcYsuDRKrn0Q" name="nestedReference" occurs="zeroOrMany" valueType="Resource" range="_KtCfS-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNA-ffEeqcYsuDRKrn0Q" name="nestedConnection" occurs="zeroOrMany" valueType="Resource" range="_KtCfTOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNBOffEeqcYsuDRKrn0Q" name="nestedItem" occurs="zeroOrMany" valueType="Resource" range="_KtCfTuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNBeffEeqcYsuDRKrn0Q" name="nestedPart" occurs="zeroOrMany" valueType="Resource" range="_KtCfTeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNBuffEeqcYsuDRKrn0Q" name="nestedIndividual" occurs="zeroOrMany" valueType="Resource" range="_KtCfUOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNB-ffEeqcYsuDRKrn0Q" name="nestedInterface" occurs="zeroOrMany" valueType="Resource" range="_KtCfUeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNCOffEeqcYsuDRKrn0Q" name="nestedAttribute" occurs="zeroOrMany" valueType="Resource" range="_KtCfVOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNCeffEeqcYsuDRKrn0Q" name="owningDefinition" occurs="zeroOrOne" valueType="Resource" range="_KtCfNOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNCuffEeqcYsuDRKrn0Q" name="variantMembership" occurs="zeroOrMany" valueType="Resource" range="_KtCfSOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNC-ffEeqcYsuDRKrn0Q" name="objectiveRequirement" occurs="zeroOrOne" valueType="Resource" range="_KtCfQOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNDOffEeqcYsuDRKrn0Q" name="subjectParameter" valueType="Resource" range="_KtB4JOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNDeffEeqcYsuDRKrn0Q" name="caseDefinition" valueType="Resource" range="_KtCfReffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNDuffEeqcYsuDRKrn0Q" name="assertionConnector" valueType="Resource" range="_KtCfIOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJND-ffEeqcYsuDRKrn0Q" name="subsettedFeature" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNEOffEeqcYsuDRKrn0Q" name="subsettingFeature" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNEeffEeqcYsuDRKrn0Q" name="owningFeature" occurs="zeroOrOne" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNEuffEeqcYsuDRKrn0Q" name="value" valueType="Integer"/>
-    <resourceProperties id="_KtJNE-ffEeqcYsuDRKrn0Q" name="featureWithValue" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNFOffEeqcYsuDRKrn0Q" name="valueConnector" valueType="Resource" range="_KtCfIOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNFeffEeqcYsuDRKrn0Q" name="value_comp" valueType="Resource" range="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNFuffEeqcYsuDRKrn0Q" name="value" valueType="Resource" range="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNF-ffEeqcYsuDRKrn0Q" name="referent" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNGOffEeqcYsuDRKrn0Q" name="reqId" occurs="zeroOrOne" valueType="String"/>
-    <resourceProperties id="_KtJNGeffEeqcYsuDRKrn0Q" name="text" occurs="zeroOrOne" valueType="String"/>
-    <resourceProperties id="_KtJNGuffEeqcYsuDRKrn0Q" name="requirementDefinition" valueType="Resource" range="_KtCfQeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNG-ffEeqcYsuDRKrn0Q" name="subjectParameter" valueType="Resource" range="_KtB4JOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNHOffEeqcYsuDRKrn0Q" name="requiredConstraint" occurs="zeroOrMany" valueType="Resource" range="_KtCfPOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJNHeffEeqcYsuDRKrn0Q" name="assumedConstraint" occurs="zeroOrMany" valueType="Resource" range="_KtCfPOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz4OffEeqcYsuDRKrn0Q" name="assertedConstraint" valueType="Resource" range="_KtCfPOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz4effEeqcYsuDRKrn0Q" name="analysisAction" occurs="zeroOrMany" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz4uffEeqcYsuDRKrn0Q" name="analysisCaseDefinition" valueType="Resource" range="_KtCfSuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz4-ffEeqcYsuDRKrn0Q" name="resultExpression" occurs="zeroOrOne" valueType="Resource" range="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz5OffEeqcYsuDRKrn0Q" name="function" valueType="Resource" range="_KtB4LOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz5effEeqcYsuDRKrn0Q" name="result" valueType="Resource" range="_KtB4JOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz5uffEeqcYsuDRKrn0Q" name="ownedSuperclassing" occurs="zeroOrMany" valueType="Resource" range="_KtB4IeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz5-ffEeqcYsuDRKrn0Q" name="type" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz6OffEeqcYsuDRKrn0Q" name="typedFeature" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz6effEeqcYsuDRKrn0Q" name="ownedObjectiveRequirement_comp" valueType="Resource" range="_KtCfQOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz6uffEeqcYsuDRKrn0Q" name="ownedObjectiveRequirement" valueType="Resource" range="_KtCfQOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz6-ffEeqcYsuDRKrn0Q" name="argument" occurs="zeroOrMany" valueType="Resource" range="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz7OffEeqcYsuDRKrn0Q" name="referenceType" occurs="oneOrMany" valueType="Resource" range="_KtB4EuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz7effEeqcYsuDRKrn0Q" name="predicate" valueType="Resource" range="_KtB4OeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz7uffEeqcYsuDRKrn0Q" name="objectiveRequirement" occurs="zeroOrOne" valueType="Resource" range="_KtCfQOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz7-ffEeqcYsuDRKrn0Q" name="subjectParameter" valueType="Resource" range="_KtB4JOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz8OffEeqcYsuDRKrn0Q" name="stateDefinition" occurs="oneOrMany" valueType="Resource" range="_KtB4JeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz8effEeqcYsuDRKrn0Q" name="entryAction" occurs="zeroOrOne" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz8uffEeqcYsuDRKrn0Q" name="doAction" occurs="zeroOrOne" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz8-ffEeqcYsuDRKrn0Q" name="exitAction" occurs="zeroOrOne" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz9OffEeqcYsuDRKrn0Q" name="visibility" valueType="String">
+    <resources id="_5ptkjI1HEeuS5oYDZ6mCNA" name="Superclassing" extends="_5ptkfY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LAo1HEeuS5oYDZ6mCNA _5p5LA41HEeuS5oYDZ6mCNA _5p5LBI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkdo1HEeuS5oYDZ6mCNA" name="Relationship" extends="_5ptkdI1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LBY1HEeuS5oYDZ6mCNA _5p5LBo1HEeuS5oYDZ6mCNA _5p5LB41HEeuS5oYDZ6mCNA _5p5LCI1HEeuS5oYDZ6mCNA _5p5LCY1HEeuS5oYDZ6mCNA _5p5LCo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkgY1HEeuS5oYDZ6mCNA" name="Multiplicity" extends="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkpI1HEeuS5oYDZ6mCNA" name="LiteralString" extends="_5ptkpY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LC41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLj41HEeuS5oYDZ6mCNA" name="Dependency" extends="_5ptkdo1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LDI1HEeuS5oYDZ6mCNA _5p5LDY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkwY1HEeuS5oYDZ6mCNA" name="StateUsage" extends="_5ptkwI1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LDo1HEeuS5oYDZ6mCNA _5p5LD41HEeuS5oYDZ6mCNA _5p5LEI1HEeuS5oYDZ6mCNA _5p5LEY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkqo1HEeuS5oYDZ6mCNA" name="NullExpression" extends="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkn41HEeuS5oYDZ6mCNA" name="InvocationExpression" extends="_5ptkkI1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LEo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkso1HEeuS5oYDZ6mCNA" name="BooleanExpression" extends="_5ptkkI1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LE41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkk41HEeuS5oYDZ6mCNA" name="Interaction" extends="_5ptkio1HEeuS5oYDZ6mCNA _5ptkjo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLiY1HEeuS5oYDZ6mCNA" name="ControlNode" extends="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkcY1HEeuS5oYDZ6mCNA" name="Feature" extends="_5ptkco1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LFI1HEeuS5oYDZ6mCNA _5p5LFY1HEeuS5oYDZ6mCNA _5p5LFo1HEeuS5oYDZ6mCNA _5p5LF41HEeuS5oYDZ6mCNA _5p5LGI1HEeuS5oYDZ6mCNA _5p5LGY1HEeuS5oYDZ6mCNA _5p5LGo1HEeuS5oYDZ6mCNA _5p5LG41HEeuS5oYDZ6mCNA _5p5LHI1HEeuS5oYDZ6mCNA _5p5LHY1HEeuS5oYDZ6mCNA _5p5LHo1HEeuS5oYDZ6mCNA _5p5LH41HEeuS5oYDZ6mCNA _5p5LII1HEeuS5oYDZ6mCNA _5p5LIY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkoY1HEeuS5oYDZ6mCNA" name="QueryQualifierExpression" extends="_5ptkoo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkeY1HEeuS5oYDZ6mCNA" name="AnnotatingElement" extends="_5ptkdI1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LIo1HEeuS5oYDZ6mCNA _5p5LI41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkh41HEeuS5oYDZ6mCNA" name="SuccessionItemFlow" extends="_5ptkko1HEeuS5oYDZ6mCNA _5ptkiI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLjY1HEeuS5oYDZ6mCNA" name="JoinNode" extends="_5puLiY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptk1o1HEeuS5oYDZ6mCNA" name="InterfaceDefinition" extends="_5ptk141HEeuS5oYDZ6mCNA" resourceProperties="_5p5LJI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLkI1HEeuS5oYDZ6mCNA" name="TimeSliceFeature" extends="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptktY1HEeuS5oYDZ6mCNA" name="ResultExpressionMembership" extends="_5ptkfo1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LJY1HEeuS5oYDZ6mCNA _5p5LJo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLiI1HEeuS5oYDZ6mCNA" name="ForkNode" extends="_5puLiY1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkz41HEeuS5oYDZ6mCNA" name="PartUsage" extends="_5ptk0I1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LJ41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkyI1HEeuS5oYDZ6mCNA" name="CalculationUsage" extends="_5ptkwI1HEeuS5oYDZ6mCNA _5ptkkI1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LKI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkoo1HEeuS5oYDZ6mCNA" name="OperatorExpression" extends="_5ptkn41HEeuS5oYDZ6mCNA" resourceProperties="_5p5LKY1HEeuS5oYDZ6mCNA _5p5LKo1HEeuS5oYDZ6mCNA _5p5LK41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkoI1HEeuS5oYDZ6mCNA" name="BlockExpression" extends="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkhI1HEeuS5oYDZ6mCNA" name="FeatureTyping" extends="_5ptkfY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LLI1HEeuS5oYDZ6mCNA _5p5LLY1HEeuS5oYDZ6mCNA _5p5LLo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkuo1HEeuS5oYDZ6mCNA" name="Definition" extends="_5ptki41HEeuS5oYDZ6mCNA" resourceProperties="_5p5LL41HEeuS5oYDZ6mCNA _5p5LMI1HEeuS5oYDZ6mCNA _5p5LMY1HEeuS5oYDZ6mCNA _5p5LMo1HEeuS5oYDZ6mCNA _5p5LM41HEeuS5oYDZ6mCNA _5p5LNI1HEeuS5oYDZ6mCNA _5p5LNY1HEeuS5oYDZ6mCNA _5p5LNo1HEeuS5oYDZ6mCNA _5p5LN41HEeuS5oYDZ6mCNA _5p5LOI1HEeuS5oYDZ6mCNA _5p5LOY1HEeuS5oYDZ6mCNA _5p5LOo1HEeuS5oYDZ6mCNA _5p5LO41HEeuS5oYDZ6mCNA _5p5LPI1HEeuS5oYDZ6mCNA _5p5LPY1HEeuS5oYDZ6mCNA _5p5LPo1HEeuS5oYDZ6mCNA _5p5LP41HEeuS5oYDZ6mCNA _5p5LQI1HEeuS5oYDZ6mCNA _5p5LQY1HEeuS5oYDZ6mCNA _5p5LQo1HEeuS5oYDZ6mCNA _5p5LQ41HEeuS5oYDZ6mCNA _5p5LRI1HEeuS5oYDZ6mCNA _5p5LRY1HEeuS5oYDZ6mCNA _5p5LRo1HEeuS5oYDZ6mCNA _5p5LR41HEeuS5oYDZ6mCNA _5p5LSI1HEeuS5oYDZ6mCNA _5p5LSY1HEeuS5oYDZ6mCNA _5p5LSo1HEeuS5oYDZ6mCNA _5p5LS41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptk1I1HEeuS5oYDZ6mCNA" name="IndividualDefinition" extends="_5ptk0o1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LTI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkjo1HEeuS5oYDZ6mCNA" name="Behavior" extends="_5ptkj41HEeuS5oYDZ6mCNA" resourceProperties="_5p5LTY1HEeuS5oYDZ6mCNA _5p5LTo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkrI1HEeuS5oYDZ6mCNA" name="MetadataFeature" extends="_5ptkcY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LT41HEeuS5oYDZ6mCNA _5p5LUI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkiY1HEeuS5oYDZ6mCNA" name="Connector" extends="_5ptkcY1HEeuS5oYDZ6mCNA _5ptkdo1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LUY1HEeuS5oYDZ6mCNA _5p5LUo1HEeuS5oYDZ6mCNA _5p5LU41HEeuS5oYDZ6mCNA _5p5LVI1HEeuS5oYDZ6mCNA _5p5LVY1HEeuS5oYDZ6mCNA _5p5LVo1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5puLlY1HEeuS5oYDZ6mCNA" name="AssertConstraintUsage" extends="_5ptkwo1HEeuS5oYDZ6mCNA _5ptksY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LV41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkqI1HEeuS5oYDZ6mCNA" name="LiteralReal" extends="_5ptkpY1HEeuS5oYDZ6mCNA" resourceProperties="_5p5LWI1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptkyY1HEeuS5oYDZ6mCNA" name="CaseUsage" extends="_5ptkyI1HEeuS5oYDZ6mCNA" resourceProperties="_5p5xsI1HEeuS5oYDZ6mCNA _5p5xsY1HEeuS5oYDZ6mCNA _5p5xso1HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptki41HEeuS5oYDZ6mCNA" name="Classifier" extends="_5ptkco1HEeuS5oYDZ6mCNA" resourceProperties="_5p5xs41HEeuS5oYDZ6mCNA"/>
+    <resources id="_5ptk0I1HEeuS5oYDZ6mCNA" name="ItemUsage" extends="_5ptku41HEeuS5oYDZ6mCNA" resourceProperties="_5p5xtI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5px14I1HEeuS5oYDZ6mCNA" name="viewDefinition" valueType="Resource" range="_5ptk2o1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5px14Y1HEeuS5oYDZ6mCNA" name="satisfiedViewpoint" occurs="zeroOrMany" valueType="Resource" range="_5ptk241HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5px14o1HEeuS5oYDZ6mCNA" name="exposedNamespace" occurs="zeroOrMany" valueType="Resource" range="_5ptkc41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5px1441HEeuS5oYDZ6mCNA" name="rendering" occurs="zeroOrOne" valueType="Resource" range="_5ptk3Y1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5px15I1HEeuS5oYDZ6mCNA" name="viewCondition" occurs="zeroOrMany" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5px15Y1HEeuS5oYDZ6mCNA" name="viewedElement" occurs="zeroOrMany" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5px15o1HEeuS5oYDZ6mCNA" name="language" valueType="String"/>
+    <resourceProperties id="_5px1541HEeuS5oYDZ6mCNA" name="body" valueType="String"/>
+    <resourceProperties id="_5px16I1HEeuS5oYDZ6mCNA" name="representedElement" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5px16Y1HEeuS5oYDZ6mCNA" name="instantiatedType" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5px16o1HEeuS5oYDZ6mCNA" name="originalPortDefinition" valueType="Resource" range="_5ptkvY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5px1641HEeuS5oYDZ6mCNA" name="conjugatedPortDefinition" valueType="Resource" range="_5ptkvo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5px17I1HEeuS5oYDZ6mCNA" name="visibility" valueType="String">
       <allowedValue>public</allowedValue>
       <allowedValue>private</allowedValue>
       <allowedValue>protected</allowedValue>
       <allowedValue>package</allowedValue>
     </resourceProperties>
-    <resourceProperties id="_KtJz9effEeqcYsuDRKrn0Q" name="importedPackage" valueType="Resource" range="_KtB4FOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz9uffEeqcYsuDRKrn0Q" name="importOwningPackage" occurs="zeroOrOne" valueType="Resource" range="_KtB4FOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz9-ffEeqcYsuDRKrn0Q" name="action" occurs="zeroOrMany" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz-OffEeqcYsuDRKrn0Q" name="memberName" occurs="zeroOrOne" valueType="String"/>
-    <resourceProperties id="_KtJz-effEeqcYsuDRKrn0Q" name="visibility" valueType="String">
+    <resourceProperties id="_5pzEAI1HEeuS5oYDZ6mCNA" name="isRecursive"/>
+    <resourceProperties id="_5pzEAY1HEeuS5oYDZ6mCNA" name="importedNamespace" valueType="Resource" range="_5ptkc41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEAo1HEeuS5oYDZ6mCNA" name="importOwningNamespace" occurs="zeroOrOne" valueType="Resource" range="_5ptkc41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEA41HEeuS5oYDZ6mCNA" name="viewpointDefinition" valueType="Resource" range="_5ptk3I1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEBI1HEeuS5oYDZ6mCNA" name="documentingComment_comp" valueType="Resource" range="_5ptkeo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEBY1HEeuS5oYDZ6mCNA" name="owningDocumentedElement" occurs="zeroOrOne" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEBo1HEeuS5oYDZ6mCNA" name="documentingComment" valueType="Resource" range="_5ptkeo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEB41HEeuS5oYDZ6mCNA" name="reqId" occurs="zeroOrOne" valueType="String"/>
+    <resourceProperties id="_5pzECI1HEeuS5oYDZ6mCNA" name="text" occurs="zeroOrMany" valueType="String"/>
+    <resourceProperties id="_5pzECY1HEeuS5oYDZ6mCNA" name="requirementDefinition" valueType="Resource" range="_5ptkxo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzECo1HEeuS5oYDZ6mCNA" name="requiredConstraint" occurs="zeroOrMany" valueType="Resource" range="_5ptkwo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEC41HEeuS5oYDZ6mCNA" name="assumedConstraint" occurs="zeroOrMany" valueType="Resource" range="_5ptkwo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEDI1HEeuS5oYDZ6mCNA" name="subjectParameter" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEDY1HEeuS5oYDZ6mCNA" name="allocationDefinition" occurs="oneOrMany" valueType="Resource" range="_5puLhI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEDo1HEeuS5oYDZ6mCNA" name="ownedMemberParameter_comp" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzED41HEeuS5oYDZ6mCNA" name="memberParameter" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEEI1HEeuS5oYDZ6mCNA" name="ownedMemberParameter" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEEY1HEeuS5oYDZ6mCNA" name="connectionEnd" occurs="zeroOrMany" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEEo1HEeuS5oYDZ6mCNA" name="exhibitedState" valueType="Resource" range="_5ptkwY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEE41HEeuS5oYDZ6mCNA" name="annotatingElement" valueType="Resource" range="_5ptkeY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEFI1HEeuS5oYDZ6mCNA" name="annotatedElement" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEFY1HEeuS5oYDZ6mCNA" name="owningAnnotatedElement" occurs="zeroOrOne" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEFo1HEeuS5oYDZ6mCNA" name="relatedType" occurs="zeroOrMany" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEF41HEeuS5oYDZ6mCNA" name="sourceType" occurs="zeroOrOne" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEGI1HEeuS5oYDZ6mCNA" name="targetType" occurs="oneOrMany" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEGY1HEeuS5oYDZ6mCNA" name="associationEnd" occurs="zeroOrMany" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEGo1HEeuS5oYDZ6mCNA" name="filterCondition" occurs="zeroOrMany" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEG41HEeuS5oYDZ6mCNA" name="isVariation"/>
+    <resourceProperties id="_5pzEHI1HEeuS5oYDZ6mCNA" name="nestedUsage" occurs="zeroOrMany" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEHY1HEeuS5oYDZ6mCNA" name="owningUsage" occurs="zeroOrOne" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEHo1HEeuS5oYDZ6mCNA" name="nestedPort" occurs="zeroOrMany" valueType="Resource" range="_5ptkvI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEH41HEeuS5oYDZ6mCNA" name="nestedAction" occurs="zeroOrMany" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEII1HEeuS5oYDZ6mCNA" name="nestedState" occurs="zeroOrMany" valueType="Resource" range="_5ptkwY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEIY1HEeuS5oYDZ6mCNA" name="nestedConstraint" occurs="zeroOrMany" valueType="Resource" range="_5ptkwo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEIo1HEeuS5oYDZ6mCNA" name="nestedTransition" occurs="zeroOrMany" valueType="Resource" range="_5ptkw41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEI41HEeuS5oYDZ6mCNA" name="nestedRequirement" occurs="zeroOrMany" valueType="Resource" range="_5ptkxY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEJI1HEeuS5oYDZ6mCNA" name="nestedCalculation" occurs="zeroOrMany" valueType="Resource" range="_5ptkyI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEJY1HEeuS5oYDZ6mCNA" name="flowFeature" occurs="zeroOrMany" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEJo1HEeuS5oYDZ6mCNA" name="nestedCase" occurs="zeroOrMany" valueType="Resource" range="_5ptkyY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5pzEJ41HEeuS5oYDZ6mCNA" name="nestedAnalysisCase" occurs="zeroOrMany" valueType="Resource" range="_5ptkyo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jkI1HEeuS5oYDZ6mCNA" name="variantMembership_comp" occurs="zeroOrMany" valueType="Resource" range="_5ptkzI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jkY1HEeuS5oYDZ6mCNA" name="usage" occurs="zeroOrMany" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jko1HEeuS5oYDZ6mCNA" name="variant" occurs="zeroOrMany" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jk41HEeuS5oYDZ6mCNA" name="nestedReference" occurs="zeroOrMany" valueType="Resource" range="_5ptkzY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jlI1HEeuS5oYDZ6mCNA" name="nestedConnection" occurs="zeroOrMany" valueType="Resource" range="_5ptkzo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jlY1HEeuS5oYDZ6mCNA" name="nestedItem" occurs="zeroOrMany" valueType="Resource" range="_5ptk0I1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jlo1HEeuS5oYDZ6mCNA" name="nestedPart" occurs="zeroOrMany" valueType="Resource" range="_5ptkz41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jl41HEeuS5oYDZ6mCNA" name="nestedIndividual" occurs="zeroOrMany" valueType="Resource" range="_5ptk041HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jmI1HEeuS5oYDZ6mCNA" name="nestedInterface" occurs="zeroOrMany" valueType="Resource" range="_5ptk1Y1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jmY1HEeuS5oYDZ6mCNA" name="nestedAttribute" occurs="zeroOrMany" valueType="Resource" range="_5ptk2I1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jmo1HEeuS5oYDZ6mCNA" name="nestedView" occurs="zeroOrMany" valueType="Resource" range="_5ptk2Y1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jm41HEeuS5oYDZ6mCNA" name="nestedViewpoint" occurs="zeroOrMany" valueType="Resource" range="_5ptk241HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jnI1HEeuS5oYDZ6mCNA" name="nestedRendering" occurs="zeroOrMany" valueType="Resource" range="_5ptk3Y1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jnY1HEeuS5oYDZ6mCNA" name="nestedVerificationCase" occurs="zeroOrMany" valueType="Resource" range="_5ptk341HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jno1HEeuS5oYDZ6mCNA" name="nestedEnumeration" occurs="zeroOrMany" valueType="Resource" range="_5puLgI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jn41HEeuS5oYDZ6mCNA" name="nestedAllocation" occurs="zeroOrMany" valueType="Resource" range="_5puLg41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4joI1HEeuS5oYDZ6mCNA" name="owningDefinition" occurs="zeroOrOne" valueType="Resource" range="_5ptkuo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4joY1HEeuS5oYDZ6mCNA" name="variantMembership" occurs="zeroOrMany" valueType="Resource" range="_5ptkzI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4joo1HEeuS5oYDZ6mCNA" name="transitionStep" occurs="zeroOrOne" valueType="Resource" range="_5ptkjY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jo41HEeuS5oYDZ6mCNA" name="triggerStep" occurs="zeroOrMany" valueType="Resource" range="_5ptkjY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jpI1HEeuS5oYDZ6mCNA" name="effectStep" occurs="zeroOrMany" valueType="Resource" range="_5ptkjY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jpY1HEeuS5oYDZ6mCNA" name="guardExpression" occurs="zeroOrMany" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jpo1HEeuS5oYDZ6mCNA" name="assertionConnector" valueType="Resource" range="_5ptkmY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jp41HEeuS5oYDZ6mCNA" name="memberName" occurs="zeroOrOne" valueType="String"/>
+    <resourceProperties id="_5p4jqI1HEeuS5oYDZ6mCNA" name="visibility" valueType="String">
       <allowedValue>public</allowedValue>
       <allowedValue>private</allowedValue>
       <allowedValue>protected</allowedValue>
       <allowedValue>package</allowedValue>
     </resourceProperties>
-    <resourceProperties id="_KtJz-uffEeqcYsuDRKrn0Q" name="memberElement" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz--ffEeqcYsuDRKrn0Q" name="membershipOwningPackage" occurs="zeroOrOne" valueType="Resource" range="_KtB4FOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz_OffEeqcYsuDRKrn0Q" name="ownedMemberElement_comp" occurs="zeroOrOne" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz_effEeqcYsuDRKrn0Q" name="ownedMemberElement" occurs="zeroOrOne" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz_uffEeqcYsuDRKrn0Q" name="satisfiedRequirement" valueType="Resource" range="_KtCfQOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJz_-ffEeqcYsuDRKrn0Q" name="satisfyingFeature" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0AOffEeqcYsuDRKrn0Q" name="source" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0AeffEeqcYsuDRKrn0Q" name="target" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0AuffEeqcYsuDRKrn0Q" name="triggerAction" occurs="zeroOrMany" valueType="Resource" range="_KtCfPuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0A-ffEeqcYsuDRKrn0Q" name="guardExpression" occurs="zeroOrMany" valueType="Resource" range="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0BOffEeqcYsuDRKrn0Q" name="effectAction" occurs="zeroOrMany" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0BeffEeqcYsuDRKrn0Q" name="succession" valueType="Resource" range="_KtCfKeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0BuffEeqcYsuDRKrn0Q" name="itemDefinition" occurs="oneOrMany" valueType="Resource" range="_KtB4EeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0B-ffEeqcYsuDRKrn0Q" name="instantiatedType" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0COffEeqcYsuDRKrn0Q" name="exhibitedState" valueType="Resource" range="_KtCfO-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0CeffEeqcYsuDRKrn0Q" name="partDefinition" occurs="oneOrMany" valueType="Resource" range="_KtCfT-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0CuffEeqcYsuDRKrn0Q" name="calculationUsage" occurs="zeroOrMany" valueType="Resource" range="_KtCfQ-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0C-ffEeqcYsuDRKrn0Q" name="transitionStep" occurs="zeroOrOne" valueType="Resource" range="_KtB4JuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0DOffEeqcYsuDRKrn0Q" name="triggerStep" occurs="zeroOrMany" valueType="Resource" range="_KtB4JuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0DeffEeqcYsuDRKrn0Q" name="effectStep" occurs="zeroOrMany" valueType="Resource" range="_KtB4JuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0DuffEeqcYsuDRKrn0Q" name="guardExpression" occurs="zeroOrMany" valueType="Resource" range="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0D-ffEeqcYsuDRKrn0Q" name="portDefinition" valueType="Resource" range="_KtCfN-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0EOffEeqcYsuDRKrn0Q" name="portOwningUsage" occurs="zeroOrOne" valueType="Resource" range="_KtCfNeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtJ0EeffEeqcYsuDRKrn0Q" name="connectionEnd" occurs="zeroOrMany" valueType="Resource" range="_KtCfNeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKa8OffEeqcYsuDRKrn0Q" name="step" occurs="zeroOrMany" valueType="Resource" range="_KtB4JuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKa8effEeqcYsuDRKrn0Q" name="parameter" occurs="zeroOrMany" valueType="Resource" range="_KtB4JOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKa8uffEeqcYsuDRKrn0Q" name="relatedElement" occurs="zeroOrMany" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKa8-ffEeqcYsuDRKrn0Q" name="target" occurs="zeroOrMany" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKa9OffEeqcYsuDRKrn0Q" name="source" occurs="zeroOrMany" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKa9effEeqcYsuDRKrn0Q" name="owningRelatedElement" occurs="zeroOrOne" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKa9uffEeqcYsuDRKrn0Q" name="ownedRelatedElement_comp" occurs="zeroOrMany" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKa9-ffEeqcYsuDRKrn0Q" name="ownedRelatedElement" occurs="zeroOrMany" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKa-OffEeqcYsuDRKrn0Q" name="body" valueType="String"/>
-    <resourceProperties id="_KtKa-effEeqcYsuDRKrn0Q" name="commentedElement" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKa-uffEeqcYsuDRKrn0Q" name="annotationForComment" valueType="Resource" range="_KtCfaOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKa--ffEeqcYsuDRKrn0Q" name="general" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKa_OffEeqcYsuDRKrn0Q" name="specific" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKa_effEeqcYsuDRKrn0Q" name="owningType" occurs="zeroOrOne" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKa_uffEeqcYsuDRKrn0Q" name="target" valueType="Resource" range="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKa_-ffEeqcYsuDRKrn0Q" name="value" valueType="String"/>
-    <resourceProperties id="_KtKbAOffEeqcYsuDRKrn0Q" name="reqId" occurs="zeroOrOne" valueType="String"/>
-    <resourceProperties id="_KtKbAeffEeqcYsuDRKrn0Q" name="text" occurs="zeroOrOne" valueType="String"/>
-    <resourceProperties id="_KtKbAuffEeqcYsuDRKrn0Q" name="subjectParameter" valueType="Resource" range="_KtB4JOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbA-ffEeqcYsuDRKrn0Q" name="assumedConstraint" occurs="zeroOrMany" valueType="Resource" range="_KtCfPOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbBOffEeqcYsuDRKrn0Q" name="requiredConstraint" occurs="zeroOrMany" valueType="Resource" range="_KtCfPOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbBeffEeqcYsuDRKrn0Q" name="operator" valueType="String"/>
-    <resourceProperties id="_KtKbBuffEeqcYsuDRKrn0Q" name="operand_comp" occurs="zeroOrMany" valueType="Resource" range="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbB-ffEeqcYsuDRKrn0Q" name="operand" occurs="zeroOrMany" valueType="Resource" range="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbCOffEeqcYsuDRKrn0Q" name="lifeClass" valueType="Resource" range="_KtB4EeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbCeffEeqcYsuDRKrn0Q" name="constraintDefinition" valueType="Resource" range="_KtB4OeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbCuffEeqcYsuDRKrn0Q" name="isDerived"/>
-    <resourceProperties id="_KtKbC-ffEeqcYsuDRKrn0Q" name="isReadOnly"/>
-    <resourceProperties id="_KtKbDOffEeqcYsuDRKrn0Q" name="isComposite"/>
-    <resourceProperties id="_KtKbDeffEeqcYsuDRKrn0Q" name="isPortion"/>
-    <resourceProperties id="_KtKbDuffEeqcYsuDRKrn0Q" name="isPort"/>
-    <resourceProperties id="_KtKbD-ffEeqcYsuDRKrn0Q" name="direction" occurs="zeroOrOne" valueType="String">
-      <allowedValue>in</allowedValue>
-      <allowedValue>inout</allowedValue>
-      <allowedValue>out</allowedValue>
-    </resourceProperties>
-    <resourceProperties id="_KtKbEOffEeqcYsuDRKrn0Q" name="memberFeature" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbEeffEeqcYsuDRKrn0Q" name="ownedMemberFeature_comp" occurs="zeroOrOne" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbEuffEeqcYsuDRKrn0Q" name="owningType" occurs="zeroOrOne" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbE-ffEeqcYsuDRKrn0Q" name="ownedMemberFeature" occurs="zeroOrOne" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbFOffEeqcYsuDRKrn0Q" name="state" occurs="zeroOrMany" valueType="Resource" range="_KtCfO-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbFeffEeqcYsuDRKrn0Q" name="entryAction" occurs="zeroOrOne" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbFuffEeqcYsuDRKrn0Q" name="doAction" occurs="zeroOrOne" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbF-ffEeqcYsuDRKrn0Q" name="exitAction" occurs="zeroOrOne" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbGOffEeqcYsuDRKrn0Q" name="isVariation"/>
-    <resourceProperties id="_KtKbGeffEeqcYsuDRKrn0Q" name="ownedUsage" occurs="zeroOrMany" valueType="Resource" range="_KtCfNeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbGuffEeqcYsuDRKrn0Q" name="variant" occurs="zeroOrMany" valueType="Resource" range="_KtCfNeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbG-ffEeqcYsuDRKrn0Q" name="variantMembership_comp" occurs="zeroOrMany" valueType="Resource" range="_KtCfSOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbHOffEeqcYsuDRKrn0Q" name="ownedPort" occurs="zeroOrMany" valueType="Resource" range="_KtCfNuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbHeffEeqcYsuDRKrn0Q" name="flow" occurs="zeroOrMany" valueType="Resource" range="_KtCfNeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbHuffEeqcYsuDRKrn0Q" name="usage" occurs="zeroOrMany" valueType="Resource" range="_KtCfNeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbH-ffEeqcYsuDRKrn0Q" name="ownedState" occurs="zeroOrMany" valueType="Resource" range="_KtCfO-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbIOffEeqcYsuDRKrn0Q" name="ownedConstraint" occurs="zeroOrMany" valueType="Resource" range="_KtCfPOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbIeffEeqcYsuDRKrn0Q" name="ownedTransition" occurs="zeroOrMany" valueType="Resource" range="_KtCfPeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbIuffEeqcYsuDRKrn0Q" name="ownedRequirement" occurs="zeroOrMany" valueType="Resource" range="_KtCfQOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbI-ffEeqcYsuDRKrn0Q" name="ownedCalculation" occurs="zeroOrMany" valueType="Resource" range="_KtCfQ-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbJOffEeqcYsuDRKrn0Q" name="ownedAnalysisCase" occurs="zeroOrMany" valueType="Resource" range="_KtCfSeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbJeffEeqcYsuDRKrn0Q" name="ownedCase" occurs="zeroOrMany" valueType="Resource" range="_KtCfROffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbJuffEeqcYsuDRKrn0Q" name="ownedReference" occurs="zeroOrMany" valueType="Resource" range="_KtCfS-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbJ-ffEeqcYsuDRKrn0Q" name="ownedAction" occurs="zeroOrMany" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbKOffEeqcYsuDRKrn0Q" name="ownedConnection" occurs="zeroOrMany" valueType="Resource" range="_KtCfTOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbKeffEeqcYsuDRKrn0Q" name="ownedItem" occurs="zeroOrMany" valueType="Resource" range="_KtCfTuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtKbKuffEeqcYsuDRKrn0Q" name="ownedPart" occurs="zeroOrMany" valueType="Resource" range="_KtCfTeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsYOffEeqcYsuDRKrn0Q" name="ownedIndividual" occurs="zeroOrMany" valueType="Resource" range="_KtCfUOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsYeffEeqcYsuDRKrn0Q" name="ownedInterface" occurs="zeroOrMany" valueType="Resource" range="_KtCfUeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsYuffEeqcYsuDRKrn0Q" name="ownedAttribute" occurs="zeroOrMany" valueType="Resource" range="_KtCfVOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsY-ffEeqcYsuDRKrn0Q" name="variantMembership" occurs="zeroOrMany" valueType="Resource" range="_KtCfSOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsZOffEeqcYsuDRKrn0Q" name="kind" valueType="String">
-      <allowedValue>trigger</allowedValue>
-      <allowedValue>guard</allowedValue>
-      <allowedValue>effect</allowedValue>
-    </resourceProperties>
-    <resourceProperties id="_KtOsZeffEeqcYsuDRKrn0Q" name="transitionFeature_comp" valueType="Resource" range="_KtB4JuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsZuffEeqcYsuDRKrn0Q" name="transitionFeature" valueType="Resource" range="_KtB4JuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsZ-ffEeqcYsuDRKrn0Q" name="conditionalImport" occurs="zeroOrOne" valueType="Resource" range="_KtCfLOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsaOffEeqcYsuDRKrn0Q" name="predicate_comp" valueType="Resource" range="_KtB4OeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsaeffEeqcYsuDRKrn0Q" name="predicate" valueType="Resource" range="_KtB4OeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsauffEeqcYsuDRKrn0Q" name="owningSource" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsa-ffEeqcYsuDRKrn0Q" name="ownedTarget_comp" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsbOffEeqcYsuDRKrn0Q" name="ownedTarget" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsbeffEeqcYsuDRKrn0Q" name="originalPortDefinition" valueType="Resource" range="_KtCfN-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsbuffEeqcYsuDRKrn0Q" name="conjugatedPortDefinition" valueType="Resource" range="_KtCfOOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsb-ffEeqcYsuDRKrn0Q" name="analysisAction" occurs="zeroOrMany" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOscOffEeqcYsuDRKrn0Q" name="resultExpression" occurs="zeroOrOne" valueType="Resource" range="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsceffEeqcYsuDRKrn0Q" name="isTimeSlice"/>
-    <resourceProperties id="_KtOscuffEeqcYsuDRKrn0Q" name="isSnapshot"/>
-    <resourceProperties id="_KtOsc-ffEeqcYsuDRKrn0Q" name="individualDefinition" valueType="Resource" range="_KtCfMuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsdOffEeqcYsuDRKrn0Q" name="timeSliceFeature" occurs="zeroOrOne" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsdeffEeqcYsuDRKrn0Q" name="snapshotFeature" occurs="zeroOrOne" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsduffEeqcYsuDRKrn0Q" name="relatedType" occurs="zeroOrMany" valueType="Resource" range="_KtB4E-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsd-ffEeqcYsuDRKrn0Q" name="owningConnector" occurs="zeroOrOne" valueType="Resource" range="_KtB4IuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOseOffEeqcYsuDRKrn0Q" name="associationEnd" occurs="zeroOrMany" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOseeffEeqcYsuDRKrn0Q" name="annotatingComment" valueType="Resource" range="_KtCfaeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOseuffEeqcYsuDRKrn0Q" name="annotatedElement" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOse-ffEeqcYsuDRKrn0Q" name="lowerBound" occurs="zeroOrOne" valueType="Resource" range="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsfOffEeqcYsuDRKrn0Q" name="upperBound" valueType="Resource" range="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsfeffEeqcYsuDRKrn0Q" name="bound" occurs="oneOrMany" valueType="Resource" range="_KtB4K-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsfuffEeqcYsuDRKrn0Q" name="context" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsf-ffEeqcYsuDRKrn0Q" name="ownedMembership_comp" occurs="zeroOrMany" valueType="Resource" range="_KtB4FuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsgOffEeqcYsuDRKrn0Q" name="ownedMember" occurs="zeroOrMany" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsgeffEeqcYsuDRKrn0Q" name="membership" occurs="zeroOrMany" valueType="Resource" range="_KtB4FuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsguffEeqcYsuDRKrn0Q" name="ownedImport_comp" occurs="zeroOrMany" valueType="Resource" range="_KtB4GOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOsg-ffEeqcYsuDRKrn0Q" name="member" occurs="zeroOrMany" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtOshOffEeqcYsuDRKrn0Q" name="importedMembership" occurs="zeroOrMany" valueType="Resource" range="_KtB4FuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTcOffEeqcYsuDRKrn0Q" name="ownedMembership" occurs="zeroOrMany" valueType="Resource" range="_KtB4FuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTceffEeqcYsuDRKrn0Q" name="ownedImport" occurs="zeroOrMany" valueType="Resource" range="_KtB4GOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTcuffEeqcYsuDRKrn0Q" name="interfaceDefinition" valueType="Resource" range="_KtCfUuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTc-ffEeqcYsuDRKrn0Q" name="owningVariationDefinition" occurs="zeroOrOne" valueType="Resource" range="_KtCfNOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTdOffEeqcYsuDRKrn0Q" name="owningVariationUsage" occurs="zeroOrOne" valueType="Resource" range="_KtCfNeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTdeffEeqcYsuDRKrn0Q" name="ownedVariantUsage_comp" occurs="zeroOrOne" valueType="Resource" range="_KtCfNeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTduffEeqcYsuDRKrn0Q" name="ownedVariantUsage" occurs="zeroOrOne" valueType="Resource" range="_KtCfNeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTd-ffEeqcYsuDRKrn0Q" name="actionDefinition" occurs="oneOrMany" valueType="Resource" range="_KtB4JeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTeOffEeqcYsuDRKrn0Q" name="itemType" occurs="oneOrMany" valueType="Resource" range="_KtB4EuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTeeffEeqcYsuDRKrn0Q" name="targetInputFeature" occurs="oneOrMany" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTeuffEeqcYsuDRKrn0Q" name="sourceOutputFeature" occurs="oneOrMany" valueType="Resource" range="_KtB4G-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTe-ffEeqcYsuDRKrn0Q" name="itemFlowEnd" occurs="zeroOrMany" valueType="Resource" range="_KtCfJeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTfOffEeqcYsuDRKrn0Q" name="itemFlowFeature" occurs="zeroOrMany" valueType="Resource" range="_KtCfI-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTfeffEeqcYsuDRKrn0Q" name="itemFeature" occurs="oneOrMany" valueType="Resource" range="_KtCfJOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTfuffEeqcYsuDRKrn0Q" name="kind" valueType="String">
+    <resourceProperties id="_5p4jqY1HEeuS5oYDZ6mCNA" name="memberElement" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jqo1HEeuS5oYDZ6mCNA" name="membershipOwningNamespace" occurs="zeroOrOne" valueType="Resource" range="_5ptkc41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jq41HEeuS5oYDZ6mCNA" name="ownedMemberElement_comp" occurs="zeroOrOne" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jrI1HEeuS5oYDZ6mCNA" name="ownedMemberElement" occurs="zeroOrOne" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jrY1HEeuS5oYDZ6mCNA" name="action" occurs="zeroOrMany" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jro1HEeuS5oYDZ6mCNA" name="ownedRequirement_comp" valueType="Resource" range="_5ptkxY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jr41HEeuS5oYDZ6mCNA" name="verifiedRequirement" valueType="Resource" range="_5ptkxY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jsI1HEeuS5oYDZ6mCNA" name="ownedRequirement" valueType="Resource" range="_5ptkxY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jsY1HEeuS5oYDZ6mCNA" name="actionDefinition" occurs="oneOrMany" valueType="Resource" range="_5ptkjo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jso1HEeuS5oYDZ6mCNA" name="constraintDefinition" valueType="Resource" range="_5ptks41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4js41HEeuS5oYDZ6mCNA" name="referent" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jtI1HEeuS5oYDZ6mCNA" name="receiverArgument" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jtY1HEeuS5oYDZ6mCNA" name="itemsArgument" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jto1HEeuS5oYDZ6mCNA" name="renderingDefinition" valueType="Resource" range="_5ptk3o1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jt41HEeuS5oYDZ6mCNA" name="state" occurs="zeroOrMany" valueType="Resource" range="_5ptkwY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4juI1HEeuS5oYDZ6mCNA" name="entryAction" occurs="zeroOrOne" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4juY1HEeuS5oYDZ6mCNA" name="doAction" occurs="zeroOrOne" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4juo1HEeuS5oYDZ6mCNA" name="exitAction" occurs="zeroOrOne" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4ju41HEeuS5oYDZ6mCNA" name="featureOfType" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jvI1HEeuS5oYDZ6mCNA" name="featuringType" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jvY1HEeuS5oYDZ6mCNA" name="owningFeatureOfType" occurs="zeroOrOne" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jvo1HEeuS5oYDZ6mCNA" name="receiverArgument" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jv41HEeuS5oYDZ6mCNA" name="verificationCaseDefinition" valueType="Resource" range="_5ptkto1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jwI1HEeuS5oYDZ6mCNA" name="verifiedRequirement" occurs="zeroOrMany" valueType="Resource" range="_5ptkxY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jwY1HEeuS5oYDZ6mCNA" name="itemType" occurs="oneOrMany" valueType="Resource" range="_5ptki41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jwo1HEeuS5oYDZ6mCNA" name="targetInputFeature" occurs="oneOrMany" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jw41HEeuS5oYDZ6mCNA" name="sourceOutputFeature" occurs="oneOrMany" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jxI1HEeuS5oYDZ6mCNA" name="itemFlowEnd" occurs="zeroOrMany" valueType="Resource" range="_5ptkhY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jxY1HEeuS5oYDZ6mCNA" name="itemFeature" occurs="oneOrMany" valueType="Resource" range="_5ptkho1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jxo1HEeuS5oYDZ6mCNA" name="itemFlowFeature" occurs="zeroOrMany" valueType="Resource" range="_5ptkcI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jx41HEeuS5oYDZ6mCNA" name="conjugatedPortDefinition" occurs="zeroOrOne" valueType="Resource" range="_5ptkvo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jyI1HEeuS5oYDZ6mCNA" name="originalType" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jyY1HEeuS5oYDZ6mCNA" name="conjugatedType" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jyo1HEeuS5oYDZ6mCNA" name="owningType" occurs="zeroOrOne" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jy41HEeuS5oYDZ6mCNA" name="referenceType" occurs="oneOrMany" valueType="Resource" range="_5ptki41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jzI1HEeuS5oYDZ6mCNA" name="redefiningFeature" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jzY1HEeuS5oYDZ6mCNA" name="redefinedFeature" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4jzo1HEeuS5oYDZ6mCNA" name="isModelLevelEvaluable"/>
+    <resourceProperties id="_5p4jz41HEeuS5oYDZ6mCNA" name="function" valueType="Resource" range="_5ptkkY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j0I1HEeuS5oYDZ6mCNA" name="result" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j0Y1HEeuS5oYDZ6mCNA" name="analysisAction" occurs="zeroOrMany" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j0o1HEeuS5oYDZ6mCNA" name="analysisCaseDefinition" valueType="Resource" range="_5ptky41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j041HEeuS5oYDZ6mCNA" name="resultExpression" occurs="zeroOrOne" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j1I1HEeuS5oYDZ6mCNA" name="kind" valueType="String">
       <allowedValue>entry</allowedValue>
       <allowedValue>do</allowedValue>
       <allowedValue>exit</allowedValue>
     </resourceProperties>
-    <resourceProperties id="_KtPTf-ffEeqcYsuDRKrn0Q" name="action_comp" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTgOffEeqcYsuDRKrn0Q" name="action" valueType="Resource" range="_KtCfOuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTgeffEeqcYsuDRKrn0Q" name="superclass" valueType="Resource" range="_KtB4EuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTguffEeqcYsuDRKrn0Q" name="subclass" valueType="Resource" range="_KtB4EuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTg-ffEeqcYsuDRKrn0Q" name="owningClassifier" occurs="zeroOrOne" valueType="Resource" range="_KtB4EuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPThOffEeqcYsuDRKrn0Q" name="portDefinition" valueType="Resource" range="_KtCfN-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTheffEeqcYsuDRKrn0Q" name="conjugatedPortDefinition" valueType="Resource" range="_KtCfOOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPThuffEeqcYsuDRKrn0Q" name="identifier" occurs="zeroOrOne" valueType="String"/>
-    <resourceProperties id="_KtPTh-ffEeqcYsuDRKrn0Q" name="name" occurs="zeroOrOne" valueType="String"/>
-    <resourceProperties id="_KtPTiOffEeqcYsuDRKrn0Q" name="owningMembership" occurs="zeroOrOne" valueType="Resource" range="_KtB4FuffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTieffEeqcYsuDRKrn0Q" name="ownedRelationship_comp" occurs="zeroOrMany" valueType="Resource" range="_KtB4F-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTiuffEeqcYsuDRKrn0Q" name="owningRelationship" occurs="zeroOrOne" valueType="Resource" range="_KtB4F-ffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTi-ffEeqcYsuDRKrn0Q" name="owningNamespace" occurs="zeroOrOne" valueType="Resource" range="_KtB4FOffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTjOffEeqcYsuDRKrn0Q" name="owner" occurs="zeroOrOne" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTjeffEeqcYsuDRKrn0Q" name="ownedElement" occurs="zeroOrMany" valueType="Resource" range="_KtB4FeffEeqcYsuDRKrn0Q"/>
-    <resourceProperties id="_KtPTjuffEeqcYsuDRKrn0Q" name="ownedRelationship" occurs="zeroOrMany" valueType="Resource" range="_KtB4F-ffEeqcYsuDRKrn0Q"/>
+    <resourceProperties id="_5p4j1Y1HEeuS5oYDZ6mCNA" name="action_comp" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j1o1HEeuS5oYDZ6mCNA" name="action" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j141HEeuS5oYDZ6mCNA" name="allocation" occurs="zeroOrMany" valueType="Resource" range="_5puLg41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j2I1HEeuS5oYDZ6mCNA" name="reqId" occurs="zeroOrOne" valueType="String"/>
+    <resourceProperties id="_5p4j2Y1HEeuS5oYDZ6mCNA" name="text" occurs="zeroOrMany" valueType="String"/>
+    <resourceProperties id="_5p4j2o1HEeuS5oYDZ6mCNA" name="assumedConstraint" occurs="zeroOrMany" valueType="Resource" range="_5ptkwo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j241HEeuS5oYDZ6mCNA" name="requiredConstraint" occurs="zeroOrMany" valueType="Resource" range="_5ptkwo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j3I1HEeuS5oYDZ6mCNA" name="subjectParameter" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j3Y1HEeuS5oYDZ6mCNA" name="connectionDefinition" occurs="oneOrMany" valueType="Resource" range="_5ptkmo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j3o1HEeuS5oYDZ6mCNA" name="isAbstract"/>
+    <resourceProperties id="_5p4j341HEeuS5oYDZ6mCNA" name="isSufficient"/>
+    <resourceProperties id="_5p4j4I1HEeuS5oYDZ6mCNA" name="isConjugated"/>
+    <resourceProperties id="_5p4j4Y1HEeuS5oYDZ6mCNA" name="ownedGeneralization" occurs="zeroOrMany" valueType="Resource" range="_5ptkfY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j4o1HEeuS5oYDZ6mCNA" name="ownedFeatureMembership_comp" occurs="zeroOrMany" valueType="Resource" range="_5ptkfo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j441HEeuS5oYDZ6mCNA" name="feature" occurs="zeroOrMany" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j5I1HEeuS5oYDZ6mCNA" name="ownedFeature" occurs="zeroOrMany" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j5Y1HEeuS5oYDZ6mCNA" name="input" occurs="zeroOrMany" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j5o1HEeuS5oYDZ6mCNA" name="output" occurs="zeroOrMany" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j541HEeuS5oYDZ6mCNA" name="inheritedMembership" occurs="zeroOrMany" valueType="Resource" range="_5ptkdY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j6I1HEeuS5oYDZ6mCNA" name="endFeature" occurs="zeroOrMany" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j6Y1HEeuS5oYDZ6mCNA" name="ownedEndFeature" occurs="zeroOrMany" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j6o1HEeuS5oYDZ6mCNA" name="ownedConjugator" occurs="zeroOrOne" valueType="Resource" range="_5ptkgI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j641HEeuS5oYDZ6mCNA" name="featureMembership" occurs="zeroOrMany" valueType="Resource" range="_5ptkfo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j7I1HEeuS5oYDZ6mCNA" name="inheritedFeature" occurs="zeroOrMany" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j7Y1HEeuS5oYDZ6mCNA" name="multiplicity" occurs="zeroOrOne" valueType="Resource" range="_5ptkgY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j7o1HEeuS5oYDZ6mCNA" name="ownedFeatureMembership" occurs="zeroOrMany" valueType="Resource" range="_5ptkfo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j741HEeuS5oYDZ6mCNA" name="portDefinition" valueType="Resource" range="_5ptkvY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j8I1HEeuS5oYDZ6mCNA" name="portOwningUsage" occurs="zeroOrOne" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j8Y1HEeuS5oYDZ6mCNA" name="performedAction" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j8o1HEeuS5oYDZ6mCNA" name="kind" valueType="String">
+      <allowedValue>trigger</allowedValue>
+      <allowedValue>guard</allowedValue>
+      <allowedValue>effect</allowedValue>
+    </resourceProperties>
+    <resourceProperties id="_5p4j841HEeuS5oYDZ6mCNA" name="transitionFeature_comp" valueType="Resource" range="_5ptkjY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j9I1HEeuS5oYDZ6mCNA" name="transitionFeature" valueType="Resource" range="_5ptkjY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j9Y1HEeuS5oYDZ6mCNA" name="enumeratedValue" occurs="zeroOrMany" valueType="Resource" range="_5puLgI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j9o1HEeuS5oYDZ6mCNA" name="general" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j941HEeuS5oYDZ6mCNA" name="specific" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j-I1HEeuS5oYDZ6mCNA" name="owningType" occurs="zeroOrOne" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j-Y1HEeuS5oYDZ6mCNA" name="view" occurs="zeroOrMany" valueType="Resource" range="_5ptk2Y1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p4j-o1HEeuS5oYDZ6mCNA" name="satisfiedViewpoint" occurs="zeroOrMany" valueType="Resource" range="_5ptk241HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KoI1HEeuS5oYDZ6mCNA" name="rendering" occurs="zeroOrOne" valueType="Resource" range="_5ptk3Y1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KoY1HEeuS5oYDZ6mCNA" name="viewCondition" occurs="zeroOrMany" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Koo1HEeuS5oYDZ6mCNA" name="rendering" occurs="zeroOrMany" valueType="Resource" range="_5ptk3Y1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Ko41HEeuS5oYDZ6mCNA" name="verifiedRequirement" occurs="zeroOrMany" valueType="Resource" range="_5ptkxY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KpI1HEeuS5oYDZ6mCNA" name="value" valueType="Integer"/>
+    <resourceProperties id="_5p5KpY1HEeuS5oYDZ6mCNA" name="metadataValue_comp" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Kpo1HEeuS5oYDZ6mCNA" name="owningMetadataFeature" occurs="zeroOrOne" valueType="Resource" range="_5ptkrI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Kp41HEeuS5oYDZ6mCNA" name="metadataValue" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KqI1HEeuS5oYDZ6mCNA" name="calculation" occurs="zeroOrMany" valueType="Resource" range="_5ptkyI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KqY1HEeuS5oYDZ6mCNA" name="expression" occurs="zeroOrMany" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Kqo1HEeuS5oYDZ6mCNA" name="result" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Kq41HEeuS5oYDZ6mCNA" name="isDerived"/>
+    <resourceProperties id="_5p5KrI1HEeuS5oYDZ6mCNA" name="isReadOnly"/>
+    <resourceProperties id="_5p5KrY1HEeuS5oYDZ6mCNA" name="isComposite"/>
+    <resourceProperties id="_5p5Kro1HEeuS5oYDZ6mCNA" name="isPortion"/>
+    <resourceProperties id="_5p5Kr41HEeuS5oYDZ6mCNA" name="isPort"/>
+    <resourceProperties id="_5p5KsI1HEeuS5oYDZ6mCNA" name="direction" occurs="zeroOrOne" valueType="String">
+      <allowedValue>in</allowedValue>
+      <allowedValue>inout</allowedValue>
+      <allowedValue>out</allowedValue>
+    </resourceProperties>
+    <resourceProperties id="_5p5KsY1HEeuS5oYDZ6mCNA" name="memberFeature" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Kso1HEeuS5oYDZ6mCNA" name="ownedMemberFeature_comp" occurs="zeroOrOne" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Ks41HEeuS5oYDZ6mCNA" name="owningType" occurs="zeroOrOne" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KtI1HEeuS5oYDZ6mCNA" name="ownedMemberFeature" occurs="zeroOrOne" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KtY1HEeuS5oYDZ6mCNA" name="condition_comp" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Kto1HEeuS5oYDZ6mCNA" name="condition" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Kt41HEeuS5oYDZ6mCNA" name="portDefinition" valueType="Resource" range="_5ptkvY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KuI1HEeuS5oYDZ6mCNA" name="conjugatedPortDefinition" valueType="Resource" range="_5ptkvo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KuY1HEeuS5oYDZ6mCNA" name="ownedObjectiveRequirement_comp" valueType="Resource" range="_5ptkxY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Kuo1HEeuS5oYDZ6mCNA" name="ownedObjectiveRequirement" valueType="Resource" range="_5ptkxY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Ku41HEeuS5oYDZ6mCNA" name="kind" valueType="String">
+      <allowedValue>assumption</allowedValue>
+      <allowedValue>requirement</allowedValue>
+    </resourceProperties>
+    <resourceProperties id="_5p5KvI1HEeuS5oYDZ6mCNA" name="constraint_comp" valueType="Resource" range="_5ptkwo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KvY1HEeuS5oYDZ6mCNA" name="constraint" valueType="Resource" range="_5ptkwo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Kvo1HEeuS5oYDZ6mCNA" name="subsettedFeature" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Kv41HEeuS5oYDZ6mCNA" name="subsettingFeature" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KwI1HEeuS5oYDZ6mCNA" name="owningFeature" occurs="zeroOrOne" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KwY1HEeuS5oYDZ6mCNA" name="ownedSubjectParameter_comp" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Kwo1HEeuS5oYDZ6mCNA" name="ownedSubjectParameter" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Kw41HEeuS5oYDZ6mCNA" name="ownedMembership_comp" occurs="zeroOrMany" valueType="Resource" range="_5ptkdY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KxI1HEeuS5oYDZ6mCNA" name="ownedMember" occurs="zeroOrMany" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KxY1HEeuS5oYDZ6mCNA" name="membership" occurs="zeroOrMany" valueType="Resource" range="_5ptkdY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Kxo1HEeuS5oYDZ6mCNA" name="ownedImport_comp" occurs="zeroOrMany" valueType="Resource" range="_5ptkfI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Kx41HEeuS5oYDZ6mCNA" name="member" occurs="zeroOrMany" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KyI1HEeuS5oYDZ6mCNA" name="importedMembership" occurs="zeroOrMany" valueType="Resource" range="_5ptkdY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KyY1HEeuS5oYDZ6mCNA" name="ownedMembership" occurs="zeroOrMany" valueType="Resource" range="_5ptkdY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Kyo1HEeuS5oYDZ6mCNA" name="ownedImport" occurs="zeroOrMany" valueType="Resource" range="_5ptkfI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5Ky41HEeuS5oYDZ6mCNA" name="ownedPortConjugator" valueType="Resource" range="_5ptkv41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KzI1HEeuS5oYDZ6mCNA" name="originalPortDefinition" valueType="Resource" range="_5ptkvY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5KzY1HEeuS5oYDZ6mCNA" name="isTimeSlice"/>
+    <resourceProperties id="_5p5Kzo1HEeuS5oYDZ6mCNA" name="isSnapshot"/>
+    <resourceProperties id="_5p5Kz41HEeuS5oYDZ6mCNA" name="individualDefinition" valueType="Resource" range="_5ptk1I1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K0I1HEeuS5oYDZ6mCNA" name="timeSliceFeature" occurs="zeroOrOne" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K0Y1HEeuS5oYDZ6mCNA" name="snapshotFeature" occurs="zeroOrOne" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K0o1HEeuS5oYDZ6mCNA" name="objectiveRequirement" occurs="zeroOrOne" valueType="Resource" range="_5ptkxY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K041HEeuS5oYDZ6mCNA" name="subjectParameter" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K1I1HEeuS5oYDZ6mCNA" name="value"/>
+    <resourceProperties id="_5p5K1Y1HEeuS5oYDZ6mCNA" name="body" valueType="String"/>
+    <resourceProperties id="_5p5K1o1HEeuS5oYDZ6mCNA" name="source" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K141HEeuS5oYDZ6mCNA" name="target" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K2I1HEeuS5oYDZ6mCNA" name="triggerAction" occurs="zeroOrMany" valueType="Resource" range="_5ptkxI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K2Y1HEeuS5oYDZ6mCNA" name="guardExpression" occurs="zeroOrMany" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K2o1HEeuS5oYDZ6mCNA" name="effectAction" occurs="zeroOrMany" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K241HEeuS5oYDZ6mCNA" name="succession" valueType="Resource" range="_5ptkiI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K3I1HEeuS5oYDZ6mCNA" name="interfaceDefinition" valueType="Resource" range="_5ptk1o1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K3Y1HEeuS5oYDZ6mCNA" name="satisfiedRequirement" valueType="Resource" range="_5ptkxY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K3o1HEeuS5oYDZ6mCNA" name="satisfyingFeature" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K341HEeuS5oYDZ6mCNA" name="featureWithValue" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K4I1HEeuS5oYDZ6mCNA" name="value_comp" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K4Y1HEeuS5oYDZ6mCNA" name="valueConnector" valueType="Resource" range="_5ptkmY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K4o1HEeuS5oYDZ6mCNA" name="value" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K441HEeuS5oYDZ6mCNA" name="lowerBound" occurs="zeroOrOne" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K5I1HEeuS5oYDZ6mCNA" name="upperBound" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K5Y1HEeuS5oYDZ6mCNA" name="bound" occurs="oneOrMany" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K5o1HEeuS5oYDZ6mCNA" name="analysisAction" occurs="zeroOrMany" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K541HEeuS5oYDZ6mCNA" name="resultExpression" occurs="zeroOrOne" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K6I1HEeuS5oYDZ6mCNA" name="enumerationDefinition" valueType="Resource" range="_5puLgY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K6Y1HEeuS5oYDZ6mCNA" name="ownedVariantUsage_comp" occurs="zeroOrOne" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K6o1HEeuS5oYDZ6mCNA" name="ownedVariantUsage" occurs="zeroOrOne" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K641HEeuS5oYDZ6mCNA" name="metadataType" valueType="Resource" range="_5ptklI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K7I1HEeuS5oYDZ6mCNA" name="ownedMetadata" occurs="zeroOrMany" valueType="Resource" range="_5ptkrI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K7Y1HEeuS5oYDZ6mCNA" name="behavior" occurs="oneOrMany" valueType="Resource" range="_5ptkjo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K7o1HEeuS5oYDZ6mCNA" name="parameter" occurs="zeroOrMany" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K741HEeuS5oYDZ6mCNA" name="attributeDefinition" occurs="oneOrMany" valueType="Resource" range="_5ptklI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K8I1HEeuS5oYDZ6mCNA" name="identifier" valueType="String"/>
+    <resourceProperties id="_5p5K8Y1HEeuS5oYDZ6mCNA" name="name" occurs="zeroOrOne" valueType="String"/>
+    <resourceProperties id="_5p5K8o1HEeuS5oYDZ6mCNA" name="qualifiedName" occurs="zeroOrOne" valueType="String"/>
+    <resourceProperties id="_5p5K841HEeuS5oYDZ6mCNA" name="aliasId" occurs="zeroOrMany" valueType="String"/>
+    <resourceProperties id="_5p5K9I1HEeuS5oYDZ6mCNA" name="humanId" occurs="zeroOrOne" valueType="String"/>
+    <resourceProperties id="_5p5K9Y1HEeuS5oYDZ6mCNA" name="owningMembership" occurs="zeroOrOne" valueType="Resource" range="_5ptkdY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K9o1HEeuS5oYDZ6mCNA" name="ownedRelationship_comp" occurs="zeroOrMany" valueType="Resource" range="_5ptkdo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K941HEeuS5oYDZ6mCNA" name="owningRelationship" occurs="zeroOrOne" valueType="Resource" range="_5ptkdo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K-I1HEeuS5oYDZ6mCNA" name="owningNamespace" occurs="zeroOrOne" valueType="Resource" range="_5ptkc41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K-Y1HEeuS5oYDZ6mCNA" name="owner" occurs="zeroOrOne" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K-o1HEeuS5oYDZ6mCNA" name="ownedElement" occurs="zeroOrMany" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K-41HEeuS5oYDZ6mCNA" name="documentation_comp" occurs="zeroOrMany" valueType="Resource" range="_5ptkd41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K_I1HEeuS5oYDZ6mCNA" name="ownedAnnotation_comp" occurs="zeroOrMany" valueType="Resource" range="_5ptkeI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K_Y1HEeuS5oYDZ6mCNA" name="documentationComment" occurs="zeroOrMany" valueType="Resource" range="_5ptkeo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K_o1HEeuS5oYDZ6mCNA" name="ownedTextualRepresentation" occurs="zeroOrMany" valueType="Resource" range="_5ptke41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5K_41HEeuS5oYDZ6mCNA" name="ownedRelationship" occurs="zeroOrMany" valueType="Resource" range="_5ptkdo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LAI1HEeuS5oYDZ6mCNA" name="documentation" occurs="zeroOrMany" valueType="Resource" range="_5ptkd41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LAY1HEeuS5oYDZ6mCNA" name="ownedAnnotation" occurs="zeroOrMany" valueType="Resource" range="_5ptkeI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LAo1HEeuS5oYDZ6mCNA" name="superclass" valueType="Resource" range="_5ptki41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LA41HEeuS5oYDZ6mCNA" name="subclass" valueType="Resource" range="_5ptki41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LBI1HEeuS5oYDZ6mCNA" name="owningClassifier" occurs="zeroOrOne" valueType="Resource" range="_5ptki41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LBY1HEeuS5oYDZ6mCNA" name="relatedElement" occurs="zeroOrMany" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LBo1HEeuS5oYDZ6mCNA" name="target" occurs="zeroOrMany" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LB41HEeuS5oYDZ6mCNA" name="source" occurs="zeroOrMany" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LCI1HEeuS5oYDZ6mCNA" name="owningRelatedElement" occurs="zeroOrOne" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LCY1HEeuS5oYDZ6mCNA" name="ownedRelatedElement_comp" occurs="zeroOrMany" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LCo1HEeuS5oYDZ6mCNA" name="ownedRelatedElement" occurs="zeroOrMany" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LC41HEeuS5oYDZ6mCNA" name="value" valueType="String"/>
+    <resourceProperties id="_5p5LDI1HEeuS5oYDZ6mCNA" name="client" occurs="oneOrMany" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LDY1HEeuS5oYDZ6mCNA" name="supplier" occurs="oneOrMany" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LDo1HEeuS5oYDZ6mCNA" name="stateDefinition" occurs="oneOrMany" valueType="Resource" range="_5ptkjo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LD41HEeuS5oYDZ6mCNA" name="entryAction" occurs="zeroOrOne" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LEI1HEeuS5oYDZ6mCNA" name="doAction" occurs="zeroOrOne" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LEY1HEeuS5oYDZ6mCNA" name="exitAction" occurs="zeroOrOne" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LEo1HEeuS5oYDZ6mCNA" name="argument" occurs="zeroOrMany" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LE41HEeuS5oYDZ6mCNA" name="predicate" valueType="Resource" range="_5ptks41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LFI1HEeuS5oYDZ6mCNA" name="isUnique"/>
+    <resourceProperties id="_5p5LFY1HEeuS5oYDZ6mCNA" name="isOrdered"/>
+    <resourceProperties id="_5p5LFo1HEeuS5oYDZ6mCNA" name="isComposite"/>
+    <resourceProperties id="_5p5LF41HEeuS5oYDZ6mCNA" name="isEnd"/>
+    <resourceProperties id="_5p5LGI1HEeuS5oYDZ6mCNA" name="isNonunique"/>
+    <resourceProperties id="_5p5LGY1HEeuS5oYDZ6mCNA" name="ownedTypeFeaturing" occurs="zeroOrMany" valueType="Resource" range="_5ptkf41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LGo1HEeuS5oYDZ6mCNA" name="owningFeatureMembership" occurs="zeroOrOne" valueType="Resource" range="_5ptkfo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LG41HEeuS5oYDZ6mCNA" name="owningType" occurs="zeroOrOne" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LHI1HEeuS5oYDZ6mCNA" name="endOwningType" occurs="zeroOrOne" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LHY1HEeuS5oYDZ6mCNA" name="type" occurs="oneOrMany" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LHo1HEeuS5oYDZ6mCNA" name="ownedRedefinition" occurs="zeroOrMany" valueType="Resource" range="_5ptkgo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LH41HEeuS5oYDZ6mCNA" name="ownedSubsetting" occurs="zeroOrMany" valueType="Resource" range="_5ptkg41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LII1HEeuS5oYDZ6mCNA" name="ownedTyping" occurs="zeroOrMany" valueType="Resource" range="_5ptkhI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LIY1HEeuS5oYDZ6mCNA" name="featuringType" occurs="zeroOrMany" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LIo1HEeuS5oYDZ6mCNA" name="annotatedElement" occurs="zeroOrMany" valueType="Resource" range="_5ptkdI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LI41HEeuS5oYDZ6mCNA" name="annotation" occurs="zeroOrMany" valueType="Resource" range="_5ptkeI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LJI1HEeuS5oYDZ6mCNA" name="interfaceEnd" occurs="zeroOrMany" valueType="Resource" range="_5ptkvI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LJY1HEeuS5oYDZ6mCNA" name="ownedResultExpression_comp" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LJo1HEeuS5oYDZ6mCNA" name="ownedResultExpression" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LJ41HEeuS5oYDZ6mCNA" name="partDefinition" occurs="oneOrMany" valueType="Resource" range="_5ptk0Y1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LKI1HEeuS5oYDZ6mCNA" name="calculationDefinition" valueType="Resource" range="_5ptkkY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LKY1HEeuS5oYDZ6mCNA" name="operator" valueType="String"/>
+    <resourceProperties id="_5p5LKo1HEeuS5oYDZ6mCNA" name="operand_comp" occurs="zeroOrMany" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LK41HEeuS5oYDZ6mCNA" name="operand" occurs="zeroOrMany" valueType="Resource" range="_5ptkkI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LLI1HEeuS5oYDZ6mCNA" name="typedFeature" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LLY1HEeuS5oYDZ6mCNA" name="type" valueType="Resource" range="_5ptkco1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LLo1HEeuS5oYDZ6mCNA" name="owningFeature" occurs="zeroOrOne" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LL41HEeuS5oYDZ6mCNA" name="isVariation"/>
+    <resourceProperties id="_5p5LMI1HEeuS5oYDZ6mCNA" name="ownedUsage" occurs="zeroOrMany" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LMY1HEeuS5oYDZ6mCNA" name="ownedPort" occurs="zeroOrMany" valueType="Resource" range="_5ptkvI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LMo1HEeuS5oYDZ6mCNA" name="flowFeature" occurs="zeroOrMany" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LM41HEeuS5oYDZ6mCNA" name="usage" occurs="zeroOrMany" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LNI1HEeuS5oYDZ6mCNA" name="ownedState" occurs="zeroOrMany" valueType="Resource" range="_5ptkwY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LNY1HEeuS5oYDZ6mCNA" name="ownedConstraint" occurs="zeroOrMany" valueType="Resource" range="_5ptkwo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LNo1HEeuS5oYDZ6mCNA" name="ownedTransition" occurs="zeroOrMany" valueType="Resource" range="_5ptkw41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LN41HEeuS5oYDZ6mCNA" name="ownedRequirement" occurs="zeroOrMany" valueType="Resource" range="_5ptkxY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LOI1HEeuS5oYDZ6mCNA" name="ownedCalculation" occurs="zeroOrMany" valueType="Resource" range="_5ptkyI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LOY1HEeuS5oYDZ6mCNA" name="variantMembership_comp" occurs="zeroOrMany" valueType="Resource" range="_5ptkzI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LOo1HEeuS5oYDZ6mCNA" name="ownedAnalysisCase" occurs="zeroOrMany" valueType="Resource" range="_5ptkyo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LO41HEeuS5oYDZ6mCNA" name="variant" occurs="zeroOrMany" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LPI1HEeuS5oYDZ6mCNA" name="ownedCase" occurs="zeroOrMany" valueType="Resource" range="_5ptkyY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LPY1HEeuS5oYDZ6mCNA" name="ownedReference" occurs="zeroOrMany" valueType="Resource" range="_5ptkzY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LPo1HEeuS5oYDZ6mCNA" name="ownedAction" occurs="zeroOrMany" valueType="Resource" range="_5ptkwI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LP41HEeuS5oYDZ6mCNA" name="ownedConnection" occurs="zeroOrMany" valueType="Resource" range="_5ptkzo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LQI1HEeuS5oYDZ6mCNA" name="ownedItem" occurs="zeroOrMany" valueType="Resource" range="_5ptk0I1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LQY1HEeuS5oYDZ6mCNA" name="ownedPart" occurs="zeroOrMany" valueType="Resource" range="_5ptkz41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LQo1HEeuS5oYDZ6mCNA" name="ownedIndividual" occurs="zeroOrMany" valueType="Resource" range="_5ptk041HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LQ41HEeuS5oYDZ6mCNA" name="ownedInterface" occurs="zeroOrMany" valueType="Resource" range="_5ptk1Y1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LRI1HEeuS5oYDZ6mCNA" name="ownedAttribute" occurs="zeroOrMany" valueType="Resource" range="_5ptk2I1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LRY1HEeuS5oYDZ6mCNA" name="ownedView" occurs="zeroOrMany" valueType="Resource" range="_5ptk2Y1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LRo1HEeuS5oYDZ6mCNA" name="ownedViewpoint" occurs="zeroOrMany" valueType="Resource" range="_5ptk241HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LR41HEeuS5oYDZ6mCNA" name="ownedRendering" occurs="zeroOrMany" valueType="Resource" range="_5ptk3Y1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LSI1HEeuS5oYDZ6mCNA" name="ownedVerificationCase" occurs="zeroOrMany" valueType="Resource" range="_5ptk341HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LSY1HEeuS5oYDZ6mCNA" name="ownedEnumeration" occurs="zeroOrMany" valueType="Resource" range="_5puLgI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LSo1HEeuS5oYDZ6mCNA" name="ownedAllocation" occurs="zeroOrMany" valueType="Resource" range="_5puLg41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LS41HEeuS5oYDZ6mCNA" name="variantMembership" occurs="zeroOrMany" valueType="Resource" range="_5ptkzI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LTI1HEeuS5oYDZ6mCNA" name="lifeClass" valueType="Resource" range="_5ptkj41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LTY1HEeuS5oYDZ6mCNA" name="step" occurs="zeroOrMany" valueType="Resource" range="_5ptkjY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LTo1HEeuS5oYDZ6mCNA" name="parameter" occurs="zeroOrMany" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LT41HEeuS5oYDZ6mCNA" name="metadataFeatureValue_comp" valueType="Resource" range="_5ptkrY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LUI1HEeuS5oYDZ6mCNA" name="metadataFeatureValue" valueType="Resource" range="_5ptkrY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LUY1HEeuS5oYDZ6mCNA" name="isDirected"/>
+    <resourceProperties id="_5p5LUo1HEeuS5oYDZ6mCNA" name="relatedFeature" occurs="zeroOrMany" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LU41HEeuS5oYDZ6mCNA" name="association" occurs="oneOrMany" valueType="Resource" range="_5ptkio1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LVI1HEeuS5oYDZ6mCNA" name="connectorEnd" occurs="zeroOrMany" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LVY1HEeuS5oYDZ6mCNA" name="sourceFeature" occurs="zeroOrOne" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LVo1HEeuS5oYDZ6mCNA" name="targetFeature" occurs="oneOrMany" valueType="Resource" range="_5ptkcY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LV41HEeuS5oYDZ6mCNA" name="assertedConstraint" valueType="Resource" range="_5ptkwo1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5LWI1HEeuS5oYDZ6mCNA" name="value"/>
+    <resourceProperties id="_5p5xsI1HEeuS5oYDZ6mCNA" name="objectiveRequirement" occurs="zeroOrOne" valueType="Resource" range="_5ptkxY1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5xsY1HEeuS5oYDZ6mCNA" name="caseDefinition" valueType="Resource" range="_5ptkt41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5xso1HEeuS5oYDZ6mCNA" name="subjectParameter" valueType="Resource" range="_5ptku41HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5xs41HEeuS5oYDZ6mCNA" name="ownedSuperclassing" occurs="zeroOrMany" valueType="Resource" range="_5ptkjI1HEeuS5oYDZ6mCNA"/>
+    <resourceProperties id="_5p5xtI1HEeuS5oYDZ6mCNA" name="itemDefinition" occurs="oneOrMany" valueType="Resource" range="_5ptkm41HEeuS5oYDZ6mCNA"/>
   </domainSpecifications>
   <domainPrefixes name="sysml"/>
   <configuration xsi:type="oslc4j_ai:MavenSpecificationConfiguration">
     <generalConfiguration doNotGenerateFromImportedModels="true" filesBasePath="../org.oasis.oslcop.sysml.oslc-domain" javaBasePackageName="org.oasis.oslcop.sysml"/>
-    <projectConfiguration xsi:type="oslc4j_ai:MavenProjectConfiguration" lyoVersion="4.0.0-SNAPSHOT" groupId="org.oasis.oslcop.sysml" artifactId="sysml-oslc-domain" version="0.0.1-SNAPSHOT"/>
+    <projectConfiguration xsi:type="oslc4j_ai:MavenProjectConfiguration" lyoVersion="4.0.0" groupId="org.oasis.oslcop.sysml" artifactId="sysml-oslc-domain" version="0.0.1-SNAPSHOT"/>
   </configuration>
 </oslc4j_ai:Specification>

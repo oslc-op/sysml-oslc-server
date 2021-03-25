@@ -55,8 +55,11 @@ import org.eclipse.lyo.oslc4j.core.model.ValueType;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IBehavior;
+import org.oasis.oslcop.sysml.IComment;
 import org.oasis.oslcop.sysml.IConjugation;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IFeature;
 import org.oasis.oslcop.sysml.IFeatureMembership;
@@ -65,13 +68,14 @@ import org.oasis.oslcop.sysml.IGeneralization;
 import org.oasis.oslcop.sysml.ISysmlImport;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
-import org.oasis.oslcop.sysml.ISysmlPackage;
-import org.oasis.oslcop.sysml.IParameter;
+import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRedefinition;
 import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.ISubsetting;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 import org.oasis.oslcop.sysml.IType;
+import org.oasis.oslcop.sysml.ITypeFeaturing;
 // Start of user code imports
 // End of user code
 
@@ -96,7 +100,7 @@ public interface IStep
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "parameter")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
     public Set<Link> getParameter();
 

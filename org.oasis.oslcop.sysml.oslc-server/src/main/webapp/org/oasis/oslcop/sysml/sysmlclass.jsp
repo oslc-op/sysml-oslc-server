@@ -223,62 +223,37 @@
             </dd>
           </dl>
           <dl class="row">
-            <% method = SysmlClass.class.getMethod("getOwnedFeature"); %>
-            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
-            <dd class="col-sm-9">
-            <ul>
-            <%
-            for(Link next : aSysmlClass.getOwnedFeature()) {
-                if (next.getValue() == null) {
-                    out.write("<li>" + "<em>null</em>" + "</li>");
-                }
-                else {
-                    %>
-                    <li>
-                    <jsp:include page="/org/oasis/oslcop/sysml/featuretohtml.jsp">
-                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
-                        </jsp:include>
-                    </li>
-                    <%
-                }
-            }
-            %>
-            </ul>
-            
-            </dd>
-          </dl>
-          <dl class="row">
-            <% method = SysmlClass.class.getMethod("getOwnedEndFeature"); %>
-            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
-            <dd class="col-sm-9">
-            <ul>
-            <%
-            for(Link next : aSysmlClass.getOwnedEndFeature()) {
-                if (next.getValue() == null) {
-                    out.write("<li>" + "<em>null</em>" + "</li>");
-                }
-                else {
-                    %>
-                    <li>
-                    <jsp:include page="/org/oasis/oslcop/sysml/featuretohtml.jsp">
-                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
-                        </jsp:include>
-                    </li>
-                    <%
-                }
-            }
-            %>
-            </ul>
-            
-            </dd>
-          </dl>
-          <dl class="row">
             <% method = SysmlClass.class.getMethod("getFeature"); %>
             <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
             <ul>
             <%
             for(Link next : aSysmlClass.getFeature()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/featuretohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = SysmlClass.class.getMethod("getOwnedFeature"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSysmlClass.getOwnedFeature()) {
                 if (next.getValue() == null) {
                     out.write("<li>" + "<em>null</em>" + "</li>");
                 }
@@ -398,6 +373,31 @@
             </dd>
           </dl>
           <dl class="row">
+            <% method = SysmlClass.class.getMethod("getOwnedEndFeature"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSysmlClass.getOwnedEndFeature()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/featuretohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
             <% method = SysmlClass.class.getMethod("getOwnedConjugator"); %>
             <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
@@ -409,25 +409,6 @@
                 %>
                 <jsp:include page="/org/oasis/oslcop/sysml/conjugationtohtml.jsp">
                     <jsp:param name="resourceUri" value="<%=aSysmlClass.getOwnedConjugator().getValue()%>"/> 
-                    </jsp:include>
-                <%
-            }
-            %>
-            
-            </dd>
-          </dl>
-          <dl class="row">
-            <% method = SysmlClass.class.getMethod("getConjugator"); %>
-            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
-            <dd class="col-sm-9">
-            <%
-            if ((aSysmlClass.getConjugator() == null) || (aSysmlClass.getConjugator().getValue() == null)) {
-                out.write("<em>null</em>");
-            }
-            else {
-                %>
-                <jsp:include page="/org/oasis/oslcop/sysml/conjugationtohtml.jsp">
-                    <jsp:param name="resourceUri" value="<%=aSysmlClass.getConjugator().getValue()%>"/> 
                     </jsp:include>
                 <%
             }
@@ -760,6 +741,51 @@
             </dd>
           </dl>
           <dl class="row">
+            <% method = SysmlClass.class.getMethod("getQualifiedName"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aSysmlClass.getQualifiedName() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aSysmlClass.getQualifiedName().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = SysmlClass.class.getMethod("getAliasId"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            Iterator<String> aliasIdItr = aSysmlClass.getAliasId().iterator();
+            while(aliasIdItr.hasNext()) {
+                out.write("<li>" + aliasIdItr.next().toString() + "</li>");
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = SysmlClass.class.getMethod("getHumanId"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aSysmlClass.getHumanId() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aSysmlClass.getHumanId().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
             <% method = SysmlClass.class.getMethod("getOwningMembership"); %>
             <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
@@ -832,7 +858,7 @@
             }
             else {
                 %>
-                <jsp:include page="/org/oasis/oslcop/sysml/sysmlpackagetohtml.jsp">
+                <jsp:include page="/org/oasis/oslcop/sysml/namespacetohtml.jsp">
                     <jsp:param name="resourceUri" value="<%=aSysmlClass.getOwningNamespace().getValue()%>"/> 
                     </jsp:include>
                 <%
@@ -886,6 +912,106 @@
             </dd>
           </dl>
           <dl class="row">
+            <% method = SysmlClass.class.getMethod("getDocumentation_comp"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSysmlClass.getDocumentation_comp()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/documentationtohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = SysmlClass.class.getMethod("getOwnedAnnotation_comp"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSysmlClass.getOwnedAnnotation_comp()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/annotationtohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = SysmlClass.class.getMethod("getDocumentationComment"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSysmlClass.getDocumentationComment()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/commenttohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = SysmlClass.class.getMethod("getOwnedTextualRepresentation"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSysmlClass.getOwnedTextualRepresentation()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/textualrepresentationtohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
             <% method = SysmlClass.class.getMethod("getOwnedRelationship"); %>
             <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
@@ -899,6 +1025,56 @@
                     %>
                     <li>
                     <jsp:include page="/org/oasis/oslcop/sysml/relationshiptohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = SysmlClass.class.getMethod("getDocumentation"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSysmlClass.getDocumentation()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/documentationtohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = SysmlClass.class.getMethod("getOwnedAnnotation"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSysmlClass.getOwnedAnnotation()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/annotationtohtml.jsp">
                         <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
                         </jsp:include>
                     </li>

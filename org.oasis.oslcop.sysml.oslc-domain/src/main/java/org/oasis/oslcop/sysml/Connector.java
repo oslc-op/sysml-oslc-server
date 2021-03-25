@@ -61,8 +61,11 @@ import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.Association;
+import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
@@ -71,12 +74,14 @@ import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.Subsetting;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
+import org.oasis.oslcop.sysml.TypeFeaturing;
 // Start of user code imports
 // End of user code
 
@@ -104,9 +109,12 @@ public class Connector
     // Start of user code attributeAnnotation:connectorEnd
     // End of user code
     private Set<Link> connectorEnd = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedAssociationType
+    // Start of user code attributeAnnotation:sourceFeature
     // End of user code
-    private Set<Link> ownedAssociationType = new HashSet<Link>();
+    private Link sourceFeature;
+    // Start of user code attributeAnnotation:targetFeature
+    // End of user code
+    private Set<Link> targetFeature = new HashSet<Link>();
     // Start of user code attributeAnnotation:relatedElement
     // End of user code
     private Set<Link> relatedElement = new HashSet<Link>();
@@ -196,9 +204,9 @@ public class Connector
         this.connectorEnd.add(connectorEnd);
     }
     
-    public void addOwnedAssociationType(final Link ownedAssociationType)
+    public void addTargetFeature(final Link targetFeature)
     {
-        this.ownedAssociationType.add(ownedAssociationType);
+        this.targetFeature.add(targetFeature);
     }
     
     public void addRelatedElement(final Link relatedElement)
@@ -286,19 +294,34 @@ public class Connector
         return connectorEnd;
     }
     
-    // Start of user code getterAnnotation:ownedAssociationType
+    // Start of user code getterAnnotation:sourceFeature
     // End of user code
-    @OslcName("ownedAssociationType")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedAssociationType")
-    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcName("sourceFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "sourceFeature")
+    @OslcOccurs(Occurs.ZeroOrOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ASSOCIATION_TYPE})
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedAssociationType()
+    public Link getSourceFeature()
     {
-        // Start of user code getterInit:ownedAssociationType
+        // Start of user code getterInit:sourceFeature
         // End of user code
-        return ownedAssociationType;
+        return sourceFeature;
+    }
+    
+    // Start of user code getterAnnotation:targetFeature
+    // End of user code
+    @OslcName("targetFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "targetFeature")
+    @OslcOccurs(Occurs.OneOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getTargetFeature()
+    {
+        // Start of user code getterInit:targetFeature
+        // End of user code
+        return targetFeature;
     }
     
     // Start of user code getterAnnotation:relatedElement
@@ -452,19 +475,31 @@ public class Connector
         // End of user code
     }
     
-    // Start of user code setterAnnotation:ownedAssociationType
+    // Start of user code setterAnnotation:sourceFeature
     // End of user code
-    public void setOwnedAssociationType(final Set<Link> ownedAssociationType )
+    public void setSourceFeature(final Link sourceFeature )
     {
-        // Start of user code setterInit:ownedAssociationType
+        // Start of user code setterInit:sourceFeature
         // End of user code
-        this.ownedAssociationType.clear();
-        if (ownedAssociationType != null)
+        this.sourceFeature = sourceFeature;
+    
+        // Start of user code setterFinalize:sourceFeature
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:targetFeature
+    // End of user code
+    public void setTargetFeature(final Set<Link> targetFeature )
+    {
+        // Start of user code setterInit:targetFeature
+        // End of user code
+        this.targetFeature.clear();
+        if (targetFeature != null)
         {
-            this.ownedAssociationType.addAll(ownedAssociationType);
+            this.targetFeature.addAll(targetFeature);
         }
     
-        // Start of user code setterFinalize:ownedAssociationType
+        // Start of user code setterFinalize:targetFeature
         // End of user code
     }
     

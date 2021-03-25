@@ -57,12 +57,14 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
-import org.oasis.oslcop.sysml.SysmlClass;
+import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
-import org.oasis.oslcop.sysml.Connector;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
@@ -70,10 +72,11 @@ import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.Superclassing;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
 // Start of user code imports
 // End of user code
@@ -87,15 +90,18 @@ import org.oasis.oslcop.sysml.Type;
 @OslcName(SysmlDomainConstants.ASSOCIATION_LOCALNAME)
 @OslcResourceShape(title = "Association Resource Shape", describes = SysmlDomainConstants.ASSOCIATION_TYPE)
 public class Association
-    extends SysmlClass
+    extends Classifier
     implements IAssociation, IRelationship
 {
     // Start of user code attributeAnnotation:relatedType
     // End of user code
     private Set<Link> relatedType = new HashSet<Link>();
-    // Start of user code attributeAnnotation:owningConnector
+    // Start of user code attributeAnnotation:sourceType
     // End of user code
-    private Link owningConnector;
+    private Link sourceType;
+    // Start of user code attributeAnnotation:targetType
+    // End of user code
+    private Set<Link> targetType = new HashSet<Link>();
     // Start of user code attributeAnnotation:associationEnd
     // End of user code
     private Set<Link> associationEnd = new HashSet<Link>();
@@ -178,6 +184,11 @@ public class Association
         this.relatedType.add(relatedType);
     }
     
+    public void addTargetType(final Link targetType)
+    {
+        this.targetType.add(targetType);
+    }
+    
     public void addAssociationEnd(final Link associationEnd)
     {
         this.associationEnd.add(associationEnd);
@@ -224,19 +235,34 @@ public class Association
         return relatedType;
     }
     
-    // Start of user code getterAnnotation:owningConnector
+    // Start of user code getterAnnotation:sourceType
     // End of user code
-    @OslcName("owningConnector")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningConnector")
+    @OslcName("sourceType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "sourceType")
     @OslcOccurs(Occurs.ZeroOrOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.CONNECTOR_TYPE})
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
     @OslcReadOnly(false)
-    public Link getOwningConnector()
+    public Link getSourceType()
     {
-        // Start of user code getterInit:owningConnector
+        // Start of user code getterInit:sourceType
         // End of user code
-        return owningConnector;
+        return sourceType;
+    }
+    
+    // Start of user code getterAnnotation:targetType
+    // End of user code
+    @OslcName("targetType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "targetType")
+    @OslcOccurs(Occurs.OneOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getTargetType()
+    {
+        // Start of user code getterInit:targetType
+        // End of user code
+        return targetType;
     }
     
     // Start of user code getterAnnotation:associationEnd
@@ -361,15 +387,31 @@ public class Association
         // End of user code
     }
     
-    // Start of user code setterAnnotation:owningConnector
+    // Start of user code setterAnnotation:sourceType
     // End of user code
-    public void setOwningConnector(final Link owningConnector )
+    public void setSourceType(final Link sourceType )
     {
-        // Start of user code setterInit:owningConnector
+        // Start of user code setterInit:sourceType
         // End of user code
-        this.owningConnector = owningConnector;
+        this.sourceType = sourceType;
     
-        // Start of user code setterFinalize:owningConnector
+        // Start of user code setterFinalize:sourceType
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:targetType
+    // End of user code
+    public void setTargetType(final Set<Link> targetType )
+    {
+        // Start of user code setterInit:targetType
+        // End of user code
+        this.targetType.clear();
+        if (targetType != null)
+        {
+            this.targetType.addAll(targetType);
+        }
+    
+        // Start of user code setterFinalize:targetType
         // End of user code
     }
     

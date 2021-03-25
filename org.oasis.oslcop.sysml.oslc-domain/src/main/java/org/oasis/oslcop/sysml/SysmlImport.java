@@ -61,11 +61,15 @@ import org.oasis.oslcop.sysml.Relationship;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Membership;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 // Start of user code imports
 // End of user code
 
@@ -84,12 +88,15 @@ public class SysmlImport
     // Start of user code attributeAnnotation:visibility
     // End of user code
     private String visibility;
-    // Start of user code attributeAnnotation:importedPackage
+    // Start of user code attributeAnnotation:isRecursive
     // End of user code
-    private Link importedPackage;
-    // Start of user code attributeAnnotation:importOwningPackage
+    private Boolean isRecursive;
+    // Start of user code attributeAnnotation:importedNamespace
     // End of user code
-    private Link importOwningPackage;
+    private Link importedNamespace;
+    // Start of user code attributeAnnotation:importOwningNamespace
+    // End of user code
+    private Link importOwningNamespace;
     
     // Start of user code classAttributes
     // End of user code
@@ -162,34 +169,48 @@ public class SysmlImport
         return visibility;
     }
     
-    // Start of user code getterAnnotation:importedPackage
+    // Start of user code getterAnnotation:isRecursive
     // End of user code
-    @OslcName("importedPackage")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "importedPackage")
+    @OslcName("isRecursive")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isRecursive")
     @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PACKAGE_TYPE})
+    @OslcValueType(ValueType.Boolean)
     @OslcReadOnly(false)
-    public Link getImportedPackage()
+    public Boolean isIsRecursive()
     {
-        // Start of user code getterInit:importedPackage
+        // Start of user code getterInit:isRecursive
         // End of user code
-        return importedPackage;
+        return isRecursive;
     }
     
-    // Start of user code getterAnnotation:importOwningPackage
+    // Start of user code getterAnnotation:importedNamespace
     // End of user code
-    @OslcName("importOwningPackage")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "importOwningPackage")
+    @OslcName("importedNamespace")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "importedNamespace")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.NAMESPACE_TYPE})
+    @OslcReadOnly(false)
+    public Link getImportedNamespace()
+    {
+        // Start of user code getterInit:importedNamespace
+        // End of user code
+        return importedNamespace;
+    }
+    
+    // Start of user code getterAnnotation:importOwningNamespace
+    // End of user code
+    @OslcName("importOwningNamespace")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "importOwningNamespace")
     @OslcOccurs(Occurs.ZeroOrOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PACKAGE_TYPE})
+    @OslcRange({SysmlDomainConstants.NAMESPACE_TYPE})
     @OslcReadOnly(false)
-    public Link getImportOwningPackage()
+    public Link getImportOwningNamespace()
     {
-        // Start of user code getterInit:importOwningPackage
+        // Start of user code getterInit:importOwningNamespace
         // End of user code
-        return importOwningPackage;
+        return importOwningNamespace;
     }
     
     
@@ -205,27 +226,39 @@ public class SysmlImport
         // End of user code
     }
     
-    // Start of user code setterAnnotation:importedPackage
+    // Start of user code setterAnnotation:isRecursive
     // End of user code
-    public void setImportedPackage(final Link importedPackage )
+    public void setIsRecursive(final Boolean isRecursive )
     {
-        // Start of user code setterInit:importedPackage
+        // Start of user code setterInit:isRecursive
         // End of user code
-        this.importedPackage = importedPackage;
+        this.isRecursive = isRecursive;
     
-        // Start of user code setterFinalize:importedPackage
+        // Start of user code setterFinalize:isRecursive
         // End of user code
     }
     
-    // Start of user code setterAnnotation:importOwningPackage
+    // Start of user code setterAnnotation:importedNamespace
     // End of user code
-    public void setImportOwningPackage(final Link importOwningPackage )
+    public void setImportedNamespace(final Link importedNamespace )
     {
-        // Start of user code setterInit:importOwningPackage
+        // Start of user code setterInit:importedNamespace
         // End of user code
-        this.importOwningPackage = importOwningPackage;
+        this.importedNamespace = importedNamespace;
     
-        // Start of user code setterFinalize:importOwningPackage
+        // Start of user code setterFinalize:importedNamespace
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:importOwningNamespace
+    // End of user code
+    public void setImportOwningNamespace(final Link importOwningNamespace )
+    {
+        // Start of user code setterInit:importOwningNamespace
+        // End of user code
+        this.importOwningNamespace = importOwningNamespace;
+    
+        // Start of user code setterFinalize:importOwningNamespace
         // End of user code
     }
     

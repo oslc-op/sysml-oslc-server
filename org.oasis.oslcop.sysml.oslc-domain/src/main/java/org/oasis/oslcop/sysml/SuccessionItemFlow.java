@@ -62,9 +62,12 @@ import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.ISuccession;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.Association;
 import org.oasis.oslcop.sysml.Classifier;
+import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Expression;
 import org.oasis.oslcop.sysml.Feature;
@@ -77,13 +80,15 @@ import org.oasis.oslcop.sysml.ItemFlowEnd;
 import org.oasis.oslcop.sysml.ItemFlowFeature;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.Step;
 import org.oasis.oslcop.sysml.Subsetting;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
+import org.oasis.oslcop.sysml.TypeFeaturing;
 // Start of user code imports
 // End of user code
 
@@ -99,6 +104,18 @@ public class SuccessionItemFlow
     extends ItemFlow
     implements ISuccessionItemFlow, IRelationship, ISuccession
 {
+    // Start of user code attributeAnnotation:transitionStep
+    // End of user code
+    private Link transitionStep;
+    // Start of user code attributeAnnotation:triggerStep
+    // End of user code
+    private Set<Link> triggerStep = new HashSet<Link>();
+    // Start of user code attributeAnnotation:effectStep
+    // End of user code
+    private Set<Link> effectStep = new HashSet<Link>();
+    // Start of user code attributeAnnotation:guardExpression
+    // End of user code
+    private Set<Link> guardExpression = new HashSet<Link>();
     // Start of user code attributeAnnotation:relatedElement
     // End of user code
     private Set<Link> relatedElement = new HashSet<Link>();
@@ -117,18 +134,6 @@ public class SuccessionItemFlow
     // Start of user code attributeAnnotation:ownedRelatedElement
     // End of user code
     private Set<Link> ownedRelatedElement = new HashSet<Link>();
-    // Start of user code attributeAnnotation:transitionStep
-    // End of user code
-    private Link transitionStep;
-    // Start of user code attributeAnnotation:triggerStep
-    // End of user code
-    private Set<Link> triggerStep = new HashSet<Link>();
-    // Start of user code attributeAnnotation:effectStep
-    // End of user code
-    private Set<Link> effectStep = new HashSet<Link>();
-    // Start of user code attributeAnnotation:guardExpression
-    // End of user code
-    private Set<Link> guardExpression = new HashSet<Link>();
     
     // Start of user code classAttributes
     // End of user code
@@ -185,6 +190,21 @@ public class SuccessionItemFlow
         return result;
     }
     
+    public void addTriggerStep(final Link triggerStep)
+    {
+        this.triggerStep.add(triggerStep);
+    }
+    
+    public void addEffectStep(final Link effectStep)
+    {
+        this.effectStep.add(effectStep);
+    }
+    
+    public void addGuardExpression(final Link guardExpression)
+    {
+        this.guardExpression.add(guardExpression);
+    }
+    
     public void addRelatedElement(final Link relatedElement)
     {
         this.relatedElement.add(relatedElement);
@@ -210,21 +230,66 @@ public class SuccessionItemFlow
         this.ownedRelatedElement.add(ownedRelatedElement);
     }
     
-    public void addTriggerStep(final Link triggerStep)
+    
+    // Start of user code getterAnnotation:transitionStep
+    // End of user code
+    @OslcName("transitionStep")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "transitionStep")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.STEP_TYPE})
+    @OslcReadOnly(false)
+    public Link getTransitionStep()
     {
-        this.triggerStep.add(triggerStep);
+        // Start of user code getterInit:transitionStep
+        // End of user code
+        return transitionStep;
     }
     
-    public void addEffectStep(final Link effectStep)
+    // Start of user code getterAnnotation:triggerStep
+    // End of user code
+    @OslcName("triggerStep")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "triggerStep")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.STEP_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getTriggerStep()
     {
-        this.effectStep.add(effectStep);
+        // Start of user code getterInit:triggerStep
+        // End of user code
+        return triggerStep;
     }
     
-    public void addGuardExpression(final Link guardExpression)
+    // Start of user code getterAnnotation:effectStep
+    // End of user code
+    @OslcName("effectStep")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "effectStep")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.STEP_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getEffectStep()
     {
-        this.guardExpression.add(guardExpression);
+        // Start of user code getterInit:effectStep
+        // End of user code
+        return effectStep;
     }
     
+    // Start of user code getterAnnotation:guardExpression
+    // End of user code
+    @OslcName("guardExpression")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "guardExpression")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getGuardExpression()
+    {
+        // Start of user code getterInit:guardExpression
+        // End of user code
+        return guardExpression;
+    }
     
     // Start of user code getterAnnotation:relatedElement
     // End of user code
@@ -316,66 +381,66 @@ public class SuccessionItemFlow
         return ownedRelatedElement;
     }
     
-    // Start of user code getterAnnotation:transitionStep
+    
+    // Start of user code setterAnnotation:transitionStep
     // End of user code
-    @OslcName("transitionStep")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "transitionStep")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.STEP_TYPE})
-    @OslcReadOnly(false)
-    public Link getTransitionStep()
+    public void setTransitionStep(final Link transitionStep )
     {
-        // Start of user code getterInit:transitionStep
+        // Start of user code setterInit:transitionStep
         // End of user code
-        return transitionStep;
+        this.transitionStep = transitionStep;
+    
+        // Start of user code setterFinalize:transitionStep
+        // End of user code
     }
     
-    // Start of user code getterAnnotation:triggerStep
+    // Start of user code setterAnnotation:triggerStep
     // End of user code
-    @OslcName("triggerStep")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "triggerStep")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.STEP_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getTriggerStep()
+    public void setTriggerStep(final Set<Link> triggerStep )
     {
-        // Start of user code getterInit:triggerStep
+        // Start of user code setterInit:triggerStep
         // End of user code
-        return triggerStep;
+        this.triggerStep.clear();
+        if (triggerStep != null)
+        {
+            this.triggerStep.addAll(triggerStep);
+        }
+    
+        // Start of user code setterFinalize:triggerStep
+        // End of user code
     }
     
-    // Start of user code getterAnnotation:effectStep
+    // Start of user code setterAnnotation:effectStep
     // End of user code
-    @OslcName("effectStep")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "effectStep")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.STEP_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getEffectStep()
+    public void setEffectStep(final Set<Link> effectStep )
     {
-        // Start of user code getterInit:effectStep
+        // Start of user code setterInit:effectStep
         // End of user code
-        return effectStep;
+        this.effectStep.clear();
+        if (effectStep != null)
+        {
+            this.effectStep.addAll(effectStep);
+        }
+    
+        // Start of user code setterFinalize:effectStep
+        // End of user code
     }
     
-    // Start of user code getterAnnotation:guardExpression
+    // Start of user code setterAnnotation:guardExpression
     // End of user code
-    @OslcName("guardExpression")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "guardExpression")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getGuardExpression()
+    public void setGuardExpression(final Set<Link> guardExpression )
     {
-        // Start of user code getterInit:guardExpression
+        // Start of user code setterInit:guardExpression
         // End of user code
-        return guardExpression;
-    }
+        this.guardExpression.clear();
+        if (guardExpression != null)
+        {
+            this.guardExpression.addAll(guardExpression);
+        }
     
+        // Start of user code setterFinalize:guardExpression
+        // End of user code
+    }
     
     // Start of user code setterAnnotation:relatedElement
     // End of user code
@@ -466,66 +531,6 @@ public class SuccessionItemFlow
         }
     
         // Start of user code setterFinalize:ownedRelatedElement
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:transitionStep
-    // End of user code
-    public void setTransitionStep(final Link transitionStep )
-    {
-        // Start of user code setterInit:transitionStep
-        // End of user code
-        this.transitionStep = transitionStep;
-    
-        // Start of user code setterFinalize:transitionStep
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:triggerStep
-    // End of user code
-    public void setTriggerStep(final Set<Link> triggerStep )
-    {
-        // Start of user code setterInit:triggerStep
-        // End of user code
-        this.triggerStep.clear();
-        if (triggerStep != null)
-        {
-            this.triggerStep.addAll(triggerStep);
-        }
-    
-        // Start of user code setterFinalize:triggerStep
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:effectStep
-    // End of user code
-    public void setEffectStep(final Set<Link> effectStep )
-    {
-        // Start of user code setterInit:effectStep
-        // End of user code
-        this.effectStep.clear();
-        if (effectStep != null)
-        {
-            this.effectStep.addAll(effectStep);
-        }
-    
-        // Start of user code setterFinalize:effectStep
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:guardExpression
-    // End of user code
-    public void setGuardExpression(final Set<Link> guardExpression )
-    {
-        // Start of user code setterInit:guardExpression
-        // End of user code
-        this.guardExpression.clear();
-        if (guardExpression != null)
-        {
-            this.guardExpression.addAll(guardExpression);
-        }
-    
-        // Start of user code setterFinalize:guardExpression
         // End of user code
     }
     

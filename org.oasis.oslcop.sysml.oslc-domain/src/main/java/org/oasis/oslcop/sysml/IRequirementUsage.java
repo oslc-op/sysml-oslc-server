@@ -56,15 +56,20 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.IActionUsage;
+import org.oasis.oslcop.sysml.IAllocationUsage;
 import org.oasis.oslcop.sysml.IAnalysisCaseUsage;
+import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IAttributeUsage;
 import org.oasis.oslcop.sysml.ICalculationUsage;
 import org.oasis.oslcop.sysml.ICaseUsage;
+import org.oasis.oslcop.sysml.IComment;
 import org.oasis.oslcop.sysml.IConjugation;
 import org.oasis.oslcop.sysml.IConnectionUsage;
 import org.oasis.oslcop.sysml.IConstraintUsage;
 import org.oasis.oslcop.sysml.IDefinition;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
+import org.oasis.oslcop.sysml.IEnumerationUsage;
 import org.oasis.oslcop.sysml.IFeature;
 import org.oasis.oslcop.sysml.IFeatureMembership;
 import org.oasis.oslcop.sysml.IFeatureTyping;
@@ -75,8 +80,7 @@ import org.oasis.oslcop.sysml.IInterfaceUsage;
 import org.oasis.oslcop.sysml.IItemUsage;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
-import org.oasis.oslcop.sysml.ISysmlPackage;
-import org.oasis.oslcop.sysml.IParameter;
+import org.oasis.oslcop.sysml.INamespace;
 import org.oasis.oslcop.sysml.IPartUsage;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IPortUsage;
@@ -84,14 +88,20 @@ import org.oasis.oslcop.sysml.IPredicate;
 import org.oasis.oslcop.sysml.IRedefinition;
 import org.oasis.oslcop.sysml.IReferenceUsage;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.IRenderingUsage;
 import org.oasis.oslcop.sysml.IRequirementDefinition;
 import org.oasis.oslcop.sysml.IRequirementUsage;
 import org.oasis.oslcop.sysml.IStateUsage;
 import org.oasis.oslcop.sysml.ISubsetting;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 import org.oasis.oslcop.sysml.ITransitionUsage;
 import org.oasis.oslcop.sysml.IType;
+import org.oasis.oslcop.sysml.ITypeFeaturing;
 import org.oasis.oslcop.sysml.IUsage;
 import org.oasis.oslcop.sysml.IVariantMembership;
+import org.oasis.oslcop.sysml.IVerificationCaseUsage;
+import org.oasis.oslcop.sysml.IViewUsage;
+import org.oasis.oslcop.sysml.IViewpointUsage;
 // Start of user code imports
 // End of user code
 
@@ -101,6 +111,7 @@ import org.oasis.oslcop.sysml.IVariantMembership;
 public interface IRequirementUsage
 {
 
+    public void addText(final String text );
     public void addRequiredConstraint(final Link requiredConstraint );
     public void addAssumedConstraint(final Link assumedConstraint );
 
@@ -113,10 +124,10 @@ public interface IRequirementUsage
 
     @OslcName("text")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "text")
-    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.String)
     @OslcReadOnly(false)
-    public String getText();
+    public Set<String> getText();
 
     @OslcName("requirementDefinition")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "requirementDefinition")
@@ -125,14 +136,6 @@ public interface IRequirementUsage
     @OslcRange({SysmlDomainConstants.REQUIREMENTDEFINITION_TYPE})
     @OslcReadOnly(false)
     public Link getRequirementDefinition();
-
-    @OslcName("subjectParameter")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "subjectParameter")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
-    @OslcReadOnly(false)
-    public Link getSubjectParameter();
 
     @OslcName("requiredConstraint")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "requiredConstraint")
@@ -150,12 +153,20 @@ public interface IRequirementUsage
     @OslcReadOnly(false)
     public Set<Link> getAssumedConstraint();
 
+    @OslcName("subjectParameter")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "subjectParameter")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.USAGE_TYPE})
+    @OslcReadOnly(false)
+    public Link getSubjectParameter();
+
 
     public void setReqId(final String reqId );
-    public void setText(final String text );
+    public void setText(final Set<String> text );
     public void setRequirementDefinition(final Link requirementDefinition );
-    public void setSubjectParameter(final Link subjectParameter );
     public void setRequiredConstraint(final Set<Link> requiredConstraint );
     public void setAssumedConstraint(final Set<Link> assumedConstraint );
+    public void setSubjectParameter(final Link subjectParameter );
 }
 

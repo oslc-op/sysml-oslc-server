@@ -57,16 +57,19 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
-import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.AnnotatingElement;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Membership;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 // Start of user code imports
 // End of user code
 
@@ -79,18 +82,12 @@ import org.oasis.oslcop.sysml.Relationship;
 @OslcName(SysmlDomainConstants.COMMENT_LOCALNAME)
 @OslcResourceShape(title = "Comment Resource Shape", describes = SysmlDomainConstants.COMMENT_TYPE)
 public class Comment
-    extends Element
+    extends AnnotatingElement
     implements IComment
 {
     // Start of user code attributeAnnotation:body
     // End of user code
     private String body;
-    // Start of user code attributeAnnotation:commentedElement
-    // End of user code
-    private Link commentedElement;
-    // Start of user code attributeAnnotation:annotationForComment
-    // End of user code
-    private Link annotationForComment;
     
     // Start of user code classAttributes
     // End of user code
@@ -162,36 +159,6 @@ public class Comment
         return body;
     }
     
-    // Start of user code getterAnnotation:commentedElement
-    // End of user code
-    @OslcName("commentedElement")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "commentedElement")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Link getCommentedElement()
-    {
-        // Start of user code getterInit:commentedElement
-        // End of user code
-        return commentedElement;
-    }
-    
-    // Start of user code getterAnnotation:annotationForComment
-    // End of user code
-    @OslcName("annotationForComment")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "annotationForComment")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ANNOTATION_TYPE})
-    @OslcReadOnly(false)
-    public Link getAnnotationForComment()
-    {
-        // Start of user code getterInit:annotationForComment
-        // End of user code
-        return annotationForComment;
-    }
-    
     
     // Start of user code setterAnnotation:body
     // End of user code
@@ -202,30 +169,6 @@ public class Comment
         this.body = body;
     
         // Start of user code setterFinalize:body
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:commentedElement
-    // End of user code
-    public void setCommentedElement(final Link commentedElement )
-    {
-        // Start of user code setterInit:commentedElement
-        // End of user code
-        this.commentedElement = commentedElement;
-    
-        // Start of user code setterFinalize:commentedElement
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:annotationForComment
-    // End of user code
-    public void setAnnotationForComment(final Link annotationForComment )
-    {
-        // Start of user code setterInit:annotationForComment
-        // End of user code
-        this.annotationForComment = annotationForComment;
-    
-        // Start of user code setterFinalize:annotationForComment
         // End of user code
     }
     

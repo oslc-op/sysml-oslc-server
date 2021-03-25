@@ -59,19 +59,25 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.Definition;
 import org.oasis.oslcop.sysml.IBehavior;
+import org.oasis.oslcop.sysml.ISysmlClass;
 import org.oasis.oslcop.sysml.IFunction;
 import org.oasis.oslcop.sysml.IPredicate;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.ActionUsage;
+import org.oasis.oslcop.sysml.AllocationUsage;
 import org.oasis.oslcop.sysml.AnalysisCaseUsage;
+import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
 import org.oasis.oslcop.sysml.ConnectionUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Expression;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
@@ -82,20 +88,24 @@ import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
-import org.oasis.oslcop.sysml.SysmlPackage;
-import org.oasis.oslcop.sysml.Parameter;
+import org.oasis.oslcop.sysml.Namespace;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
 import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
 import org.oasis.oslcop.sysml.StateUsage;
 import org.oasis.oslcop.sysml.Step;
 import org.oasis.oslcop.sysml.Superclassing;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Usage;
 import org.oasis.oslcop.sysml.VariantMembership;
+import org.oasis.oslcop.sysml.VerificationCaseUsage;
+import org.oasis.oslcop.sysml.ViewUsage;
+import org.oasis.oslcop.sysml.ViewpointUsage;
 // Start of user code imports
 // End of user code
 
@@ -109,20 +119,20 @@ import org.oasis.oslcop.sysml.VariantMembership;
 @OslcResourceShape(title = "ConstraintDefinition Resource Shape", describes = SysmlDomainConstants.CONSTRAINTDEFINITION_TYPE)
 public class ConstraintDefinition
     extends Definition
-    implements IConstraintDefinition, IBehavior, IFunction, IPredicate
+    implements IConstraintDefinition, IBehavior, ISysmlClass, IFunction, IPredicate
 {
-    // Start of user code attributeAnnotation:expression
-    // End of user code
-    private Set<Link> expression = new HashSet<Link>();
-    // Start of user code attributeAnnotation:result
-    // End of user code
-    private Link result;
     // Start of user code attributeAnnotation:step
     // End of user code
     private Set<Link> step = new HashSet<Link>();
     // Start of user code attributeAnnotation:parameter
     // End of user code
     private Set<Link> parameter = new HashSet<Link>();
+    // Start of user code attributeAnnotation:expression
+    // End of user code
+    private Set<Link> expression = new HashSet<Link>();
+    // Start of user code attributeAnnotation:result
+    // End of user code
+    private Link result;
     
     // Start of user code classAttributes
     // End of user code
@@ -179,11 +189,6 @@ public class ConstraintDefinition
         return result;
     }
     
-    public void addExpression(final Link expression)
-    {
-        this.expression.add(expression);
-    }
-    
     public void addStep(final Link step)
     {
         this.step.add(step);
@@ -194,36 +199,11 @@ public class ConstraintDefinition
         this.parameter.add(parameter);
     }
     
-    
-    // Start of user code getterAnnotation:expression
-    // End of user code
-    @OslcName("expression")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "expression")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getExpression()
+    public void addExpression(final Link expression)
     {
-        // Start of user code getterInit:expression
-        // End of user code
-        return expression;
+        this.expression.add(expression);
     }
     
-    // Start of user code getterAnnotation:result
-    // End of user code
-    @OslcName("result")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "result")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
-    @OslcReadOnly(false)
-    public Link getResult()
-    {
-        // Start of user code getterInit:result
-        // End of user code
-        return result;
-    }
     
     // Start of user code getterAnnotation:step
     // End of user code
@@ -246,7 +226,7 @@ public class ConstraintDefinition
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "parameter")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
     public Set<Link> getParameter()
     {
@@ -255,34 +235,36 @@ public class ConstraintDefinition
         return parameter;
     }
     
-    
-    // Start of user code setterAnnotation:expression
+    // Start of user code getterAnnotation:expression
     // End of user code
-    public void setExpression(final Set<Link> expression )
+    @OslcName("expression")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "expression")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getExpression()
     {
-        // Start of user code setterInit:expression
+        // Start of user code getterInit:expression
         // End of user code
-        this.expression.clear();
-        if (expression != null)
-        {
-            this.expression.addAll(expression);
-        }
-    
-        // Start of user code setterFinalize:expression
-        // End of user code
+        return expression;
     }
     
-    // Start of user code setterAnnotation:result
+    // Start of user code getterAnnotation:result
     // End of user code
-    public void setResult(final Link result )
+    @OslcName("result")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "result")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Link getResult()
     {
-        // Start of user code setterInit:result
+        // Start of user code getterInit:result
         // End of user code
-        this.result = result;
-    
-        // Start of user code setterFinalize:result
-        // End of user code
+        return result;
     }
+    
     
     // Start of user code setterAnnotation:step
     // End of user code
@@ -313,6 +295,34 @@ public class ConstraintDefinition
         }
     
         // Start of user code setterFinalize:parameter
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:expression
+    // End of user code
+    public void setExpression(final Set<Link> expression )
+    {
+        // Start of user code setterInit:expression
+        // End of user code
+        this.expression.clear();
+        if (expression != null)
+        {
+            this.expression.addAll(expression);
+        }
+    
+        // Start of user code setterFinalize:expression
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:result
+    // End of user code
+    public void setResult(final Link result )
+    {
+        // Start of user code setterInit:result
+        // End of user code
+        this.result = result;
+    
+        // Start of user code setterFinalize:result
         // End of user code
     }
     

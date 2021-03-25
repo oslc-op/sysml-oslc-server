@@ -53,50 +53,35 @@ import org.eclipse.lyo.oslc4j.core.model.Representation;
 import org.eclipse.lyo.oslc4j.core.model.ValueType;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
-import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+
+import org.oasis.oslcop.sysml.IAnnotation;
+import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IConjugation;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
+import org.oasis.oslcop.sysml.IFeature;
+import org.oasis.oslcop.sysml.IFeatureMembership;
+import org.oasis.oslcop.sysml.IGeneralization;
+import org.oasis.oslcop.sysml.ISysmlImport;
 import org.oasis.oslcop.sysml.IMembership;
-import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.oasis.oslcop.sysml.IMultiplicity;
+import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ISuperclassing;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
+import org.oasis.oslcop.sysml.IType;
 // Start of user code imports
 // End of user code
 
-@OslcNamespace(SysmlDomainConstants.OWNERSHIP_NAMESPACE)
-@OslcName(SysmlDomainConstants.OWNERSHIP_LOCALNAME)
-@OslcResourceShape(title = "Ownership Resource Shape", describes = SysmlDomainConstants.OWNERSHIP_TYPE)
-public interface IOwnership
+@OslcNamespace(SysmlDomainConstants.ASSOCIATIONSTRUCTURE_NAMESPACE)
+@OslcName(SysmlDomainConstants.ASSOCIATIONSTRUCTURE_LOCALNAME)
+@OslcResourceShape(title = "AssociationStructure Resource Shape", describes = SysmlDomainConstants.ASSOCIATIONSTRUCTURE_TYPE)
+public interface IAssociationStructure
 {
 
 
-    @OslcName("owningSource")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningSource")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwningSource();
 
-    @OslcName("ownedTarget_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedTarget_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedTarget_comp();
-
-    @OslcName("ownedTarget")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedTarget")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedTarget();
-
-
-    public void setOwningSource(final Link owningSource );
-    public void setOwnedTarget_comp(final Link ownedTarget_comp );
-    public void setOwnedTarget(final Link ownedTarget );
 }
 

@@ -57,24 +57,21 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
-import org.oasis.oslcop.sysml.Feature;
-
-
-
-import org.oasis.oslcop.sysml.Conjugation;
-import org.oasis.oslcop.sysml.Element;
-import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
-import org.oasis.oslcop.sysml.FeatureTyping;
-import org.oasis.oslcop.sysml.Generalization;
-import org.oasis.oslcop.sysml.SysmlImport;
+
+import org.oasis.oslcop.sysml.SysmlDomainConstants;
+
+import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.Documentation;
+import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.Expression;
+import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.Membership;
-import org.oasis.oslcop.sysml.Multiplicity;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
-import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
-import org.oasis.oslcop.sysml.Subsetting;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
 // Start of user code imports
 // End of user code
@@ -84,19 +81,25 @@ import org.oasis.oslcop.sysml.Type;
 
 // Start of user code classAnnotations
 // End of user code
-@OslcNamespace(SysmlDomainConstants.PARAMETER_NAMESPACE)
-@OslcName(SysmlDomainConstants.PARAMETER_LOCALNAME)
-@OslcResourceShape(title = "Parameter Resource Shape", describes = SysmlDomainConstants.PARAMETER_TYPE)
-public class Parameter
-    extends Feature
-    implements IParameter
+@OslcNamespace(SysmlDomainConstants.RESULTEXPRESSIONMEMBERSHIP_NAMESPACE)
+@OslcName(SysmlDomainConstants.RESULTEXPRESSIONMEMBERSHIP_LOCALNAME)
+@OslcResourceShape(title = "ResultExpressionMembership Resource Shape", describes = SysmlDomainConstants.RESULTEXPRESSIONMEMBERSHIP_TYPE)
+public class ResultExpressionMembership
+    extends FeatureMembership
+    implements IResultExpressionMembership
 {
+    // Start of user code attributeAnnotation:ownedResultExpression_comp
+    // End of user code
+    private Link ownedResultExpression_comp;
+    // Start of user code attributeAnnotation:ownedResultExpression
+    // End of user code
+    private Link ownedResultExpression;
     
     // Start of user code classAttributes
     // End of user code
     // Start of user code classMethods
     // End of user code
-    public Parameter()
+    public ResultExpressionMembership()
     {
         super();
     
@@ -104,7 +107,7 @@ public class Parameter
         // End of user code
     }
     
-    public Parameter(final URI about)
+    public ResultExpressionMembership(final URI about)
     {
         super(about);
     
@@ -115,8 +118,8 @@ public class Parameter
     public static ResourceShape createResourceShape() throws OslcCoreApplicationException, URISyntaxException {
         return ResourceShapeFactory.createResourceShape(OSLC4JUtils.getServletURI(),
         OslcConstants.PATH_RESOURCE_SHAPES,
-        SysmlDomainConstants.PARAMETER_PATH,
-        Parameter.class);
+        SysmlDomainConstants.RESULTEXPRESSIONMEMBERSHIP_PATH,
+        ResultExpressionMembership.class);
     }
     
     
@@ -132,7 +135,7 @@ public class Parameter
         // End of user code
     
         if (asLocalResource) {
-            result = result + "{a Local Parameter Resource} - update Parameter.toString() to present resource as desired.";
+            result = result + "{a Local ResultExpressionMembership Resource} - update ResultExpressionMembership.toString() to present resource as desired.";
             // Start of user code toString_bodyForLocalResource
             // End of user code
         }
@@ -148,6 +151,60 @@ public class Parameter
     }
     
     
+    // Start of user code getterAnnotation:ownedResultExpression_comp
+    // End of user code
+    @OslcName("ownedResultExpression_comp")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedResultExpression_comp")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
+    @OslcReadOnly(false)
+    public Link getOwnedResultExpression_comp()
+    {
+        // Start of user code getterInit:ownedResultExpression_comp
+        // End of user code
+        return ownedResultExpression_comp;
+    }
+    
+    // Start of user code getterAnnotation:ownedResultExpression
+    // End of user code
+    @OslcName("ownedResultExpression")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedResultExpression")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
+    @OslcReadOnly(false)
+    public Link getOwnedResultExpression()
+    {
+        // Start of user code getterInit:ownedResultExpression
+        // End of user code
+        return ownedResultExpression;
+    }
+    
+    
+    // Start of user code setterAnnotation:ownedResultExpression_comp
+    // End of user code
+    public void setOwnedResultExpression_comp(final Link ownedResultExpression_comp )
+    {
+        // Start of user code setterInit:ownedResultExpression_comp
+        // End of user code
+        this.ownedResultExpression_comp = ownedResultExpression_comp;
+    
+        // Start of user code setterFinalize:ownedResultExpression_comp
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedResultExpression
+    // End of user code
+    public void setOwnedResultExpression(final Link ownedResultExpression )
+    {
+        // Start of user code setterInit:ownedResultExpression
+        // End of user code
+        this.ownedResultExpression = ownedResultExpression;
+    
+        // Start of user code setterFinalize:ownedResultExpression
+        // End of user code
+    }
     
     
 }

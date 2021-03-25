@@ -62,15 +62,20 @@ import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.ActionUsage;
+import org.oasis.oslcop.sysml.AllocationUsage;
 import org.oasis.oslcop.sysml.AnalysisCaseUsage;
+import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
 import org.oasis.oslcop.sysml.ConnectionUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
 import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
@@ -81,20 +86,26 @@ import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
 import org.oasis.oslcop.sysml.StateUsage;
 import org.oasis.oslcop.sysml.Subsetting;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
+import org.oasis.oslcop.sysml.TypeFeaturing;
 import org.oasis.oslcop.sysml.Usage;
 import org.oasis.oslcop.sysml.VariantMembership;
+import org.oasis.oslcop.sysml.VerificationCaseUsage;
+import org.oasis.oslcop.sysml.ViewUsage;
+import org.oasis.oslcop.sysml.ViewpointUsage;
 // Start of user code imports
 // End of user code
 
@@ -140,33 +151,24 @@ public class Usage
     // Start of user code attributeAnnotation:nestedCalculation
     // End of user code
     private Set<Link> nestedCalculation = new HashSet<Link>();
-    // Start of user code attributeAnnotation:owningVariationDefinition
+    // Start of user code attributeAnnotation:flowFeature
     // End of user code
-    private Link owningVariationDefinition;
-    // Start of user code attributeAnnotation:flow
-    // End of user code
-    private Set<Link> flow = new HashSet<Link>();
+    private Set<Link> flowFeature = new HashSet<Link>();
     // Start of user code attributeAnnotation:nestedCase
     // End of user code
     private Set<Link> nestedCase = new HashSet<Link>();
-    // Start of user code attributeAnnotation:owningVariantMembership
-    // End of user code
-    private Link owningVariantMembership;
-    // Start of user code attributeAnnotation:variantMembership_comp
-    // End of user code
-    private Set<Link> variantMembership_comp = new HashSet<Link>();
-    // Start of user code attributeAnnotation:owningVariationUsage
-    // End of user code
-    private Link owningVariationUsage;
-    // Start of user code attributeAnnotation:variant
-    // End of user code
-    private Set<Link> variant = new HashSet<Link>();
     // Start of user code attributeAnnotation:nestedAnalysisCase
     // End of user code
     private Set<Link> nestedAnalysisCase = new HashSet<Link>();
+    // Start of user code attributeAnnotation:variantMembership_comp
+    // End of user code
+    private Set<Link> variantMembership_comp = new HashSet<Link>();
     // Start of user code attributeAnnotation:usage
     // End of user code
     private Set<Link> usage = new HashSet<Link>();
+    // Start of user code attributeAnnotation:variant
+    // End of user code
+    private Set<Link> variant = new HashSet<Link>();
     // Start of user code attributeAnnotation:nestedReference
     // End of user code
     private Set<Link> nestedReference = new HashSet<Link>();
@@ -188,6 +190,24 @@ public class Usage
     // Start of user code attributeAnnotation:nestedAttribute
     // End of user code
     private Set<Link> nestedAttribute = new HashSet<Link>();
+    // Start of user code attributeAnnotation:nestedView
+    // End of user code
+    private Set<Link> nestedView = new HashSet<Link>();
+    // Start of user code attributeAnnotation:nestedViewpoint
+    // End of user code
+    private Set<Link> nestedViewpoint = new HashSet<Link>();
+    // Start of user code attributeAnnotation:nestedRendering
+    // End of user code
+    private Set<Link> nestedRendering = new HashSet<Link>();
+    // Start of user code attributeAnnotation:nestedVerificationCase
+    // End of user code
+    private Set<Link> nestedVerificationCase = new HashSet<Link>();
+    // Start of user code attributeAnnotation:nestedEnumeration
+    // End of user code
+    private Set<Link> nestedEnumeration = new HashSet<Link>();
+    // Start of user code attributeAnnotation:nestedAllocation
+    // End of user code
+    private Set<Link> nestedAllocation = new HashSet<Link>();
     // Start of user code attributeAnnotation:owningDefinition
     // End of user code
     private Link owningDefinition;
@@ -290,9 +310,9 @@ public class Usage
         this.nestedCalculation.add(nestedCalculation);
     }
     
-    public void addFlow(final Link flow)
+    public void addFlowFeature(final Link flowFeature)
     {
-        this.flow.add(flow);
+        this.flowFeature.add(flowFeature);
     }
     
     public void addNestedCase(final Link nestedCase)
@@ -300,24 +320,24 @@ public class Usage
         this.nestedCase.add(nestedCase);
     }
     
-    public void addVariantMembership_comp(final Link variantMembership_comp)
-    {
-        this.variantMembership_comp.add(variantMembership_comp);
-    }
-    
-    public void addVariant(final Link variant)
-    {
-        this.variant.add(variant);
-    }
-    
     public void addNestedAnalysisCase(final Link nestedAnalysisCase)
     {
         this.nestedAnalysisCase.add(nestedAnalysisCase);
     }
     
+    public void addVariantMembership_comp(final Link variantMembership_comp)
+    {
+        this.variantMembership_comp.add(variantMembership_comp);
+    }
+    
     public void addUsage(final Link usage)
     {
         this.usage.add(usage);
+    }
+    
+    public void addVariant(final Link variant)
+    {
+        this.variant.add(variant);
     }
     
     public void addNestedReference(final Link nestedReference)
@@ -353,6 +373,36 @@ public class Usage
     public void addNestedAttribute(final Link nestedAttribute)
     {
         this.nestedAttribute.add(nestedAttribute);
+    }
+    
+    public void addNestedView(final Link nestedView)
+    {
+        this.nestedView.add(nestedView);
+    }
+    
+    public void addNestedViewpoint(final Link nestedViewpoint)
+    {
+        this.nestedViewpoint.add(nestedViewpoint);
+    }
+    
+    public void addNestedRendering(final Link nestedRendering)
+    {
+        this.nestedRendering.add(nestedRendering);
+    }
+    
+    public void addNestedVerificationCase(final Link nestedVerificationCase)
+    {
+        this.nestedVerificationCase.add(nestedVerificationCase);
+    }
+    
+    public void addNestedEnumeration(final Link nestedEnumeration)
+    {
+        this.nestedEnumeration.add(nestedEnumeration);
+    }
+    
+    public void addNestedAllocation(final Link nestedAllocation)
+    {
+        this.nestedAllocation.add(nestedAllocation);
     }
     
     public void addVariantMembership(final Link variantMembership)
@@ -510,34 +560,19 @@ public class Usage
         return nestedCalculation;
     }
     
-    // Start of user code getterAnnotation:owningVariationDefinition
+    // Start of user code getterAnnotation:flowFeature
     // End of user code
-    @OslcName("owningVariationDefinition")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningVariationDefinition")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.DEFINITION_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwningVariationDefinition()
-    {
-        // Start of user code getterInit:owningVariationDefinition
-        // End of user code
-        return owningVariationDefinition;
-    }
-    
-    // Start of user code getterAnnotation:flow
-    // End of user code
-    @OslcName("flow")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "flow")
+    @OslcName("flowFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "flowFeature")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.USAGE_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getFlow()
+    public Set<Link> getFlowFeature()
     {
-        // Start of user code getterInit:flow
+        // Start of user code getterInit:flowFeature
         // End of user code
-        return flow;
+        return flowFeature;
     }
     
     // Start of user code getterAnnotation:nestedCase
@@ -555,19 +590,19 @@ public class Usage
         return nestedCase;
     }
     
-    // Start of user code getterAnnotation:owningVariantMembership
+    // Start of user code getterAnnotation:nestedAnalysisCase
     // End of user code
-    @OslcName("owningVariantMembership")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningVariantMembership")
-    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcName("nestedAnalysisCase")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedAnalysisCase")
+    @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.VARIANTMEMBERSHIP_TYPE})
+    @OslcRange({SysmlDomainConstants.ANALYSISCASEUSAGE_TYPE})
     @OslcReadOnly(false)
-    public Link getOwningVariantMembership()
+    public Set<Link> getNestedAnalysisCase()
     {
-        // Start of user code getterInit:owningVariantMembership
+        // Start of user code getterInit:nestedAnalysisCase
         // End of user code
-        return owningVariantMembership;
+        return nestedAnalysisCase;
     }
     
     // Start of user code getterAnnotation:variantMembership_comp
@@ -585,19 +620,19 @@ public class Usage
         return variantMembership_comp;
     }
     
-    // Start of user code getterAnnotation:owningVariationUsage
+    // Start of user code getterAnnotation:usage
     // End of user code
-    @OslcName("owningVariationUsage")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningVariationUsage")
-    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcName("usage")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "usage")
+    @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.USAGE_TYPE})
     @OslcReadOnly(false)
-    public Link getOwningVariationUsage()
+    public Set<Link> getUsage()
     {
-        // Start of user code getterInit:owningVariationUsage
+        // Start of user code getterInit:usage
         // End of user code
-        return owningVariationUsage;
+        return usage;
     }
     
     // Start of user code getterAnnotation:variant
@@ -613,36 +648,6 @@ public class Usage
         // Start of user code getterInit:variant
         // End of user code
         return variant;
-    }
-    
-    // Start of user code getterAnnotation:nestedAnalysisCase
-    // End of user code
-    @OslcName("nestedAnalysisCase")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedAnalysisCase")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ANALYSISCASEUSAGE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getNestedAnalysisCase()
-    {
-        // Start of user code getterInit:nestedAnalysisCase
-        // End of user code
-        return nestedAnalysisCase;
-    }
-    
-    // Start of user code getterAnnotation:usage
-    // End of user code
-    @OslcName("usage")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "usage")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.USAGE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getUsage()
-    {
-        // Start of user code getterInit:usage
-        // End of user code
-        return usage;
     }
     
     // Start of user code getterAnnotation:nestedReference
@@ -748,6 +753,96 @@ public class Usage
         // Start of user code getterInit:nestedAttribute
         // End of user code
         return nestedAttribute;
+    }
+    
+    // Start of user code getterAnnotation:nestedView
+    // End of user code
+    @OslcName("nestedView")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedView")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.VIEWUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getNestedView()
+    {
+        // Start of user code getterInit:nestedView
+        // End of user code
+        return nestedView;
+    }
+    
+    // Start of user code getterAnnotation:nestedViewpoint
+    // End of user code
+    @OslcName("nestedViewpoint")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedViewpoint")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.VIEWPOINTUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getNestedViewpoint()
+    {
+        // Start of user code getterInit:nestedViewpoint
+        // End of user code
+        return nestedViewpoint;
+    }
+    
+    // Start of user code getterAnnotation:nestedRendering
+    // End of user code
+    @OslcName("nestedRendering")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedRendering")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.RENDERINGUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getNestedRendering()
+    {
+        // Start of user code getterInit:nestedRendering
+        // End of user code
+        return nestedRendering;
+    }
+    
+    // Start of user code getterAnnotation:nestedVerificationCase
+    // End of user code
+    @OslcName("nestedVerificationCase")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedVerificationCase")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.VERIFICATIONCASEUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getNestedVerificationCase()
+    {
+        // Start of user code getterInit:nestedVerificationCase
+        // End of user code
+        return nestedVerificationCase;
+    }
+    
+    // Start of user code getterAnnotation:nestedEnumeration
+    // End of user code
+    @OslcName("nestedEnumeration")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedEnumeration")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ENUMERATIONUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getNestedEnumeration()
+    {
+        // Start of user code getterInit:nestedEnumeration
+        // End of user code
+        return nestedEnumeration;
+    }
+    
+    // Start of user code getterAnnotation:nestedAllocation
+    // End of user code
+    @OslcName("nestedAllocation")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedAllocation")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ALLOCATIONUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getNestedAllocation()
+    {
+        // Start of user code getterInit:nestedAllocation
+        // End of user code
+        return nestedAllocation;
     }
     
     // Start of user code getterAnnotation:owningDefinition
@@ -933,31 +1028,19 @@ public class Usage
         // End of user code
     }
     
-    // Start of user code setterAnnotation:owningVariationDefinition
+    // Start of user code setterAnnotation:flowFeature
     // End of user code
-    public void setOwningVariationDefinition(final Link owningVariationDefinition )
+    public void setFlowFeature(final Set<Link> flowFeature )
     {
-        // Start of user code setterInit:owningVariationDefinition
+        // Start of user code setterInit:flowFeature
         // End of user code
-        this.owningVariationDefinition = owningVariationDefinition;
-    
-        // Start of user code setterFinalize:owningVariationDefinition
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:flow
-    // End of user code
-    public void setFlow(final Set<Link> flow )
-    {
-        // Start of user code setterInit:flow
-        // End of user code
-        this.flow.clear();
-        if (flow != null)
+        this.flowFeature.clear();
+        if (flowFeature != null)
         {
-            this.flow.addAll(flow);
+            this.flowFeature.addAll(flowFeature);
         }
     
-        // Start of user code setterFinalize:flow
+        // Start of user code setterFinalize:flowFeature
         // End of user code
     }
     
@@ -977,15 +1060,19 @@ public class Usage
         // End of user code
     }
     
-    // Start of user code setterAnnotation:owningVariantMembership
+    // Start of user code setterAnnotation:nestedAnalysisCase
     // End of user code
-    public void setOwningVariantMembership(final Link owningVariantMembership )
+    public void setNestedAnalysisCase(final Set<Link> nestedAnalysisCase )
     {
-        // Start of user code setterInit:owningVariantMembership
+        // Start of user code setterInit:nestedAnalysisCase
         // End of user code
-        this.owningVariantMembership = owningVariantMembership;
+        this.nestedAnalysisCase.clear();
+        if (nestedAnalysisCase != null)
+        {
+            this.nestedAnalysisCase.addAll(nestedAnalysisCase);
+        }
     
-        // Start of user code setterFinalize:owningVariantMembership
+        // Start of user code setterFinalize:nestedAnalysisCase
         // End of user code
     }
     
@@ -1005,15 +1092,19 @@ public class Usage
         // End of user code
     }
     
-    // Start of user code setterAnnotation:owningVariationUsage
+    // Start of user code setterAnnotation:usage
     // End of user code
-    public void setOwningVariationUsage(final Link owningVariationUsage )
+    public void setUsage(final Set<Link> usage )
     {
-        // Start of user code setterInit:owningVariationUsage
+        // Start of user code setterInit:usage
         // End of user code
-        this.owningVariationUsage = owningVariationUsage;
+        this.usage.clear();
+        if (usage != null)
+        {
+            this.usage.addAll(usage);
+        }
     
-        // Start of user code setterFinalize:owningVariationUsage
+        // Start of user code setterFinalize:usage
         // End of user code
     }
     
@@ -1030,38 +1121,6 @@ public class Usage
         }
     
         // Start of user code setterFinalize:variant
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:nestedAnalysisCase
-    // End of user code
-    public void setNestedAnalysisCase(final Set<Link> nestedAnalysisCase )
-    {
-        // Start of user code setterInit:nestedAnalysisCase
-        // End of user code
-        this.nestedAnalysisCase.clear();
-        if (nestedAnalysisCase != null)
-        {
-            this.nestedAnalysisCase.addAll(nestedAnalysisCase);
-        }
-    
-        // Start of user code setterFinalize:nestedAnalysisCase
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:usage
-    // End of user code
-    public void setUsage(final Set<Link> usage )
-    {
-        // Start of user code setterInit:usage
-        // End of user code
-        this.usage.clear();
-        if (usage != null)
-        {
-            this.usage.addAll(usage);
-        }
-    
-        // Start of user code setterFinalize:usage
         // End of user code
     }
     
@@ -1174,6 +1233,102 @@ public class Usage
         }
     
         // Start of user code setterFinalize:nestedAttribute
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:nestedView
+    // End of user code
+    public void setNestedView(final Set<Link> nestedView )
+    {
+        // Start of user code setterInit:nestedView
+        // End of user code
+        this.nestedView.clear();
+        if (nestedView != null)
+        {
+            this.nestedView.addAll(nestedView);
+        }
+    
+        // Start of user code setterFinalize:nestedView
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:nestedViewpoint
+    // End of user code
+    public void setNestedViewpoint(final Set<Link> nestedViewpoint )
+    {
+        // Start of user code setterInit:nestedViewpoint
+        // End of user code
+        this.nestedViewpoint.clear();
+        if (nestedViewpoint != null)
+        {
+            this.nestedViewpoint.addAll(nestedViewpoint);
+        }
+    
+        // Start of user code setterFinalize:nestedViewpoint
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:nestedRendering
+    // End of user code
+    public void setNestedRendering(final Set<Link> nestedRendering )
+    {
+        // Start of user code setterInit:nestedRendering
+        // End of user code
+        this.nestedRendering.clear();
+        if (nestedRendering != null)
+        {
+            this.nestedRendering.addAll(nestedRendering);
+        }
+    
+        // Start of user code setterFinalize:nestedRendering
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:nestedVerificationCase
+    // End of user code
+    public void setNestedVerificationCase(final Set<Link> nestedVerificationCase )
+    {
+        // Start of user code setterInit:nestedVerificationCase
+        // End of user code
+        this.nestedVerificationCase.clear();
+        if (nestedVerificationCase != null)
+        {
+            this.nestedVerificationCase.addAll(nestedVerificationCase);
+        }
+    
+        // Start of user code setterFinalize:nestedVerificationCase
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:nestedEnumeration
+    // End of user code
+    public void setNestedEnumeration(final Set<Link> nestedEnumeration )
+    {
+        // Start of user code setterInit:nestedEnumeration
+        // End of user code
+        this.nestedEnumeration.clear();
+        if (nestedEnumeration != null)
+        {
+            this.nestedEnumeration.addAll(nestedEnumeration);
+        }
+    
+        // Start of user code setterFinalize:nestedEnumeration
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:nestedAllocation
+    // End of user code
+    public void setNestedAllocation(final Set<Link> nestedAllocation )
+    {
+        // Start of user code setterInit:nestedAllocation
+        // End of user code
+        this.nestedAllocation.clear();
+        if (nestedAllocation != null)
+        {
+            this.nestedAllocation.addAll(nestedAllocation);
+        }
+    
+        // Start of user code setterFinalize:nestedAllocation
         // End of user code
     }
     

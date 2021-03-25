@@ -56,14 +56,19 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.IActionUsage;
+import org.oasis.oslcop.sysml.IAllocationUsage;
 import org.oasis.oslcop.sysml.IAnalysisCaseUsage;
+import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IAttributeUsage;
 import org.oasis.oslcop.sysml.ICalculationUsage;
 import org.oasis.oslcop.sysml.ICaseUsage;
+import org.oasis.oslcop.sysml.IComment;
 import org.oasis.oslcop.sysml.IConjugation;
 import org.oasis.oslcop.sysml.IConnectionUsage;
 import org.oasis.oslcop.sysml.IConstraintUsage;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
+import org.oasis.oslcop.sysml.IEnumerationUsage;
 import org.oasis.oslcop.sysml.IFeature;
 import org.oasis.oslcop.sysml.IFeatureMembership;
 import org.oasis.oslcop.sysml.IGeneralization;
@@ -73,18 +78,23 @@ import org.oasis.oslcop.sysml.IInterfaceUsage;
 import org.oasis.oslcop.sysml.IItemUsage;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
-import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.oasis.oslcop.sysml.INamespace;
 import org.oasis.oslcop.sysml.IPartUsage;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IPortUsage;
 import org.oasis.oslcop.sysml.IReferenceUsage;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.IRenderingUsage;
 import org.oasis.oslcop.sysml.IRequirementUsage;
 import org.oasis.oslcop.sysml.IStateUsage;
 import org.oasis.oslcop.sysml.ISuperclassing;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 import org.oasis.oslcop.sysml.ITransitionUsage;
 import org.oasis.oslcop.sysml.IUsage;
 import org.oasis.oslcop.sysml.IVariantMembership;
+import org.oasis.oslcop.sysml.IVerificationCaseUsage;
+import org.oasis.oslcop.sysml.IViewUsage;
+import org.oasis.oslcop.sysml.IViewpointUsage;
 // Start of user code imports
 // End of user code
 
@@ -95,17 +105,17 @@ public interface IDefinition
 {
 
     public void addOwnedUsage(final Link ownedUsage );
-    public void addVariant(final Link variant );
-    public void addVariantMembership_comp(final Link variantMembership_comp );
     public void addOwnedPort(final Link ownedPort );
-    public void addFlow(final Link flow );
+    public void addFlowFeature(final Link flowFeature );
     public void addUsage(final Link usage );
     public void addOwnedState(final Link ownedState );
     public void addOwnedConstraint(final Link ownedConstraint );
     public void addOwnedTransition(final Link ownedTransition );
     public void addOwnedRequirement(final Link ownedRequirement );
     public void addOwnedCalculation(final Link ownedCalculation );
+    public void addVariantMembership_comp(final Link variantMembership_comp );
     public void addOwnedAnalysisCase(final Link ownedAnalysisCase );
+    public void addVariant(final Link variant );
     public void addOwnedCase(final Link ownedCase );
     public void addOwnedReference(final Link ownedReference );
     public void addOwnedAction(final Link ownedAction );
@@ -115,6 +125,12 @@ public interface IDefinition
     public void addOwnedIndividual(final Link ownedIndividual );
     public void addOwnedInterface(final Link ownedInterface );
     public void addOwnedAttribute(final Link ownedAttribute );
+    public void addOwnedView(final Link ownedView );
+    public void addOwnedViewpoint(final Link ownedViewpoint );
+    public void addOwnedRendering(final Link ownedRendering );
+    public void addOwnedVerificationCase(final Link ownedVerificationCase );
+    public void addOwnedEnumeration(final Link ownedEnumeration );
+    public void addOwnedAllocation(final Link ownedAllocation );
     public void addVariantMembership(final Link variantMembership );
 
     @OslcName("isVariation")
@@ -132,22 +148,6 @@ public interface IDefinition
     @OslcReadOnly(false)
     public Set<Link> getOwnedUsage();
 
-    @OslcName("variant")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "variant")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.USAGE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getVariant();
-
-    @OslcName("variantMembership_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "variantMembership_comp")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.VARIANTMEMBERSHIP_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getVariantMembership_comp();
-
     @OslcName("ownedPort")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedPort")
     @OslcOccurs(Occurs.ZeroOrMany)
@@ -156,13 +156,13 @@ public interface IDefinition
     @OslcReadOnly(false)
     public Set<Link> getOwnedPort();
 
-    @OslcName("flow")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "flow")
+    @OslcName("flowFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "flowFeature")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.USAGE_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getFlow();
+    public Set<Link> getFlowFeature();
 
     @OslcName("usage")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "usage")
@@ -212,6 +212,14 @@ public interface IDefinition
     @OslcReadOnly(false)
     public Set<Link> getOwnedCalculation();
 
+    @OslcName("variantMembership_comp")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "variantMembership_comp")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.VARIANTMEMBERSHIP_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getVariantMembership_comp();
+
     @OslcName("ownedAnalysisCase")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedAnalysisCase")
     @OslcOccurs(Occurs.ZeroOrMany)
@@ -219,6 +227,14 @@ public interface IDefinition
     @OslcRange({SysmlDomainConstants.ANALYSISCASEUSAGE_TYPE})
     @OslcReadOnly(false)
     public Set<Link> getOwnedAnalysisCase();
+
+    @OslcName("variant")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "variant")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.USAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getVariant();
 
     @OslcName("ownedCase")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedCase")
@@ -292,6 +308,54 @@ public interface IDefinition
     @OslcReadOnly(false)
     public Set<Link> getOwnedAttribute();
 
+    @OslcName("ownedView")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedView")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.VIEWUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedView();
+
+    @OslcName("ownedViewpoint")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedViewpoint")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.VIEWPOINTUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedViewpoint();
+
+    @OslcName("ownedRendering")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRendering")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.RENDERINGUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedRendering();
+
+    @OslcName("ownedVerificationCase")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedVerificationCase")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.VERIFICATIONCASEUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedVerificationCase();
+
+    @OslcName("ownedEnumeration")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedEnumeration")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ENUMERATIONUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedEnumeration();
+
+    @OslcName("ownedAllocation")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedAllocation")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ALLOCATIONUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedAllocation();
+
     @OslcName("variantMembership")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "variantMembership")
     @OslcOccurs(Occurs.ZeroOrMany)
@@ -303,17 +367,17 @@ public interface IDefinition
 
     public void setIsVariation(final Boolean isVariation );
     public void setOwnedUsage(final Set<Link> ownedUsage );
-    public void setVariant(final Set<Link> variant );
-    public void setVariantMembership_comp(final Set<Link> variantMembership_comp );
     public void setOwnedPort(final Set<Link> ownedPort );
-    public void setFlow(final Set<Link> flow );
+    public void setFlowFeature(final Set<Link> flowFeature );
     public void setUsage(final Set<Link> usage );
     public void setOwnedState(final Set<Link> ownedState );
     public void setOwnedConstraint(final Set<Link> ownedConstraint );
     public void setOwnedTransition(final Set<Link> ownedTransition );
     public void setOwnedRequirement(final Set<Link> ownedRequirement );
     public void setOwnedCalculation(final Set<Link> ownedCalculation );
+    public void setVariantMembership_comp(final Set<Link> variantMembership_comp );
     public void setOwnedAnalysisCase(final Set<Link> ownedAnalysisCase );
+    public void setVariant(final Set<Link> variant );
     public void setOwnedCase(final Set<Link> ownedCase );
     public void setOwnedReference(final Set<Link> ownedReference );
     public void setOwnedAction(final Set<Link> ownedAction );
@@ -323,6 +387,12 @@ public interface IDefinition
     public void setOwnedIndividual(final Set<Link> ownedIndividual );
     public void setOwnedInterface(final Set<Link> ownedInterface );
     public void setOwnedAttribute(final Set<Link> ownedAttribute );
+    public void setOwnedView(final Set<Link> ownedView );
+    public void setOwnedViewpoint(final Set<Link> ownedViewpoint );
+    public void setOwnedRendering(final Set<Link> ownedRendering );
+    public void setOwnedVerificationCase(final Set<Link> ownedVerificationCase );
+    public void setOwnedEnumeration(final Set<Link> ownedEnumeration );
+    public void setOwnedAllocation(final Set<Link> ownedAllocation );
     public void setVariantMembership(final Set<Link> variantMembership );
 }
 

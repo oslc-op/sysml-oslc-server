@@ -62,14 +62,19 @@ import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.ActionUsage;
+import org.oasis.oslcop.sysml.AllocationUsage;
 import org.oasis.oslcop.sysml.AnalysisCaseUsage;
+import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
 import org.oasis.oslcop.sysml.ConnectionUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.Generalization;
@@ -79,18 +84,23 @@ import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
 import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
 import org.oasis.oslcop.sysml.StateUsage;
 import org.oasis.oslcop.sysml.Superclassing;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Usage;
 import org.oasis.oslcop.sysml.VariantMembership;
+import org.oasis.oslcop.sysml.VerificationCaseUsage;
+import org.oasis.oslcop.sysml.ViewUsage;
+import org.oasis.oslcop.sysml.ViewpointUsage;
 // Start of user code imports
 // End of user code
 
@@ -112,18 +122,12 @@ public class Definition
     // Start of user code attributeAnnotation:ownedUsage
     // End of user code
     private Set<Link> ownedUsage = new HashSet<Link>();
-    // Start of user code attributeAnnotation:variant
-    // End of user code
-    private Set<Link> variant = new HashSet<Link>();
-    // Start of user code attributeAnnotation:variantMembership_comp
-    // End of user code
-    private Set<Link> variantMembership_comp = new HashSet<Link>();
     // Start of user code attributeAnnotation:ownedPort
     // End of user code
     private Set<Link> ownedPort = new HashSet<Link>();
-    // Start of user code attributeAnnotation:flow
+    // Start of user code attributeAnnotation:flowFeature
     // End of user code
-    private Set<Link> flow = new HashSet<Link>();
+    private Set<Link> flowFeature = new HashSet<Link>();
     // Start of user code attributeAnnotation:usage
     // End of user code
     private Set<Link> usage = new HashSet<Link>();
@@ -142,9 +146,15 @@ public class Definition
     // Start of user code attributeAnnotation:ownedCalculation
     // End of user code
     private Set<Link> ownedCalculation = new HashSet<Link>();
+    // Start of user code attributeAnnotation:variantMembership_comp
+    // End of user code
+    private Set<Link> variantMembership_comp = new HashSet<Link>();
     // Start of user code attributeAnnotation:ownedAnalysisCase
     // End of user code
     private Set<Link> ownedAnalysisCase = new HashSet<Link>();
+    // Start of user code attributeAnnotation:variant
+    // End of user code
+    private Set<Link> variant = new HashSet<Link>();
     // Start of user code attributeAnnotation:ownedCase
     // End of user code
     private Set<Link> ownedCase = new HashSet<Link>();
@@ -172,6 +182,24 @@ public class Definition
     // Start of user code attributeAnnotation:ownedAttribute
     // End of user code
     private Set<Link> ownedAttribute = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedView
+    // End of user code
+    private Set<Link> ownedView = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedViewpoint
+    // End of user code
+    private Set<Link> ownedViewpoint = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedRendering
+    // End of user code
+    private Set<Link> ownedRendering = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedVerificationCase
+    // End of user code
+    private Set<Link> ownedVerificationCase = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedEnumeration
+    // End of user code
+    private Set<Link> ownedEnumeration = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedAllocation
+    // End of user code
+    private Set<Link> ownedAllocation = new HashSet<Link>();
     // Start of user code attributeAnnotation:variantMembership
     // End of user code
     private Set<Link> variantMembership = new HashSet<Link>();
@@ -236,24 +264,14 @@ public class Definition
         this.ownedUsage.add(ownedUsage);
     }
     
-    public void addVariant(final Link variant)
-    {
-        this.variant.add(variant);
-    }
-    
-    public void addVariantMembership_comp(final Link variantMembership_comp)
-    {
-        this.variantMembership_comp.add(variantMembership_comp);
-    }
-    
     public void addOwnedPort(final Link ownedPort)
     {
         this.ownedPort.add(ownedPort);
     }
     
-    public void addFlow(final Link flow)
+    public void addFlowFeature(final Link flowFeature)
     {
-        this.flow.add(flow);
+        this.flowFeature.add(flowFeature);
     }
     
     public void addUsage(final Link usage)
@@ -286,9 +304,19 @@ public class Definition
         this.ownedCalculation.add(ownedCalculation);
     }
     
+    public void addVariantMembership_comp(final Link variantMembership_comp)
+    {
+        this.variantMembership_comp.add(variantMembership_comp);
+    }
+    
     public void addOwnedAnalysisCase(final Link ownedAnalysisCase)
     {
         this.ownedAnalysisCase.add(ownedAnalysisCase);
+    }
+    
+    public void addVariant(final Link variant)
+    {
+        this.variant.add(variant);
     }
     
     public void addOwnedCase(final Link ownedCase)
@@ -336,6 +364,36 @@ public class Definition
         this.ownedAttribute.add(ownedAttribute);
     }
     
+    public void addOwnedView(final Link ownedView)
+    {
+        this.ownedView.add(ownedView);
+    }
+    
+    public void addOwnedViewpoint(final Link ownedViewpoint)
+    {
+        this.ownedViewpoint.add(ownedViewpoint);
+    }
+    
+    public void addOwnedRendering(final Link ownedRendering)
+    {
+        this.ownedRendering.add(ownedRendering);
+    }
+    
+    public void addOwnedVerificationCase(final Link ownedVerificationCase)
+    {
+        this.ownedVerificationCase.add(ownedVerificationCase);
+    }
+    
+    public void addOwnedEnumeration(final Link ownedEnumeration)
+    {
+        this.ownedEnumeration.add(ownedEnumeration);
+    }
+    
+    public void addOwnedAllocation(final Link ownedAllocation)
+    {
+        this.ownedAllocation.add(ownedAllocation);
+    }
+    
     public void addVariantMembership(final Link variantMembership)
     {
         this.variantMembership.add(variantMembership);
@@ -371,36 +429,6 @@ public class Definition
         return ownedUsage;
     }
     
-    // Start of user code getterAnnotation:variant
-    // End of user code
-    @OslcName("variant")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "variant")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.USAGE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getVariant()
-    {
-        // Start of user code getterInit:variant
-        // End of user code
-        return variant;
-    }
-    
-    // Start of user code getterAnnotation:variantMembership_comp
-    // End of user code
-    @OslcName("variantMembership_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "variantMembership_comp")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.VARIANTMEMBERSHIP_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getVariantMembership_comp()
-    {
-        // Start of user code getterInit:variantMembership_comp
-        // End of user code
-        return variantMembership_comp;
-    }
-    
     // Start of user code getterAnnotation:ownedPort
     // End of user code
     @OslcName("ownedPort")
@@ -416,19 +444,19 @@ public class Definition
         return ownedPort;
     }
     
-    // Start of user code getterAnnotation:flow
+    // Start of user code getterAnnotation:flowFeature
     // End of user code
-    @OslcName("flow")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "flow")
+    @OslcName("flowFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "flowFeature")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.USAGE_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getFlow()
+    public Set<Link> getFlowFeature()
     {
-        // Start of user code getterInit:flow
+        // Start of user code getterInit:flowFeature
         // End of user code
-        return flow;
+        return flowFeature;
     }
     
     // Start of user code getterAnnotation:usage
@@ -521,6 +549,21 @@ public class Definition
         return ownedCalculation;
     }
     
+    // Start of user code getterAnnotation:variantMembership_comp
+    // End of user code
+    @OslcName("variantMembership_comp")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "variantMembership_comp")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.VARIANTMEMBERSHIP_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getVariantMembership_comp()
+    {
+        // Start of user code getterInit:variantMembership_comp
+        // End of user code
+        return variantMembership_comp;
+    }
+    
     // Start of user code getterAnnotation:ownedAnalysisCase
     // End of user code
     @OslcName("ownedAnalysisCase")
@@ -534,6 +577,21 @@ public class Definition
         // Start of user code getterInit:ownedAnalysisCase
         // End of user code
         return ownedAnalysisCase;
+    }
+    
+    // Start of user code getterAnnotation:variant
+    // End of user code
+    @OslcName("variant")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "variant")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.USAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getVariant()
+    {
+        // Start of user code getterInit:variant
+        // End of user code
+        return variant;
     }
     
     // Start of user code getterAnnotation:ownedCase
@@ -671,6 +729,96 @@ public class Definition
         return ownedAttribute;
     }
     
+    // Start of user code getterAnnotation:ownedView
+    // End of user code
+    @OslcName("ownedView")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedView")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.VIEWUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedView()
+    {
+        // Start of user code getterInit:ownedView
+        // End of user code
+        return ownedView;
+    }
+    
+    // Start of user code getterAnnotation:ownedViewpoint
+    // End of user code
+    @OslcName("ownedViewpoint")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedViewpoint")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.VIEWPOINTUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedViewpoint()
+    {
+        // Start of user code getterInit:ownedViewpoint
+        // End of user code
+        return ownedViewpoint;
+    }
+    
+    // Start of user code getterAnnotation:ownedRendering
+    // End of user code
+    @OslcName("ownedRendering")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRendering")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.RENDERINGUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedRendering()
+    {
+        // Start of user code getterInit:ownedRendering
+        // End of user code
+        return ownedRendering;
+    }
+    
+    // Start of user code getterAnnotation:ownedVerificationCase
+    // End of user code
+    @OslcName("ownedVerificationCase")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedVerificationCase")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.VERIFICATIONCASEUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedVerificationCase()
+    {
+        // Start of user code getterInit:ownedVerificationCase
+        // End of user code
+        return ownedVerificationCase;
+    }
+    
+    // Start of user code getterAnnotation:ownedEnumeration
+    // End of user code
+    @OslcName("ownedEnumeration")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedEnumeration")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ENUMERATIONUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedEnumeration()
+    {
+        // Start of user code getterInit:ownedEnumeration
+        // End of user code
+        return ownedEnumeration;
+    }
+    
+    // Start of user code getterAnnotation:ownedAllocation
+    // End of user code
+    @OslcName("ownedAllocation")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedAllocation")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ALLOCATIONUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedAllocation()
+    {
+        // Start of user code getterInit:ownedAllocation
+        // End of user code
+        return ownedAllocation;
+    }
+    
     // Start of user code getterAnnotation:variantMembership
     // End of user code
     @OslcName("variantMembership")
@@ -715,38 +863,6 @@ public class Definition
         // End of user code
     }
     
-    // Start of user code setterAnnotation:variant
-    // End of user code
-    public void setVariant(final Set<Link> variant )
-    {
-        // Start of user code setterInit:variant
-        // End of user code
-        this.variant.clear();
-        if (variant != null)
-        {
-            this.variant.addAll(variant);
-        }
-    
-        // Start of user code setterFinalize:variant
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:variantMembership_comp
-    // End of user code
-    public void setVariantMembership_comp(final Set<Link> variantMembership_comp )
-    {
-        // Start of user code setterInit:variantMembership_comp
-        // End of user code
-        this.variantMembership_comp.clear();
-        if (variantMembership_comp != null)
-        {
-            this.variantMembership_comp.addAll(variantMembership_comp);
-        }
-    
-        // Start of user code setterFinalize:variantMembership_comp
-        // End of user code
-    }
-    
     // Start of user code setterAnnotation:ownedPort
     // End of user code
     public void setOwnedPort(final Set<Link> ownedPort )
@@ -763,19 +879,19 @@ public class Definition
         // End of user code
     }
     
-    // Start of user code setterAnnotation:flow
+    // Start of user code setterAnnotation:flowFeature
     // End of user code
-    public void setFlow(final Set<Link> flow )
+    public void setFlowFeature(final Set<Link> flowFeature )
     {
-        // Start of user code setterInit:flow
+        // Start of user code setterInit:flowFeature
         // End of user code
-        this.flow.clear();
-        if (flow != null)
+        this.flowFeature.clear();
+        if (flowFeature != null)
         {
-            this.flow.addAll(flow);
+            this.flowFeature.addAll(flowFeature);
         }
     
-        // Start of user code setterFinalize:flow
+        // Start of user code setterFinalize:flowFeature
         // End of user code
     }
     
@@ -875,6 +991,22 @@ public class Definition
         // End of user code
     }
     
+    // Start of user code setterAnnotation:variantMembership_comp
+    // End of user code
+    public void setVariantMembership_comp(final Set<Link> variantMembership_comp )
+    {
+        // Start of user code setterInit:variantMembership_comp
+        // End of user code
+        this.variantMembership_comp.clear();
+        if (variantMembership_comp != null)
+        {
+            this.variantMembership_comp.addAll(variantMembership_comp);
+        }
+    
+        // Start of user code setterFinalize:variantMembership_comp
+        // End of user code
+    }
+    
     // Start of user code setterAnnotation:ownedAnalysisCase
     // End of user code
     public void setOwnedAnalysisCase(final Set<Link> ownedAnalysisCase )
@@ -888,6 +1020,22 @@ public class Definition
         }
     
         // Start of user code setterFinalize:ownedAnalysisCase
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:variant
+    // End of user code
+    public void setVariant(final Set<Link> variant )
+    {
+        // Start of user code setterInit:variant
+        // End of user code
+        this.variant.clear();
+        if (variant != null)
+        {
+            this.variant.addAll(variant);
+        }
+    
+        // Start of user code setterFinalize:variant
         // End of user code
     }
     
@@ -1032,6 +1180,102 @@ public class Definition
         }
     
         // Start of user code setterFinalize:ownedAttribute
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedView
+    // End of user code
+    public void setOwnedView(final Set<Link> ownedView )
+    {
+        // Start of user code setterInit:ownedView
+        // End of user code
+        this.ownedView.clear();
+        if (ownedView != null)
+        {
+            this.ownedView.addAll(ownedView);
+        }
+    
+        // Start of user code setterFinalize:ownedView
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedViewpoint
+    // End of user code
+    public void setOwnedViewpoint(final Set<Link> ownedViewpoint )
+    {
+        // Start of user code setterInit:ownedViewpoint
+        // End of user code
+        this.ownedViewpoint.clear();
+        if (ownedViewpoint != null)
+        {
+            this.ownedViewpoint.addAll(ownedViewpoint);
+        }
+    
+        // Start of user code setterFinalize:ownedViewpoint
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedRendering
+    // End of user code
+    public void setOwnedRendering(final Set<Link> ownedRendering )
+    {
+        // Start of user code setterInit:ownedRendering
+        // End of user code
+        this.ownedRendering.clear();
+        if (ownedRendering != null)
+        {
+            this.ownedRendering.addAll(ownedRendering);
+        }
+    
+        // Start of user code setterFinalize:ownedRendering
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedVerificationCase
+    // End of user code
+    public void setOwnedVerificationCase(final Set<Link> ownedVerificationCase )
+    {
+        // Start of user code setterInit:ownedVerificationCase
+        // End of user code
+        this.ownedVerificationCase.clear();
+        if (ownedVerificationCase != null)
+        {
+            this.ownedVerificationCase.addAll(ownedVerificationCase);
+        }
+    
+        // Start of user code setterFinalize:ownedVerificationCase
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedEnumeration
+    // End of user code
+    public void setOwnedEnumeration(final Set<Link> ownedEnumeration )
+    {
+        // Start of user code setterInit:ownedEnumeration
+        // End of user code
+        this.ownedEnumeration.clear();
+        if (ownedEnumeration != null)
+        {
+            this.ownedEnumeration.addAll(ownedEnumeration);
+        }
+    
+        // Start of user code setterFinalize:ownedEnumeration
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedAllocation
+    // End of user code
+    public void setOwnedAllocation(final Set<Link> ownedAllocation )
+    {
+        // Start of user code setterInit:ownedAllocation
+        // End of user code
+        this.ownedAllocation.clear();
+        if (ownedAllocation != null)
+        {
+            this.ownedAllocation.addAll(ownedAllocation);
+        }
+    
+        // Start of user code setterFinalize:ownedAllocation
         // End of user code
     }
     

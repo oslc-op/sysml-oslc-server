@@ -59,20 +59,26 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.PartDefinition;
 import org.oasis.oslcop.sysml.IAssociation;
+import org.oasis.oslcop.sysml.IAssociationStructure;
 import org.oasis.oslcop.sysml.ISysmlClass;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.IStructure;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.ActionUsage;
+import org.oasis.oslcop.sysml.AllocationUsage;
 import org.oasis.oslcop.sysml.AnalysisCaseUsage;
+import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
 import org.oasis.oslcop.sysml.ConnectionUsage;
-import org.oasis.oslcop.sysml.Connector;
 import org.oasis.oslcop.sysml.ConstraintUsage;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.Generalization;
@@ -82,19 +88,24 @@ import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
 import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
 import org.oasis.oslcop.sysml.StateUsage;
 import org.oasis.oslcop.sysml.Superclassing;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
 import org.oasis.oslcop.sysml.Usage;
 import org.oasis.oslcop.sysml.VariantMembership;
+import org.oasis.oslcop.sysml.VerificationCaseUsage;
+import org.oasis.oslcop.sysml.ViewUsage;
+import org.oasis.oslcop.sysml.ViewpointUsage;
 // Start of user code imports
 // End of user code
 
@@ -108,11 +119,23 @@ import org.oasis.oslcop.sysml.VariantMembership;
 @OslcResourceShape(title = "ConnectionDefinition Resource Shape", describes = SysmlDomainConstants.CONNECTIONDEFINITION_TYPE)
 public class ConnectionDefinition
     extends PartDefinition
-    implements IConnectionDefinition, IAssociation, ISysmlClass, IRelationship
+    implements IConnectionDefinition, IAssociation, IAssociationStructure, ISysmlClass, IRelationship, IStructure
 {
     // Start of user code attributeAnnotation:connectionEnd
     // End of user code
     private Set<Link> connectionEnd = new HashSet<Link>();
+    // Start of user code attributeAnnotation:relatedType
+    // End of user code
+    private Set<Link> relatedType = new HashSet<Link>();
+    // Start of user code attributeAnnotation:sourceType
+    // End of user code
+    private Link sourceType;
+    // Start of user code attributeAnnotation:targetType
+    // End of user code
+    private Set<Link> targetType = new HashSet<Link>();
+    // Start of user code attributeAnnotation:associationEnd
+    // End of user code
+    private Set<Link> associationEnd = new HashSet<Link>();
     // Start of user code attributeAnnotation:relatedElement
     // End of user code
     private Set<Link> relatedElement = new HashSet<Link>();
@@ -131,15 +154,6 @@ public class ConnectionDefinition
     // Start of user code attributeAnnotation:ownedRelatedElement
     // End of user code
     private Set<Link> ownedRelatedElement = new HashSet<Link>();
-    // Start of user code attributeAnnotation:relatedType
-    // End of user code
-    private Set<Link> relatedType = new HashSet<Link>();
-    // Start of user code attributeAnnotation:owningConnector
-    // End of user code
-    private Link owningConnector;
-    // Start of user code attributeAnnotation:associationEnd
-    // End of user code
-    private Set<Link> associationEnd = new HashSet<Link>();
     
     // Start of user code classAttributes
     // End of user code
@@ -201,6 +215,21 @@ public class ConnectionDefinition
         this.connectionEnd.add(connectionEnd);
     }
     
+    public void addRelatedType(final Link relatedType)
+    {
+        this.relatedType.add(relatedType);
+    }
+    
+    public void addTargetType(final Link targetType)
+    {
+        this.targetType.add(targetType);
+    }
+    
+    public void addAssociationEnd(final Link associationEnd)
+    {
+        this.associationEnd.add(associationEnd);
+    }
+    
     public void addRelatedElement(final Link relatedElement)
     {
         this.relatedElement.add(relatedElement);
@@ -226,16 +255,6 @@ public class ConnectionDefinition
         this.ownedRelatedElement.add(ownedRelatedElement);
     }
     
-    public void addRelatedType(final Link relatedType)
-    {
-        this.relatedType.add(relatedType);
-    }
-    
-    public void addAssociationEnd(final Link associationEnd)
-    {
-        this.associationEnd.add(associationEnd);
-    }
-    
     
     // Start of user code getterAnnotation:connectionEnd
     // End of user code
@@ -250,6 +269,66 @@ public class ConnectionDefinition
         // Start of user code getterInit:connectionEnd
         // End of user code
         return connectionEnd;
+    }
+    
+    // Start of user code getterAnnotation:relatedType
+    // End of user code
+    @OslcName("relatedType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "relatedType")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getRelatedType()
+    {
+        // Start of user code getterInit:relatedType
+        // End of user code
+        return relatedType;
+    }
+    
+    // Start of user code getterAnnotation:sourceType
+    // End of user code
+    @OslcName("sourceType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "sourceType")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
+    @OslcReadOnly(false)
+    public Link getSourceType()
+    {
+        // Start of user code getterInit:sourceType
+        // End of user code
+        return sourceType;
+    }
+    
+    // Start of user code getterAnnotation:targetType
+    // End of user code
+    @OslcName("targetType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "targetType")
+    @OslcOccurs(Occurs.OneOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getTargetType()
+    {
+        // Start of user code getterInit:targetType
+        // End of user code
+        return targetType;
+    }
+    
+    // Start of user code getterAnnotation:associationEnd
+    // End of user code
+    @OslcName("associationEnd")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "associationEnd")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getAssociationEnd()
+    {
+        // Start of user code getterInit:associationEnd
+        // End of user code
+        return associationEnd;
     }
     
     // Start of user code getterAnnotation:relatedElement
@@ -342,51 +421,6 @@ public class ConnectionDefinition
         return ownedRelatedElement;
     }
     
-    // Start of user code getterAnnotation:relatedType
-    // End of user code
-    @OslcName("relatedType")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "relatedType")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getRelatedType()
-    {
-        // Start of user code getterInit:relatedType
-        // End of user code
-        return relatedType;
-    }
-    
-    // Start of user code getterAnnotation:owningConnector
-    // End of user code
-    @OslcName("owningConnector")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningConnector")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.CONNECTOR_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwningConnector()
-    {
-        // Start of user code getterInit:owningConnector
-        // End of user code
-        return owningConnector;
-    }
-    
-    // Start of user code getterAnnotation:associationEnd
-    // End of user code
-    @OslcName("associationEnd")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "associationEnd")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getAssociationEnd()
-    {
-        // Start of user code getterInit:associationEnd
-        // End of user code
-        return associationEnd;
-    }
-    
     
     // Start of user code setterAnnotation:connectionEnd
     // End of user code
@@ -401,6 +435,66 @@ public class ConnectionDefinition
         }
     
         // Start of user code setterFinalize:connectionEnd
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:relatedType
+    // End of user code
+    public void setRelatedType(final Set<Link> relatedType )
+    {
+        // Start of user code setterInit:relatedType
+        // End of user code
+        this.relatedType.clear();
+        if (relatedType != null)
+        {
+            this.relatedType.addAll(relatedType);
+        }
+    
+        // Start of user code setterFinalize:relatedType
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:sourceType
+    // End of user code
+    public void setSourceType(final Link sourceType )
+    {
+        // Start of user code setterInit:sourceType
+        // End of user code
+        this.sourceType = sourceType;
+    
+        // Start of user code setterFinalize:sourceType
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:targetType
+    // End of user code
+    public void setTargetType(final Set<Link> targetType )
+    {
+        // Start of user code setterInit:targetType
+        // End of user code
+        this.targetType.clear();
+        if (targetType != null)
+        {
+            this.targetType.addAll(targetType);
+        }
+    
+        // Start of user code setterFinalize:targetType
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:associationEnd
+    // End of user code
+    public void setAssociationEnd(final Set<Link> associationEnd )
+    {
+        // Start of user code setterInit:associationEnd
+        // End of user code
+        this.associationEnd.clear();
+        if (associationEnd != null)
+        {
+            this.associationEnd.addAll(associationEnd);
+        }
+    
+        // Start of user code setterFinalize:associationEnd
         // End of user code
     }
     
@@ -493,50 +587,6 @@ public class ConnectionDefinition
         }
     
         // Start of user code setterFinalize:ownedRelatedElement
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:relatedType
-    // End of user code
-    public void setRelatedType(final Set<Link> relatedType )
-    {
-        // Start of user code setterInit:relatedType
-        // End of user code
-        this.relatedType.clear();
-        if (relatedType != null)
-        {
-            this.relatedType.addAll(relatedType);
-        }
-    
-        // Start of user code setterFinalize:relatedType
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:owningConnector
-    // End of user code
-    public void setOwningConnector(final Link owningConnector )
-    {
-        // Start of user code setterInit:owningConnector
-        // End of user code
-        this.owningConnector = owningConnector;
-    
-        // Start of user code setterFinalize:owningConnector
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:associationEnd
-    // End of user code
-    public void setAssociationEnd(final Set<Link> associationEnd )
-    {
-        // Start of user code setterInit:associationEnd
-        // End of user code
-        this.associationEnd.clear();
-        if (associationEnd != null)
-        {
-            this.associationEnd.addAll(associationEnd);
-        }
-    
-        // Start of user code setterFinalize:associationEnd
         // End of user code
     }
     

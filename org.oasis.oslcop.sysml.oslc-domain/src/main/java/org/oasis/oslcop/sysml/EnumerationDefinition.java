@@ -57,17 +57,50 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
-import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.AttributeDefinition;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
-import org.oasis.oslcop.sysml.ConditionalImport;
+import org.oasis.oslcop.sysml.ActionUsage;
+import org.oasis.oslcop.sysml.AllocationUsage;
+import org.oasis.oslcop.sysml.AnalysisCaseUsage;
+import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.AttributeUsage;
+import org.oasis.oslcop.sysml.CalculationUsage;
+import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.ConnectionUsage;
+import org.oasis.oslcop.sysml.ConstraintUsage;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.EnumerationUsage;
+import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureMembership;
+import org.oasis.oslcop.sysml.Generalization;
+import org.oasis.oslcop.sysml.SysmlImport;
+import org.oasis.oslcop.sysml.IndividualUsage;
+import org.oasis.oslcop.sysml.InterfaceUsage;
+import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Multiplicity;
+import org.oasis.oslcop.sysml.Namespace;
+import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
-import org.oasis.oslcop.sysml.Predicate;
+import org.oasis.oslcop.sysml.PortUsage;
+import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.RenderingUsage;
+import org.oasis.oslcop.sysml.RequirementUsage;
+import org.oasis.oslcop.sysml.StateUsage;
+import org.oasis.oslcop.sysml.Superclassing;
+import org.oasis.oslcop.sysml.TextualRepresentation;
+import org.oasis.oslcop.sysml.TransitionUsage;
+import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.VariantMembership;
+import org.oasis.oslcop.sysml.VerificationCaseUsage;
+import org.oasis.oslcop.sysml.ViewUsage;
+import org.oasis.oslcop.sysml.ViewpointUsage;
 // Start of user code imports
 // End of user code
 
@@ -76,28 +109,22 @@ import org.oasis.oslcop.sysml.Relationship;
 
 // Start of user code classAnnotations
 // End of user code
-@OslcNamespace(SysmlDomainConstants.IMPORTCONDITION_NAMESPACE)
-@OslcName(SysmlDomainConstants.IMPORTCONDITION_LOCALNAME)
-@OslcResourceShape(title = "ImportCondition Resource Shape", describes = SysmlDomainConstants.IMPORTCONDITION_TYPE)
-public class ImportCondition
-    extends Relationship
-    implements IImportCondition
+@OslcNamespace(SysmlDomainConstants.ENUMERATIONDEFINITION_NAMESPACE)
+@OslcName(SysmlDomainConstants.ENUMERATIONDEFINITION_LOCALNAME)
+@OslcResourceShape(title = "EnumerationDefinition Resource Shape", describes = SysmlDomainConstants.ENUMERATIONDEFINITION_TYPE)
+public class EnumerationDefinition
+    extends AttributeDefinition
+    implements IEnumerationDefinition
 {
-    // Start of user code attributeAnnotation:conditionalImport
+    // Start of user code attributeAnnotation:enumeratedValue
     // End of user code
-    private Link conditionalImport;
-    // Start of user code attributeAnnotation:predicate_comp
-    // End of user code
-    private Link predicate_comp;
-    // Start of user code attributeAnnotation:predicate
-    // End of user code
-    private Link predicate;
+    private Set<Link> enumeratedValue = new HashSet<Link>();
     
     // Start of user code classAttributes
     // End of user code
     // Start of user code classMethods
     // End of user code
-    public ImportCondition()
+    public EnumerationDefinition()
     {
         super();
     
@@ -105,7 +132,7 @@ public class ImportCondition
         // End of user code
     }
     
-    public ImportCondition(final URI about)
+    public EnumerationDefinition(final URI about)
     {
         super(about);
     
@@ -116,8 +143,8 @@ public class ImportCondition
     public static ResourceShape createResourceShape() throws OslcCoreApplicationException, URISyntaxException {
         return ResourceShapeFactory.createResourceShape(OSLC4JUtils.getServletURI(),
         OslcConstants.PATH_RESOURCE_SHAPES,
-        SysmlDomainConstants.IMPORTCONDITION_PATH,
-        ImportCondition.class);
+        SysmlDomainConstants.ENUMERATIONDEFINITION_PATH,
+        EnumerationDefinition.class);
     }
     
     
@@ -133,7 +160,7 @@ public class ImportCondition
         // End of user code
     
         if (asLocalResource) {
-            result = result + "{a Local ImportCondition Resource} - update ImportCondition.toString() to present resource as desired.";
+            result = result + "{a Local EnumerationDefinition Resource} - update EnumerationDefinition.toString() to present resource as desired.";
             // Start of user code toString_bodyForLocalResource
             // End of user code
         }
@@ -148,86 +175,41 @@ public class ImportCondition
         return result;
     }
     
+    public void addEnumeratedValue(final Link enumeratedValue)
+    {
+        this.enumeratedValue.add(enumeratedValue);
+    }
     
-    // Start of user code getterAnnotation:conditionalImport
+    
+    // Start of user code getterAnnotation:enumeratedValue
     // End of user code
-    @OslcName("conditionalImport")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "conditionalImport")
-    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcName("enumeratedValue")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "enumeratedValue")
+    @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.CONDITIONALIMPORT_TYPE})
+    @OslcRange({SysmlDomainConstants.ENUMERATIONUSAGE_TYPE})
     @OslcReadOnly(false)
-    public Link getConditionalImport()
+    public Set<Link> getEnumeratedValue()
     {
-        // Start of user code getterInit:conditionalImport
+        // Start of user code getterInit:enumeratedValue
         // End of user code
-        return conditionalImport;
-    }
-    
-    // Start of user code getterAnnotation:predicate_comp
-    // End of user code
-    @OslcName("predicate_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "predicate_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PREDICATE_TYPE})
-    @OslcReadOnly(false)
-    public Link getPredicate_comp()
-    {
-        // Start of user code getterInit:predicate_comp
-        // End of user code
-        return predicate_comp;
-    }
-    
-    // Start of user code getterAnnotation:predicate
-    // End of user code
-    @OslcName("predicate")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "predicate")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PREDICATE_TYPE})
-    @OslcReadOnly(false)
-    public Link getPredicate()
-    {
-        // Start of user code getterInit:predicate
-        // End of user code
-        return predicate;
+        return enumeratedValue;
     }
     
     
-    // Start of user code setterAnnotation:conditionalImport
+    // Start of user code setterAnnotation:enumeratedValue
     // End of user code
-    public void setConditionalImport(final Link conditionalImport )
+    public void setEnumeratedValue(final Set<Link> enumeratedValue )
     {
-        // Start of user code setterInit:conditionalImport
+        // Start of user code setterInit:enumeratedValue
         // End of user code
-        this.conditionalImport = conditionalImport;
+        this.enumeratedValue.clear();
+        if (enumeratedValue != null)
+        {
+            this.enumeratedValue.addAll(enumeratedValue);
+        }
     
-        // Start of user code setterFinalize:conditionalImport
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:predicate_comp
-    // End of user code
-    public void setPredicate_comp(final Link predicate_comp )
-    {
-        // Start of user code setterInit:predicate_comp
-        // End of user code
-        this.predicate_comp = predicate_comp;
-    
-        // Start of user code setterFinalize:predicate_comp
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:predicate
-    // End of user code
-    public void setPredicate(final Link predicate )
-    {
-        // Start of user code setterInit:predicate
-        // End of user code
-        this.predicate = predicate;
-    
-        // Start of user code setterFinalize:predicate
+        // Start of user code setterFinalize:enumeratedValue
         // End of user code
     }
     

@@ -61,14 +61,18 @@ import org.oasis.oslcop.sysml.ParameterMembership;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.Membership;
-import org.oasis.oslcop.sysml.SysmlPackage;
-import org.oasis.oslcop.sysml.Parameter;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
+import org.oasis.oslcop.sysml.Usage;
 // Start of user code imports
 // End of user code
 
@@ -153,7 +157,7 @@ public class SubjectMembership
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedSubjectParameter_comp")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
+    @OslcRange({SysmlDomainConstants.USAGE_TYPE})
     @OslcReadOnly(false)
     public Link getOwnedSubjectParameter_comp()
     {
@@ -168,7 +172,7 @@ public class SubjectMembership
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedSubjectParameter")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
+    @OslcRange({SysmlDomainConstants.USAGE_TYPE})
     @OslcReadOnly(false)
     public Link getOwnedSubjectParameter()
     {

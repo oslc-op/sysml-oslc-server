@@ -55,8 +55,10 @@ import org.eclipse.lyo.oslc4j.core.model.ValueType;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.IAnnotation;
+import org.oasis.oslcop.sysml.IComment;
 import org.oasis.oslcop.sysml.IConjugation;
-import org.oasis.oslcop.sysml.IConnector;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IFeature;
 import org.oasis.oslcop.sysml.IFeatureMembership;
@@ -64,10 +66,11 @@ import org.oasis.oslcop.sysml.IGeneralization;
 import org.oasis.oslcop.sysml.ISysmlImport;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
-import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.ISuperclassing;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 import org.oasis.oslcop.sysml.IType;
 // Start of user code imports
 // End of user code
@@ -79,6 +82,7 @@ public interface IAssociation
 {
 
     public void addRelatedType(final Link relatedType );
+    public void addTargetType(final Link targetType );
     public void addAssociationEnd(final Link associationEnd );
 
     @OslcName("relatedType")
@@ -89,13 +93,21 @@ public interface IAssociation
     @OslcReadOnly(false)
     public Set<Link> getRelatedType();
 
-    @OslcName("owningConnector")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningConnector")
+    @OslcName("sourceType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "sourceType")
     @OslcOccurs(Occurs.ZeroOrOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.CONNECTOR_TYPE})
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
     @OslcReadOnly(false)
-    public Link getOwningConnector();
+    public Link getSourceType();
+
+    @OslcName("targetType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "targetType")
+    @OslcOccurs(Occurs.OneOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getTargetType();
 
     @OslcName("associationEnd")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "associationEnd")
@@ -107,7 +119,8 @@ public interface IAssociation
 
 
     public void setRelatedType(final Set<Link> relatedType );
-    public void setOwningConnector(final Link owningConnector );
+    public void setSourceType(final Link sourceType );
+    public void setTargetType(final Set<Link> targetType );
     public void setAssociationEnd(final Set<Link> associationEnd );
 }
 

@@ -61,13 +61,16 @@ import org.oasis.oslcop.sysml.FeatureMembership;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.Membership;
-import org.oasis.oslcop.sysml.SysmlPackage;
-import org.oasis.oslcop.sysml.Parameter;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
 // Start of user code imports
 // End of user code
@@ -84,12 +87,12 @@ public class ParameterMembership
     extends FeatureMembership
     implements IParameterMembership
 {
-    // Start of user code attributeAnnotation:memberParameter
-    // End of user code
-    private Link memberParameter;
     // Start of user code attributeAnnotation:ownedMemberParameter_comp
     // End of user code
     private Link ownedMemberParameter_comp;
+    // Start of user code attributeAnnotation:memberParameter
+    // End of user code
+    private Link memberParameter;
     // Start of user code attributeAnnotation:ownedMemberParameter
     // End of user code
     private Link ownedMemberParameter;
@@ -150,28 +153,13 @@ public class ParameterMembership
     }
     
     
-    // Start of user code getterAnnotation:memberParameter
-    // End of user code
-    @OslcName("memberParameter")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "memberParameter")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
-    @OslcReadOnly(false)
-    public Link getMemberParameter()
-    {
-        // Start of user code getterInit:memberParameter
-        // End of user code
-        return memberParameter;
-    }
-    
     // Start of user code getterAnnotation:ownedMemberParameter_comp
     // End of user code
     @OslcName("ownedMemberParameter_comp")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberParameter_comp")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
     public Link getOwnedMemberParameter_comp()
     {
@@ -180,13 +168,28 @@ public class ParameterMembership
         return ownedMemberParameter_comp;
     }
     
+    // Start of user code getterAnnotation:memberParameter
+    // End of user code
+    @OslcName("memberParameter")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "memberParameter")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Link getMemberParameter()
+    {
+        // Start of user code getterInit:memberParameter
+        // End of user code
+        return memberParameter;
+    }
+    
     // Start of user code getterAnnotation:ownedMemberParameter
     // End of user code
     @OslcName("ownedMemberParameter")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberParameter")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
     public Link getOwnedMemberParameter()
     {
@@ -195,18 +198,6 @@ public class ParameterMembership
         return ownedMemberParameter;
     }
     
-    
-    // Start of user code setterAnnotation:memberParameter
-    // End of user code
-    public void setMemberParameter(final Link memberParameter )
-    {
-        // Start of user code setterInit:memberParameter
-        // End of user code
-        this.memberParameter = memberParameter;
-    
-        // Start of user code setterFinalize:memberParameter
-        // End of user code
-    }
     
     // Start of user code setterAnnotation:ownedMemberParameter_comp
     // End of user code
@@ -217,6 +208,18 @@ public class ParameterMembership
         this.ownedMemberParameter_comp = ownedMemberParameter_comp;
     
         // Start of user code setterFinalize:ownedMemberParameter_comp
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:memberParameter
+    // End of user code
+    public void setMemberParameter(final Link memberParameter )
+    {
+        // Start of user code setterInit:memberParameter
+        // End of user code
+        this.memberParameter = memberParameter;
+    
+        // Start of user code setterFinalize:memberParameter
         // End of user code
     }
     

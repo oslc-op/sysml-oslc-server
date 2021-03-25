@@ -57,15 +57,58 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
-import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.PartUsage;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.ActionUsage;
+import org.oasis.oslcop.sysml.AllocationUsage;
+import org.oasis.oslcop.sysml.AnalysisCaseUsage;
+import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.AttributeUsage;
+import org.oasis.oslcop.sysml.CalculationUsage;
+import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.ConnectionUsage;
+import org.oasis.oslcop.sysml.ConstraintUsage;
+import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.EnumerationUsage;
+import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureMembership;
+import org.oasis.oslcop.sysml.FeatureTyping;
+import org.oasis.oslcop.sysml.Generalization;
+import org.oasis.oslcop.sysml.SysmlImport;
+import org.oasis.oslcop.sysml.IndividualUsage;
+import org.oasis.oslcop.sysml.InterfaceUsage;
+import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Multiplicity;
+import org.oasis.oslcop.sysml.Namespace;
+import org.oasis.oslcop.sysml.PartDefinition;
+import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
+import org.oasis.oslcop.sysml.PortUsage;
+import org.oasis.oslcop.sysml.Redefinition;
+import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.RenderingDefinition;
+import org.oasis.oslcop.sysml.RenderingUsage;
+import org.oasis.oslcop.sysml.RequirementUsage;
+import org.oasis.oslcop.sysml.StateUsage;
+import org.oasis.oslcop.sysml.Structure;
+import org.oasis.oslcop.sysml.Subsetting;
+import org.oasis.oslcop.sysml.TextualRepresentation;
+import org.oasis.oslcop.sysml.TransitionUsage;
+import org.oasis.oslcop.sysml.Type;
+import org.oasis.oslcop.sysml.TypeFeaturing;
+import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.VariantMembership;
+import org.oasis.oslcop.sysml.VerificationCaseUsage;
+import org.oasis.oslcop.sysml.ViewUsage;
+import org.oasis.oslcop.sysml.ViewpointUsage;
 // Start of user code imports
 // End of user code
 
@@ -74,28 +117,22 @@ import org.oasis.oslcop.sysml.Relationship;
 
 // Start of user code classAnnotations
 // End of user code
-@OslcNamespace(SysmlDomainConstants.OWNERSHIP_NAMESPACE)
-@OslcName(SysmlDomainConstants.OWNERSHIP_LOCALNAME)
-@OslcResourceShape(title = "Ownership Resource Shape", describes = SysmlDomainConstants.OWNERSHIP_TYPE)
-public class Ownership
-    extends Relationship
-    implements IOwnership
+@OslcNamespace(SysmlDomainConstants.RENDERINGUSAGE_NAMESPACE)
+@OslcName(SysmlDomainConstants.RENDERINGUSAGE_LOCALNAME)
+@OslcResourceShape(title = "RenderingUsage Resource Shape", describes = SysmlDomainConstants.RENDERINGUSAGE_TYPE)
+public class RenderingUsage
+    extends PartUsage
+    implements IRenderingUsage
 {
-    // Start of user code attributeAnnotation:owningSource
+    // Start of user code attributeAnnotation:renderingDefinition
     // End of user code
-    private Link owningSource;
-    // Start of user code attributeAnnotation:ownedTarget_comp
-    // End of user code
-    private Link ownedTarget_comp;
-    // Start of user code attributeAnnotation:ownedTarget
-    // End of user code
-    private Link ownedTarget;
+    private Link renderingDefinition;
     
     // Start of user code classAttributes
     // End of user code
     // Start of user code classMethods
     // End of user code
-    public Ownership()
+    public RenderingUsage()
     {
         super();
     
@@ -103,7 +140,7 @@ public class Ownership
         // End of user code
     }
     
-    public Ownership(final URI about)
+    public RenderingUsage(final URI about)
     {
         super(about);
     
@@ -114,8 +151,8 @@ public class Ownership
     public static ResourceShape createResourceShape() throws OslcCoreApplicationException, URISyntaxException {
         return ResourceShapeFactory.createResourceShape(OSLC4JUtils.getServletURI(),
         OslcConstants.PATH_RESOURCE_SHAPES,
-        SysmlDomainConstants.OWNERSHIP_PATH,
-        Ownership.class);
+        SysmlDomainConstants.RENDERINGUSAGE_PATH,
+        RenderingUsage.class);
     }
     
     
@@ -131,7 +168,7 @@ public class Ownership
         // End of user code
     
         if (asLocalResource) {
-            result = result + "{a Local Ownership Resource} - update Ownership.toString() to present resource as desired.";
+            result = result + "{a Local RenderingUsage Resource} - update RenderingUsage.toString() to present resource as desired.";
             // Start of user code toString_bodyForLocalResource
             // End of user code
         }
@@ -147,85 +184,31 @@ public class Ownership
     }
     
     
-    // Start of user code getterAnnotation:owningSource
+    // Start of user code getterAnnotation:renderingDefinition
     // End of user code
-    @OslcName("owningSource")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningSource")
+    @OslcName("renderingDefinition")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "renderingDefinition")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
+    @OslcRange({SysmlDomainConstants.RENDERINGDEFINITION_TYPE})
     @OslcReadOnly(false)
-    public Link getOwningSource()
+    public Link getRenderingDefinition()
     {
-        // Start of user code getterInit:owningSource
+        // Start of user code getterInit:renderingDefinition
         // End of user code
-        return owningSource;
-    }
-    
-    // Start of user code getterAnnotation:ownedTarget_comp
-    // End of user code
-    @OslcName("ownedTarget_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedTarget_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedTarget_comp()
-    {
-        // Start of user code getterInit:ownedTarget_comp
-        // End of user code
-        return ownedTarget_comp;
-    }
-    
-    // Start of user code getterAnnotation:ownedTarget
-    // End of user code
-    @OslcName("ownedTarget")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedTarget")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedTarget()
-    {
-        // Start of user code getterInit:ownedTarget
-        // End of user code
-        return ownedTarget;
+        return renderingDefinition;
     }
     
     
-    // Start of user code setterAnnotation:owningSource
+    // Start of user code setterAnnotation:renderingDefinition
     // End of user code
-    public void setOwningSource(final Link owningSource )
+    public void setRenderingDefinition(final Link renderingDefinition )
     {
-        // Start of user code setterInit:owningSource
+        // Start of user code setterInit:renderingDefinition
         // End of user code
-        this.owningSource = owningSource;
+        this.renderingDefinition = renderingDefinition;
     
-        // Start of user code setterFinalize:owningSource
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedTarget_comp
-    // End of user code
-    public void setOwnedTarget_comp(final Link ownedTarget_comp )
-    {
-        // Start of user code setterInit:ownedTarget_comp
-        // End of user code
-        this.ownedTarget_comp = ownedTarget_comp;
-    
-        // Start of user code setterFinalize:ownedTarget_comp
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedTarget
-    // End of user code
-    public void setOwnedTarget(final Link ownedTarget )
-    {
-        // Start of user code setterInit:ownedTarget
-        // End of user code
-        this.ownedTarget = ownedTarget;
-    
-        // Start of user code setterFinalize:ownedTarget
+        // Start of user code setterFinalize:renderingDefinition
         // End of user code
     }
     

@@ -61,11 +61,15 @@ import org.oasis.oslcop.sysml.Relationship;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Membership;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 // Start of user code imports
 // End of user code
 
@@ -90,9 +94,9 @@ public class Membership
     // Start of user code attributeAnnotation:memberElement
     // End of user code
     private Link memberElement;
-    // Start of user code attributeAnnotation:membershipOwningPackage
+    // Start of user code attributeAnnotation:membershipOwningNamespace
     // End of user code
-    private Link membershipOwningPackage;
+    private Link membershipOwningNamespace;
     // Start of user code attributeAnnotation:ownedMemberElement_comp
     // End of user code
     private Link ownedMemberElement_comp;
@@ -200,19 +204,19 @@ public class Membership
         return memberElement;
     }
     
-    // Start of user code getterAnnotation:membershipOwningPackage
+    // Start of user code getterAnnotation:membershipOwningNamespace
     // End of user code
-    @OslcName("membershipOwningPackage")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "membershipOwningPackage")
+    @OslcName("membershipOwningNamespace")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "membershipOwningNamespace")
     @OslcOccurs(Occurs.ZeroOrOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PACKAGE_TYPE})
+    @OslcRange({SysmlDomainConstants.NAMESPACE_TYPE})
     @OslcReadOnly(false)
-    public Link getMembershipOwningPackage()
+    public Link getMembershipOwningNamespace()
     {
-        // Start of user code getterInit:membershipOwningPackage
+        // Start of user code getterInit:membershipOwningNamespace
         // End of user code
-        return membershipOwningPackage;
+        return membershipOwningNamespace;
     }
     
     // Start of user code getterAnnotation:ownedMemberElement_comp
@@ -282,15 +286,15 @@ public class Membership
         // End of user code
     }
     
-    // Start of user code setterAnnotation:membershipOwningPackage
+    // Start of user code setterAnnotation:membershipOwningNamespace
     // End of user code
-    public void setMembershipOwningPackage(final Link membershipOwningPackage )
+    public void setMembershipOwningNamespace(final Link membershipOwningNamespace )
     {
-        // Start of user code setterInit:membershipOwningPackage
+        // Start of user code setterInit:membershipOwningNamespace
         // End of user code
-        this.membershipOwningPackage = membershipOwningPackage;
+        this.membershipOwningNamespace = membershipOwningNamespace;
     
-        // Start of user code setterFinalize:membershipOwningPackage
+        // Start of user code setterFinalize:membershipOwningNamespace
         // End of user code
     }
     

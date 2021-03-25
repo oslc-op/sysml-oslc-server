@@ -55,50 +55,44 @@ import org.eclipse.lyo.oslc4j.core.model.ValueType;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
-import org.oasis.oslcop.sysml.IConditionalImport;
+import org.oasis.oslcop.sysml.IAnnotation;
+import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
+import org.oasis.oslcop.sysml.IExpression;
 import org.oasis.oslcop.sysml.IMembership;
-import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
-import org.oasis.oslcop.sysml.IPredicate;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 // Start of user code imports
 // End of user code
 
-@OslcNamespace(SysmlDomainConstants.IMPORTCONDITION_NAMESPACE)
-@OslcName(SysmlDomainConstants.IMPORTCONDITION_LOCALNAME)
-@OslcResourceShape(title = "ImportCondition Resource Shape", describes = SysmlDomainConstants.IMPORTCONDITION_TYPE)
-public interface IImportCondition
+@OslcNamespace(SysmlDomainConstants.ELEMENTFILTERMEMBERSHIP_NAMESPACE)
+@OslcName(SysmlDomainConstants.ELEMENTFILTERMEMBERSHIP_LOCALNAME)
+@OslcResourceShape(title = "ElementFilterMembership Resource Shape", describes = SysmlDomainConstants.ELEMENTFILTERMEMBERSHIP_TYPE)
+public interface IElementFilterMembership
 {
 
 
-    @OslcName("conditionalImport")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "conditionalImport")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.CONDITIONALIMPORT_TYPE})
-    @OslcReadOnly(false)
-    public Link getConditionalImport();
-
-    @OslcName("predicate_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "predicate_comp")
+    @OslcName("condition_comp")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "condition_comp")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PREDICATE_TYPE})
+    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
     @OslcReadOnly(false)
-    public Link getPredicate_comp();
+    public Link getCondition_comp();
 
-    @OslcName("predicate")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "predicate")
+    @OslcName("condition")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "condition")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PREDICATE_TYPE})
+    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
     @OslcReadOnly(false)
-    public Link getPredicate();
+    public Link getCondition();
 
 
-    public void setConditionalImport(final Link conditionalImport );
-    public void setPredicate_comp(final Link predicate_comp );
-    public void setPredicate(final Link predicate );
+    public void setCondition_comp(final Link condition_comp );
+    public void setCondition(final Link condition );
 }
 

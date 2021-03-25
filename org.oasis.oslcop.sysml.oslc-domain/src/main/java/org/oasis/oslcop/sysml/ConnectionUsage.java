@@ -63,17 +63,22 @@ import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.ActionUsage;
+import org.oasis.oslcop.sysml.AllocationUsage;
 import org.oasis.oslcop.sysml.AnalysisCaseUsage;
+import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.Association;
+import org.oasis.oslcop.sysml.AssociationStructure;
 import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
-import org.oasis.oslcop.sysml.SysmlClass;
+import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
 import org.oasis.oslcop.sysml.ConnectionUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
 import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
@@ -84,7 +89,7 @@ import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.oasis.oslcop.sysml.PartDefinition;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
@@ -92,13 +97,20 @@ import org.oasis.oslcop.sysml.PortUsage;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
 import org.oasis.oslcop.sysml.StateUsage;
+import org.oasis.oslcop.sysml.Structure;
 import org.oasis.oslcop.sysml.Subsetting;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
+import org.oasis.oslcop.sysml.TypeFeaturing;
 import org.oasis.oslcop.sysml.Usage;
 import org.oasis.oslcop.sysml.VariantMembership;
+import org.oasis.oslcop.sysml.VerificationCaseUsage;
+import org.oasis.oslcop.sysml.ViewUsage;
+import org.oasis.oslcop.sysml.ViewpointUsage;
 // Start of user code imports
 // End of user code
 
@@ -114,6 +126,9 @@ public class ConnectionUsage
     extends PartUsage
     implements IConnectionUsage, IConnector, IRelationship
 {
+    // Start of user code attributeAnnotation:connectionDefinition
+    // End of user code
+    private Set<Link> connectionDefinition = new HashSet<Link>();
     // Start of user code attributeAnnotation:isDirected
     // End of user code
     private Boolean isDirected;
@@ -126,9 +141,12 @@ public class ConnectionUsage
     // Start of user code attributeAnnotation:connectorEnd
     // End of user code
     private Set<Link> connectorEnd = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedAssociationType
+    // Start of user code attributeAnnotation:sourceFeature
     // End of user code
-    private Set<Link> ownedAssociationType = new HashSet<Link>();
+    private Link sourceFeature;
+    // Start of user code attributeAnnotation:targetFeature
+    // End of user code
+    private Set<Link> targetFeature = new HashSet<Link>();
     // Start of user code attributeAnnotation:relatedElement
     // End of user code
     private Set<Link> relatedElement = new HashSet<Link>();
@@ -203,6 +221,11 @@ public class ConnectionUsage
         return result;
     }
     
+    public void addConnectionDefinition(final Link connectionDefinition)
+    {
+        this.connectionDefinition.add(connectionDefinition);
+    }
+    
     public void addRelatedFeature(final Link relatedFeature)
     {
         this.relatedFeature.add(relatedFeature);
@@ -218,9 +241,9 @@ public class ConnectionUsage
         this.connectorEnd.add(connectorEnd);
     }
     
-    public void addOwnedAssociationType(final Link ownedAssociationType)
+    public void addTargetFeature(final Link targetFeature)
     {
-        this.ownedAssociationType.add(ownedAssociationType);
+        this.targetFeature.add(targetFeature);
     }
     
     public void addRelatedElement(final Link relatedElement)
@@ -248,6 +271,21 @@ public class ConnectionUsage
         this.ownedRelatedElement.add(ownedRelatedElement);
     }
     
+    
+    // Start of user code getterAnnotation:connectionDefinition
+    // End of user code
+    @OslcName("connectionDefinition")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "connectionDefinition")
+    @OslcOccurs(Occurs.OneOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ASSOCIATIONSTRUCTURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getConnectionDefinition()
+    {
+        // Start of user code getterInit:connectionDefinition
+        // End of user code
+        return connectionDefinition;
+    }
     
     // Start of user code getterAnnotation:isDirected
     // End of user code
@@ -308,19 +346,34 @@ public class ConnectionUsage
         return connectorEnd;
     }
     
-    // Start of user code getterAnnotation:ownedAssociationType
+    // Start of user code getterAnnotation:sourceFeature
     // End of user code
-    @OslcName("ownedAssociationType")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedAssociationType")
-    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcName("sourceFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "sourceFeature")
+    @OslcOccurs(Occurs.ZeroOrOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ASSOCIATION_TYPE})
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedAssociationType()
+    public Link getSourceFeature()
     {
-        // Start of user code getterInit:ownedAssociationType
+        // Start of user code getterInit:sourceFeature
         // End of user code
-        return ownedAssociationType;
+        return sourceFeature;
+    }
+    
+    // Start of user code getterAnnotation:targetFeature
+    // End of user code
+    @OslcName("targetFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "targetFeature")
+    @OslcOccurs(Occurs.OneOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getTargetFeature()
+    {
+        // Start of user code getterInit:targetFeature
+        // End of user code
+        return targetFeature;
     }
     
     // Start of user code getterAnnotation:relatedElement
@@ -414,6 +467,22 @@ public class ConnectionUsage
     }
     
     
+    // Start of user code setterAnnotation:connectionDefinition
+    // End of user code
+    public void setConnectionDefinition(final Set<Link> connectionDefinition )
+    {
+        // Start of user code setterInit:connectionDefinition
+        // End of user code
+        this.connectionDefinition.clear();
+        if (connectionDefinition != null)
+        {
+            this.connectionDefinition.addAll(connectionDefinition);
+        }
+    
+        // Start of user code setterFinalize:connectionDefinition
+        // End of user code
+    }
+    
     // Start of user code setterAnnotation:isDirected
     // End of user code
     public void setIsDirected(final Boolean isDirected )
@@ -474,19 +543,31 @@ public class ConnectionUsage
         // End of user code
     }
     
-    // Start of user code setterAnnotation:ownedAssociationType
+    // Start of user code setterAnnotation:sourceFeature
     // End of user code
-    public void setOwnedAssociationType(final Set<Link> ownedAssociationType )
+    public void setSourceFeature(final Link sourceFeature )
     {
-        // Start of user code setterInit:ownedAssociationType
+        // Start of user code setterInit:sourceFeature
         // End of user code
-        this.ownedAssociationType.clear();
-        if (ownedAssociationType != null)
+        this.sourceFeature = sourceFeature;
+    
+        // Start of user code setterFinalize:sourceFeature
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:targetFeature
+    // End of user code
+    public void setTargetFeature(final Set<Link> targetFeature )
+    {
+        // Start of user code setterInit:targetFeature
+        // End of user code
+        this.targetFeature.clear();
+        if (targetFeature != null)
         {
-            this.ownedAssociationType.addAll(ownedAssociationType);
+            this.targetFeature.addAll(targetFeature);
         }
     
-        // Start of user code setterFinalize:ownedAssociationType
+        // Start of user code setterFinalize:targetFeature
         // End of user code
     }
     

@@ -61,12 +61,16 @@ import org.oasis.oslcop.sysml.Generalization;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.Membership;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
 // Start of user code imports
 // End of user code
@@ -83,12 +87,15 @@ public class FeatureTyping
     extends Generalization
     implements IFeatureTyping
 {
-    // Start of user code attributeAnnotation:sysmlType
-    // End of user code
-    private Link sysmlType;
     // Start of user code attributeAnnotation:typedFeature
     // End of user code
     private Link typedFeature;
+    // Start of user code attributeAnnotation:sysmlType
+    // End of user code
+    private Link sysmlType;
+    // Start of user code attributeAnnotation:owningFeature
+    // End of user code
+    private Link owningFeature;
     
     // Start of user code classAttributes
     // End of user code
@@ -146,21 +153,6 @@ public class FeatureTyping
     }
     
     
-    // Start of user code getterAnnotation:sysmlType
-    // End of user code
-    @OslcName("type")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "type")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
-    @OslcReadOnly(false)
-    public Link getSysmlType()
-    {
-        // Start of user code getterInit:sysmlType
-        // End of user code
-        return sysmlType;
-    }
-    
     // Start of user code getterAnnotation:typedFeature
     // End of user code
     @OslcName("typedFeature")
@@ -176,6 +168,48 @@ public class FeatureTyping
         return typedFeature;
     }
     
+    // Start of user code getterAnnotation:sysmlType
+    // End of user code
+    @OslcName("type")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "type")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
+    @OslcReadOnly(false)
+    public Link getSysmlType()
+    {
+        // Start of user code getterInit:sysmlType
+        // End of user code
+        return sysmlType;
+    }
+    
+    // Start of user code getterAnnotation:owningFeature
+    // End of user code
+    @OslcName("owningFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningFeature")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Link getOwningFeature()
+    {
+        // Start of user code getterInit:owningFeature
+        // End of user code
+        return owningFeature;
+    }
+    
+    
+    // Start of user code setterAnnotation:typedFeature
+    // End of user code
+    public void setTypedFeature(final Link typedFeature )
+    {
+        // Start of user code setterInit:typedFeature
+        // End of user code
+        this.typedFeature = typedFeature;
+    
+        // Start of user code setterFinalize:typedFeature
+        // End of user code
+    }
     
     // Start of user code setterAnnotation:sysmlType
     // End of user code
@@ -189,15 +223,15 @@ public class FeatureTyping
         // End of user code
     }
     
-    // Start of user code setterAnnotation:typedFeature
+    // Start of user code setterAnnotation:owningFeature
     // End of user code
-    public void setTypedFeature(final Link typedFeature )
+    public void setOwningFeature(final Link owningFeature )
     {
-        // Start of user code setterInit:typedFeature
+        // Start of user code setterInit:owningFeature
         // End of user code
-        this.typedFeature = typedFeature;
+        this.owningFeature = owningFeature;
     
-        // Start of user code setterFinalize:typedFeature
+        // Start of user code setterFinalize:owningFeature
         // End of user code
     }
     

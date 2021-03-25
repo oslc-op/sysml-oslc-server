@@ -61,12 +61,16 @@ import org.oasis.oslcop.sysml.Relationship;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.AnnotatingElement;
+import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Membership;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 // Start of user code imports
 // End of user code
 
@@ -82,12 +86,15 @@ public class Annotation
     extends Relationship
     implements IAnnotation
 {
-    // Start of user code attributeAnnotation:annotatingComment
+    // Start of user code attributeAnnotation:annotatingElement
     // End of user code
-    private Link annotatingComment;
+    private Link annotatingElement;
     // Start of user code attributeAnnotation:annotatedElement
     // End of user code
     private Link annotatedElement;
+    // Start of user code attributeAnnotation:owningAnnotatedElement
+    // End of user code
+    private Link owningAnnotatedElement;
     
     // Start of user code classAttributes
     // End of user code
@@ -145,19 +152,19 @@ public class Annotation
     }
     
     
-    // Start of user code getterAnnotation:annotatingComment
+    // Start of user code getterAnnotation:annotatingElement
     // End of user code
-    @OslcName("annotatingComment")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "annotatingComment")
+    @OslcName("annotatingElement")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "annotatingElement")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.COMMENT_TYPE})
+    @OslcRange({SysmlDomainConstants.ANNOTATINGELEMENT_TYPE})
     @OslcReadOnly(false)
-    public Link getAnnotatingComment()
+    public Link getAnnotatingElement()
     {
-        // Start of user code getterInit:annotatingComment
+        // Start of user code getterInit:annotatingElement
         // End of user code
-        return annotatingComment;
+        return annotatingElement;
     }
     
     // Start of user code getterAnnotation:annotatedElement
@@ -175,16 +182,31 @@ public class Annotation
         return annotatedElement;
     }
     
-    
-    // Start of user code setterAnnotation:annotatingComment
+    // Start of user code getterAnnotation:owningAnnotatedElement
     // End of user code
-    public void setAnnotatingComment(final Link annotatingComment )
+    @OslcName("owningAnnotatedElement")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningAnnotatedElement")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
+    @OslcReadOnly(false)
+    public Link getOwningAnnotatedElement()
     {
-        // Start of user code setterInit:annotatingComment
+        // Start of user code getterInit:owningAnnotatedElement
         // End of user code
-        this.annotatingComment = annotatingComment;
+        return owningAnnotatedElement;
+    }
     
-        // Start of user code setterFinalize:annotatingComment
+    
+    // Start of user code setterAnnotation:annotatingElement
+    // End of user code
+    public void setAnnotatingElement(final Link annotatingElement )
+    {
+        // Start of user code setterInit:annotatingElement
+        // End of user code
+        this.annotatingElement = annotatingElement;
+    
+        // Start of user code setterFinalize:annotatingElement
         // End of user code
     }
     
@@ -197,6 +219,18 @@ public class Annotation
         this.annotatedElement = annotatedElement;
     
         // Start of user code setterFinalize:annotatedElement
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:owningAnnotatedElement
+    // End of user code
+    public void setOwningAnnotatedElement(final Link owningAnnotatedElement )
+    {
+        // Start of user code setterInit:owningAnnotatedElement
+        // End of user code
+        this.owningAnnotatedElement = owningAnnotatedElement;
+    
+        // Start of user code setterFinalize:owningAnnotatedElement
         // End of user code
     }
     

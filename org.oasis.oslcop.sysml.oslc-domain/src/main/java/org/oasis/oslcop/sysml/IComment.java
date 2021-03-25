@@ -56,11 +56,14 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.IAnnotation;
+import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IMembership;
-import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 // Start of user code imports
 // End of user code
 
@@ -78,25 +81,7 @@ public interface IComment
     @OslcReadOnly(false)
     public String getBody();
 
-    @OslcName("commentedElement")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "commentedElement")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Link getCommentedElement();
-
-    @OslcName("annotationForComment")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "annotationForComment")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ANNOTATION_TYPE})
-    @OslcReadOnly(false)
-    public Link getAnnotationForComment();
-
 
     public void setBody(final String body );
-    public void setCommentedElement(final Link commentedElement );
-    public void setAnnotationForComment(final Link annotationForComment );
 }
 

@@ -58,15 +58,19 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.Membership;
-
+import org.oasis.oslcop.sysml.ITypeFeaturing;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.Membership;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
 // Start of user code imports
 // End of user code
@@ -81,7 +85,7 @@ import org.oasis.oslcop.sysml.Type;
 @OslcResourceShape(title = "FeatureMembership Resource Shape", describes = SysmlDomainConstants.FEATUREMEMBERSHIP_TYPE)
 public class FeatureMembership
     extends Membership
-    implements IFeatureMembership
+    implements IFeatureMembership, ITypeFeaturing
 {
     // Start of user code attributeAnnotation:isDerived
     // End of user code
@@ -113,6 +117,15 @@ public class FeatureMembership
     // Start of user code attributeAnnotation:ownedMemberFeature
     // End of user code
     private Link ownedMemberFeature;
+    // Start of user code attributeAnnotation:featureOfType
+    // End of user code
+    private Link featureOfType;
+    // Start of user code attributeAnnotation:featuringType
+    // End of user code
+    private Link featuringType;
+    // Start of user code attributeAnnotation:owningFeatureOfType
+    // End of user code
+    private Link owningFeatureOfType;
     
     // Start of user code classAttributes
     // End of user code
@@ -315,6 +328,51 @@ public class FeatureMembership
         return ownedMemberFeature;
     }
     
+    // Start of user code getterAnnotation:featureOfType
+    // End of user code
+    @OslcName("featureOfType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "featureOfType")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Link getFeatureOfType()
+    {
+        // Start of user code getterInit:featureOfType
+        // End of user code
+        return featureOfType;
+    }
+    
+    // Start of user code getterAnnotation:featuringType
+    // End of user code
+    @OslcName("featuringType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "featuringType")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
+    @OslcReadOnly(false)
+    public Link getFeaturingType()
+    {
+        // Start of user code getterInit:featuringType
+        // End of user code
+        return featuringType;
+    }
+    
+    // Start of user code getterAnnotation:owningFeatureOfType
+    // End of user code
+    @OslcName("owningFeatureOfType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningFeatureOfType")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Link getOwningFeatureOfType()
+    {
+        // Start of user code getterInit:owningFeatureOfType
+        // End of user code
+        return owningFeatureOfType;
+    }
+    
     
     // Start of user code setterAnnotation:isDerived
     // End of user code
@@ -433,6 +491,42 @@ public class FeatureMembership
         this.ownedMemberFeature = ownedMemberFeature;
     
         // Start of user code setterFinalize:ownedMemberFeature
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:featureOfType
+    // End of user code
+    public void setFeatureOfType(final Link featureOfType )
+    {
+        // Start of user code setterInit:featureOfType
+        // End of user code
+        this.featureOfType = featureOfType;
+    
+        // Start of user code setterFinalize:featureOfType
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:featuringType
+    // End of user code
+    public void setFeaturingType(final Link featuringType )
+    {
+        // Start of user code setterInit:featuringType
+        // End of user code
+        this.featuringType = featuringType;
+    
+        // Start of user code setterFinalize:featuringType
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:owningFeatureOfType
+    // End of user code
+    public void setOwningFeatureOfType(final Link owningFeatureOfType )
+    {
+        // Start of user code setterInit:owningFeatureOfType
+        // End of user code
+        this.owningFeatureOfType = owningFeatureOfType;
+    
+        // Start of user code setterFinalize:owningFeatureOfType
         // End of user code
     }
     

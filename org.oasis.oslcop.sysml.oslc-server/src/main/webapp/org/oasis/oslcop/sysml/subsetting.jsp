@@ -391,6 +391,51 @@
             </dd>
           </dl>
           <dl class="row">
+            <% method = Subsetting.class.getMethod("getQualifiedName"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aSubsetting.getQualifiedName() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aSubsetting.getQualifiedName().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getAliasId"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            Iterator<String> aliasIdItr = aSubsetting.getAliasId().iterator();
+            while(aliasIdItr.hasNext()) {
+                out.write("<li>" + aliasIdItr.next().toString() + "</li>");
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getHumanId"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <%
+            if (aSubsetting.getHumanId() == null) {
+                out.write("<em>null</em>");
+            }
+            else {
+                out.write(aSubsetting.getHumanId().toString());
+            }
+            %>
+            
+            </dd>
+          </dl>
+          <dl class="row">
             <% method = Subsetting.class.getMethod("getOwningMembership"); %>
             <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
@@ -463,7 +508,7 @@
             }
             else {
                 %>
-                <jsp:include page="/org/oasis/oslcop/sysml/sysmlpackagetohtml.jsp">
+                <jsp:include page="/org/oasis/oslcop/sysml/namespacetohtml.jsp">
                     <jsp:param name="resourceUri" value="<%=aSubsetting.getOwningNamespace().getValue()%>"/> 
                     </jsp:include>
                 <%
@@ -517,6 +562,106 @@
             </dd>
           </dl>
           <dl class="row">
+            <% method = Subsetting.class.getMethod("getDocumentation_comp"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSubsetting.getDocumentation_comp()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/documentationtohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getOwnedAnnotation_comp"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSubsetting.getOwnedAnnotation_comp()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/annotationtohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getDocumentationComment"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSubsetting.getDocumentationComment()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/commenttohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getOwnedTextualRepresentation"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSubsetting.getOwnedTextualRepresentation()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/textualrepresentationtohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
             <% method = Subsetting.class.getMethod("getOwnedRelationship"); %>
             <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
@@ -530,6 +675,56 @@
                     %>
                     <li>
                     <jsp:include page="/org/oasis/oslcop/sysml/relationshiptohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getDocumentation"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSubsetting.getDocumentation()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/documentationtohtml.jsp">
+                        <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
+                        </jsp:include>
+                    </li>
+                    <%
+                }
+            }
+            %>
+            </ul>
+            
+            </dd>
+          </dl>
+          <dl class="row">
+            <% method = Subsetting.class.getMethod("getOwnedAnnotation"); %>
+            <dt  class="col-sm-2 text-right"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dd class="col-sm-9">
+            <ul>
+            <%
+            for(Link next : aSubsetting.getOwnedAnnotation()) {
+                if (next.getValue() == null) {
+                    out.write("<li>" + "<em>null</em>" + "</li>");
+                }
+                else {
+                    %>
+                    <li>
+                    <jsp:include page="/org/oasis/oslcop/sysml/annotationtohtml.jsp">
                         <jsp:param name="resourceUri" value="<%=next.getValue()%>"/> 
                         </jsp:include>
                     </li>

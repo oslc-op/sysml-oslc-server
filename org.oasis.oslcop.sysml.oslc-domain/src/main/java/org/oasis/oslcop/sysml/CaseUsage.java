@@ -62,17 +62,22 @@ import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.ActionUsage;
+import org.oasis.oslcop.sysml.AllocationUsage;
 import org.oasis.oslcop.sysml.AnalysisCaseUsage;
+import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.Behavior;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseDefinition;
 import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
 import org.oasis.oslcop.sysml.ConnectionUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
 import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
@@ -84,21 +89,26 @@ import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
-import org.oasis.oslcop.sysml.SysmlPackage;
-import org.oasis.oslcop.sysml.Parameter;
+import org.oasis.oslcop.sysml.Namespace;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
 import org.oasis.oslcop.sysml.StateUsage;
 import org.oasis.oslcop.sysml.Subsetting;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
+import org.oasis.oslcop.sysml.TypeFeaturing;
 import org.oasis.oslcop.sysml.Usage;
 import org.oasis.oslcop.sysml.VariantMembership;
+import org.oasis.oslcop.sysml.VerificationCaseUsage;
+import org.oasis.oslcop.sysml.ViewUsage;
+import org.oasis.oslcop.sysml.ViewpointUsage;
 // Start of user code imports
 // End of user code
 
@@ -117,12 +127,12 @@ public class CaseUsage
     // Start of user code attributeAnnotation:objectiveRequirement
     // End of user code
     private Link objectiveRequirement;
-    // Start of user code attributeAnnotation:subjectParameter
-    // End of user code
-    private Link subjectParameter;
     // Start of user code attributeAnnotation:caseDefinition
     // End of user code
     private Link caseDefinition;
+    // Start of user code attributeAnnotation:subjectParameter
+    // End of user code
+    private Link subjectParameter;
     
     // Start of user code classAttributes
     // End of user code
@@ -195,21 +205,6 @@ public class CaseUsage
         return objectiveRequirement;
     }
     
-    // Start of user code getterAnnotation:subjectParameter
-    // End of user code
-    @OslcName("subjectParameter")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "subjectParameter")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PARAMETER_TYPE})
-    @OslcReadOnly(false)
-    public Link getSubjectParameter()
-    {
-        // Start of user code getterInit:subjectParameter
-        // End of user code
-        return subjectParameter;
-    }
-    
     // Start of user code getterAnnotation:caseDefinition
     // End of user code
     @OslcName("caseDefinition")
@@ -225,6 +220,21 @@ public class CaseUsage
         return caseDefinition;
     }
     
+    // Start of user code getterAnnotation:subjectParameter
+    // End of user code
+    @OslcName("subjectParameter")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "subjectParameter")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.USAGE_TYPE})
+    @OslcReadOnly(false)
+    public Link getSubjectParameter()
+    {
+        // Start of user code getterInit:subjectParameter
+        // End of user code
+        return subjectParameter;
+    }
+    
     
     // Start of user code setterAnnotation:objectiveRequirement
     // End of user code
@@ -238,18 +248,6 @@ public class CaseUsage
         // End of user code
     }
     
-    // Start of user code setterAnnotation:subjectParameter
-    // End of user code
-    public void setSubjectParameter(final Link subjectParameter )
-    {
-        // Start of user code setterInit:subjectParameter
-        // End of user code
-        this.subjectParameter = subjectParameter;
-    
-        // Start of user code setterFinalize:subjectParameter
-        // End of user code
-    }
-    
     // Start of user code setterAnnotation:caseDefinition
     // End of user code
     public void setCaseDefinition(final Link caseDefinition )
@@ -259,6 +257,18 @@ public class CaseUsage
         this.caseDefinition = caseDefinition;
     
         // Start of user code setterFinalize:caseDefinition
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:subjectParameter
+    // End of user code
+    public void setSubjectParameter(final Link subjectParameter )
+    {
+        // Start of user code setterInit:subjectParameter
+        // End of user code
+        this.subjectParameter = subjectParameter;
+    
+        // Start of user code setterFinalize:subjectParameter
         // End of user code
     }
     

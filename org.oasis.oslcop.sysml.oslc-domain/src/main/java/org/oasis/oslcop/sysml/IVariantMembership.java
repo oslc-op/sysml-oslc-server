@@ -55,12 +55,15 @@ import org.eclipse.lyo.oslc4j.core.model.ValueType;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
-import org.oasis.oslcop.sysml.IDefinition;
+import org.oasis.oslcop.sysml.IAnnotation;
+import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IMembership;
-import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 import org.oasis.oslcop.sysml.IUsage;
 // Start of user code imports
 // End of user code
@@ -71,22 +74,6 @@ import org.oasis.oslcop.sysml.IUsage;
 public interface IVariantMembership
 {
 
-
-    @OslcName("owningVariationDefinition")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningVariationDefinition")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.DEFINITION_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwningVariationDefinition();
-
-    @OslcName("owningVariationUsage")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningVariationUsage")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.USAGE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwningVariationUsage();
 
     @OslcName("ownedVariantUsage_comp")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedVariantUsage_comp")
@@ -105,8 +92,6 @@ public interface IVariantMembership
     public Link getOwnedVariantUsage();
 
 
-    public void setOwningVariationDefinition(final Link owningVariationDefinition );
-    public void setOwningVariationUsage(final Link owningVariationUsage );
     public void setOwnedVariantUsage_comp(final Link ownedVariantUsage_comp );
     public void setOwnedVariantUsage(final Link ownedVariantUsage );
 }

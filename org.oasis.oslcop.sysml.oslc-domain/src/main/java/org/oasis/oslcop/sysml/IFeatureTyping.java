@@ -55,12 +55,16 @@ import org.eclipse.lyo.oslc4j.core.model.ValueType;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.IAnnotation;
+import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IFeature;
 import org.oasis.oslcop.sysml.IMembership;
-import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
 import org.oasis.oslcop.sysml.IType;
 // Start of user code imports
 // End of user code
@@ -72,14 +76,6 @@ public interface IFeatureTyping
 {
 
 
-    @OslcName("type")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "type")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
-    @OslcReadOnly(false)
-    public Link getSysmlType();
-
     @OslcName("typedFeature")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "typedFeature")
     @OslcOccurs(Occurs.ExactlyOne)
@@ -88,8 +84,25 @@ public interface IFeatureTyping
     @OslcReadOnly(false)
     public Link getTypedFeature();
 
+    @OslcName("type")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "type")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
+    @OslcReadOnly(false)
+    public Link getSysmlType();
 
-    public void setSysmlType(final Link type );
+    @OslcName("owningFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningFeature")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Link getOwningFeature();
+
+
     public void setTypedFeature(final Link typedFeature );
+    public void setSysmlType(final Link type );
+    public void setOwningFeature(final Link owningFeature );
 }
 

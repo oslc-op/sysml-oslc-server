@@ -55,50 +55,66 @@ import org.eclipse.lyo.oslc4j.core.model.ValueType;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.IActionUsage;
+import org.oasis.oslcop.sysml.IAllocationUsage;
+import org.oasis.oslcop.sysml.IAnalysisCaseUsage;
+import org.oasis.oslcop.sysml.IAnnotation;
+import org.oasis.oslcop.sysml.IAttributeUsage;
+import org.oasis.oslcop.sysml.ICalculationUsage;
+import org.oasis.oslcop.sysml.ICaseUsage;
+import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IConjugation;
+import org.oasis.oslcop.sysml.IConnectionUsage;
+import org.oasis.oslcop.sysml.IConstraintUsage;
+import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
-import org.oasis.oslcop.sysml.IImportCondition;
+import org.oasis.oslcop.sysml.IEnumerationUsage;
+import org.oasis.oslcop.sysml.IFeature;
+import org.oasis.oslcop.sysml.IFeatureMembership;
+import org.oasis.oslcop.sysml.IGeneralization;
+import org.oasis.oslcop.sysml.ISysmlImport;
+import org.oasis.oslcop.sysml.IIndividualUsage;
+import org.oasis.oslcop.sysml.IInterfaceUsage;
+import org.oasis.oslcop.sysml.IItemUsage;
 import org.oasis.oslcop.sysml.IMembership;
-import org.oasis.oslcop.sysml.ISysmlPackage;
+import org.oasis.oslcop.sysml.IMultiplicity;
+import org.oasis.oslcop.sysml.INamespace;
+import org.oasis.oslcop.sysml.IPartUsage;
 import org.eclipse.lyo.oslc.domains.IPerson;
-import org.oasis.oslcop.sysml.IPredicate;
+import org.oasis.oslcop.sysml.IPortUsage;
+import org.oasis.oslcop.sysml.IReferenceUsage;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.IRenderingUsage;
+import org.oasis.oslcop.sysml.IRequirementUsage;
+import org.oasis.oslcop.sysml.IStateUsage;
+import org.oasis.oslcop.sysml.ISuperclassing;
+import org.oasis.oslcop.sysml.ITextualRepresentation;
+import org.oasis.oslcop.sysml.ITransitionUsage;
+import org.oasis.oslcop.sysml.IUsage;
+import org.oasis.oslcop.sysml.IVariantMembership;
+import org.oasis.oslcop.sysml.IVerificationCaseUsage;
+import org.oasis.oslcop.sysml.IViewUsage;
+import org.oasis.oslcop.sysml.IViewpointUsage;
 // Start of user code imports
 // End of user code
 
-@OslcNamespace(SysmlDomainConstants.CONDITIONALIMPORT_NAMESPACE)
-@OslcName(SysmlDomainConstants.CONDITIONALIMPORT_LOCALNAME)
-@OslcResourceShape(title = "ConditionalImport Resource Shape", describes = SysmlDomainConstants.CONDITIONALIMPORT_TYPE)
-public interface IConditionalImport
+@OslcNamespace(SysmlDomainConstants.ENUMERATIONDEFINITION_NAMESPACE)
+@OslcName(SysmlDomainConstants.ENUMERATIONDEFINITION_LOCALNAME)
+@OslcResourceShape(title = "EnumerationDefinition Resource Shape", describes = SysmlDomainConstants.ENUMERATIONDEFINITION_TYPE)
+public interface IEnumerationDefinition
 {
 
+    public void addEnumeratedValue(final Link enumeratedValue );
 
-    @OslcName("selector")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "selector")
-    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcName("enumeratedValue")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "enumeratedValue")
+    @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PREDICATE_TYPE})
+    @OslcRange({SysmlDomainConstants.ENUMERATIONUSAGE_TYPE})
     @OslcReadOnly(false)
-    public Link getSelector();
-
-    @OslcName("condition_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "condition_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.IMPORTCONDITION_TYPE})
-    @OslcReadOnly(false)
-    public Link getCondition_comp();
-
-    @OslcName("condition")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "condition")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.IMPORTCONDITION_TYPE})
-    @OslcReadOnly(false)
-    public Link getCondition();
+    public Set<Link> getEnumeratedValue();
 
 
-    public void setSelector(final Link selector );
-    public void setCondition_comp(final Link condition_comp );
-    public void setCondition(final Link condition );
+    public void setEnumeratedValue(final Set<Link> enumeratedValue );
 }
 

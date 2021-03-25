@@ -57,16 +57,21 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
-import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.Namespace;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.Expression;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 // Start of user code imports
 // End of user code
 
@@ -79,33 +84,12 @@ import org.oasis.oslcop.sysml.Relationship;
 @OslcName(SysmlDomainConstants.PACKAGE_LOCALNAME)
 @OslcResourceShape(title = "Package Resource Shape", describes = SysmlDomainConstants.PACKAGE_TYPE)
 public class SysmlPackage
-    extends Element
+    extends Namespace
     implements ISysmlPackage
 {
-    // Start of user code attributeAnnotation:ownedMembership_comp
+    // Start of user code attributeAnnotation:filterCondition
     // End of user code
-    private Set<Link> ownedMembership_comp = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedMember
-    // End of user code
-    private Set<Link> ownedMember = new HashSet<Link>();
-    // Start of user code attributeAnnotation:membership
-    // End of user code
-    private Set<Link> membership = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedImport_comp
-    // End of user code
-    private Set<Link> ownedImport_comp = new HashSet<Link>();
-    // Start of user code attributeAnnotation:member
-    // End of user code
-    private Set<Link> member = new HashSet<Link>();
-    // Start of user code attributeAnnotation:importedMembership
-    // End of user code
-    private Set<Link> importedMembership = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedMembership
-    // End of user code
-    private Set<Link> ownedMembership = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedImport
-    // End of user code
-    private Set<Link> ownedImport = new HashSet<Link>();
+    private Set<Link> filterCondition = new HashSet<Link>();
     
     // Start of user code classAttributes
     // End of user code
@@ -162,293 +146,41 @@ public class SysmlPackage
         return result;
     }
     
-    public void addOwnedMembership_comp(final Link ownedMembership_comp)
+    public void addFilterCondition(final Link filterCondition)
     {
-        this.ownedMembership_comp.add(ownedMembership_comp);
-    }
-    
-    public void addOwnedMember(final Link ownedMember)
-    {
-        this.ownedMember.add(ownedMember);
-    }
-    
-    public void addMembership(final Link membership)
-    {
-        this.membership.add(membership);
-    }
-    
-    public void addOwnedImport_comp(final Link ownedImport_comp)
-    {
-        this.ownedImport_comp.add(ownedImport_comp);
-    }
-    
-    public void addMember(final Link member)
-    {
-        this.member.add(member);
-    }
-    
-    public void addImportedMembership(final Link importedMembership)
-    {
-        this.importedMembership.add(importedMembership);
-    }
-    
-    public void addOwnedMembership(final Link ownedMembership)
-    {
-        this.ownedMembership.add(ownedMembership);
-    }
-    
-    public void addOwnedImport(final Link ownedImport)
-    {
-        this.ownedImport.add(ownedImport);
+        this.filterCondition.add(filterCondition);
     }
     
     
-    // Start of user code getterAnnotation:ownedMembership_comp
+    // Start of user code getterAnnotation:filterCondition
     // End of user code
-    @OslcName("ownedMembership_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMembership_comp")
+    @OslcName("filterCondition")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "filterCondition")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.MEMBERSHIP_TYPE})
+    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedMembership_comp()
+    public Set<Link> getFilterCondition()
     {
-        // Start of user code getterInit:ownedMembership_comp
+        // Start of user code getterInit:filterCondition
         // End of user code
-        return ownedMembership_comp;
-    }
-    
-    // Start of user code getterAnnotation:ownedMember
-    // End of user code
-    @OslcName("ownedMember")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMember")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedMember()
-    {
-        // Start of user code getterInit:ownedMember
-        // End of user code
-        return ownedMember;
-    }
-    
-    // Start of user code getterAnnotation:membership
-    // End of user code
-    @OslcName("membership")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "membership")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.MEMBERSHIP_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getMembership()
-    {
-        // Start of user code getterInit:membership
-        // End of user code
-        return membership;
-    }
-    
-    // Start of user code getterAnnotation:ownedImport_comp
-    // End of user code
-    @OslcName("ownedImport_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedImport_comp")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.IMPORT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedImport_comp()
-    {
-        // Start of user code getterInit:ownedImport_comp
-        // End of user code
-        return ownedImport_comp;
-    }
-    
-    // Start of user code getterAnnotation:member
-    // End of user code
-    @OslcName("member")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "member")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getMember()
-    {
-        // Start of user code getterInit:member
-        // End of user code
-        return member;
-    }
-    
-    // Start of user code getterAnnotation:importedMembership
-    // End of user code
-    @OslcName("importedMembership")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "importedMembership")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.MEMBERSHIP_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getImportedMembership()
-    {
-        // Start of user code getterInit:importedMembership
-        // End of user code
-        return importedMembership;
-    }
-    
-    // Start of user code getterAnnotation:ownedMembership
-    // End of user code
-    @OslcName("ownedMembership")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMembership")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.MEMBERSHIP_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedMembership()
-    {
-        // Start of user code getterInit:ownedMembership
-        // End of user code
-        return ownedMembership;
-    }
-    
-    // Start of user code getterAnnotation:ownedImport
-    // End of user code
-    @OslcName("ownedImport")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedImport")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.IMPORT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedImport()
-    {
-        // Start of user code getterInit:ownedImport
-        // End of user code
-        return ownedImport;
+        return filterCondition;
     }
     
     
-    // Start of user code setterAnnotation:ownedMembership_comp
+    // Start of user code setterAnnotation:filterCondition
     // End of user code
-    public void setOwnedMembership_comp(final Set<Link> ownedMembership_comp )
+    public void setFilterCondition(final Set<Link> filterCondition )
     {
-        // Start of user code setterInit:ownedMembership_comp
+        // Start of user code setterInit:filterCondition
         // End of user code
-        this.ownedMembership_comp.clear();
-        if (ownedMembership_comp != null)
+        this.filterCondition.clear();
+        if (filterCondition != null)
         {
-            this.ownedMembership_comp.addAll(ownedMembership_comp);
+            this.filterCondition.addAll(filterCondition);
         }
     
-        // Start of user code setterFinalize:ownedMembership_comp
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedMember
-    // End of user code
-    public void setOwnedMember(final Set<Link> ownedMember )
-    {
-        // Start of user code setterInit:ownedMember
-        // End of user code
-        this.ownedMember.clear();
-        if (ownedMember != null)
-        {
-            this.ownedMember.addAll(ownedMember);
-        }
-    
-        // Start of user code setterFinalize:ownedMember
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:membership
-    // End of user code
-    public void setMembership(final Set<Link> membership )
-    {
-        // Start of user code setterInit:membership
-        // End of user code
-        this.membership.clear();
-        if (membership != null)
-        {
-            this.membership.addAll(membership);
-        }
-    
-        // Start of user code setterFinalize:membership
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedImport_comp
-    // End of user code
-    public void setOwnedImport_comp(final Set<Link> ownedImport_comp )
-    {
-        // Start of user code setterInit:ownedImport_comp
-        // End of user code
-        this.ownedImport_comp.clear();
-        if (ownedImport_comp != null)
-        {
-            this.ownedImport_comp.addAll(ownedImport_comp);
-        }
-    
-        // Start of user code setterFinalize:ownedImport_comp
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:member
-    // End of user code
-    public void setMember(final Set<Link> member )
-    {
-        // Start of user code setterInit:member
-        // End of user code
-        this.member.clear();
-        if (member != null)
-        {
-            this.member.addAll(member);
-        }
-    
-        // Start of user code setterFinalize:member
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:importedMembership
-    // End of user code
-    public void setImportedMembership(final Set<Link> importedMembership )
-    {
-        // Start of user code setterInit:importedMembership
-        // End of user code
-        this.importedMembership.clear();
-        if (importedMembership != null)
-        {
-            this.importedMembership.addAll(importedMembership);
-        }
-    
-        // Start of user code setterFinalize:importedMembership
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedMembership
-    // End of user code
-    public void setOwnedMembership(final Set<Link> ownedMembership )
-    {
-        // Start of user code setterInit:ownedMembership
-        // End of user code
-        this.ownedMembership.clear();
-        if (ownedMembership != null)
-        {
-            this.ownedMembership.addAll(ownedMembership);
-        }
-    
-        // Start of user code setterFinalize:ownedMembership
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedImport
-    // End of user code
-    public void setOwnedImport(final Set<Link> ownedImport )
-    {
-        // Start of user code setterInit:ownedImport
-        // End of user code
-        this.ownedImport.clear();
-        if (ownedImport != null)
-        {
-            this.ownedImport.addAll(ownedImport);
-        }
-    
-        // Start of user code setterFinalize:ownedImport
+        // Start of user code setterFinalize:filterCondition
         // End of user code
     }
     

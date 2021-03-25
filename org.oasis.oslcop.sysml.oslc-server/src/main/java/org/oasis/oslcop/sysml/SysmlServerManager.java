@@ -26,9 +26,13 @@ import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
 import org.eclipse.lyo.oslc4j.core.model.AbstractResource;
 import org.oasis.oslcop.sysml.servlet.ServiceProviderCatalogSingleton;
 import org.oasis.oslcop.sysml.ServiceProviderInfo;
+import org.oasis.oslcop.sysml.AnnotatingElement;
+import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.SysmlClass;
 import org.oasis.oslcop.sysml.Classifier;
+import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
@@ -37,14 +41,16 @@ import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
 import org.eclipse.lyo.oslc.domains.am.Resource;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.Superclassing;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
+import org.oasis.oslcop.sysml.TypeFeaturing;
 import java.net.URI;
 import java.util.Properties;
 import java.io.FileInputStream;
@@ -107,9 +113,9 @@ public class SysmlServerManager {
     private static final Logger log = LoggerFactory.getLogger(SysmlServerManager.class);
 
     private static StorePool storePool;
-    private static URI sparqlQueryEndpoint;
     
     // Start of user code class_attributes
+    private static URI sparqlQueryEndpoint;
     private static ServiceProviderInfo[] serviceProviders = null;
 
     // End of user code

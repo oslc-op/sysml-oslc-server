@@ -57,11 +57,14 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
@@ -69,9 +72,10 @@ import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 // Start of user code imports
 // End of user code
 
@@ -84,7 +88,7 @@ import org.oasis.oslcop.sysml.Relationship;
 @OslcName(SysmlDomainConstants.TYPE_LOCALNAME)
 @OslcResourceShape(title = "Type Resource Shape", describes = SysmlDomainConstants.TYPE_TYPE)
 public class Type
-    extends SysmlPackage
+    extends Namespace
     implements IType
 {
     // Start of user code attributeAnnotation:isAbstract
@@ -102,15 +106,12 @@ public class Type
     // Start of user code attributeAnnotation:ownedFeatureMembership_comp
     // End of user code
     private Set<Link> ownedFeatureMembership_comp = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedFeature
-    // End of user code
-    private Set<Link> ownedFeature = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedEndFeature
-    // End of user code
-    private Set<Link> ownedEndFeature = new HashSet<Link>();
     // Start of user code attributeAnnotation:feature
     // End of user code
     private Set<Link> feature = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedFeature
+    // End of user code
+    private Set<Link> ownedFeature = new HashSet<Link>();
     // Start of user code attributeAnnotation:input
     // End of user code
     private Set<Link> input = new HashSet<Link>();
@@ -123,12 +124,12 @@ public class Type
     // Start of user code attributeAnnotation:endFeature
     // End of user code
     private Set<Link> endFeature = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedEndFeature
+    // End of user code
+    private Set<Link> ownedEndFeature = new HashSet<Link>();
     // Start of user code attributeAnnotation:ownedConjugator
     // End of user code
     private Link ownedConjugator;
-    // Start of user code attributeAnnotation:conjugator
-    // End of user code
-    private Link conjugator;
     // Start of user code attributeAnnotation:featureMembership
     // End of user code
     private Set<Link> featureMembership = new HashSet<Link>();
@@ -207,19 +208,14 @@ public class Type
         this.ownedFeatureMembership_comp.add(ownedFeatureMembership_comp);
     }
     
-    public void addOwnedFeature(final Link ownedFeature)
-    {
-        this.ownedFeature.add(ownedFeature);
-    }
-    
-    public void addOwnedEndFeature(final Link ownedEndFeature)
-    {
-        this.ownedEndFeature.add(ownedEndFeature);
-    }
-    
     public void addFeature(final Link feature)
     {
         this.feature.add(feature);
+    }
+    
+    public void addOwnedFeature(final Link ownedFeature)
+    {
+        this.ownedFeature.add(ownedFeature);
     }
     
     public void addInput(final Link input)
@@ -240,6 +236,11 @@ public class Type
     public void addEndFeature(final Link endFeature)
     {
         this.endFeature.add(endFeature);
+    }
+    
+    public void addOwnedEndFeature(final Link ownedEndFeature)
+    {
+        this.ownedEndFeature.add(ownedEndFeature);
     }
     
     public void addFeatureMembership(final Link featureMembership)
@@ -330,36 +331,6 @@ public class Type
         return ownedFeatureMembership_comp;
     }
     
-    // Start of user code getterAnnotation:ownedFeature
-    // End of user code
-    @OslcName("ownedFeature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedFeature")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedFeature()
-    {
-        // Start of user code getterInit:ownedFeature
-        // End of user code
-        return ownedFeature;
-    }
-    
-    // Start of user code getterAnnotation:ownedEndFeature
-    // End of user code
-    @OslcName("ownedEndFeature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedEndFeature")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedEndFeature()
-    {
-        // Start of user code getterInit:ownedEndFeature
-        // End of user code
-        return ownedEndFeature;
-    }
-    
     // Start of user code getterAnnotation:feature
     // End of user code
     @OslcName("feature")
@@ -373,6 +344,21 @@ public class Type
         // Start of user code getterInit:feature
         // End of user code
         return feature;
+    }
+    
+    // Start of user code getterAnnotation:ownedFeature
+    // End of user code
+    @OslcName("ownedFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedFeature")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedFeature()
+    {
+        // Start of user code getterInit:ownedFeature
+        // End of user code
+        return ownedFeature;
     }
     
     // Start of user code getterAnnotation:input
@@ -435,6 +421,21 @@ public class Type
         return endFeature;
     }
     
+    // Start of user code getterAnnotation:ownedEndFeature
+    // End of user code
+    @OslcName("ownedEndFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedEndFeature")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedEndFeature()
+    {
+        // Start of user code getterInit:ownedEndFeature
+        // End of user code
+        return ownedEndFeature;
+    }
+    
     // Start of user code getterAnnotation:ownedConjugator
     // End of user code
     @OslcName("ownedConjugator")
@@ -448,21 +449,6 @@ public class Type
         // Start of user code getterInit:ownedConjugator
         // End of user code
         return ownedConjugator;
-    }
-    
-    // Start of user code getterAnnotation:conjugator
-    // End of user code
-    @OslcName("conjugator")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "conjugator")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.CONJUGATION_TYPE})
-    @OslcReadOnly(false)
-    public Link getConjugator()
-    {
-        // Start of user code getterInit:conjugator
-        // End of user code
-        return conjugator;
     }
     
     // Start of user code getterAnnotation:featureMembership
@@ -594,38 +580,6 @@ public class Type
         // End of user code
     }
     
-    // Start of user code setterAnnotation:ownedFeature
-    // End of user code
-    public void setOwnedFeature(final Set<Link> ownedFeature )
-    {
-        // Start of user code setterInit:ownedFeature
-        // End of user code
-        this.ownedFeature.clear();
-        if (ownedFeature != null)
-        {
-            this.ownedFeature.addAll(ownedFeature);
-        }
-    
-        // Start of user code setterFinalize:ownedFeature
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedEndFeature
-    // End of user code
-    public void setOwnedEndFeature(final Set<Link> ownedEndFeature )
-    {
-        // Start of user code setterInit:ownedEndFeature
-        // End of user code
-        this.ownedEndFeature.clear();
-        if (ownedEndFeature != null)
-        {
-            this.ownedEndFeature.addAll(ownedEndFeature);
-        }
-    
-        // Start of user code setterFinalize:ownedEndFeature
-        // End of user code
-    }
-    
     // Start of user code setterAnnotation:feature
     // End of user code
     public void setFeature(final Set<Link> feature )
@@ -639,6 +593,22 @@ public class Type
         }
     
         // Start of user code setterFinalize:feature
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedFeature
+    // End of user code
+    public void setOwnedFeature(final Set<Link> ownedFeature )
+    {
+        // Start of user code setterInit:ownedFeature
+        // End of user code
+        this.ownedFeature.clear();
+        if (ownedFeature != null)
+        {
+            this.ownedFeature.addAll(ownedFeature);
+        }
+    
+        // Start of user code setterFinalize:ownedFeature
         // End of user code
     }
     
@@ -706,6 +676,22 @@ public class Type
         // End of user code
     }
     
+    // Start of user code setterAnnotation:ownedEndFeature
+    // End of user code
+    public void setOwnedEndFeature(final Set<Link> ownedEndFeature )
+    {
+        // Start of user code setterInit:ownedEndFeature
+        // End of user code
+        this.ownedEndFeature.clear();
+        if (ownedEndFeature != null)
+        {
+            this.ownedEndFeature.addAll(ownedEndFeature);
+        }
+    
+        // Start of user code setterFinalize:ownedEndFeature
+        // End of user code
+    }
+    
     // Start of user code setterAnnotation:ownedConjugator
     // End of user code
     public void setOwnedConjugator(final Link ownedConjugator )
@@ -715,18 +701,6 @@ public class Type
         this.ownedConjugator = ownedConjugator;
     
         // Start of user code setterFinalize:ownedConjugator
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:conjugator
-    // End of user code
-    public void setConjugator(final Link conjugator )
-    {
-        // Start of user code setterInit:conjugator
-        // End of user code
-        this.conjugator = conjugator;
-    
-        // Start of user code setterFinalize:conjugator
         // End of user code
     }
     

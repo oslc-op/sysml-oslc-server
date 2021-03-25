@@ -61,7 +61,10 @@ import org.oasis.oslcop.sysml.Type;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
+import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
@@ -70,12 +73,14 @@ import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
-import org.oasis.oslcop.sysml.SysmlPackage;
+import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.Subsetting;
+import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
+import org.oasis.oslcop.sysml.TypeFeaturing;
 // Start of user code imports
 // End of user code
 
@@ -106,33 +111,33 @@ public class Feature
     // Start of user code attributeAnnotation:isNonunique
     // End of user code
     private Boolean isNonunique;
-    // Start of user code attributeAnnotation:referencedType
+    // Start of user code attributeAnnotation:ownedTypeFeaturing
     // End of user code
-    private Set<Link> referencedType = new HashSet<Link>();
+    private Set<Link> ownedTypeFeaturing = new HashSet<Link>();
+    // Start of user code attributeAnnotation:owningFeatureMembership
+    // End of user code
+    private Link owningFeatureMembership;
     // Start of user code attributeAnnotation:owningType
     // End of user code
     private Link owningType;
+    // Start of user code attributeAnnotation:endOwningType
+    // End of user code
+    private Link endOwningType;
     // Start of user code attributeAnnotation:sysmlType
     // End of user code
     private Set<Link> sysmlType = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedType
-    // End of user code
-    private Set<Link> ownedType = new HashSet<Link>();
     // Start of user code attributeAnnotation:ownedRedefinition
     // End of user code
     private Set<Link> ownedRedefinition = new HashSet<Link>();
     // Start of user code attributeAnnotation:ownedSubsetting
     // End of user code
     private Set<Link> ownedSubsetting = new HashSet<Link>();
-    // Start of user code attributeAnnotation:owningFeatureMembership
+    // Start of user code attributeAnnotation:ownedTyping
     // End of user code
-    private Link owningFeatureMembership;
-    // Start of user code attributeAnnotation:typing
+    private Set<Link> ownedTyping = new HashSet<Link>();
+    // Start of user code attributeAnnotation:featuringType
     // End of user code
-    private Set<Link> typing = new HashSet<Link>();
-    // Start of user code attributeAnnotation:endOwningType
-    // End of user code
-    private Link endOwningType;
+    private Set<Link> featuringType = new HashSet<Link>();
     
     // Start of user code classAttributes
     // End of user code
@@ -189,19 +194,14 @@ public class Feature
         return result;
     }
     
-    public void addReferencedType(final Link referencedType)
+    public void addOwnedTypeFeaturing(final Link ownedTypeFeaturing)
     {
-        this.referencedType.add(referencedType);
+        this.ownedTypeFeaturing.add(ownedTypeFeaturing);
     }
     
     public void addSysmlType(final Link type)
     {
         this.sysmlType.add(type);
-    }
-    
-    public void addOwnedType(final Link ownedType)
-    {
-        this.ownedType.add(ownedType);
     }
     
     public void addOwnedRedefinition(final Link ownedRedefinition)
@@ -214,9 +214,14 @@ public class Feature
         this.ownedSubsetting.add(ownedSubsetting);
     }
     
-    public void addTyping(final Link typing)
+    public void addOwnedTyping(final Link ownedTyping)
     {
-        this.typing.add(typing);
+        this.ownedTyping.add(ownedTyping);
+    }
+    
+    public void addFeaturingType(final Link featuringType)
+    {
+        this.featuringType.add(featuringType);
     }
     
     
@@ -290,19 +295,34 @@ public class Feature
         return isNonunique;
     }
     
-    // Start of user code getterAnnotation:referencedType
+    // Start of user code getterAnnotation:ownedTypeFeaturing
     // End of user code
-    @OslcName("referencedType")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "referencedType")
+    @OslcName("ownedTypeFeaturing")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedTypeFeaturing")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
+    @OslcRange({SysmlDomainConstants.TYPEFEATURING_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getReferencedType()
+    public Set<Link> getOwnedTypeFeaturing()
     {
-        // Start of user code getterInit:referencedType
+        // Start of user code getterInit:ownedTypeFeaturing
         // End of user code
-        return referencedType;
+        return ownedTypeFeaturing;
+    }
+    
+    // Start of user code getterAnnotation:owningFeatureMembership
+    // End of user code
+    @OslcName("owningFeatureMembership")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningFeatureMembership")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATUREMEMBERSHIP_TYPE})
+    @OslcReadOnly(false)
+    public Link getOwningFeatureMembership()
+    {
+        // Start of user code getterInit:owningFeatureMembership
+        // End of user code
+        return owningFeatureMembership;
     }
     
     // Start of user code getterAnnotation:owningType
@@ -320,6 +340,21 @@ public class Feature
         return owningType;
     }
     
+    // Start of user code getterAnnotation:endOwningType
+    // End of user code
+    @OslcName("endOwningType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "endOwningType")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
+    @OslcReadOnly(false)
+    public Link getEndOwningType()
+    {
+        // Start of user code getterInit:endOwningType
+        // End of user code
+        return endOwningType;
+    }
+    
     // Start of user code getterAnnotation:sysmlType
     // End of user code
     @OslcName("type")
@@ -333,21 +368,6 @@ public class Feature
         // Start of user code getterInit:sysmlType
         // End of user code
         return sysmlType;
-    }
-    
-    // Start of user code getterAnnotation:ownedType
-    // End of user code
-    @OslcName("ownedType")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedType")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedType()
-    {
-        // Start of user code getterInit:ownedType
-        // End of user code
-        return ownedType;
     }
     
     // Start of user code getterAnnotation:ownedRedefinition
@@ -380,49 +400,34 @@ public class Feature
         return ownedSubsetting;
     }
     
-    // Start of user code getterAnnotation:owningFeatureMembership
+    // Start of user code getterAnnotation:ownedTyping
     // End of user code
-    @OslcName("owningFeatureMembership")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningFeatureMembership")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATUREMEMBERSHIP_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwningFeatureMembership()
-    {
-        // Start of user code getterInit:owningFeatureMembership
-        // End of user code
-        return owningFeatureMembership;
-    }
-    
-    // Start of user code getterAnnotation:typing
-    // End of user code
-    @OslcName("typing")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "typing")
+    @OslcName("ownedTyping")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedTyping")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.FEATURETYPING_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getTyping()
+    public Set<Link> getOwnedTyping()
     {
-        // Start of user code getterInit:typing
+        // Start of user code getterInit:ownedTyping
         // End of user code
-        return typing;
+        return ownedTyping;
     }
     
-    // Start of user code getterAnnotation:endOwningType
+    // Start of user code getterAnnotation:featuringType
     // End of user code
-    @OslcName("endOwningType")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "endOwningType")
-    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcName("featuringType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "featuringType")
+    @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.TYPE_TYPE})
     @OslcReadOnly(false)
-    public Link getEndOwningType()
+    public Set<Link> getFeaturingType()
     {
-        // Start of user code getterInit:endOwningType
+        // Start of user code getterInit:featuringType
         // End of user code
-        return endOwningType;
+        return featuringType;
     }
     
     
@@ -486,19 +491,31 @@ public class Feature
         // End of user code
     }
     
-    // Start of user code setterAnnotation:referencedType
+    // Start of user code setterAnnotation:ownedTypeFeaturing
     // End of user code
-    public void setReferencedType(final Set<Link> referencedType )
+    public void setOwnedTypeFeaturing(final Set<Link> ownedTypeFeaturing )
     {
-        // Start of user code setterInit:referencedType
+        // Start of user code setterInit:ownedTypeFeaturing
         // End of user code
-        this.referencedType.clear();
-        if (referencedType != null)
+        this.ownedTypeFeaturing.clear();
+        if (ownedTypeFeaturing != null)
         {
-            this.referencedType.addAll(referencedType);
+            this.ownedTypeFeaturing.addAll(ownedTypeFeaturing);
         }
     
-        // Start of user code setterFinalize:referencedType
+        // Start of user code setterFinalize:ownedTypeFeaturing
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:owningFeatureMembership
+    // End of user code
+    public void setOwningFeatureMembership(final Link owningFeatureMembership )
+    {
+        // Start of user code setterInit:owningFeatureMembership
+        // End of user code
+        this.owningFeatureMembership = owningFeatureMembership;
+    
+        // Start of user code setterFinalize:owningFeatureMembership
         // End of user code
     }
     
@@ -511,6 +528,18 @@ public class Feature
         this.owningType = owningType;
     
         // Start of user code setterFinalize:owningType
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:endOwningType
+    // End of user code
+    public void setEndOwningType(final Link endOwningType )
+    {
+        // Start of user code setterInit:endOwningType
+        // End of user code
+        this.endOwningType = endOwningType;
+    
+        // Start of user code setterFinalize:endOwningType
         // End of user code
     }
     
@@ -527,22 +556,6 @@ public class Feature
         }
     
         // Start of user code setterFinalize:sysmlType
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedType
-    // End of user code
-    public void setOwnedType(final Set<Link> ownedType )
-    {
-        // Start of user code setterInit:ownedType
-        // End of user code
-        this.ownedType.clear();
-        if (ownedType != null)
-        {
-            this.ownedType.addAll(ownedType);
-        }
-    
-        // Start of user code setterFinalize:ownedType
         // End of user code
     }
     
@@ -578,43 +591,35 @@ public class Feature
         // End of user code
     }
     
-    // Start of user code setterAnnotation:owningFeatureMembership
+    // Start of user code setterAnnotation:ownedTyping
     // End of user code
-    public void setOwningFeatureMembership(final Link owningFeatureMembership )
+    public void setOwnedTyping(final Set<Link> ownedTyping )
     {
-        // Start of user code setterInit:owningFeatureMembership
+        // Start of user code setterInit:ownedTyping
         // End of user code
-        this.owningFeatureMembership = owningFeatureMembership;
-    
-        // Start of user code setterFinalize:owningFeatureMembership
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:typing
-    // End of user code
-    public void setTyping(final Set<Link> typing )
-    {
-        // Start of user code setterInit:typing
-        // End of user code
-        this.typing.clear();
-        if (typing != null)
+        this.ownedTyping.clear();
+        if (ownedTyping != null)
         {
-            this.typing.addAll(typing);
+            this.ownedTyping.addAll(ownedTyping);
         }
     
-        // Start of user code setterFinalize:typing
+        // Start of user code setterFinalize:ownedTyping
         // End of user code
     }
     
-    // Start of user code setterAnnotation:endOwningType
+    // Start of user code setterAnnotation:featuringType
     // End of user code
-    public void setEndOwningType(final Link endOwningType )
+    public void setFeaturingType(final Set<Link> featuringType )
     {
-        // Start of user code setterInit:endOwningType
+        // Start of user code setterInit:featuringType
         // End of user code
-        this.endOwningType = endOwningType;
+        this.featuringType.clear();
+        if (featuringType != null)
+        {
+            this.featuringType.addAll(featuringType);
+        }
     
-        // Start of user code setterFinalize:endOwningType
+        // Start of user code setterFinalize:featuringType
         // End of user code
     }
     
