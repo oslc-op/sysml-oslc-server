@@ -228,6 +228,7 @@ public class PopulationService
         Boolean readFromFile = false;
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpget = new HttpGet(projectCommitElementsUrl);
+        httpget.addHeader("Accept", "application/ld+json");
         try {
             CloseableHttpResponse response = httpclient.execute(httpget);
             if (response != null && response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
