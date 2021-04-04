@@ -24,10 +24,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Link;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
+import org.apache.http.Header;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -222,6 +224,21 @@ public class PopulationService
         return projectCommits;
     }
 
+    public static String nextPageUri(CloseableHttpResponse response) {
+        String nextPageUri = null;
+        for (Header header : response.getHeaders("Link")) {
+            String[] links = header.getValue().split(",");
+            for (String l : links) {
+                Link link = Link.valueOf(l);
+                if (link.getParams().get("rel").equals("next")) {
+                    nextPageUri = link.getUri().toString();
+                    break;
+                }
+            }
+        }
+        return nextPageUri;
+    }
+    
     public static List<ObjectNode> getElements(String projectCommitElementsUrl) {
         List<ObjectNode> elements = new ArrayList<ObjectNode>();
     	ObjectMapper mapper = new ObjectMapper();
@@ -229,16 +246,22 @@ public class PopulationService
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpget = new HttpGet(projectCommitElementsUrl);
         httpget.addHeader("Accept", "application/ld+json");
+        String nextPageUri = null;
         try {
             CloseableHttpResponse response = httpclient.execute(httpget);
             if (response != null && response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 InputStream content = response.getEntity().getContent();
                 elements = mapper.readValue(content, new TypeReference<List<ObjectNode>>() {});
+                nextPageUri = nextPageUri(response);
             } else {
                 log.error("Could not run GET query on the REST server. Server returns status:" + response.getStatusLine().getStatusCode());
             }
         } catch (IOException e) {
             log.error("Could not run GET query on the REST server", e);
+        }
+        if (null != nextPageUri) {
+            List<ObjectNode> elementsAsJson = getElements(nextPageUri.toString());
+            elements.addAll(elementsAsJson); 
         }
         return elements;
     }
