@@ -78,34 +78,24 @@ import org.oasis.oslcop.sysml.SysmlServerManager;
 import org.oasis.oslcop.sysml.SysmlServerConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.servlet.ServiceProviderCatalogSingleton;
-import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.FeatureTyping;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 // Start of user code imports
-import org.oasis.oslcop.sysml.Feature;
-import org.oasis.oslcop.sysml.FeatureMembership;
-import org.oasis.oslcop.sysml.FeatureTyping;
-import org.oasis.oslcop.sysml.Generalization;
-import org.oasis.oslcop.sysml.AttributeUsage;
-import org.oasis.oslcop.sysml.PartUsage;
-import org.oasis.oslcop.sysml.PortUsage;
-import org.oasis.oslcop.sysml.Relationship;
-import org.oasis.oslcop.sysml.Subsetting;
-import org.oasis.oslcop.sysml.SysmlClass;
 // End of user code
 
 // Start of user code pre_class_code
 // End of user code
-@Path("projects/{projectId}/elements")
-@Api(value = "Web Service for {" + SysmlDomainConstants.ELEMENT_LOCALNAME + "}")
-public class ElementService
+@Path("projects/{projectId}/featureTypings")
+@Api(value = "Web Service for {" + SysmlDomainConstants.FEATURETYPING_LOCALNAME + "}")
+public class FeatureTypingService
 {
     @Context private HttpServletRequest httpServletRequest;
     @Context private HttpServletResponse httpServletResponse;
     @Context private UriInfo uriInfo;
 
-    private static final Logger log = LoggerFactory.getLogger(ElementService.class);
+    private static final Logger log = LoggerFactory.getLogger(FeatureTypingService.class);
 
     // Start of user code class_attributes
     // End of user code
@@ -113,7 +103,7 @@ public class ElementService
     // Start of user code class_methods
     // End of user code
 
-    public ElementService()
+    public FeatureTypingService()
     {
         super();
     }
@@ -131,26 +121,26 @@ public class ElementService
     @Path("{id}")
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_JSON_LD, OslcMediaType.TEXT_TURTLE, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
     @ApiOperation(
-        value = "GET for resources of type {'" + SysmlDomainConstants.ELEMENT_LOCALNAME + "'}",
-        notes = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.ELEMENT_TYPE + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}" +
-            ", with respective resource shapes {'" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + SysmlDomainConstants.ELEMENT_PATH + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}",
+        value = "GET for resources of type {'" + SysmlDomainConstants.FEATURETYPING_LOCALNAME + "'}",
+        notes = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.FEATURETYPING_TYPE + "\">" + SysmlDomainConstants.FEATURETYPING_LOCALNAME + "</a>" + "'}" +
+            ", with respective resource shapes {'" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + SysmlDomainConstants.FEATURETYPING_PATH + "\">" + SysmlDomainConstants.FEATURETYPING_LOCALNAME + "</a>" + "'}",
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
     )
-    public Element getElement(
+    public FeatureTyping getFeatureTyping(
                 @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws IOException, ServletException, URISyntaxException
     {
         // Start of user code getResource_init
         // End of user code
 
-        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, id);
+        final FeatureTyping aFeatureTyping = SysmlServerManager.getFeatureTyping(httpServletRequest, projectId, id);
 
-        if (aElement != null) {
-            // Start of user code getElement
+        if (aFeatureTyping != null) {
+            // Start of user code getFeatureTyping
             // End of user code
-            httpServletResponse.setHeader("ETag", SysmlServerManager.getETagFromElement(aElement));
+            httpServletResponse.setHeader("ETag", SysmlServerManager.getETagFromFeatureTyping(aFeatureTyping));
             httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
-            return aElement;
+            return aFeatureTyping;
         }
 
         throw new WebApplicationException(Status.NOT_FOUND);
@@ -160,37 +150,26 @@ public class ElementService
     @Path("{id}")
     @Produces({ MediaType.TEXT_HTML })
     @ApiOperation(
-        value = "GET for resources of type {'" + SysmlDomainConstants.ELEMENT_LOCALNAME + "'}",
-        notes = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.ELEMENT_TYPE + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}" +
-            ", with respective resource shapes {'" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + SysmlDomainConstants.ELEMENT_PATH + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}",
+        value = "GET for resources of type {'" + SysmlDomainConstants.FEATURETYPING_LOCALNAME + "'}",
+        notes = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.FEATURETYPING_TYPE + "\">" + SysmlDomainConstants.FEATURETYPING_LOCALNAME + "</a>" + "'}" +
+            ", with respective resource shapes {'" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + SysmlDomainConstants.FEATURETYPING_PATH + "\">" + SysmlDomainConstants.FEATURETYPING_LOCALNAME + "</a>" + "'}",
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
     )
-    public void getElementAsHtml(
+    public void getFeatureTypingAsHtml(
         @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
-        // Start of user code getElementAsHtml_init
+        // Start of user code getFeatureTypingAsHtml_init
         // End of user code
 
-        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, id);
+        final FeatureTyping aFeatureTyping = SysmlServerManager.getFeatureTyping(httpServletRequest, projectId, id);
 
-        if (aElement != null) {
-            httpServletRequest.setAttribute("aElement", aElement);
-            // Start of user code getElementAsHtml_setAttributes
-            URI sourceUri = PopulationService.translateBack(uriInfo.getAbsolutePath());
-            httpServletRequest.setAttribute("sourceUri", sourceUri.toString());
-            List<Class> servicedDomainClasses = new ArrayList<Class>(Arrays.asList(SysmlClass.class, Subsetting.class, Relationship.class, Generalization.class, 
-                    Feature.class, FeatureMembership.class, FeatureTyping.class, PortUsage.class, AttributeUsage.class, PartUsage.class));
-            if (servicedDomainClasses.contains(aElement.getClass())) {
-                httpServletRequest.setAttribute("a" + aElement.getClass().getSimpleName(), aElement);
-                RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/" + aElement.getClass().getSimpleName().toLowerCase() + ".jsp");
-                rd.forward(httpServletRequest,httpServletResponse);
-                return;
-            }
-            
+        if (aFeatureTyping != null) {
+            httpServletRequest.setAttribute("aFeatureTyping", aFeatureTyping);
+            // Start of user code getFeatureTypingAsHtml_setAttributes
             // End of user code
 
-            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/element.jsp");
+            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/featuretyping.jsp");
             rd.forward(httpServletRequest,httpServletResponse);
             return;
         }
@@ -202,12 +181,12 @@ public class ElementService
     @Path("{id}")
     @Produces({OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML})
     @ApiOperation(
-        value = "GET for resources of type {'" + SysmlDomainConstants.ELEMENT_LOCALNAME + "'}",
-        notes = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.ELEMENT_TYPE + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}" +
-            ", with respective resource shapes {'" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + SysmlDomainConstants.ELEMENT_PATH + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}",
+        value = "GET for resources of type {'" + SysmlDomainConstants.FEATURETYPING_LOCALNAME + "'}",
+        notes = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.FEATURETYPING_TYPE + "\">" + SysmlDomainConstants.FEATURETYPING_LOCALNAME + "</a>" + "'}" +
+            ", with respective resource shapes {'" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + SysmlDomainConstants.FEATURETYPING_PATH + "\">" + SysmlDomainConstants.FEATURETYPING_LOCALNAME + "</a>" + "'}",
         produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
     )
-    public Compact getElementCompact(
+    public Compact getFeatureTypingCompact(
         @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
@@ -217,17 +196,17 @@ public class ElementService
         String largePreviewHintHeight = "20em";
         String largePreviewHintWidth = "45em";
 
-        // Start of user code getElementCompact_init
+        // Start of user code getFeatureTypingCompact_init
         //TODO: adjust the preview height & width values from the default values provided above.
         // End of user code
 
-        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, id);
+        final FeatureTyping aFeatureTyping = SysmlServerManager.getFeatureTyping(httpServletRequest, projectId, id);
 
-        if (aElement != null) {
+        if (aFeatureTyping != null) {
             final Compact compact = new Compact();
 
-            compact.setAbout(aElement.getAbout());
-            compact.setTitle(aElement.toString());
+            compact.setAbout(aFeatureTyping.getAbout());
+            compact.setTitle(aFeatureTyping.toString());
 
             compact.setIcon(new URI(iconUri));
 
@@ -235,13 +214,13 @@ public class ElementService
             final Preview smallPreview = new Preview();
             smallPreview.setHintHeight(smallPreviewHintHeight);
             smallPreview.setHintWidth(smallPreviewHintWidth);
-            smallPreview.setDocument(UriBuilder.fromUri(aElement.getAbout()).path("smallPreview").build());
+            smallPreview.setDocument(UriBuilder.fromUri(aFeatureTyping.getAbout()).path("smallPreview").build());
             compact.setSmallPreview(smallPreview);
 
             final Preview largePreview = new Preview();
             largePreview.setHintHeight(largePreviewHintHeight);
             largePreview.setHintWidth(largePreviewHintWidth);
-            largePreview.setDocument(UriBuilder.fromUri(aElement.getAbout()).path("largePreview").build());
+            largePreview.setDocument(UriBuilder.fromUri(aFeatureTyping.getAbout()).path("largePreview").build());
             compact.setLargePreview(largePreview);
 
             httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
@@ -254,21 +233,21 @@ public class ElementService
     @GET
     @Path("{id}/smallPreview")
     @Produces({ MediaType.TEXT_HTML })
-    public void getElementAsHtmlSmallPreview(
+    public void getFeatureTypingAsHtmlSmallPreview(
         @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
-        // Start of user code getElementAsHtmlSmallPreview_init
+        // Start of user code getFeatureTypingAsHtmlSmallPreview_init
         // End of user code
 
-        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, id);
+        final FeatureTyping aFeatureTyping = SysmlServerManager.getFeatureTyping(httpServletRequest, projectId, id);
 
-        if (aElement != null) {
-            httpServletRequest.setAttribute("aElement", aElement);
-            // Start of user code getElementAsHtmlSmallPreview_setAttributes
+        if (aFeatureTyping != null) {
+            httpServletRequest.setAttribute("aFeatureTyping", aFeatureTyping);
+            // Start of user code getFeatureTypingAsHtmlSmallPreview_setAttributes
             // End of user code
 
-            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/elementsmallpreview.jsp");
+            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/featuretypingsmallpreview.jsp");
             httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);
@@ -281,21 +260,21 @@ public class ElementService
     @GET
     @Path("{id}/largePreview")
     @Produces({ MediaType.TEXT_HTML })
-    public void getElementAsHtmlLargePreview(
+    public void getFeatureTypingAsHtmlLargePreview(
         @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
-        // Start of user code getElementAsHtmlLargePreview_init
+        // Start of user code getFeatureTypingAsHtmlLargePreview_init
         // End of user code
 
-        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, id);
+        final FeatureTyping aFeatureTyping = SysmlServerManager.getFeatureTyping(httpServletRequest, projectId, id);
 
-        if (aElement != null) {
-            httpServletRequest.setAttribute("aElement", aElement);
-            // Start of user code getElementAsHtmlLargePreview_setAttributes
+        if (aFeatureTyping != null) {
+            httpServletRequest.setAttribute("aFeatureTyping", aFeatureTyping);
+            // Start of user code getFeatureTypingAsHtmlLargePreview_setAttributes
             // End of user code
 
-            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/elementlargepreview.jsp");
+            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/featuretypinglargepreview.jsp");
             httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);

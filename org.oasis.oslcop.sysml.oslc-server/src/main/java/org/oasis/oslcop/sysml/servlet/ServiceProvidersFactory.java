@@ -46,6 +46,12 @@ import org.oasis.oslcop.sysml.services.ServiceProviderService2;
 import org.oasis.oslcop.sysml.services.ServiceProviderService3;
 import org.oasis.oslcop.sysml.services.ServiceProviderService4;
 import org.oasis.oslcop.sysml.services.ServiceProviderService5;
+import org.oasis.oslcop.sysml.services.ServiceProviderService6;
+import org.oasis.oslcop.sysml.services.ServiceProviderService7;
+import org.oasis.oslcop.sysml.services.ServiceProviderService8;
+import org.oasis.oslcop.sysml.services.ServiceProviderService9;
+import org.oasis.oslcop.sysml.services.ServiceProviderService10;
+import org.oasis.oslcop.sysml.services.ServiceProviderService11;
 
 // Start of user code imports
 // End of user code
@@ -54,7 +60,7 @@ public class ServiceProvidersFactory
 {
     private static Class<?>[] RESOURCE_CLASSES =
     {
-        ServiceProviderService1.class, ServiceProviderService2.class, ServiceProviderService3.class, ServiceProviderService4.class, ServiceProviderService5.class
+        ServiceProviderService1.class, ServiceProviderService2.class, ServiceProviderService3.class, ServiceProviderService4.class, ServiceProviderService5.class, ServiceProviderService6.class, ServiceProviderService7.class, ServiceProviderService8.class, ServiceProviderService9.class, ServiceProviderService10.class, ServiceProviderService11.class
     };
 
     private ServiceProvidersFactory()
