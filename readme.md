@@ -57,7 +57,7 @@ Tips: Use Notepad++ to search/replace on all *.java files.
 * Replace:        // Start of user code toString_finalize\n        result = getShortTitle();\n        // End of user code
 
 ### 3. 
-In the generated jsp pages, there are calls to getDctermsIdentifier() and getDctermsSource(), but these methods do not exist.
-They would have existed if the OSLC AM resources were generated. But because we are including the library as it is previously generated, the methods should be really getIdentifier() and getSource()
+In the generated jsp pages, there are calls to getDctermsType(), getDctermsIdentifier() and getDctermsSource(), but these methods do not exist.
+They would have existed if the OSLC AM resources were generated. But because we are including the library as it is previously generated, the methods should be really getType(), getIdentifier() and getSource()
 
 
