@@ -60,4 +60,6 @@ Tips: Use Notepad++ to search/replace on all *.java files.
 In the generated jsp pages, there are calls to getDctermsType(), getDctermsIdentifier() and getDctermsSource(), but these methods do not exist.
 They would have existed if the OSLC AM resources were generated. But because we are including the library as it is previously generated, the methods should be really getType(), getIdentifier() and getSource()
 
+# License
 
+This work is licensed under the terms of Apache License 2.0.
