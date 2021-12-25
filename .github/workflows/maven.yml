@@ -5,26 +5,25 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
   schedule:
     # catch SNAPSHOT breaking changes, check before THU OSLC calls and on Sat
-    - cron: "30 4 * * 4,6" 
+    - cron: "30 4 * * 4,6"
   workflow_dispatch:
-      
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.8
-    - name: Build SysML domain
-      run: mvn -B install --file org.oasis.oslcop.sysml.oslc-domain/pom.xml
-    - name: Build SysML OSLC server
-      run: mvn -B package --file org.oasis.oslcop.sysml.oslc-server/pom.xml
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Build SysML domain
+        run: mvn -B install --file org.oasis.oslcop.sysml.oslc-domain/pom.xml
+      - name: Build SysML OSLC server
+        run: mvn -B verify --file org.oasis.oslcop.sysml.oslc-server/pom.xml

@@ -1,7 +1,7 @@
 # SysML OSLC Server
 
 ![CI](https://github.com/oslc-op/sysml-oslc-server/workflows/CI/badge.svg)
-[![](https://img.shields.io/badge/talk-discourse-lightgrey.svg)](https://forum.open-services.net/)
+[![Discourse users](https://img.shields.io/discourse/users?color=28bd84&server=https%3A%2F%2Fforum.open-services.net%2F)](https://forum.open-services.net/)
 
 Sample code to demonstrate how to use Lyo Designer to create an OSLC server for the SysML v2 REST API.
 
@@ -30,7 +30,7 @@ Alternatively, do a manual install:
 
 ## Query
 
-Example queries we can examplify with
+Example queries we can execute:
 
 https://aide.md.kth.se/sysml_oslc_server/services/projects/585a5a94-61a0-4a60-9731-c2be32b06f89/commits/7cbc0568-1f44-4725-ace0-e7d4e1c046c6/service1/subsettings/query
 
