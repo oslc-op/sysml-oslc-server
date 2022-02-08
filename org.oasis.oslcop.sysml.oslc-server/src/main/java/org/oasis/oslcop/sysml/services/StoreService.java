@@ -87,17 +87,6 @@ public class StoreService
     public void getProjectCommits() throws IOException, ServletException, StoreAccessException,
             ModelUnmarshallingException {
         List<String> commits = projectCommits();
-//        httpServletRequest.setAttribute("projectCommits", commits);
-//        Store store = SysmlServerManager.getStorePool().getStore();
-//        String id = projectCommits().get(0);
-//        try {
-//            List<ServiceProvider> serviceProviders =  store.getResources(StoreService.constructNamedGraphUri(id), ServiceProvider.class); //new ArrayList<ServiceProvider>();
-//        } catch (StoreAccessException e) {
-//            e.printStackTrace();
-//        } catch (ModelUnmarshallingException e) {
-//            e.printStackTrace();
-//        }
-
 
         Store store = SysmlServerManager.getStorePool().getStore();
         List <ProjectCommitViewModel> commitModels = new ArrayList<>();
