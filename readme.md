@@ -24,17 +24,18 @@ Alternatively, do a manual install:
 1. run `mvn install` on the project `org.oasis.oslcop.sysml.oslc-domain`
    1. this is necessary if changes are made to the classes in the sysml-domain, which the sysml-server depends on.
    1. This is also necessary when running for the first time.
-1. run `mvn jetty:run-exploded` on the project `org.oasis.oslcop.sysml.oslc-server-model`
-1. If the first time you are running the server, populate the database by calling http://localhost:8085/sysml_oslc_server/services/populate
-1. Browse the data starting with the catalog http://localhost:8085/sysml_oslc_server/services/catalog/singleton
+2. run `mvn jetty:run-exploded` on the project `org.oasis.oslcop.sysml.oslc-server-model`
+3. If the first time you are running the server, populate the database by calling http://localhost:8085/sysml_oslc_server/services/populate
+   1. If you already have the data in the triplestore, **make sure to select active version via http://localhost:8085/sysml_oslc_server/services/store/projectCommits** (WARN: the page will take quite a long time to load).
+4. Browse the data starting with the catalog http://localhost:8085/sysml_oslc_server/services/catalog/singleton
 
 ## Query
 
-Example queries we can execute:
+Example queries we can execute (if you chose version `11609e2b-a4df-4a64-9e61-a45660c28542`):
 
-https://aide.md.kth.se/sysml_oslc_server/services/projects/585a5a94-61a0-4a60-9731-c2be32b06f89/commits/7cbc0568-1f44-4725-ace0-e7d4e1c046c6/service1/subsettings/query
+http://localhost:8085/sysml_oslc_server/services/projects/23561420-ef88-4249-bf99-651670ff438f/service6/features/query
 
-- `oslc.where sysml:identifier="bd51aa62-e8df-474e-931c-f3cb60c17d6b"`
+- `oslc.where sysml:identifier="5bc41f66-4d42-41da-b7a3-92af54dab320"`
 - `oslc.prefix sysml=<http://omg.org/ns/sysml#>`
 
 ## Info
