@@ -221,6 +221,24 @@ public class SysmlServerManager {
         String password = null;
         storePool = new StorePool(initialPoolSize, defaultNamedGraph, sparqlQueryEndpoint, sparqlUpdateEndpoint, userName, password);
         // Start of user code StoreFinalize
+        Properties storeCredentials = new Properties();
+        String storeCredentialsFilename = StorePool.class.getResource("/store-credentials.properties").getFile();
+        if(storeCredentialsFilename == null || storeCredentialsFilename.isBlank()) {
+            log.debug("store-credentials.properties file not found; see store-credentials.sample.properties for a template");
+        } else {
+            log.debug("store-credentials.properties FOUND");
+            try {
+                storeCredentials.load(new FileInputStream(storeCredentialsFilename));
+            } catch (IOException e) {
+                log.error("Failed to initialize Store. properties file for Store configuration could not be loaded.", e);
+                throw new RuntimeException(e);
+            }
+
+            userName = storeCredentials.getProperty("sparqlUser");
+            password = storeCredentials.getProperty("sparqlPassword");
+            storePool = new StorePool(initialPoolSize, defaultNamedGraph, sparqlQueryEndpoint, sparqlUpdateEndpoint, userName, password);
+        }
+
         // End of user code
         
     }
