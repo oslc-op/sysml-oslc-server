@@ -1,3 +1,6 @@
+# SysML adaptor
+store-credentials.properties
+
 # Compiled class file
 *.class
 
@@ -24,19 +27,13 @@
 *.rar
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-sysml-server/target
+target/
 hs_err_pid*
 /.metadata/
 sysml-server/.DS_Store
 sysml-server/.classpath
-jsonld/.cache/raw.githubusercontent.comModelDrivenSysML-v2-Pilot-Implementationmasterorg.omg.sysmlmodelS,0c3df545bd509650a25521ebeb69ac37
-jsonld/.cache/raw.githubusercontent.comModelDrivenSysML-v2-Pilot-Implementationmasterorg.omg.sysmlmodelS,0c3df545bd509650a25521ebeb69ac37
+jsonld/.cache/
 *.prefs
 *.component
-sysml-server/.settings/org.eclipse.wst.common.project.facet.core.prefs.xml
-sysml-server/.settings/org.eclipse.wst.common.project.facet.core.xml
-sysml-server/src/.DS_Store
-sysml-server/src/main/.DS_Store
-sysml-server/src/main/java/org/oasis/oslcop/.DS_Store
-sysml-server/src/main/java/org/oasis/oslcop/sysml/.DS_Store
-jsonld/.cache/raw.githubusercontent.comModelDrivenSysML-v2-Pilot-Implementationmasterorg.omg.sysmlmodelS,0c3df545bd509650a25521ebeb69ac37
+sysml-server/.settings/
+.DS_Store
