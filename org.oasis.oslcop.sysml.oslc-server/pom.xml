@@ -10,18 +10,19 @@
     -->
     <groupId>org.oasis.oslcop.sysml</groupId>
     <artifactId>sysml_oslc_server</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Sysml Server</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.release>11</maven.compiler.release>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <version.lyo>5.0.0.alpha2</version.lyo>
-        <swagger.version>1.5.22</swagger.version>
-        <swagger-ui.version>3.25.0</swagger-ui.version>
+        <maven.compiler.release>11</maven.compiler.release>
+        <version.lyo>5.0.0-SNAPSHOT</version.lyo>
+        <jersey.version>2.35</jersey.version>
+        <swagger.version>2.1.4</swagger.version>
+        <swagger-ui.version>3.52.5</swagger-ui.version>
         <!-- Start of user code properties
         -->
         <!-- TODO: Add additional properties here to avoid them be overrriden upon future re-generation -->
@@ -34,14 +35,6 @@
         <!-- TODO: Add additional repositories here to avoid them be overrriden upon future re-generation -->
         <!-- End of user code
         -->
-        <repository>
-            <id>lyo-releases</id>
-            <name>Eclipse Lyo Releases</name>
-            <url>https://repo.eclipse.org/content/repositories/lyo-releases/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
         <repository>
             <id>lyo-snapshots</id>
             <name>Eclipse Lyo Snapshots</name>
@@ -63,7 +56,7 @@
         <dependency>
             <groupId>org.oasis.oslcop.sysml</groupId>
             <artifactId>sysml-oslc-domain</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.lyo.clients</groupId>
@@ -83,13 +76,8 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>1.7.21</version>
+            <version>1.7.32</version>
             <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.7.21</version>
         </dependency>
         <!-- Servlet dependencies -->
         <dependency>
@@ -104,16 +92,53 @@
             <version>1.2</version>
         </dependency>
         <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
+        
+        <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-server</artifactId>
-            <version>2.25.1</version>
+            <version>${jersey.version}</version>
+            <exclusions>
+                <exclusion>
+                    <!--we have a proper javax.inject:javax.inject dependency-->
+                    <!--also see https://stackoverflow.com/questions/25212944/why-does-hk2-repackage-everything-->
+                    <groupId>org.glassfish.hk2.external</groupId>
+                    <artifactId>javax.inject</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet</artifactId>
-            <version>2.25.1</version>
+            <version>${jersey.version}</version>
+            <exclusions>
+                <exclusion>
+                    <!--we have a proper javax.inject:javax.inject dependency-->
+                    <groupId>org.glassfish.hk2.external</groupId>
+                    <artifactId>javax.inject</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>${jersey.version}</version>
         </dependency>
         
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.5</version>
+            <scope>runtime</scope>
+        </dependency>
         <!-- Lyo dependencies -->
         <dependency>
             <groupId>org.eclipse.lyo.oslc4j.core</groupId>
@@ -154,10 +179,27 @@
         
         <!-- Swagger dependencies -->
         <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-jersey2-jaxrs</artifactId>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-jaxrs2</artifactId>
+            <version>${swagger.version}</version>
+            <exclusions>
+                <exclusion>
+                    <!--should be <provided>-->
+                    <groupId>jakarta.activation</groupId>
+                    <artifactId>jakarta.activation-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-jaxrs2-servlet-initializer-v2</artifactId>
             <version>${swagger.version}</version>
         </dependency>
+        <!-- Start of user code dependencies_final
+        -->
+        <!-- TODO: Add additional dependencies here to avoid them be overridden upon future re-generation -->
+        <!-- End of user code
+        -->
     </dependencies>
     <!-- Start of user code post_dependencies
     -->
@@ -174,21 +216,15 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.18.v20190429</version>
+                <version>10.0.7</version>
                 <configuration>
-                    <webAppConfig>
-                        <contextPath>/sysml_oslc_server</contextPath>
-                    </webAppConfig>
-                    <reload>automatic</reload>
-                    <scanIntervalSeconds>5</scanIntervalSeconds>
-                    <systemProperties>
-                        <systemProperty>
-                            <name>jetty.port</name>
-                            <value>8085</value>
-                        </systemProperty>
-                    </systemProperties>
-                    <stopKey />
-                    <stopPort />
+                  <webApp>
+                    <contextPath>/sysml_oslc_server</contextPath>
+                  </webApp>
+                  <httpConnector>
+                    <port>8085</port>
+                  </httpConnector>
+                  <scan>5</scan>
                 </configuration>
             </plugin>
             <!-- Swagger-ui -->

@@ -52,7 +52,7 @@ public class StoreService
     private static List<String> projectCommits() throws IOException {
         List<String> ng = new ArrayList<String>();
         String query = "SELECT ?g WHERE {GRAPH ?g { }}";
-        QueryExecution queryExecution = QueryExecutionFactory.sparqlService(SysmlServerManager.getSparqlQueryEndpoint().toString(), query);
+        QueryExecution queryExecution = QueryExecutionFactory.sparqlService(SysmlServerManager.getSparqlQueryEndpoint(), query);
         ResultSet resultSet = queryExecution.execSelect();
         while (resultSet.hasNext()) {
             QuerySolution solution = resultSet.next(); 

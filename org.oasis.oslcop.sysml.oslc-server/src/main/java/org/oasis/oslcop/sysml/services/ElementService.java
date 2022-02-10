@@ -79,8 +79,9 @@ import org.oasis.oslcop.sysml.SysmlServerConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.servlet.ServiceProviderCatalogSingleton;
 import org.oasis.oslcop.sysml.Element;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 // Start of user code imports
 import org.oasis.oslcop.sysml.Feature;
@@ -98,7 +99,6 @@ import org.oasis.oslcop.sysml.SysmlClass;
 // Start of user code pre_class_code
 // End of user code
 @Path("projects/{projectId}/elements")
-@Api(value = "Web Service for {" + SysmlDomainConstants.ELEMENT_LOCALNAME + "}")
 public class ElementService
 {
     @Context private HttpServletRequest httpServletRequest;
@@ -130,11 +130,13 @@ public class ElementService
     @GET
     @Path("{id}")
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_JSON_LD, OslcMediaType.TEXT_TURTLE, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
-    @ApiOperation(
-        value = "GET for resources of type {'" + SysmlDomainConstants.ELEMENT_LOCALNAME + "'}",
-        notes = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.ELEMENT_TYPE + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}" +
+    @Operation(
+        summary = "GET for resources of type {'" + SysmlDomainConstants.ELEMENT_LOCALNAME + "'}",
+        description = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.ELEMENT_TYPE + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}" +
             ", with respective resource shapes {'" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + SysmlDomainConstants.ELEMENT_PATH + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}",
-        produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
+        responses = {
+            @ApiResponse(description = "default response", content = {@Content(mediaType = OslcMediaType.APPLICATION_RDF_XML), @Content(mediaType = OslcMediaType.APPLICATION_XML), @Content(mediaType = OslcMediaType.APPLICATION_JSON), @Content(mediaType = OslcMediaType.TEXT_TURTLE), @Content(mediaType = MediaType.TEXT_HTML), @Content(mediaType = OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML)})
+        }
     )
     public Element getElement(
                 @PathParam("projectId") final String projectId, @PathParam("id") final String id
@@ -159,11 +161,13 @@ public class ElementService
     @GET
     @Path("{id}")
     @Produces({ MediaType.TEXT_HTML })
-    @ApiOperation(
-        value = "GET for resources of type {'" + SysmlDomainConstants.ELEMENT_LOCALNAME + "'}",
-        notes = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.ELEMENT_TYPE + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}" +
+    @Operation(
+        summary = "GET for resources of type {'" + SysmlDomainConstants.ELEMENT_LOCALNAME + "'}",
+        description = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.ELEMENT_TYPE + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}" +
             ", with respective resource shapes {'" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + SysmlDomainConstants.ELEMENT_PATH + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}",
-        produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
+        responses = {
+            @ApiResponse(description = "default response", content = {@Content(mediaType = OslcMediaType.APPLICATION_RDF_XML), @Content(mediaType = OslcMediaType.APPLICATION_XML), @Content(mediaType = OslcMediaType.APPLICATION_JSON), @Content(mediaType = OslcMediaType.TEXT_TURTLE), @Content(mediaType = MediaType.TEXT_HTML), @Content(mediaType = OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML)})
+        }
     )
     public void getElementAsHtml(
         @PathParam("projectId") final String projectId, @PathParam("id") final String id
@@ -201,21 +205,23 @@ public class ElementService
     @GET
     @Path("{id}")
     @Produces({OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML})
-    @ApiOperation(
-        value = "GET for resources of type {'" + SysmlDomainConstants.ELEMENT_LOCALNAME + "'}",
-        notes = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.ELEMENT_TYPE + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}" +
+    @Operation(
+        summary = "GET for resources of type {'" + SysmlDomainConstants.ELEMENT_LOCALNAME + "'}",
+        description = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.ELEMENT_TYPE + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}" +
             ", with respective resource shapes {'" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + SysmlDomainConstants.ELEMENT_PATH + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}",
-        produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
+        responses = {
+            @ApiResponse(description = "default response", content = {@Content(mediaType = OslcMediaType.APPLICATION_RDF_XML), @Content(mediaType = OslcMediaType.APPLICATION_XML), @Content(mediaType = OslcMediaType.APPLICATION_JSON), @Content(mediaType = OslcMediaType.TEXT_TURTLE), @Content(mediaType = MediaType.TEXT_HTML), @Content(mediaType = OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML)})
+        }
     )
     public Compact getElementCompact(
         @PathParam("projectId") final String projectId, @PathParam("id") final String id
         ) throws ServletException, IOException, URISyntaxException
     {
         String iconUri = OSLC4JUtils.getPublicURI() + "/images/ui_preview_icon.gif";
-        String smallPreviewHintHeight = "10em";
-        String smallPreviewHintWidth = "45em";
-        String largePreviewHintHeight = "20em";
-        String largePreviewHintWidth = "45em";
+        String smallPreviewHintHeight = "200px";
+        String smallPreviewHintWidth = "300px";
+        String largePreviewHintHeight = "400px";
+        String largePreviewHintWidth = "600px";
 
         // Start of user code getElementCompact_init
         //TODO: adjust the preview height & width values from the default values provided above.

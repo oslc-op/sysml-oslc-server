@@ -21,10 +21,10 @@ Alternatively, do a manual install:
 
 ## Running the server
 
-1. run `mvn install` on the project `org.oasis.oslcop.sysml.oslc-domain`
+1. run `mvn install` on the project `org.oasis.oslcop.sysml.oslc-domain`: `mvn -f org.oasis.oslcop.sysml.oslc-domain/pom.xml clean install`
    1. this is necessary if changes are made to the classes in the sysml-domain, which the sysml-server depends on.
    1. This is also necessary when running for the first time.
-2. run `mvn jetty:run-exploded` on the project `org.oasis.oslcop.sysml.oslc-server-model`
+2. run `mvn jetty:run-war` on the project `org.oasis.oslcop.sysml.oslc-server-model`
 3. If the first time you are running the server, populate the database by calling http://localhost:8085/sysml_oslc_server/services/populate
    1. If you already have the data in the triplestore, **make sure to select active version via http://localhost:8085/sysml_oslc_server/services/store/projectCommits** (WARN: the page will take quite a long time to load).
 4. Browse the data starting with the catalog http://localhost:8085/sysml_oslc_server/services/catalog/singleton
