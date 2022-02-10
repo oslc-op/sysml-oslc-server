@@ -86,6 +86,7 @@ public class StoreService
     @Path("projectCommits")
     public void getProjectCommits() throws IOException, ServletException, StoreAccessException,
             ModelUnmarshallingException {
+        log.trace("BEGIN list all project commits");
         List<String> commits = projectCommits();
 
         Store store = SysmlServerManager.getStorePool().getStore();
@@ -106,6 +107,7 @@ public class StoreService
         httpServletRequest.setAttribute("projectCommits", commitModels);
         httpServletRequest.setAttribute("selectedProjectCommit", selectedProjectCommit);
 
+        log.trace("END list all project commits");
         RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/projectCommits.jsp");
         rd.forward(httpServletRequest,httpServletResponse);
         return;
