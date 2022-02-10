@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "1e42488d-0f7a-46c3-af4e-173a07917f19",
+		"name": "SysML tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "_Select version",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/html",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/html",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{APP_BASE}}/services/store/projectCommits/11609e2b-a4df-4a64-9e61-a45660c28542",
+					"host": [
+						"{{APP_BASE}}"
+					],
+					"path": [
+						"services",
+						"store",
+						"projectCommits",
+						"11609e2b-a4df-4a64-9e61-a45660c28542"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Features QC empty",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/turtle;q=1.0,application/rdf+xml;q=0.9,application/n-triples;q=0.8,application/ld+json;q=0.3",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{APP_BASE}}/services/projects/034a9983-fefc-4851-8f2f-ab015cd4c747/service6/features/query?oslc.pageSize=500",
+					"host": [
+						"{{APP_BASE}}"
+					],
+					"path": [
+						"services",
+						"projects",
+						"034a9983-fefc-4851-8f2f-ab015cd4c747",
+						"service6",
+						"features",
+						"query"
+					],
+					"query": [
+						{
+							"key": "oslc.pageSize",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Features QC by Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/turtle;q=1.0,application/rdf+xml;q=0.9,application/n-triples;q=0.8,application/ld+json;q=0.3",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{APP_BASE}}/services/projects/034a9983-fefc-4851-8f2f-ab015cd4c747/service6/features/query?oslc.prefix=sysml=<http://omg.org/ns/sysml%23>&oslc.where=sysml:identifier=\"5bc41f66-4d42-41da-b7a3-92af54dab320\"",
+					"host": [
+						"{{APP_BASE}}"
+					],
+					"path": [
+						"services",
+						"projects",
+						"034a9983-fefc-4851-8f2f-ab015cd4c747",
+						"service6",
+						"features",
+						"query"
+					],
+					"query": [
+						{
+							"key": "oslc.prefix",
+							"value": "sysml=<http://omg.org/ns/sysml%23>"
+						},
+						{
+							"key": "oslc.where",
+							"value": "sysml:identifier=\"5bc41f66-4d42-41da-b7a3-92af54dab320\""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "README request !BROKEN",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/turtle;q=1.0,application/rdf+xml;q=0.9,application/n-triples;q=0.8,application/ld+json;q=0.3",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{APP_BASE}}/services/projects/585a5a94-61a0-4a60-9731-c2be32b06f89/commits/7cbc0568-1f44-4725-ace0-e7d4e1c046c6/service1/subsettings/query",
+					"host": [
+						"{{APP_BASE}}"
+					],
+					"path": [
+						"services",
+						"projects",
+						"585a5a94-61a0-4a60-9731-c2be32b06f89",
+						"commits",
+						"7cbc0568-1f44-4725-ace0-e7d4e1c046c6",
+						"service1",
+						"subsettings",
+						"query"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "admin",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "APP_BASE",
+			"value": "http://localhost:8085/sysml_oslc_server",
+			"type": "string"
+		}
+	]
+}

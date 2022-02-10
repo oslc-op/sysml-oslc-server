@@ -152,7 +152,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.rdf.model.RDFReader;
+import org.apache.jena.rdf.model.RDFReaderI;
 import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
@@ -174,9 +174,8 @@ public class SysmlServerManager {
     private static StorePool storePool;
     
     // Start of user code class_attributes
-    private static URI sparqlQueryEndpoint;
+    private static URI _sparqlQueryEndpoint;
     private static ServiceProviderInfo[] serviceProviders = null;
-
     // End of user code
     
     
@@ -184,8 +183,8 @@ public class SysmlServerManager {
     public static StorePool getStorePool() {
 		return storePool;
 	}
-    public static URI getSparqlQueryEndpoint() {
-        return sparqlQueryEndpoint;
+    public static String getSparqlQueryEndpoint() {
+        return _sparqlQueryEndpoint.toString();
     }
     // End of user code
 
@@ -198,7 +197,7 @@ public class SysmlServerManager {
         // Start of user code StoreInitialise
         // End of user code
         Properties lyoStoreProperties = new Properties();
-        String lyoStorePropertiesFile = StorePool.class.getResource("/store.properties").getFile();
+        String lyoStorePropertiesFile = SysmlServerManager.class.getResource("/store.properties").getFile();
         try {
             lyoStoreProperties.load(new FileInputStream(lyoStorePropertiesFile));
         } catch (IOException e) {
@@ -208,6 +207,7 @@ public class SysmlServerManager {
         
         int initialPoolSize = Integer.parseInt(lyoStoreProperties.getProperty("initialPoolSize"));
         URI defaultNamedGraph;
+        URI sparqlQueryEndpoint;
         URI sparqlUpdateEndpoint;
         try {
             defaultNamedGraph = new URI(lyoStoreProperties.getProperty("defaultNamedGraph"));
@@ -221,6 +221,24 @@ public class SysmlServerManager {
         String password = null;
         storePool = new StorePool(initialPoolSize, defaultNamedGraph, sparqlQueryEndpoint, sparqlUpdateEndpoint, userName, password);
         // Start of user code StoreFinalize
+        Properties storeCredentials = new Properties();
+        String storeCredentialsFilename = StorePool.class.getResource("/store-credentials.properties").getFile();
+        if(storeCredentialsFilename == null || storeCredentialsFilename.isBlank()) {
+            log.debug("store-credentials.properties file not found; see store-credentials.sample.properties for a template");
+        } else {
+            log.debug("store-credentials.properties FOUND");
+            try {
+                storeCredentials.load(new FileInputStream(storeCredentialsFilename));
+            } catch (IOException e) {
+                log.error("Failed to initialize Store. properties file for Store configuration could not be loaded.", e);
+                throw new RuntimeException(e);
+            }
+
+            userName = storeCredentials.getProperty("sparqlUser");
+            password = storeCredentials.getProperty("sparqlPassword");
+            storePool = new StorePool(initialPoolSize, defaultNamedGraph, sparqlQueryEndpoint, sparqlUpdateEndpoint, userName, password);
+        }
+        _sparqlQueryEndpoint = sparqlQueryEndpoint;
         // End of user code
         
     }
@@ -260,7 +278,7 @@ public class SysmlServerManager {
         return serviceProviderInfos;
     }
 
-    public static List<Subsetting> querySubsettings(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, int page, int limit)
+    public static List<Subsetting> querySubsettings(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
     {
         List<Subsetting> resources = null;
         
@@ -313,7 +331,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<Element> queryElements(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, int page, int limit)
+    public static List<Element> queryElements(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
     {
         List<Element> resources = null;
         
@@ -366,7 +384,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<SysmlClass> querySysmlClasss(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, int page, int limit)
+    public static List<SysmlClass> querySysmlClasss(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
     {
         List<SysmlClass> resources = null;
         
@@ -419,7 +437,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<Relationship> queryRelationships(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, int page, int limit)
+    public static List<Relationship> queryRelationships(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
     {
         List<Relationship> resources = null;
         
@@ -472,7 +490,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<Generalization> queryGeneralizations(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, int page, int limit)
+    public static List<Generalization> queryGeneralizations(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
     {
         List<Generalization> resources = null;
         
@@ -525,7 +543,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<Feature> queryFeatures(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, int page, int limit)
+    public static List<Feature> queryFeatures(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
     {
         List<Feature> resources = null;
         
@@ -578,7 +596,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<FeatureMembership> queryFeatureMemberships(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, int page, int limit)
+    public static List<FeatureMembership> queryFeatureMemberships(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
     {
         List<FeatureMembership> resources = null;
         
@@ -631,7 +649,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<FeatureTyping> queryFeatureTypings(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, int page, int limit)
+    public static List<FeatureTyping> queryFeatureTypings(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
     {
         List<FeatureTyping> resources = null;
         
@@ -684,7 +702,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<PortUsage> queryPortUsages(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, int page, int limit)
+    public static List<PortUsage> queryPortUsages(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
     {
         List<PortUsage> resources = null;
         
@@ -737,7 +755,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<AttributeUsage> queryAttributeUsages(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, int page, int limit)
+    public static List<AttributeUsage> queryAttributeUsages(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
     {
         List<AttributeUsage> resources = null;
         
@@ -790,7 +808,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<PartUsage> queryPartUsages(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, int page, int limit)
+    public static List<PartUsage> queryPartUsages(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
     {
         List<PartUsage> resources = null;
         

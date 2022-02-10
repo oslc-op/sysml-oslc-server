@@ -43,8 +43,7 @@ function search(baseUrl){
     }
   };
   terms = document.getElementById("searchTerms").value;
-  selectType = document.getElementById("selectType").value;
-  xmlhttp.open("GET", baseUrl + "?terms=" + encodeURIComponent(terms) + "&selectType=" + selectType, true);
+  xmlhttp.open("GET", baseUrl + "?terms=" + encodeURIComponent(terms), true);
   searchMessage.style.display = 'none';
   loadingMessage.style.display = 'block';
   xmlhttp.send();
