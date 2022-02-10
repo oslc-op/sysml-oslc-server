@@ -109,34 +109,7 @@
 			"response": []
 		},
 		{
-			"name": "SPARQL query",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3030/ds/sparql?query=PREFIX  sysml: <http://omg.org/ns/sysml%23>\nPREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns%23>\nDESCRIBE ?s\nWHERE\n{\n\tGRAPH <http://11609e2b-a4df-4a64-9e61-a45660c28542>\n\t{ \n\t\tSELECT DISTINCT  ?s\n      WHERE\n\t\t{ \n\t\t\t?s ?p ?o ;\n\t\t\tsysml:identifier  \"5bc41f66-4d42-41da-b7a3-92af54dab320\" ;\n\t\t\trdf:type          sysml:Feature\n \t\t}\n\t\tLIMIT   21\n\t}\n}#;\n#                rdf:type          sysml:Feature\n }\n         LIMIT   21\n      }}\n",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3030",
-					"path": [
-						"ds",
-						"sparql"
-					],
-					"query": [
-						{
-							"key": "query",
-							"value": "PREFIX  sysml: <http://omg.org/ns/sysml#>\nPREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nDESCRIBE ?s\nWHERE\n{\n\tGRAPH <http://11609e2b-a4df-4a64-9e61-a45660c28542>\n\t{ \n\t\tSELECT DISTINCT  ?s\n      WHERE\n\t\t{ \n\t\t\t?s ?p ?o ;\n\t\t\tsysml:identifier  \"5bc41f66-4d42-41da-b7a3-92af54dab320\" ;\n\t\t\trdf:type          sysml:Feature\n \t\t}\n\t\tLIMIT   21\n\t}\n}"
-						}
-					],
-					"hash": ";\n#                rdf:type          sysml:Feature\n }\n         LIMIT   21\n      }}\n"
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "README request Copy",
+			"name": "README request !BROKEN",
 			"request": {
 				"method": "GET",
 				"header": [
