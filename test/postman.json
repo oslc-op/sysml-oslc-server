@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1e42488d-0f7a-46c3-af4e-173a07917f19",
+		"_postman_id": "7f8bdd3c-3375-4f60-9928-247727d1f535",
 		"name": "SysML tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -31,6 +31,35 @@
 						"store",
 						"projectCommits",
 						"11609e2b-a4df-4a64-9e61-a45660c28542"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "_Populate",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/html",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/html",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{APP_BASE}}/services/populate",
+					"host": [
+						"{{APP_BASE}}"
+					],
+					"path": [
+						"services",
+						"populate"
 					]
 				}
 			},

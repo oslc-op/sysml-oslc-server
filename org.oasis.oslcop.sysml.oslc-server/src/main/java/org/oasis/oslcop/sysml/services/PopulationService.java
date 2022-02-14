@@ -339,7 +339,7 @@ public class PopulationService
         log.info("Projects:" + projects.size());
         for (Project project : projects) {
             List<ProjectCommit> projectCommits = getProjectCommits(project);
-            log.info("Populating on Project:" + project.getId() + " with commits:" + projectCommits.size());
+            log.info("Populating on Project: {} with commits: {}", project.getId(), projectCommits.size());
             for (ProjectCommit projectCommit : projectCommits) {
                 log.info("    Populating on ProjectCommit:" + projectCommit.getId());
                 count++;
@@ -352,7 +352,7 @@ public class PopulationService
                 r.name = "Project:" + r.projectId;
                 try {
                     ServiceProvider aServiceProvider = ServiceProvidersFactory.createServiceProvider(r);
-                    //It could be that the SP already exists from previous project commits. So, we only added it if it does not yet exist 
+                    //It could be that the SP already exists from previous project commits. So, we only added it if it does not yet exist
                     if (!store.resourceExists(StoreService.constructNamedGraphUri(projectCommit.getId()), aServiceProvider.getAbout())) {
                         store.updateResources(StoreService.constructNamedGraphUri(projectCommit.getId()), aServiceProvider);
                     }
