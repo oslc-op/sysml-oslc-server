@@ -12,8 +12,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "@type",
-    "containingProject",
-    "id",
+    "owningProject",
+    "@id",
     "previousCommit",
     "timestamp"
 })
@@ -21,9 +21,9 @@ public class ProjectCommit {
 
     @JsonProperty("@type")
     private String type;
-    @JsonProperty("containingProject")
-    private Project containingProject;
-    @JsonProperty("id")
+    @JsonProperty("owningProject")
+    private Project owningProject;
+    @JsonProperty("@id")
     private String id;
     @JsonProperty("previousCommit")
     private ProjectCommit previousCommit;
@@ -42,22 +42,22 @@ public class ProjectCommit {
         this.type = type;
     }
 
-    @JsonProperty("containingProject")
-    public Project getContainingProject() {
-        return containingProject;
+    @JsonProperty("owningProject")
+    public Project getOwningProject() {
+        return owningProject;
     }
 
-    @JsonProperty("containingProject")
-    public void setContainingProject(Project containingProject) {
-        this.containingProject = containingProject;
+    @JsonProperty("owningProject")
+    public void setOwningProject(Project owningProject) {
+        this.owningProject = owningProject;
     }
 
-    @JsonProperty("id")
+    @JsonProperty("@id")
     public String getId() {
         return id;
     }
 
-    @JsonProperty("id")
+    @JsonProperty("@id")
     public void setId(String id) {
         this.id = id;
     }

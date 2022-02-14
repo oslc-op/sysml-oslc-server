@@ -12,14 +12,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "@type",
-    "id",
+    "@id",
     "name"
 })
 public class Project {
 
     @JsonProperty("@type")
     private String type;
-    @JsonProperty("id")
+    @JsonProperty("@id")
     private String id;
     @JsonProperty("name")
     private String name;
@@ -36,12 +36,12 @@ public class Project {
         this.type = type;
     }
 
-    @JsonProperty("id")
+    @JsonProperty("@id")
     public String getId() {
         return id;
     }
 
-    @JsonProperty("id")
+    @JsonProperty("@id")
     public void setId(String id) {
         this.id = id;
     }
