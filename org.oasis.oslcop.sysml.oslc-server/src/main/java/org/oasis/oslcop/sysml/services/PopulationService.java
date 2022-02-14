@@ -36,6 +36,7 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.jena.atlas.web.HttpException;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Property;
@@ -47,6 +48,7 @@ import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.vocabulary.RDF;
 import org.eclipse.lyo.oslc4j.provider.jena.JenaModelHelper;
 import org.eclipse.lyo.store.Store;
+import org.eclipse.lyo.store.StoreAccessException;
 import org.glassfish.jersey.uri.UriTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -350,11 +352,25 @@ public class PopulationService
                 ServiceProviderInfo r = new ServiceProviderInfo();
                 r.projectId = project.getId();
                 r.name = "Project:" + r.projectId;
+                if(project.getId() == null || project.getId().isBlank()) {
+                    log.error("Cannot create a URI for a blank Project Id");
+                    continue;
+                }
                 try {
                     ServiceProvider aServiceProvider = ServiceProvidersFactory.createServiceProvider(r);
                     //It could be that the SP already exists from previous project commits. So, we only added it if it does not yet exist
-                    if (!store.resourceExists(StoreService.constructNamedGraphUri(projectCommit.getId()), aServiceProvider.getAbout())) {
-                        store.updateResources(StoreService.constructNamedGraphUri(projectCommit.getId()), aServiceProvider);
+                    if(projectCommit.getId() == null || projectCommit.getId().isBlank()) {
+                        log.error("Cannot create a URI for a blank Commit Id");
+                        continue;
+                    }
+                    URI commitUri = StoreService.constructNamedGraphUri(projectCommit.getId());
+                    try {
+                        if (!store.resourceExists(commitUri, aServiceProvider.getAbout())) {
+                            store.updateResources(commitUri, aServiceProvider);
+                        }
+                    } catch (HttpException e) {
+                        log.error("Error connecting to the triplestore. Did you check " +
+                                "store.properties and store-credentials.properties?");
                     }
                 } catch (Exception e) {
                     log.error("Could not handle the SP.", e);
