@@ -59,13 +59,14 @@ import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IAssociation;
 import org.oasis.oslcop.sysml.IComment;
 import org.oasis.oslcop.sysml.IConjugation;
+import org.oasis.oslcop.sysml.IDisjoining;
 import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IExpression;
 import org.oasis.oslcop.sysml.IFeature;
+import org.oasis.oslcop.sysml.IFeatureChaining;
 import org.oasis.oslcop.sysml.IFeatureMembership;
 import org.oasis.oslcop.sysml.IFeatureTyping;
-import org.oasis.oslcop.sysml.IGeneralization;
 import org.oasis.oslcop.sysml.ISysmlImport;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
@@ -73,6 +74,7 @@ import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRedefinition;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ISpecialization;
 import org.oasis.oslcop.sysml.IStep;
 import org.oasis.oslcop.sysml.ISubsetting;
 import org.oasis.oslcop.sysml.ITextualRepresentation;
@@ -83,7 +85,7 @@ import org.oasis.oslcop.sysml.ITypeFeaturing;
 
 @OslcNamespace(SysmlDomainConstants.SUCCESSION_NAMESPACE)
 @OslcName(SysmlDomainConstants.SUCCESSION_LOCALNAME)
-@OslcResourceShape(title = "Succession Resource Shape", describes = SysmlDomainConstants.SUCCESSION_TYPE)
+@OslcResourceShape(title = "Succession Shape", describes = SysmlDomainConstants.SUCCESSION_TYPE)
 public interface ISuccession
 {
 

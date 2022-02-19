@@ -69,22 +69,24 @@ import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
 import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.ConcernUsage;
 import org.oasis.oslcop.sysml.Conjugation;
-import org.oasis.oslcop.sysml.ConnectionUsage;
+import org.oasis.oslcop.sysml.ConnectorAsUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
-import org.oasis.oslcop.sysml.Generalization;
+import org.oasis.oslcop.sysml.FlowConnectionUsage;
 import org.oasis.oslcop.sysml.SysmlImport;
-import org.oasis.oslcop.sysml.IndividualUsage;
 import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
+import org.oasis.oslcop.sysml.OccurrenceUsage;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
@@ -92,11 +94,13 @@ import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.StateUsage;
-import org.oasis.oslcop.sysml.Superclassing;
+import org.oasis.oslcop.sysml.Subclassification;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.UseCaseUsage;
 import org.oasis.oslcop.sysml.VariantMembership;
 import org.oasis.oslcop.sysml.VerificationCaseUsage;
 import org.oasis.oslcop.sysml.ViewUsage;
@@ -111,7 +115,7 @@ import org.oasis.oslcop.sysml.ViewpointUsage;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.ATTRIBUTEDEFINITION_NAMESPACE)
 @OslcName(SysmlDomainConstants.ATTRIBUTEDEFINITION_LOCALNAME)
-@OslcResourceShape(title = "AttributeDefinition Resource Shape", describes = SysmlDomainConstants.ATTRIBUTEDEFINITION_TYPE)
+@OslcResourceShape(title = "AttributeDefinition Shape", describes = SysmlDomainConstants.ATTRIBUTEDEFINITION_TYPE)
 public class AttributeDefinition
     extends Definition
     implements IAttributeDefinition, IDataType
@@ -166,7 +170,7 @@ public class AttributeDefinition
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

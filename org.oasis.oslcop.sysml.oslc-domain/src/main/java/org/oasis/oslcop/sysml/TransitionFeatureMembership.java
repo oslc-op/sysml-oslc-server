@@ -83,7 +83,7 @@ import org.oasis.oslcop.sysml.Type;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.TRANSITIONFEATUREMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.TRANSITIONFEATUREMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "TransitionFeatureMembership Resource Shape", describes = SysmlDomainConstants.TRANSITIONFEATUREMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "TransitionFeatureMembership Shape", describes = SysmlDomainConstants.TRANSITIONFEATUREMEMBERSHIP_TYPE)
 public class TransitionFeatureMembership
     extends FeatureMembership
     implements ITransitionFeatureMembership
@@ -91,9 +91,6 @@ public class TransitionFeatureMembership
     // Start of user code attributeAnnotation:kind
     // End of user code
     private String kind;
-    // Start of user code attributeAnnotation:transitionFeature_comp
-    // End of user code
-    private Link transitionFeature_comp;
     // Start of user code attributeAnnotation:transitionFeature
     // End of user code
     private Link transitionFeature;
@@ -147,7 +144,7 @@ public class TransitionFeatureMembership
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -167,21 +164,6 @@ public class TransitionFeatureMembership
         // Start of user code getterInit:kind
         // End of user code
         return kind;
-    }
-    
-    // Start of user code getterAnnotation:transitionFeature_comp
-    // End of user code
-    @OslcName("transitionFeature_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "transitionFeature_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.STEP_TYPE})
-    @OslcReadOnly(false)
-    public Link getTransitionFeature_comp()
-    {
-        // Start of user code getterInit:transitionFeature_comp
-        // End of user code
-        return transitionFeature_comp;
     }
     
     // Start of user code getterAnnotation:transitionFeature
@@ -209,18 +191,6 @@ public class TransitionFeatureMembership
         this.kind = kind;
     
         // Start of user code setterFinalize:kind
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:transitionFeature_comp
-    // End of user code
-    public void setTransitionFeature_comp(final Link transitionFeature_comp )
-    {
-        // Start of user code setterInit:transitionFeature_comp
-        // End of user code
-        this.transitionFeature_comp = transitionFeature_comp;
-    
-        // Start of user code setterFinalize:transitionFeature_comp
         // End of user code
     }
     

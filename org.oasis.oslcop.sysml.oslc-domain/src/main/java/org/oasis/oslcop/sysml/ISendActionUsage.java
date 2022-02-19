@@ -63,34 +63,42 @@ import org.oasis.oslcop.sysml.IAttributeUsage;
 import org.oasis.oslcop.sysml.IBehavior;
 import org.oasis.oslcop.sysml.ICalculationUsage;
 import org.oasis.oslcop.sysml.ICaseUsage;
+import org.oasis.oslcop.sysml.ISysmlClass;
+import org.oasis.oslcop.sysml.IClassifier;
 import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IConcernUsage;
 import org.oasis.oslcop.sysml.IConjugation;
-import org.oasis.oslcop.sysml.IConnectionUsage;
+import org.oasis.oslcop.sysml.IConnectorAsUsage;
 import org.oasis.oslcop.sysml.IConstraintUsage;
 import org.oasis.oslcop.sysml.IDefinition;
+import org.oasis.oslcop.sysml.IDisjoining;
 import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IEnumerationUsage;
 import org.oasis.oslcop.sysml.IExpression;
 import org.oasis.oslcop.sysml.IFeature;
+import org.oasis.oslcop.sysml.IFeatureChaining;
 import org.oasis.oslcop.sysml.IFeatureMembership;
 import org.oasis.oslcop.sysml.IFeatureTyping;
-import org.oasis.oslcop.sysml.IGeneralization;
+import org.oasis.oslcop.sysml.IFlowConnectionUsage;
 import org.oasis.oslcop.sysml.ISysmlImport;
-import org.oasis.oslcop.sysml.IIndividualUsage;
 import org.oasis.oslcop.sysml.IInterfaceUsage;
 import org.oasis.oslcop.sysml.IItemUsage;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
 import org.oasis.oslcop.sysml.INamespace;
+import org.oasis.oslcop.sysml.IOccurrenceDefinition;
+import org.oasis.oslcop.sysml.IOccurrenceUsage;
 import org.oasis.oslcop.sysml.IPartUsage;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IPortUsage;
+import org.oasis.oslcop.sysml.IPortioningFeature;
 import org.oasis.oslcop.sysml.IRedefinition;
 import org.oasis.oslcop.sysml.IReferenceUsage;
 import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.IRenderingUsage;
 import org.oasis.oslcop.sysml.IRequirementUsage;
+import org.oasis.oslcop.sysml.ISpecialization;
 import org.oasis.oslcop.sysml.IStateUsage;
 import org.oasis.oslcop.sysml.ISubsetting;
 import org.oasis.oslcop.sysml.ITextualRepresentation;
@@ -98,6 +106,7 @@ import org.oasis.oslcop.sysml.ITransitionUsage;
 import org.oasis.oslcop.sysml.IType;
 import org.oasis.oslcop.sysml.ITypeFeaturing;
 import org.oasis.oslcop.sysml.IUsage;
+import org.oasis.oslcop.sysml.IUseCaseUsage;
 import org.oasis.oslcop.sysml.IVariantMembership;
 import org.oasis.oslcop.sysml.IVerificationCaseUsage;
 import org.oasis.oslcop.sysml.IViewUsage;
@@ -107,7 +116,7 @@ import org.oasis.oslcop.sysml.IViewpointUsage;
 
 @OslcNamespace(SysmlDomainConstants.SENDACTIONUSAGE_NAMESPACE)
 @OslcName(SysmlDomainConstants.SENDACTIONUSAGE_LOCALNAME)
-@OslcResourceShape(title = "SendActionUsage Resource Shape", describes = SysmlDomainConstants.SENDACTIONUSAGE_TYPE)
+@OslcResourceShape(title = "SendActionUsage Shape", describes = SysmlDomainConstants.SENDACTIONUSAGE_TYPE)
 public interface ISendActionUsage
 {
 
@@ -120,16 +129,16 @@ public interface ISendActionUsage
     @OslcReadOnly(false)
     public Link getReceiverArgument();
 
-    @OslcName("itemsArgument")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "itemsArgument")
+    @OslcName("payloadArgument")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "payloadArgument")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
     @OslcReadOnly(false)
-    public Link getItemsArgument();
+    public Link getPayloadArgument();
 
 
     public void setReceiverArgument(final Link receiverArgument );
-    public void setItemsArgument(final Link itemsArgument );
+    public void setPayloadArgument(final Link payloadArgument );
 }
 

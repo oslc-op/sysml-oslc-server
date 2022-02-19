@@ -83,14 +83,11 @@ import org.oasis.oslcop.sysml.Usage;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.SUBJECTMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.SUBJECTMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "SubjectMembership Resource Shape", describes = SysmlDomainConstants.SUBJECTMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "SubjectMembership Shape", describes = SysmlDomainConstants.SUBJECTMEMBERSHIP_TYPE)
 public class SubjectMembership
     extends ParameterMembership
     implements ISubjectMembership
 {
-    // Start of user code attributeAnnotation:ownedSubjectParameter_comp
-    // End of user code
-    private Link ownedSubjectParameter_comp;
     // Start of user code attributeAnnotation:ownedSubjectParameter
     // End of user code
     private Link ownedSubjectParameter;
@@ -144,27 +141,12 @@ public class SubjectMembership
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
-    
-    // Start of user code getterAnnotation:ownedSubjectParameter_comp
-    // End of user code
-    @OslcName("ownedSubjectParameter_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedSubjectParameter_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.USAGE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedSubjectParameter_comp()
-    {
-        // Start of user code getterInit:ownedSubjectParameter_comp
-        // End of user code
-        return ownedSubjectParameter_comp;
-    }
     
     // Start of user code getterAnnotation:ownedSubjectParameter
     // End of user code
@@ -181,18 +163,6 @@ public class SubjectMembership
         return ownedSubjectParameter;
     }
     
-    
-    // Start of user code setterAnnotation:ownedSubjectParameter_comp
-    // End of user code
-    public void setOwnedSubjectParameter_comp(final Link ownedSubjectParameter_comp )
-    {
-        // Start of user code setterInit:ownedSubjectParameter_comp
-        // End of user code
-        this.ownedSubjectParameter_comp = ownedSubjectParameter_comp;
-    
-        // Start of user code setterFinalize:ownedSubjectParameter_comp
-        // End of user code
-    }
     
     // Start of user code setterAnnotation:ownedSubjectParameter
     // End of user code

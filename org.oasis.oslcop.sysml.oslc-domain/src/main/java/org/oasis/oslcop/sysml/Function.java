@@ -64,20 +64,21 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Expression;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
-import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.Step;
-import org.oasis.oslcop.sysml.Superclassing;
+import org.oasis.oslcop.sysml.Subclassification;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 // Start of user code imports
 // End of user code
@@ -89,11 +90,14 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.FUNCTION_NAMESPACE)
 @OslcName(SysmlDomainConstants.FUNCTION_LOCALNAME)
-@OslcResourceShape(title = "Function Resource Shape", describes = SysmlDomainConstants.FUNCTION_TYPE)
+@OslcResourceShape(title = "Function Shape", describes = SysmlDomainConstants.FUNCTION_TYPE)
 public class Function
     extends Behavior
     implements IFunction
 {
+    // Start of user code attributeAnnotation:isModelLevelEvaluable
+    // End of user code
+    private Boolean isModelLevelEvaluable;
     // Start of user code attributeAnnotation:expression
     // End of user code
     private Set<Link> expression = new HashSet<Link>();
@@ -150,7 +154,7 @@ public class Function
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -161,6 +165,20 @@ public class Function
         this.expression.add(expression);
     }
     
+    
+    // Start of user code getterAnnotation:isModelLevelEvaluable
+    // End of user code
+    @OslcName("isModelLevelEvaluable")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isModelLevelEvaluable")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsModelLevelEvaluable()
+    {
+        // Start of user code getterInit:isModelLevelEvaluable
+        // End of user code
+        return isModelLevelEvaluable;
+    }
     
     // Start of user code getterAnnotation:expression
     // End of user code
@@ -192,6 +210,18 @@ public class Function
         return result;
     }
     
+    
+    // Start of user code setterAnnotation:isModelLevelEvaluable
+    // End of user code
+    public void setIsModelLevelEvaluable(final Boolean isModelLevelEvaluable )
+    {
+        // Start of user code setterInit:isModelLevelEvaluable
+        // End of user code
+        this.isModelLevelEvaluable = isModelLevelEvaluable;
+    
+        // Start of user code setterFinalize:isModelLevelEvaluable
+        // End of user code
+    }
     
     // Start of user code setterAnnotation:expression
     // End of user code

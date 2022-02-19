@@ -83,17 +83,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
+import org.eclipse.lyo.server.ui.model.PreviewFactory;
 // Start of user code imports
-import org.oasis.oslcop.sysml.Feature;
-import org.oasis.oslcop.sysml.FeatureMembership;
-import org.oasis.oslcop.sysml.FeatureTyping;
-import org.oasis.oslcop.sysml.Generalization;
-import org.oasis.oslcop.sysml.AttributeUsage;
-import org.oasis.oslcop.sysml.PartUsage;
-import org.oasis.oslcop.sysml.PortUsage;
-import org.oasis.oslcop.sysml.Relationship;
-import org.oasis.oslcop.sysml.Subsetting;
-import org.oasis.oslcop.sysml.SysmlClass;
 // End of user code
 
 // Start of user code pre_class_code
@@ -134,8 +125,13 @@ public class ElementService
         summary = "GET for resources of type {'" + SysmlDomainConstants.ELEMENT_LOCALNAME + "'}",
         description = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.ELEMENT_TYPE + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}" +
             ", with respective resource shapes {'" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + SysmlDomainConstants.ELEMENT_PATH + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}",
-        responses = {
-            @ApiResponse(description = "default response", content = {@Content(mediaType = OslcMediaType.APPLICATION_RDF_XML), @Content(mediaType = OslcMediaType.APPLICATION_XML), @Content(mediaType = OslcMediaType.APPLICATION_JSON), @Content(mediaType = OslcMediaType.TEXT_TURTLE), @Content(mediaType = MediaType.TEXT_HTML), @Content(mediaType = OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML)})
+        responses = {@ApiResponse(description = "default response",
+            content = {@Content(mediaType = OslcMediaType.APPLICATION_RDF_XML), @Content(
+                mediaType = OslcMediaType.APPLICATION_XML), @Content(
+                mediaType = OslcMediaType.APPLICATION_JSON), @Content(
+                mediaType = OslcMediaType.TEXT_TURTLE), @Content(
+                mediaType = MediaType.TEXT_HTML), @Content(
+                mediaType = OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML)})
         }
     )
     public Element getElement(
@@ -165,8 +161,13 @@ public class ElementService
         summary = "GET for resources of type {'" + SysmlDomainConstants.ELEMENT_LOCALNAME + "'}",
         description = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.ELEMENT_TYPE + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}" +
             ", with respective resource shapes {'" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + SysmlDomainConstants.ELEMENT_PATH + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}",
-        responses = {
-            @ApiResponse(description = "default response", content = {@Content(mediaType = OslcMediaType.APPLICATION_RDF_XML), @Content(mediaType = OslcMediaType.APPLICATION_XML), @Content(mediaType = OslcMediaType.APPLICATION_JSON), @Content(mediaType = OslcMediaType.TEXT_TURTLE), @Content(mediaType = MediaType.TEXT_HTML), @Content(mediaType = OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML)})
+        responses = {@ApiResponse(description = "default response",
+            content = {@Content(mediaType = OslcMediaType.APPLICATION_RDF_XML), @Content(
+                mediaType = OslcMediaType.APPLICATION_XML), @Content(
+                mediaType = OslcMediaType.APPLICATION_JSON), @Content(
+                mediaType = OslcMediaType.TEXT_TURTLE), @Content(
+                mediaType = MediaType.TEXT_HTML), @Content(
+                mediaType = OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML)})
         }
     )
     public void getElementAsHtml(
@@ -183,18 +184,12 @@ public class ElementService
             // Start of user code getElementAsHtml_setAttributes
             URI sourceUri = PopulationService.translateBack(uriInfo.getAbsolutePath());
             httpServletRequest.setAttribute("sourceUri", sourceUri.toString());
-            List<Class> servicedDomainClasses = new ArrayList<Class>(Arrays.asList(SysmlClass.class, Subsetting.class, Relationship.class, Generalization.class, 
-                    Feature.class, FeatureMembership.class, FeatureTyping.class, PortUsage.class, AttributeUsage.class, PartUsage.class));
-            if (servicedDomainClasses.contains(aElement.getClass())) {
-                httpServletRequest.setAttribute("a" + aElement.getClass().getSimpleName(), aElement);
-                RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/" + aElement.getClass().getSimpleName().toLowerCase() + ".jsp");
-                rd.forward(httpServletRequest,httpServletResponse);
-                return;
-            }
-            
             // End of user code
 
-            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/element.jsp");
+            httpServletRequest.setAttribute("aResource", aElement);
+            httpServletRequest.setAttribute("resourceTypeName", SysmlDomainConstants.ELEMENT_LOCALNAME);
+            httpServletRequest.setAttribute("shapeUri", UriBuilder.fromUri(OSLC4JUtils.getServletURI()).path(OslcConstants.PATH_RESOURCE_SHAPES).path(SysmlDomainConstants.ELEMENT_PATH).build());
+            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/viewresource.jsp");
             rd.forward(httpServletRequest,httpServletResponse);
             return;
         }
@@ -209,8 +204,13 @@ public class ElementService
         summary = "GET for resources of type {'" + SysmlDomainConstants.ELEMENT_LOCALNAME + "'}",
         description = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.ELEMENT_TYPE + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}" +
             ", with respective resource shapes {'" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + SysmlDomainConstants.ELEMENT_PATH + "\">" + SysmlDomainConstants.ELEMENT_LOCALNAME + "</a>" + "'}",
-        responses = {
-            @ApiResponse(description = "default response", content = {@Content(mediaType = OslcMediaType.APPLICATION_RDF_XML), @Content(mediaType = OslcMediaType.APPLICATION_XML), @Content(mediaType = OslcMediaType.APPLICATION_JSON), @Content(mediaType = OslcMediaType.TEXT_TURTLE), @Content(mediaType = MediaType.TEXT_HTML), @Content(mediaType = OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML)})
+        responses = {@ApiResponse(description = "default response",
+            content = {@Content(mediaType = OslcMediaType.APPLICATION_RDF_XML), @Content(
+                mediaType = OslcMediaType.APPLICATION_XML), @Content(
+                mediaType = OslcMediaType.APPLICATION_JSON), @Content(
+                mediaType = OslcMediaType.TEXT_TURTLE), @Content(
+                mediaType = MediaType.TEXT_HTML), @Content(
+                mediaType = OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML)})
         }
     )
     public Compact getElementCompact(
@@ -274,7 +274,35 @@ public class ElementService
             // Start of user code getElementAsHtmlSmallPreview_setAttributes
             // End of user code
 
-            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/elementsmallpreview.jsp");
+            try {
+                httpServletRequest.setAttribute("resourceTitle", aElement.toString());
+                ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getSysmlIdentifier", "getName", "getQualifiedName", "getEffectiveName", "getAliasId", "getHumanId", "getOwningMembership", "getOwnedRelationship", "getOwningRelationship", "getOwningNamespace", "getOwner", "getOwnedElement", "getDocumentation", "getOwnedAnnotation", "getDocumentationComment", "getOwnedTextualRepresentation", "getContributor", "getCreated", "getCreator", "getDescription", "getIdentifier", "getModified", "getSource", "getTitle", "getType", "getInstanceShape", "getServiceProvider", "getShortTitle", "getExternal", "getTrace", "getRefine", "getDerives", "getElaborates", "getSatisfy"));
+                // Start of user code getElementAsHtmlSmallPreview_setResourceGetterMethods
+                switch (aElement.getClass().getSimpleName()) {
+                case "Relationship":
+                    getterMethodNames = new ArrayList<String>(Arrays.asList("getRelatedElement", "getTarget", "getSysmlSource", "getOwningRelatedElement", "getOwnedRelatedElement", "getSysmlIdentifier", "getName", "getQualifiedName", "getEffectiveName", "getAliasId", "getHumanId", "getOwningMembership", "getOwnedRelationship", "getOwningRelationship", "getOwningNamespace", "getOwner", "getOwnedElement", "getDocumentation", "getOwnedAnnotation", "getDocumentationComment", "getOwnedTextualRepresentation", "getContributor", "getCreated", "getCreator", "getDescription", "getIdentifier", "getModified", "getSource", "getTitle", "getType", "getInstanceShape", "getServiceProvider", "getShortTitle", "getExternal", "getTrace", "getRefine", "getDerives", "getElaborates", "getSatisfy"));
+                    break;
+                case "Class":
+                    getterMethodNames = new ArrayList<String>(Arrays.asList("getOwnedSubclassification", "isIsAbstract", "isIsSufficient", "isIsConjugated", "getOwnedSpecialization", "getOwnedFeatureMembership", "getOwnedFeature", "getOwnedEndFeature", "getFeature", "getInput", "getOutput", "getInheritedMembership", "getEndFeature", "getOwnedConjugator", "getFeatureMembership", "getInheritedFeature", "getMultiplicity", "getDirectedFeature", "getOwnedDisjoining", "getOwnedMembership", "getOwnedMember", "getMembership", "getOwnedImport", "getMember", "getImportedMembership", "getSysmlIdentifier", "getName", "getQualifiedName", "getEffectiveName", "getAliasId", "getHumanId", "getOwningMembership", "getOwnedRelationship", "getOwningRelationship", "getOwningNamespace", "getOwner", "getOwnedElement", "getDocumentation", "getOwnedAnnotation", "getDocumentationComment", "getOwnedTextualRepresentation", "getContributor", "getCreated", "getCreator", "getDescription", "getIdentifier", "getModified", "getSource", "getTitle", "getType", "getInstanceShape", "getServiceProvider", "getShortTitle", "getExternal", "getTrace", "getRefine", "getDerives", "getElaborates", "getSatisfy"));
+                    break;
+                case "Feature":
+                    getterMethodNames = new ArrayList<String>(Arrays.asList("isIsUnique", "isIsOrdered", "isIsComposite", "isIsPortion", "isIsDerived", "isIsReadOnly", "isIsEnd", "getDirection", "isIsNonunique", "getOwningType", "getSysmlType", "getOwnedRedefinition", "getOwnedSubsetting", "getOwningFeatureMembership", "getEndOwningType", "getOwnedTyping", "getFeaturingType", "getOwnedTypeFeaturing", "getChainingFeature", "getOwnedFeatureChaining", "isIsAbstract", "isIsSufficient", "isIsConjugated", "getOwnedSpecialization", "getOwnedFeatureMembership", "getOwnedFeature", "getOwnedEndFeature", "getFeature", "getInput", "getOutput", "getInheritedMembership", "getEndFeature", "getOwnedConjugator", "getFeatureMembership", "getInheritedFeature", "getMultiplicity", "getDirectedFeature", "getOwnedDisjoining", "getOwnedMembership", "getOwnedMember", "getMembership", "getOwnedImport", "getMember", "getImportedMembership", "getSysmlIdentifier", "getName", "getQualifiedName", "getEffectiveName", "getAliasId", "getHumanId", "getOwningMembership", "getOwnedRelationship", "getOwningRelationship", "getOwningNamespace", "getOwner", "getOwnedElement", "getDocumentation", "getOwnedAnnotation", "getDocumentationComment", "getOwnedTextualRepresentation", "getContributor", "getCreated", "getCreator", "getDescription", "getIdentifier", "getModified", "getSource", "getTitle", "getType", "getInstanceShape", "getServiceProvider", "getShortTitle", "getExternal", "getTrace", "getRefine", "getDerives", "getElaborates", "getSatisfy"));
+                    break;
+                case "Subsetting":
+                    getterMethodNames = new ArrayList<String>(Arrays.asList("getSubsettedFeature", "getSubsettingFeature", "getOwningFeature", "getGeneral", "getSpecific", "getOwningType", "getRelatedElement", "getTarget", "getSysmlSource", "getOwningRelatedElement", "getOwnedRelatedElement", "getSysmlIdentifier", "getName", "getQualifiedName", "getEffectiveName", "getAliasId", "getHumanId", "getOwningMembership", "getOwnedRelationship", "getOwningRelationship", "getOwningNamespace", "getOwner", "getOwnedElement", "getDocumentation", "getOwnedAnnotation", "getDocumentationComment", "getOwnedTextualRepresentation", "getContributor", "getCreated", "getCreator", "getDescription", "getIdentifier", "getModified", "getSource", "getTitle", "getType", "getInstanceShape", "getServiceProvider", "getShortTitle", "getExternal", "getTrace", "getRefine", "getDerives", "getElaborates", "getSatisfy"));
+                    break;
+
+                default:
+                    break;
+                }
+                // End of user code
+                String oslcPreviewDataSetAsString = PreviewFactory.getPreviewAsJsonString(aElement, getterMethodNames, false);
+                httpServletRequest.setAttribute("resourcePreviewDataSet", oslcPreviewDataSetAsString);
+            } catch (Exception e) {
+                log.error("Could not handle smallPreview", e);
+                throw new WebApplicationException("Could not handle smallPreview", e);
+            }
+            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/uipreview.jsp");
             httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);
@@ -301,7 +329,35 @@ public class ElementService
             // Start of user code getElementAsHtmlLargePreview_setAttributes
             // End of user code
 
-            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/elementlargepreview.jsp");
+            try {
+                httpServletRequest.setAttribute("resourceTitle", aElement.toString());
+                ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getSysmlIdentifier", "getName", "getQualifiedName", "getEffectiveName", "getAliasId", "getHumanId", "getOwningMembership", "getOwnedRelationship", "getOwningRelationship", "getOwningNamespace", "getOwner", "getOwnedElement", "getDocumentation", "getOwnedAnnotation", "getDocumentationComment", "getOwnedTextualRepresentation", "getContributor", "getCreated", "getCreator", "getDescription", "getIdentifier", "getModified", "getSource", "getTitle", "getType", "getInstanceShape", "getServiceProvider", "getShortTitle", "getExternal", "getTrace", "getRefine", "getDerives", "getElaborates", "getSatisfy"));
+                // Start of user code getElementAsHtmlLargePreview_setResourceGetterMethods
+                switch (aElement.getClass().getSimpleName()) {
+                case "Relationship":
+                    getterMethodNames = new ArrayList<String>(Arrays.asList("getRelatedElement", "getTarget", "getSysmlSource", "getOwningRelatedElement", "getOwnedRelatedElement", "getSysmlIdentifier", "getName", "getQualifiedName", "getEffectiveName", "getAliasId", "getHumanId", "getOwningMembership", "getOwnedRelationship", "getOwningRelationship", "getOwningNamespace", "getOwner", "getOwnedElement", "getDocumentation", "getOwnedAnnotation", "getDocumentationComment", "getOwnedTextualRepresentation", "getContributor", "getCreated", "getCreator", "getDescription", "getIdentifier", "getModified", "getSource", "getTitle", "getType", "getInstanceShape", "getServiceProvider", "getShortTitle", "getExternal", "getTrace", "getRefine", "getDerives", "getElaborates", "getSatisfy"));
+                    break;
+                case "Class":
+                    getterMethodNames = new ArrayList<String>(Arrays.asList("getOwnedSubclassification", "isIsAbstract", "isIsSufficient", "isIsConjugated", "getOwnedSpecialization", "getOwnedFeatureMembership", "getOwnedFeature", "getOwnedEndFeature", "getFeature", "getInput", "getOutput", "getInheritedMembership", "getEndFeature", "getOwnedConjugator", "getFeatureMembership", "getInheritedFeature", "getMultiplicity", "getDirectedFeature", "getOwnedDisjoining", "getOwnedMembership", "getOwnedMember", "getMembership", "getOwnedImport", "getMember", "getImportedMembership", "getSysmlIdentifier", "getName", "getQualifiedName", "getEffectiveName", "getAliasId", "getHumanId", "getOwningMembership", "getOwnedRelationship", "getOwningRelationship", "getOwningNamespace", "getOwner", "getOwnedElement", "getDocumentation", "getOwnedAnnotation", "getDocumentationComment", "getOwnedTextualRepresentation", "getContributor", "getCreated", "getCreator", "getDescription", "getIdentifier", "getModified", "getSource", "getTitle", "getType", "getInstanceShape", "getServiceProvider", "getShortTitle", "getExternal", "getTrace", "getRefine", "getDerives", "getElaborates", "getSatisfy"));
+                    break;
+                case "Feature":
+                    getterMethodNames = new ArrayList<String>(Arrays.asList("isIsUnique", "isIsOrdered", "isIsComposite", "isIsPortion", "isIsDerived", "isIsReadOnly", "isIsEnd", "getDirection", "isIsNonunique", "getOwningType", "getSysmlType", "getOwnedRedefinition", "getOwnedSubsetting", "getOwningFeatureMembership", "getEndOwningType", "getOwnedTyping", "getFeaturingType", "getOwnedTypeFeaturing", "getChainingFeature", "getOwnedFeatureChaining", "isIsAbstract", "isIsSufficient", "isIsConjugated", "getOwnedSpecialization", "getOwnedFeatureMembership", "getOwnedFeature", "getOwnedEndFeature", "getFeature", "getInput", "getOutput", "getInheritedMembership", "getEndFeature", "getOwnedConjugator", "getFeatureMembership", "getInheritedFeature", "getMultiplicity", "getDirectedFeature", "getOwnedDisjoining", "getOwnedMembership", "getOwnedMember", "getMembership", "getOwnedImport", "getMember", "getImportedMembership", "getSysmlIdentifier", "getName", "getQualifiedName", "getEffectiveName", "getAliasId", "getHumanId", "getOwningMembership", "getOwnedRelationship", "getOwningRelationship", "getOwningNamespace", "getOwner", "getOwnedElement", "getDocumentation", "getOwnedAnnotation", "getDocumentationComment", "getOwnedTextualRepresentation", "getContributor", "getCreated", "getCreator", "getDescription", "getIdentifier", "getModified", "getSource", "getTitle", "getType", "getInstanceShape", "getServiceProvider", "getShortTitle", "getExternal", "getTrace", "getRefine", "getDerives", "getElaborates", "getSatisfy"));
+                    break;
+                case "Subsetting":
+                    getterMethodNames = new ArrayList<String>(Arrays.asList("getSubsettedFeature", "getSubsettingFeature", "getOwningFeature", "getGeneral", "getSpecific", "getOwningType", "getRelatedElement", "getTarget", "getSysmlSource", "getOwningRelatedElement", "getOwnedRelatedElement", "getSysmlIdentifier", "getName", "getQualifiedName", "getEffectiveName", "getAliasId", "getHumanId", "getOwningMembership", "getOwnedRelationship", "getOwningRelationship", "getOwningNamespace", "getOwner", "getOwnedElement", "getDocumentation", "getOwnedAnnotation", "getDocumentationComment", "getOwnedTextualRepresentation", "getContributor", "getCreated", "getCreator", "getDescription", "getIdentifier", "getModified", "getSource", "getTitle", "getType", "getInstanceShape", "getServiceProvider", "getShortTitle", "getExternal", "getTrace", "getRefine", "getDerives", "getElaborates", "getSatisfy"));
+                    break;
+
+                default:
+                    break;
+                }
+                // End of user code
+                String oslcPreviewDataSetAsString = PreviewFactory.getPreviewAsJsonString(aElement, getterMethodNames, true);
+                httpServletRequest.setAttribute("resourcePreviewDataSet", oslcPreviewDataSetAsString);
+            } catch (Exception e) {
+                log.error("Could not handle largePreview", e);
+                throw new WebApplicationException("Could not handle largePreview", e);
+            }
+            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/uipreview.jsp");
             httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);

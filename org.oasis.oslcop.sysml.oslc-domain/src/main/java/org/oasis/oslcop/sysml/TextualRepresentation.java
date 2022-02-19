@@ -80,7 +80,7 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.TEXTUALREPRESENTATION_NAMESPACE)
 @OslcName(SysmlDomainConstants.TEXTUALREPRESENTATION_LOCALNAME)
-@OslcResourceShape(title = "TextualRepresentation Resource Shape", describes = SysmlDomainConstants.TEXTUALREPRESENTATION_TYPE)
+@OslcResourceShape(title = "TextualRepresentation Shape", describes = SysmlDomainConstants.TEXTUALREPRESENTATION_TYPE)
 public class TextualRepresentation
     extends AnnotatingElement
     implements ITextualRepresentation
@@ -144,7 +144,7 @@ public class TextualRepresentation
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

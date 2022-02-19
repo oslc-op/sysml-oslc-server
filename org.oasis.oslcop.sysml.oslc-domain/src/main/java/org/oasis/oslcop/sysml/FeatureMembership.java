@@ -82,50 +82,29 @@ import org.oasis.oslcop.sysml.Type;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.FEATUREMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.FEATUREMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "FeatureMembership Resource Shape", describes = SysmlDomainConstants.FEATUREMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "FeatureMembership Shape", describes = SysmlDomainConstants.FEATUREMEMBERSHIP_TYPE)
 public class FeatureMembership
     extends Membership
     implements IFeatureMembership, ITypeFeaturing
 {
-    // Start of user code attributeAnnotation:isDerived
-    // End of user code
-    private Boolean isDerived;
-    // Start of user code attributeAnnotation:isReadOnly
-    // End of user code
-    private Boolean isReadOnly;
-    // Start of user code attributeAnnotation:isComposite
-    // End of user code
-    private Boolean isComposite;
-    // Start of user code attributeAnnotation:isPortion
-    // End of user code
-    private Boolean isPortion;
-    // Start of user code attributeAnnotation:isPort
-    // End of user code
-    private Boolean isPort;
-    // Start of user code attributeAnnotation:direction
-    // End of user code
-    private String direction;
-    // Start of user code attributeAnnotation:memberFeature
-    // End of user code
-    private Link memberFeature;
-    // Start of user code attributeAnnotation:ownedMemberFeature_comp
-    // End of user code
-    private Link ownedMemberFeature_comp;
-    // Start of user code attributeAnnotation:owningType
-    // End of user code
-    private Link owningType;
     // Start of user code attributeAnnotation:ownedMemberFeature
     // End of user code
     private Link ownedMemberFeature;
+    // Start of user code attributeAnnotation:memberFeature
+    // End of user code
+    private Link memberFeature;
+    // Start of user code attributeAnnotation:owningType
+    // End of user code
+    private Link owningType;
     // Start of user code attributeAnnotation:featureOfType
     // End of user code
     private Link featureOfType;
-    // Start of user code attributeAnnotation:featuringType
-    // End of user code
-    private Link featuringType;
     // Start of user code attributeAnnotation:owningFeatureOfType
     // End of user code
     private Link owningFeatureOfType;
+    // Start of user code attributeAnnotation:featuringType
+    // End of user code
+    private Link featuringType;
     
     // Start of user code classAttributes
     // End of user code
@@ -176,96 +155,26 @@ public class FeatureMembership
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
     
-    // Start of user code getterAnnotation:isDerived
+    // Start of user code getterAnnotation:ownedMemberFeature
     // End of user code
-    @OslcName("isDerived")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isDerived")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Boolean)
-    @OslcReadOnly(false)
-    public Boolean isIsDerived()
-    {
-        // Start of user code getterInit:isDerived
-        // End of user code
-        return isDerived;
-    }
-    
-    // Start of user code getterAnnotation:isReadOnly
-    // End of user code
-    @OslcName("isReadOnly")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isReadOnly")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Boolean)
-    @OslcReadOnly(false)
-    public Boolean isIsReadOnly()
-    {
-        // Start of user code getterInit:isReadOnly
-        // End of user code
-        return isReadOnly;
-    }
-    
-    // Start of user code getterAnnotation:isComposite
-    // End of user code
-    @OslcName("isComposite")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isComposite")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Boolean)
-    @OslcReadOnly(false)
-    public Boolean isIsComposite()
-    {
-        // Start of user code getterInit:isComposite
-        // End of user code
-        return isComposite;
-    }
-    
-    // Start of user code getterAnnotation:isPortion
-    // End of user code
-    @OslcName("isPortion")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isPortion")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Boolean)
-    @OslcReadOnly(false)
-    public Boolean isIsPortion()
-    {
-        // Start of user code getterInit:isPortion
-        // End of user code
-        return isPortion;
-    }
-    
-    // Start of user code getterAnnotation:isPort
-    // End of user code
-    @OslcName("isPort")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isPort")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Boolean)
-    @OslcReadOnly(false)
-    public Boolean isIsPort()
-    {
-        // Start of user code getterInit:isPort
-        // End of user code
-        return isPort;
-    }
-    
-    // Start of user code getterAnnotation:direction
-    // End of user code
-    @OslcName("direction")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "direction")
+    @OslcName("ownedMemberFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberFeature")
     @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.String)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
-    @OslcAllowedValue({"in", "inout", "out"})
-    public String getDirection()
+    public Link getOwnedMemberFeature()
     {
-        // Start of user code getterInit:direction
+        // Start of user code getterInit:ownedMemberFeature
         // End of user code
-        return direction;
+        return ownedMemberFeature;
     }
     
     // Start of user code getterAnnotation:memberFeature
@@ -283,26 +192,11 @@ public class FeatureMembership
         return memberFeature;
     }
     
-    // Start of user code getterAnnotation:ownedMemberFeature_comp
-    // End of user code
-    @OslcName("ownedMemberFeature_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberFeature_comp")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedMemberFeature_comp()
-    {
-        // Start of user code getterInit:ownedMemberFeature_comp
-        // End of user code
-        return ownedMemberFeature_comp;
-    }
-    
     // Start of user code getterAnnotation:owningType
     // End of user code
     @OslcName("owningType")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningType")
-    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.TYPE_TYPE})
     @OslcReadOnly(false)
@@ -311,21 +205,6 @@ public class FeatureMembership
         // Start of user code getterInit:owningType
         // End of user code
         return owningType;
-    }
-    
-    // Start of user code getterAnnotation:ownedMemberFeature
-    // End of user code
-    @OslcName("ownedMemberFeature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberFeature")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedMemberFeature()
-    {
-        // Start of user code getterInit:ownedMemberFeature
-        // End of user code
-        return ownedMemberFeature;
     }
     
     // Start of user code getterAnnotation:featureOfType
@@ -343,21 +222,6 @@ public class FeatureMembership
         return featureOfType;
     }
     
-    // Start of user code getterAnnotation:featuringType
-    // End of user code
-    @OslcName("featuringType")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "featuringType")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
-    @OslcReadOnly(false)
-    public Link getFeaturingType()
-    {
-        // Start of user code getterInit:featuringType
-        // End of user code
-        return featuringType;
-    }
-    
     // Start of user code getterAnnotation:owningFeatureOfType
     // End of user code
     @OslcName("owningFeatureOfType")
@@ -373,76 +237,31 @@ public class FeatureMembership
         return owningFeatureOfType;
     }
     
-    
-    // Start of user code setterAnnotation:isDerived
+    // Start of user code getterAnnotation:featuringType
     // End of user code
-    public void setIsDerived(final Boolean isDerived )
+    @OslcName("featuringType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "featuringType")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
+    @OslcReadOnly(false)
+    public Link getFeaturingType()
     {
-        // Start of user code setterInit:isDerived
+        // Start of user code getterInit:featuringType
         // End of user code
-        this.isDerived = isDerived;
-    
-        // Start of user code setterFinalize:isDerived
-        // End of user code
+        return featuringType;
     }
     
-    // Start of user code setterAnnotation:isReadOnly
+    
+    // Start of user code setterAnnotation:ownedMemberFeature
     // End of user code
-    public void setIsReadOnly(final Boolean isReadOnly )
+    public void setOwnedMemberFeature(final Link ownedMemberFeature )
     {
-        // Start of user code setterInit:isReadOnly
+        // Start of user code setterInit:ownedMemberFeature
         // End of user code
-        this.isReadOnly = isReadOnly;
+        this.ownedMemberFeature = ownedMemberFeature;
     
-        // Start of user code setterFinalize:isReadOnly
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:isComposite
-    // End of user code
-    public void setIsComposite(final Boolean isComposite )
-    {
-        // Start of user code setterInit:isComposite
-        // End of user code
-        this.isComposite = isComposite;
-    
-        // Start of user code setterFinalize:isComposite
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:isPortion
-    // End of user code
-    public void setIsPortion(final Boolean isPortion )
-    {
-        // Start of user code setterInit:isPortion
-        // End of user code
-        this.isPortion = isPortion;
-    
-        // Start of user code setterFinalize:isPortion
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:isPort
-    // End of user code
-    public void setIsPort(final Boolean isPort )
-    {
-        // Start of user code setterInit:isPort
-        // End of user code
-        this.isPort = isPort;
-    
-        // Start of user code setterFinalize:isPort
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:direction
-    // End of user code
-    public void setDirection(final String direction )
-    {
-        // Start of user code setterInit:direction
-        // End of user code
-        this.direction = direction;
-    
-        // Start of user code setterFinalize:direction
+        // Start of user code setterFinalize:ownedMemberFeature
         // End of user code
     }
     
@@ -458,18 +277,6 @@ public class FeatureMembership
         // End of user code
     }
     
-    // Start of user code setterAnnotation:ownedMemberFeature_comp
-    // End of user code
-    public void setOwnedMemberFeature_comp(final Link ownedMemberFeature_comp )
-    {
-        // Start of user code setterInit:ownedMemberFeature_comp
-        // End of user code
-        this.ownedMemberFeature_comp = ownedMemberFeature_comp;
-    
-        // Start of user code setterFinalize:ownedMemberFeature_comp
-        // End of user code
-    }
-    
     // Start of user code setterAnnotation:owningType
     // End of user code
     public void setOwningType(final Link owningType )
@@ -479,18 +286,6 @@ public class FeatureMembership
         this.owningType = owningType;
     
         // Start of user code setterFinalize:owningType
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedMemberFeature
-    // End of user code
-    public void setOwnedMemberFeature(final Link ownedMemberFeature )
-    {
-        // Start of user code setterInit:ownedMemberFeature
-        // End of user code
-        this.ownedMemberFeature = ownedMemberFeature;
-    
-        // Start of user code setterFinalize:ownedMemberFeature
         // End of user code
     }
     
@@ -506,18 +301,6 @@ public class FeatureMembership
         // End of user code
     }
     
-    // Start of user code setterAnnotation:featuringType
-    // End of user code
-    public void setFeaturingType(final Link featuringType )
-    {
-        // Start of user code setterInit:featuringType
-        // End of user code
-        this.featuringType = featuringType;
-    
-        // Start of user code setterFinalize:featuringType
-        // End of user code
-    }
-    
     // Start of user code setterAnnotation:owningFeatureOfType
     // End of user code
     public void setOwningFeatureOfType(final Link owningFeatureOfType )
@@ -527,6 +310,18 @@ public class FeatureMembership
         this.owningFeatureOfType = owningFeatureOfType;
     
         // Start of user code setterFinalize:owningFeatureOfType
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:featuringType
+    // End of user code
+    public void setFeaturingType(final Link featuringType )
+    {
+        // Start of user code setterInit:featuringType
+        // End of user code
+        this.featuringType = featuringType;
+    
+        // Start of user code setterFinalize:featuringType
         // End of user code
     }
     

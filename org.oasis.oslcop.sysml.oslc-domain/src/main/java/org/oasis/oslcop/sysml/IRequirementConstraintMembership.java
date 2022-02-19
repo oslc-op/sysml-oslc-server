@@ -72,7 +72,7 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.REQUIREMENTCONSTRAINTMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.REQUIREMENTCONSTRAINTMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "RequirementConstraintMembership Resource Shape", describes = SysmlDomainConstants.REQUIREMENTCONSTRAINTMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "RequirementConstraintMembership Shape", describes = SysmlDomainConstants.REQUIREMENTCONSTRAINTMEMBERSHIP_TYPE)
 public interface IRequirementConstraintMembership
 {
 
@@ -85,25 +85,25 @@ public interface IRequirementConstraintMembership
     @OslcAllowedValue({"assumption", "requirement"})
     public String getKind();
 
-    @OslcName("constraint_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "constraint_comp")
+    @OslcName("ownedConstraint")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedConstraint")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.CONSTRAINTUSAGE_TYPE})
     @OslcReadOnly(false)
-    public Link getConstraint_comp();
+    public Link getOwnedConstraint();
 
-    @OslcName("constraint")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "constraint")
+    @OslcName("referencedConstraint")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "referencedConstraint")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.CONSTRAINTUSAGE_TYPE})
     @OslcReadOnly(false)
-    public Link getConstraint();
+    public Link getReferencedConstraint();
 
 
     public void setKind(final String kind );
-    public void setConstraint_comp(final Link constraint_comp );
-    public void setConstraint(final Link constraint );
+    public void setOwnedConstraint(final Link ownedConstraint );
+    public void setReferencedConstraint(final Link referencedConstraint );
 }
 

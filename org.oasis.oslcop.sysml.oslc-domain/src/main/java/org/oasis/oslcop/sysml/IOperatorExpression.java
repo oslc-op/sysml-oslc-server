@@ -59,14 +59,15 @@ import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IBehavior;
 import org.oasis.oslcop.sysml.IComment;
 import org.oasis.oslcop.sysml.IConjugation;
+import org.oasis.oslcop.sysml.IDisjoining;
 import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IExpression;
 import org.oasis.oslcop.sysml.IFeature;
+import org.oasis.oslcop.sysml.IFeatureChaining;
 import org.oasis.oslcop.sysml.IFeatureMembership;
 import org.oasis.oslcop.sysml.IFeatureTyping;
 import org.oasis.oslcop.sysml.IFunction;
-import org.oasis.oslcop.sysml.IGeneralization;
 import org.oasis.oslcop.sysml.ISysmlImport;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
@@ -74,6 +75,7 @@ import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRedefinition;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ISpecialization;
 import org.oasis.oslcop.sysml.ISubsetting;
 import org.oasis.oslcop.sysml.ITextualRepresentation;
 import org.oasis.oslcop.sysml.IType;
@@ -83,11 +85,10 @@ import org.oasis.oslcop.sysml.ITypeFeaturing;
 
 @OslcNamespace(SysmlDomainConstants.OPERATOREXPRESSION_NAMESPACE)
 @OslcName(SysmlDomainConstants.OPERATOREXPRESSION_LOCALNAME)
-@OslcResourceShape(title = "OperatorExpression Resource Shape", describes = SysmlDomainConstants.OPERATOREXPRESSION_TYPE)
+@OslcResourceShape(title = "OperatorExpression Shape", describes = SysmlDomainConstants.OPERATOREXPRESSION_TYPE)
 public interface IOperatorExpression
 {
 
-    public void addOperand_comp(final Link operand_comp );
     public void addOperand(final Link operand );
 
     @OslcName("operator")
@@ -96,14 +97,6 @@ public interface IOperatorExpression
     @OslcValueType(ValueType.String)
     @OslcReadOnly(false)
     public String getOperator();
-
-    @OslcName("operand_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "operand_comp")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOperand_comp();
 
     @OslcName("operand")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "operand")
@@ -115,7 +108,6 @@ public interface IOperatorExpression
 
 
     public void setOperator(final String operator );
-    public void setOperand_comp(final Set<Link> operand_comp );
     public void setOperand(final Set<Link> operand );
 }
 

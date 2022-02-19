@@ -67,13 +67,14 @@ import org.oasis.oslcop.sysml.Association;
 import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Expression;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
-import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.ItemFeature;
 import org.oasis.oslcop.sysml.ItemFlowEnd;
@@ -84,6 +85,7 @@ import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.Step;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
@@ -99,7 +101,7 @@ import org.oasis.oslcop.sysml.TypeFeaturing;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.SUCCESSIONITEMFLOW_NAMESPACE)
 @OslcName(SysmlDomainConstants.SUCCESSIONITEMFLOW_LOCALNAME)
-@OslcResourceShape(title = "SuccessionItemFlow Resource Shape", describes = SysmlDomainConstants.SUCCESSIONITEMFLOW_TYPE)
+@OslcResourceShape(title = "SuccessionItemFlow Shape", describes = SysmlDomainConstants.SUCCESSIONITEMFLOW_TYPE)
 public class SuccessionItemFlow
     extends ItemFlow
     implements ISuccessionItemFlow, IRelationship, ISuccession
@@ -128,9 +130,6 @@ public class SuccessionItemFlow
     // Start of user code attributeAnnotation:owningRelatedElement
     // End of user code
     private Link owningRelatedElement;
-    // Start of user code attributeAnnotation:ownedRelatedElement_comp
-    // End of user code
-    private Set<Link> ownedRelatedElement_comp = new HashSet<Link>();
     // Start of user code attributeAnnotation:ownedRelatedElement
     // End of user code
     private Set<Link> ownedRelatedElement = new HashSet<Link>();
@@ -184,7 +183,7 @@ public class SuccessionItemFlow
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -218,11 +217,6 @@ public class SuccessionItemFlow
     public void addSysmlSource(final Link source)
     {
         this.sysmlSource.add(source);
-    }
-    
-    public void addOwnedRelatedElement_comp(final Link ownedRelatedElement_comp)
-    {
-        this.ownedRelatedElement_comp.add(ownedRelatedElement_comp);
     }
     
     public void addOwnedRelatedElement(final Link ownedRelatedElement)
@@ -349,21 +343,6 @@ public class SuccessionItemFlow
         // Start of user code getterInit:owningRelatedElement
         // End of user code
         return owningRelatedElement;
-    }
-    
-    // Start of user code getterAnnotation:ownedRelatedElement_comp
-    // End of user code
-    @OslcName("ownedRelatedElement_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelatedElement_comp")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedRelatedElement_comp()
-    {
-        // Start of user code getterInit:ownedRelatedElement_comp
-        // End of user code
-        return ownedRelatedElement_comp;
     }
     
     // Start of user code getterAnnotation:ownedRelatedElement
@@ -499,22 +478,6 @@ public class SuccessionItemFlow
         this.owningRelatedElement = owningRelatedElement;
     
         // Start of user code setterFinalize:owningRelatedElement
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedRelatedElement_comp
-    // End of user code
-    public void setOwnedRelatedElement_comp(final Set<Link> ownedRelatedElement_comp )
-    {
-        // Start of user code setterInit:ownedRelatedElement_comp
-        // End of user code
-        this.ownedRelatedElement_comp.clear();
-        if (ownedRelatedElement_comp != null)
-        {
-            this.ownedRelatedElement_comp.addAll(ownedRelatedElement_comp);
-        }
-    
-        // Start of user code setterFinalize:ownedRelatedElement_comp
         // End of user code
     }
     

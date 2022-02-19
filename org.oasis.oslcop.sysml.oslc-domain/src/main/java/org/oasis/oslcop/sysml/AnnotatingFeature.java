@@ -65,12 +65,13 @@ import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
 import org.oasis.oslcop.sysml.DataType;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
-import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.MetadataFeature;
@@ -79,6 +80,7 @@ import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
@@ -93,7 +95,7 @@ import org.oasis.oslcop.sysml.TypeFeaturing;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.ANNOTATINGFEATURE_NAMESPACE)
 @OslcName(SysmlDomainConstants.ANNOTATINGFEATURE_LOCALNAME)
-@OslcResourceShape(title = "AnnotatingFeature Resource Shape", describes = SysmlDomainConstants.ANNOTATINGFEATURE_TYPE)
+@OslcResourceShape(title = "AnnotatingFeature Shape", describes = SysmlDomainConstants.ANNOTATINGFEATURE_TYPE)
 public class AnnotatingFeature
     extends Feature
     implements IAnnotatingFeature, IAnnotatingElement
@@ -160,7 +162,7 @@ public class AnnotatingFeature
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

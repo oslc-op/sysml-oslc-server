@@ -80,7 +80,7 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.IMPORT_NAMESPACE)
 @OslcName(SysmlDomainConstants.IMPORT_LOCALNAME)
-@OslcResourceShape(title = "Import Resource Shape", describes = SysmlDomainConstants.IMPORT_TYPE)
+@OslcResourceShape(title = "Import Shape", describes = SysmlDomainConstants.IMPORT_TYPE)
 public class SysmlImport
     extends Relationship
     implements ISysmlImport
@@ -88,9 +88,15 @@ public class SysmlImport
     // Start of user code attributeAnnotation:visibility
     // End of user code
     private String visibility;
+    // Start of user code attributeAnnotation:importedMemberName
+    // End of user code
+    private String importedMemberName;
     // Start of user code attributeAnnotation:isRecursive
     // End of user code
     private Boolean isRecursive;
+    // Start of user code attributeAnnotation:isImportAll
+    // End of user code
+    private Boolean isImportAll;
     // Start of user code attributeAnnotation:importedNamespace
     // End of user code
     private Link importedNamespace;
@@ -147,7 +153,7 @@ public class SysmlImport
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -161,12 +167,26 @@ public class SysmlImport
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.String)
     @OslcReadOnly(false)
-    @OslcAllowedValue({"public", "private", "protected", "package"})
+    @OslcAllowedValue({"private", "protected", "public"})
     public String getVisibility()
     {
         // Start of user code getterInit:visibility
         // End of user code
         return visibility;
+    }
+    
+    // Start of user code getterAnnotation:importedMemberName
+    // End of user code
+    @OslcName("importedMemberName")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "importedMemberName")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.String)
+    @OslcReadOnly(false)
+    public String getImportedMemberName()
+    {
+        // Start of user code getterInit:importedMemberName
+        // End of user code
+        return importedMemberName;
     }
     
     // Start of user code getterAnnotation:isRecursive
@@ -181,6 +201,20 @@ public class SysmlImport
         // Start of user code getterInit:isRecursive
         // End of user code
         return isRecursive;
+    }
+    
+    // Start of user code getterAnnotation:isImportAll
+    // End of user code
+    @OslcName("isImportAll")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isImportAll")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsImportAll()
+    {
+        // Start of user code getterInit:isImportAll
+        // End of user code
+        return isImportAll;
     }
     
     // Start of user code getterAnnotation:importedNamespace
@@ -202,7 +236,7 @@ public class SysmlImport
     // End of user code
     @OslcName("importOwningNamespace")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "importOwningNamespace")
-    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.NAMESPACE_TYPE})
     @OslcReadOnly(false)
@@ -226,6 +260,18 @@ public class SysmlImport
         // End of user code
     }
     
+    // Start of user code setterAnnotation:importedMemberName
+    // End of user code
+    public void setImportedMemberName(final String importedMemberName )
+    {
+        // Start of user code setterInit:importedMemberName
+        // End of user code
+        this.importedMemberName = importedMemberName;
+    
+        // Start of user code setterFinalize:importedMemberName
+        // End of user code
+    }
+    
     // Start of user code setterAnnotation:isRecursive
     // End of user code
     public void setIsRecursive(final Boolean isRecursive )
@@ -235,6 +281,18 @@ public class SysmlImport
         this.isRecursive = isRecursive;
     
         // Start of user code setterFinalize:isRecursive
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:isImportAll
+    // End of user code
+    public void setIsImportAll(final Boolean isImportAll )
+    {
+        // Start of user code setterInit:isImportAll
+        // End of user code
+        this.isImportAll = isImportAll;
+    
+        // Start of user code setterFinalize:isImportAll
         // End of user code
     }
     

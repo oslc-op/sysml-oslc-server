@@ -71,7 +71,7 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.TYPEFEATURING_NAMESPACE)
 @OslcName(SysmlDomainConstants.TYPEFEATURING_LOCALNAME)
-@OslcResourceShape(title = "TypeFeaturing Resource Shape", describes = SysmlDomainConstants.TYPEFEATURING_TYPE)
+@OslcResourceShape(title = "TypeFeaturing Shape", describes = SysmlDomainConstants.TYPEFEATURING_TYPE)
 public interface ITypeFeaturing
 {
 
@@ -84,14 +84,6 @@ public interface ITypeFeaturing
     @OslcReadOnly(false)
     public Link getFeatureOfType();
 
-    @OslcName("featuringType")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "featuringType")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
-    @OslcReadOnly(false)
-    public Link getFeaturingType();
-
     @OslcName("owningFeatureOfType")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningFeatureOfType")
     @OslcOccurs(Occurs.ZeroOrOne)
@@ -100,9 +92,17 @@ public interface ITypeFeaturing
     @OslcReadOnly(false)
     public Link getOwningFeatureOfType();
 
+    @OslcName("featuringType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "featuringType")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
+    @OslcReadOnly(false)
+    public Link getFeaturingType();
+
 
     public void setFeatureOfType(final Link featureOfType );
-    public void setFeaturingType(final Link featuringType );
     public void setOwningFeatureOfType(final Link owningFeatureOfType );
+    public void setFeaturingType(final Link featuringType );
 }
 

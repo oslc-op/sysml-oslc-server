@@ -80,7 +80,7 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.COMMENT_NAMESPACE)
 @OslcName(SysmlDomainConstants.COMMENT_LOCALNAME)
-@OslcResourceShape(title = "Comment Resource Shape", describes = SysmlDomainConstants.COMMENT_TYPE)
+@OslcResourceShape(title = "Comment Shape", describes = SysmlDomainConstants.COMMENT_TYPE)
 public class Comment
     extends AnnotatingElement
     implements IComment
@@ -138,7 +138,7 @@ public class Comment
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

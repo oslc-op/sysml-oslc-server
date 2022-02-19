@@ -71,7 +71,7 @@ import org.oasis.oslcop.sysml.ITextualRepresentation;
 
 @OslcNamespace(SysmlDomainConstants.PACKAGE_NAMESPACE)
 @OslcName(SysmlDomainConstants.PACKAGE_LOCALNAME)
-@OslcResourceShape(title = "Package Resource Shape", describes = SysmlDomainConstants.PACKAGE_TYPE)
+@OslcResourceShape(title = "Package Shape", describes = SysmlDomainConstants.PACKAGE_TYPE)
 public interface ISysmlPackage
 {
 

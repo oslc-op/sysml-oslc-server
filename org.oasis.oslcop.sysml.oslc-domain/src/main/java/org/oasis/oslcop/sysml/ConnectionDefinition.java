@@ -73,22 +73,25 @@ import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
 import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.ConcernUsage;
 import org.oasis.oslcop.sysml.Conjugation;
-import org.oasis.oslcop.sysml.ConnectionUsage;
+import org.oasis.oslcop.sysml.ConnectorAsUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
-import org.oasis.oslcop.sysml.Generalization;
+import org.oasis.oslcop.sysml.FlowConnectionUsage;
 import org.oasis.oslcop.sysml.SysmlImport;
-import org.oasis.oslcop.sysml.IndividualUsage;
 import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
+import org.oasis.oslcop.sysml.LifeClass;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
+import org.oasis.oslcop.sysml.OccurrenceUsage;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
@@ -96,12 +99,14 @@ import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.StateUsage;
-import org.oasis.oslcop.sysml.Superclassing;
+import org.oasis.oslcop.sysml.Subclassification;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
 import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.UseCaseUsage;
 import org.oasis.oslcop.sysml.VariantMembership;
 import org.oasis.oslcop.sysml.VerificationCaseUsage;
 import org.oasis.oslcop.sysml.ViewUsage;
@@ -116,7 +121,7 @@ import org.oasis.oslcop.sysml.ViewpointUsage;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.CONNECTIONDEFINITION_NAMESPACE)
 @OslcName(SysmlDomainConstants.CONNECTIONDEFINITION_LOCALNAME)
-@OslcResourceShape(title = "ConnectionDefinition Resource Shape", describes = SysmlDomainConstants.CONNECTIONDEFINITION_TYPE)
+@OslcResourceShape(title = "ConnectionDefinition Shape", describes = SysmlDomainConstants.CONNECTIONDEFINITION_TYPE)
 public class ConnectionDefinition
     extends PartDefinition
     implements IConnectionDefinition, IAssociation, IAssociationStructure, ISysmlClass, IRelationship, IStructure
@@ -148,9 +153,6 @@ public class ConnectionDefinition
     // Start of user code attributeAnnotation:owningRelatedElement
     // End of user code
     private Link owningRelatedElement;
-    // Start of user code attributeAnnotation:ownedRelatedElement_comp
-    // End of user code
-    private Set<Link> ownedRelatedElement_comp = new HashSet<Link>();
     // Start of user code attributeAnnotation:ownedRelatedElement
     // End of user code
     private Set<Link> ownedRelatedElement = new HashSet<Link>();
@@ -204,7 +206,7 @@ public class ConnectionDefinition
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -243,11 +245,6 @@ public class ConnectionDefinition
     public void addSysmlSource(final Link source)
     {
         this.sysmlSource.add(source);
-    }
-    
-    public void addOwnedRelatedElement_comp(final Link ownedRelatedElement_comp)
-    {
-        this.ownedRelatedElement_comp.add(ownedRelatedElement_comp);
     }
     
     public void addOwnedRelatedElement(final Link ownedRelatedElement)
@@ -389,21 +386,6 @@ public class ConnectionDefinition
         // Start of user code getterInit:owningRelatedElement
         // End of user code
         return owningRelatedElement;
-    }
-    
-    // Start of user code getterAnnotation:ownedRelatedElement_comp
-    // End of user code
-    @OslcName("ownedRelatedElement_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelatedElement_comp")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedRelatedElement_comp()
-    {
-        // Start of user code getterInit:ownedRelatedElement_comp
-        // End of user code
-        return ownedRelatedElement_comp;
     }
     
     // Start of user code getterAnnotation:ownedRelatedElement
@@ -555,22 +537,6 @@ public class ConnectionDefinition
         this.owningRelatedElement = owningRelatedElement;
     
         // Start of user code setterFinalize:owningRelatedElement
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedRelatedElement_comp
-    // End of user code
-    public void setOwnedRelatedElement_comp(final Set<Link> ownedRelatedElement_comp )
-    {
-        // Start of user code setterInit:ownedRelatedElement_comp
-        // End of user code
-        this.ownedRelatedElement_comp.clear();
-        if (ownedRelatedElement_comp != null)
-        {
-            this.ownedRelatedElement_comp.addAll(ownedRelatedElement_comp);
-        }
-    
-        // Start of user code setterFinalize:ownedRelatedElement_comp
         // End of user code
     }
     

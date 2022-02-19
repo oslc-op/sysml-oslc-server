@@ -82,20 +82,17 @@ import org.oasis.oslcop.sysml.Type;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.PARAMETERMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.PARAMETERMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "ParameterMembership Resource Shape", describes = SysmlDomainConstants.PARAMETERMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "ParameterMembership Shape", describes = SysmlDomainConstants.PARAMETERMEMBERSHIP_TYPE)
 public class ParameterMembership
     extends FeatureMembership
     implements IParameterMembership
 {
-    // Start of user code attributeAnnotation:ownedMemberParameter_comp
-    // End of user code
-    private Link ownedMemberParameter_comp;
-    // Start of user code attributeAnnotation:memberParameter
-    // End of user code
-    private Link memberParameter;
     // Start of user code attributeAnnotation:ownedMemberParameter
     // End of user code
     private Link ownedMemberParameter;
+    // Start of user code attributeAnnotation:memberParameter
+    // End of user code
+    private Link memberParameter;
     
     // Start of user code classAttributes
     // End of user code
@@ -146,26 +143,26 @@ public class ParameterMembership
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
     
-    // Start of user code getterAnnotation:ownedMemberParameter_comp
+    // Start of user code getterAnnotation:ownedMemberParameter
     // End of user code
-    @OslcName("ownedMemberParameter_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberParameter_comp")
+    @OslcName("ownedMemberParameter")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberParameter")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
-    public Link getOwnedMemberParameter_comp()
+    public Link getOwnedMemberParameter()
     {
-        // Start of user code getterInit:ownedMemberParameter_comp
+        // Start of user code getterInit:ownedMemberParameter
         // End of user code
-        return ownedMemberParameter_comp;
+        return ownedMemberParameter;
     }
     
     // Start of user code getterAnnotation:memberParameter
@@ -183,31 +180,16 @@ public class ParameterMembership
         return memberParameter;
     }
     
-    // Start of user code getterAnnotation:ownedMemberParameter
+    
+    // Start of user code setterAnnotation:ownedMemberParameter
     // End of user code
-    @OslcName("ownedMemberParameter")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberParameter")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedMemberParameter()
+    public void setOwnedMemberParameter(final Link ownedMemberParameter )
     {
-        // Start of user code getterInit:ownedMemberParameter
+        // Start of user code setterInit:ownedMemberParameter
         // End of user code
-        return ownedMemberParameter;
-    }
+        this.ownedMemberParameter = ownedMemberParameter;
     
-    
-    // Start of user code setterAnnotation:ownedMemberParameter_comp
-    // End of user code
-    public void setOwnedMemberParameter_comp(final Link ownedMemberParameter_comp )
-    {
-        // Start of user code setterInit:ownedMemberParameter_comp
-        // End of user code
-        this.ownedMemberParameter_comp = ownedMemberParameter_comp;
-    
-        // Start of user code setterFinalize:ownedMemberParameter_comp
+        // Start of user code setterFinalize:ownedMemberParameter
         // End of user code
     }
     
@@ -220,18 +202,6 @@ public class ParameterMembership
         this.memberParameter = memberParameter;
     
         // Start of user code setterFinalize:memberParameter
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedMemberParameter
-    // End of user code
-    public void setOwnedMemberParameter(final Link ownedMemberParameter )
-    {
-        // Start of user code setterInit:ownedMemberParameter
-        // End of user code
-        this.ownedMemberParameter = ownedMemberParameter;
-    
-        // Start of user code setterFinalize:ownedMemberParameter
         // End of user code
     }
     

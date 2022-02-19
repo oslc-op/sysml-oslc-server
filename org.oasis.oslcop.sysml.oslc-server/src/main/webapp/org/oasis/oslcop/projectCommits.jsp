@@ -13,14 +13,14 @@
 <%@page import="org.eclipse.lyo.store.Store"%>
 <%@page import="org.oasis.oslcop.sysml.SysmlServerManager"%>
 <%@page import="org.eclipse.lyo.oslc4j.core.model.ServiceProvider"%>
-<%@page import="org.oasis.oslcop.sysml.services.StoreService"%>
+<%@page import="org.oasis.oslcop.sysml.services.ProjectCommitSelectionService"%>
 <%@page import="org.oasis.oslcop.sysml.resources.view.ProjectCommitViewModel"%>
 
 <%@ page contentType="text/html" language="java" pageEncoding="UTF-8" %>
 
 <%
-String selectedProjectCommit = (String) request.getAttribute("selectedProjectCommit");
-List<ProjectCommitViewModel> projectCommits = (List<ProjectCommitViewModel>) request.getAttribute("projectCommits");
+ServiceProvider selectedServiceProvider = (ServiceProvider) request.getAttribute("selectedServiceProvider");
+List<ServiceProvider> serviceProviders = (List<ServiceProvider>) request.getAttribute("serviceProviders");
 %>
 
 <html lang="en">
@@ -54,30 +54,33 @@ List<ProjectCommitViewModel> projectCommits = (List<ProjectCommitViewModel>) req
 <div class="container">
     <div>
         <h1>ProjectCommits</h1>
-        <p>Selected ProjectCommit: <%=selectedProjectCommit%></p>
+        <p>Selected ProjectCommit: <%=selectedServiceProvider.getAbout().toString()%></p>
+        <p>Select another ProjectCommit from list below</p>
         <p>All Project Commits:</p>
         <ul>
-        <%
-        for (ProjectCommitViewModel commit : projectCommits) {
-            if (commit.isSelected()) {
-            %>
-                <li><%=commit.getId()%> - Current</li>
+        <%for (ServiceProvider serviceProvider : serviceProviders) {%>
+            <li>
+            <%=serviceProvider.getTitle()%>
+            <%if (serviceProvider.getAbout().equals(selectedServiceProvider.getAbout())) {%>
+                <strong>Current Selection</strong>
             <%
             }
             else {
             %>
-                <li><%=commit.getId()%> - <a href="<%=commit.getUri() %>"><%="Switch"%></a></li>
-            <%
-            }
-            %><ul><%
-            for (ProjectCommitViewModel.ServiceProviderViewModel sp : commit.getProviders()) {
-                %>
-                <li><%=sp.getIdentifier()%></li>
+                <a href="<%= UriBuilder.fromUri(OSLC4JUtils.getServletURI()).path("/projectCommits/switch").queryParam("serviceProviderUri", serviceProvider.getAbout()).build() %>" role="button">Switch to this Project Commit</a>
+            <%}%>
+            </li>
+            <ul>
                 <%
-            }
-            %></ul><%
-        }
-        %>
+                String[] split = serviceProvider.getIdentifier().split("/");
+                String projectId = split[0];
+                String projectCommitId = split[1];
+                %>
+                <li>Project ID: <%=projectId%></li>
+                <li>Commit ID: <%=projectCommitId%></li>
+                <li><a href="<%= serviceProvider.getAbout() %>">Service Provider</a> (Only available after switching to this commit)</li>
+            </ul>
+        <%}%>
         </ul>
     </div>
 </div>

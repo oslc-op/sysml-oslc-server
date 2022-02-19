@@ -69,27 +69,30 @@ import org.oasis.oslcop.sysml.AssociationStructure;
 import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.ConcernUsage;
 import org.oasis.oslcop.sysml.Conjugation;
-import org.oasis.oslcop.sysml.ConnectionUsage;
+import org.oasis.oslcop.sysml.ConnectorAsUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
 import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
-import org.oasis.oslcop.sysml.Generalization;
+import org.oasis.oslcop.sysml.FlowConnectionUsage;
 import org.oasis.oslcop.sysml.SysmlImport;
-import org.oasis.oslcop.sysml.IndividualUsage;
 import org.oasis.oslcop.sysml.InterfaceDefinition;
 import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
-import org.oasis.oslcop.sysml.PartDefinition;
+import org.oasis.oslcop.sysml.OccurrenceUsage;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
@@ -98,14 +101,15 @@ import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.StateUsage;
-import org.oasis.oslcop.sysml.Structure;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
 import org.oasis.oslcop.sysml.TypeFeaturing;
 import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.UseCaseUsage;
 import org.oasis.oslcop.sysml.VariantMembership;
 import org.oasis.oslcop.sysml.VerificationCaseUsage;
 import org.oasis.oslcop.sysml.ViewUsage;
@@ -120,14 +124,14 @@ import org.oasis.oslcop.sysml.ViewpointUsage;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.INTERFACEUSAGE_NAMESPACE)
 @OslcName(SysmlDomainConstants.INTERFACEUSAGE_LOCALNAME)
-@OslcResourceShape(title = "InterfaceUsage Resource Shape", describes = SysmlDomainConstants.INTERFACEUSAGE_TYPE)
+@OslcResourceShape(title = "InterfaceUsage Shape", describes = SysmlDomainConstants.INTERFACEUSAGE_TYPE)
 public class InterfaceUsage
     extends ConnectionUsage
     implements IInterfaceUsage
 {
     // Start of user code attributeAnnotation:interfaceDefinition
     // End of user code
-    private Link interfaceDefinition;
+    private Set<Link> interfaceDefinition = new HashSet<Link>();
     
     // Start of user code classAttributes
     // End of user code
@@ -178,10 +182,15 @@ public class InterfaceUsage
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
+    }
+    
+    public void addInterfaceDefinition(final Link interfaceDefinition)
+    {
+        this.interfaceDefinition.add(interfaceDefinition);
     }
     
     
@@ -189,11 +198,11 @@ public class InterfaceUsage
     // End of user code
     @OslcName("interfaceDefinition")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "interfaceDefinition")
-    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcOccurs(Occurs.OneOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.INTERFACEDEFINITION_TYPE})
     @OslcReadOnly(false)
-    public Link getInterfaceDefinition()
+    public Set<Link> getInterfaceDefinition()
     {
         // Start of user code getterInit:interfaceDefinition
         // End of user code
@@ -203,11 +212,15 @@ public class InterfaceUsage
     
     // Start of user code setterAnnotation:interfaceDefinition
     // End of user code
-    public void setInterfaceDefinition(final Link interfaceDefinition )
+    public void setInterfaceDefinition(final Set<Link> interfaceDefinition )
     {
         // Start of user code setterInit:interfaceDefinition
         // End of user code
-        this.interfaceDefinition = interfaceDefinition;
+        this.interfaceDefinition.clear();
+        if (interfaceDefinition != null)
+        {
+            this.interfaceDefinition.addAll(interfaceDefinition);
+        }
     
         // Start of user code setterFinalize:interfaceDefinition
         // End of user code

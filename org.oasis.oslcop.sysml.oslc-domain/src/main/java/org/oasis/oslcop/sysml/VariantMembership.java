@@ -81,14 +81,11 @@ import org.oasis.oslcop.sysml.Usage;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.VARIANTMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.VARIANTMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "VariantMembership Resource Shape", describes = SysmlDomainConstants.VARIANTMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "VariantMembership Shape", describes = SysmlDomainConstants.VARIANTMEMBERSHIP_TYPE)
 public class VariantMembership
     extends Membership
     implements IVariantMembership
 {
-    // Start of user code attributeAnnotation:ownedVariantUsage_comp
-    // End of user code
-    private Link ownedVariantUsage_comp;
     // Start of user code attributeAnnotation:ownedVariantUsage
     // End of user code
     private Link ownedVariantUsage;
@@ -142,33 +139,18 @@ public class VariantMembership
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
     
-    // Start of user code getterAnnotation:ownedVariantUsage_comp
-    // End of user code
-    @OslcName("ownedVariantUsage_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedVariantUsage_comp")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.USAGE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedVariantUsage_comp()
-    {
-        // Start of user code getterInit:ownedVariantUsage_comp
-        // End of user code
-        return ownedVariantUsage_comp;
-    }
-    
     // Start of user code getterAnnotation:ownedVariantUsage
     // End of user code
     @OslcName("ownedVariantUsage")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedVariantUsage")
-    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.USAGE_TYPE})
     @OslcReadOnly(false)
@@ -179,18 +161,6 @@ public class VariantMembership
         return ownedVariantUsage;
     }
     
-    
-    // Start of user code setterAnnotation:ownedVariantUsage_comp
-    // End of user code
-    public void setOwnedVariantUsage_comp(final Link ownedVariantUsage_comp )
-    {
-        // Start of user code setterInit:ownedVariantUsage_comp
-        // End of user code
-        this.ownedVariantUsage_comp = ownedVariantUsage_comp;
-    
-        // Start of user code setterFinalize:ownedVariantUsage_comp
-        // End of user code
-    }
     
     // Start of user code setterAnnotation:ownedVariantUsage
     // End of user code

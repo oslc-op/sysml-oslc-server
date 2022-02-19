@@ -64,18 +64,19 @@ import org.oasis.oslcop.sysml.SysmlClass;
 import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
-import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
-import org.oasis.oslcop.sysml.Superclassing;
+import org.oasis.oslcop.sysml.Specialization;
+import org.oasis.oslcop.sysml.Subclassification;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 // Start of user code imports
 // End of user code
@@ -87,7 +88,7 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.LIFECLASS_NAMESPACE)
 @OslcName(SysmlDomainConstants.LIFECLASS_LOCALNAME)
-@OslcResourceShape(title = "LifeClass Resource Shape", describes = SysmlDomainConstants.LIFECLASS_TYPE)
+@OslcResourceShape(title = "LifeClass Shape", describes = SysmlDomainConstants.LIFECLASS_TYPE)
 public class LifeClass
     extends SysmlClass
     implements ILifeClass
@@ -142,7 +143,7 @@ public class LifeClass
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

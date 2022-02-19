@@ -71,7 +71,7 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.ENDFEATUREMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.ENDFEATUREMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "EndFeatureMembership Resource Shape", describes = SysmlDomainConstants.ENDFEATUREMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "EndFeatureMembership Shape", describes = SysmlDomainConstants.ENDFEATUREMEMBERSHIP_TYPE)
 public interface IEndFeatureMembership
 {
 

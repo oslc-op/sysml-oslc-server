@@ -69,22 +69,24 @@ import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
 import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.ConcernUsage;
 import org.oasis.oslcop.sysml.Conjugation;
-import org.oasis.oslcop.sysml.ConnectionUsage;
+import org.oasis.oslcop.sysml.ConnectorAsUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
-import org.oasis.oslcop.sysml.Generalization;
+import org.oasis.oslcop.sysml.FlowConnectionUsage;
 import org.oasis.oslcop.sysml.SysmlImport;
-import org.oasis.oslcop.sysml.IndividualUsage;
 import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
+import org.oasis.oslcop.sysml.OccurrenceUsage;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
@@ -92,11 +94,13 @@ import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.StateUsage;
-import org.oasis.oslcop.sysml.Superclassing;
+import org.oasis.oslcop.sysml.Subclassification;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.UseCaseUsage;
 import org.oasis.oslcop.sysml.VariantMembership;
 import org.oasis.oslcop.sysml.VerificationCaseUsage;
 import org.oasis.oslcop.sysml.ViewUsage;
@@ -111,7 +115,7 @@ import org.oasis.oslcop.sysml.ViewpointUsage;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.DEFINITION_NAMESPACE)
 @OslcName(SysmlDomainConstants.DEFINITION_LOCALNAME)
-@OslcResourceShape(title = "Definition Resource Shape", describes = SysmlDomainConstants.DEFINITION_TYPE)
+@OslcResourceShape(title = "Definition Shape", describes = SysmlDomainConstants.DEFINITION_TYPE)
 public class Definition
     extends Classifier
     implements IDefinition
@@ -125,9 +129,9 @@ public class Definition
     // Start of user code attributeAnnotation:ownedPort
     // End of user code
     private Set<Link> ownedPort = new HashSet<Link>();
-    // Start of user code attributeAnnotation:flowFeature
+    // Start of user code attributeAnnotation:directedUsage
     // End of user code
-    private Set<Link> flowFeature = new HashSet<Link>();
+    private Set<Link> directedUsage = new HashSet<Link>();
     // Start of user code attributeAnnotation:usage
     // End of user code
     private Set<Link> usage = new HashSet<Link>();
@@ -146,9 +150,9 @@ public class Definition
     // Start of user code attributeAnnotation:ownedCalculation
     // End of user code
     private Set<Link> ownedCalculation = new HashSet<Link>();
-    // Start of user code attributeAnnotation:variantMembership_comp
+    // Start of user code attributeAnnotation:variantMembership
     // End of user code
-    private Set<Link> variantMembership_comp = new HashSet<Link>();
+    private Set<Link> variantMembership = new HashSet<Link>();
     // Start of user code attributeAnnotation:ownedAnalysisCase
     // End of user code
     private Set<Link> ownedAnalysisCase = new HashSet<Link>();
@@ -173,9 +177,6 @@ public class Definition
     // Start of user code attributeAnnotation:ownedPart
     // End of user code
     private Set<Link> ownedPart = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedIndividual
-    // End of user code
-    private Set<Link> ownedIndividual = new HashSet<Link>();
     // Start of user code attributeAnnotation:ownedInterface
     // End of user code
     private Set<Link> ownedInterface = new HashSet<Link>();
@@ -200,9 +201,18 @@ public class Definition
     // Start of user code attributeAnnotation:ownedAllocation
     // End of user code
     private Set<Link> ownedAllocation = new HashSet<Link>();
-    // Start of user code attributeAnnotation:variantMembership
+    // Start of user code attributeAnnotation:ownedConcern
     // End of user code
-    private Set<Link> variantMembership = new HashSet<Link>();
+    private Set<Link> ownedConcern = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedOccurrence
+    // End of user code
+    private Set<Link> ownedOccurrence = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedUseCase
+    // End of user code
+    private Set<Link> ownedUseCase = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedFlow
+    // End of user code
+    private Set<Link> ownedFlow = new HashSet<Link>();
     
     // Start of user code classAttributes
     // End of user code
@@ -253,7 +263,7 @@ public class Definition
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -269,9 +279,9 @@ public class Definition
         this.ownedPort.add(ownedPort);
     }
     
-    public void addFlowFeature(final Link flowFeature)
+    public void addDirectedUsage(final Link directedUsage)
     {
-        this.flowFeature.add(flowFeature);
+        this.directedUsage.add(directedUsage);
     }
     
     public void addUsage(final Link usage)
@@ -304,9 +314,9 @@ public class Definition
         this.ownedCalculation.add(ownedCalculation);
     }
     
-    public void addVariantMembership_comp(final Link variantMembership_comp)
+    public void addVariantMembership(final Link variantMembership)
     {
-        this.variantMembership_comp.add(variantMembership_comp);
+        this.variantMembership.add(variantMembership);
     }
     
     public void addOwnedAnalysisCase(final Link ownedAnalysisCase)
@@ -349,11 +359,6 @@ public class Definition
         this.ownedPart.add(ownedPart);
     }
     
-    public void addOwnedIndividual(final Link ownedIndividual)
-    {
-        this.ownedIndividual.add(ownedIndividual);
-    }
-    
     public void addOwnedInterface(final Link ownedInterface)
     {
         this.ownedInterface.add(ownedInterface);
@@ -394,9 +399,24 @@ public class Definition
         this.ownedAllocation.add(ownedAllocation);
     }
     
-    public void addVariantMembership(final Link variantMembership)
+    public void addOwnedConcern(final Link ownedConcern)
     {
-        this.variantMembership.add(variantMembership);
+        this.ownedConcern.add(ownedConcern);
+    }
+    
+    public void addOwnedOccurrence(final Link ownedOccurrence)
+    {
+        this.ownedOccurrence.add(ownedOccurrence);
+    }
+    
+    public void addOwnedUseCase(final Link ownedUseCase)
+    {
+        this.ownedUseCase.add(ownedUseCase);
+    }
+    
+    public void addOwnedFlow(final Link ownedFlow)
+    {
+        this.ownedFlow.add(ownedFlow);
     }
     
     
@@ -444,19 +464,19 @@ public class Definition
         return ownedPort;
     }
     
-    // Start of user code getterAnnotation:flowFeature
+    // Start of user code getterAnnotation:directedUsage
     // End of user code
-    @OslcName("flowFeature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "flowFeature")
+    @OslcName("directedUsage")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "directedUsage")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.USAGE_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getFlowFeature()
+    public Set<Link> getDirectedUsage()
     {
-        // Start of user code getterInit:flowFeature
+        // Start of user code getterInit:directedUsage
         // End of user code
-        return flowFeature;
+        return directedUsage;
     }
     
     // Start of user code getterAnnotation:usage
@@ -549,19 +569,19 @@ public class Definition
         return ownedCalculation;
     }
     
-    // Start of user code getterAnnotation:variantMembership_comp
+    // Start of user code getterAnnotation:variantMembership
     // End of user code
-    @OslcName("variantMembership_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "variantMembership_comp")
+    @OslcName("variantMembership")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "variantMembership")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.VARIANTMEMBERSHIP_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getVariantMembership_comp()
+    public Set<Link> getVariantMembership()
     {
-        // Start of user code getterInit:variantMembership_comp
+        // Start of user code getterInit:variantMembership
         // End of user code
-        return variantMembership_comp;
+        return variantMembership;
     }
     
     // Start of user code getterAnnotation:ownedAnalysisCase
@@ -645,7 +665,7 @@ public class Definition
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedConnection")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.CONNECTIONUSAGE_TYPE})
+    @OslcRange({SysmlDomainConstants.CONNECTORASUSAGE_TYPE})
     @OslcReadOnly(false)
     public Set<Link> getOwnedConnection()
     {
@@ -682,21 +702,6 @@ public class Definition
         // Start of user code getterInit:ownedPart
         // End of user code
         return ownedPart;
-    }
-    
-    // Start of user code getterAnnotation:ownedIndividual
-    // End of user code
-    @OslcName("ownedIndividual")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedIndividual")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.INDIVIDUALUSAGE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedIndividual()
-    {
-        // Start of user code getterInit:ownedIndividual
-        // End of user code
-        return ownedIndividual;
     }
     
     // Start of user code getterAnnotation:ownedInterface
@@ -819,19 +824,64 @@ public class Definition
         return ownedAllocation;
     }
     
-    // Start of user code getterAnnotation:variantMembership
+    // Start of user code getterAnnotation:ownedConcern
     // End of user code
-    @OslcName("variantMembership")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "variantMembership")
+    @OslcName("ownedConcern")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedConcern")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.VARIANTMEMBERSHIP_TYPE})
+    @OslcRange({SysmlDomainConstants.CONCERNUSAGE_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getVariantMembership()
+    public Set<Link> getOwnedConcern()
     {
-        // Start of user code getterInit:variantMembership
+        // Start of user code getterInit:ownedConcern
         // End of user code
-        return variantMembership;
+        return ownedConcern;
+    }
+    
+    // Start of user code getterAnnotation:ownedOccurrence
+    // End of user code
+    @OslcName("ownedOccurrence")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedOccurrence")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.OCCURRENCEUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedOccurrence()
+    {
+        // Start of user code getterInit:ownedOccurrence
+        // End of user code
+        return ownedOccurrence;
+    }
+    
+    // Start of user code getterAnnotation:ownedUseCase
+    // End of user code
+    @OslcName("ownedUseCase")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedUseCase")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.USECASEUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedUseCase()
+    {
+        // Start of user code getterInit:ownedUseCase
+        // End of user code
+        return ownedUseCase;
+    }
+    
+    // Start of user code getterAnnotation:ownedFlow
+    // End of user code
+    @OslcName("ownedFlow")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedFlow")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FLOWCONNECTIONUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedFlow()
+    {
+        // Start of user code getterInit:ownedFlow
+        // End of user code
+        return ownedFlow;
     }
     
     
@@ -879,19 +929,19 @@ public class Definition
         // End of user code
     }
     
-    // Start of user code setterAnnotation:flowFeature
+    // Start of user code setterAnnotation:directedUsage
     // End of user code
-    public void setFlowFeature(final Set<Link> flowFeature )
+    public void setDirectedUsage(final Set<Link> directedUsage )
     {
-        // Start of user code setterInit:flowFeature
+        // Start of user code setterInit:directedUsage
         // End of user code
-        this.flowFeature.clear();
-        if (flowFeature != null)
+        this.directedUsage.clear();
+        if (directedUsage != null)
         {
-            this.flowFeature.addAll(flowFeature);
+            this.directedUsage.addAll(directedUsage);
         }
     
-        // Start of user code setterFinalize:flowFeature
+        // Start of user code setterFinalize:directedUsage
         // End of user code
     }
     
@@ -991,19 +1041,19 @@ public class Definition
         // End of user code
     }
     
-    // Start of user code setterAnnotation:variantMembership_comp
+    // Start of user code setterAnnotation:variantMembership
     // End of user code
-    public void setVariantMembership_comp(final Set<Link> variantMembership_comp )
+    public void setVariantMembership(final Set<Link> variantMembership )
     {
-        // Start of user code setterInit:variantMembership_comp
+        // Start of user code setterInit:variantMembership
         // End of user code
-        this.variantMembership_comp.clear();
-        if (variantMembership_comp != null)
+        this.variantMembership.clear();
+        if (variantMembership != null)
         {
-            this.variantMembership_comp.addAll(variantMembership_comp);
+            this.variantMembership.addAll(variantMembership);
         }
     
-        // Start of user code setterFinalize:variantMembership_comp
+        // Start of user code setterFinalize:variantMembership
         // End of user code
     }
     
@@ -1135,22 +1185,6 @@ public class Definition
         // End of user code
     }
     
-    // Start of user code setterAnnotation:ownedIndividual
-    // End of user code
-    public void setOwnedIndividual(final Set<Link> ownedIndividual )
-    {
-        // Start of user code setterInit:ownedIndividual
-        // End of user code
-        this.ownedIndividual.clear();
-        if (ownedIndividual != null)
-        {
-            this.ownedIndividual.addAll(ownedIndividual);
-        }
-    
-        // Start of user code setterFinalize:ownedIndividual
-        // End of user code
-    }
-    
     // Start of user code setterAnnotation:ownedInterface
     // End of user code
     public void setOwnedInterface(final Set<Link> ownedInterface )
@@ -1279,19 +1313,67 @@ public class Definition
         // End of user code
     }
     
-    // Start of user code setterAnnotation:variantMembership
+    // Start of user code setterAnnotation:ownedConcern
     // End of user code
-    public void setVariantMembership(final Set<Link> variantMembership )
+    public void setOwnedConcern(final Set<Link> ownedConcern )
     {
-        // Start of user code setterInit:variantMembership
+        // Start of user code setterInit:ownedConcern
         // End of user code
-        this.variantMembership.clear();
-        if (variantMembership != null)
+        this.ownedConcern.clear();
+        if (ownedConcern != null)
         {
-            this.variantMembership.addAll(variantMembership);
+            this.ownedConcern.addAll(ownedConcern);
         }
     
-        // Start of user code setterFinalize:variantMembership
+        // Start of user code setterFinalize:ownedConcern
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedOccurrence
+    // End of user code
+    public void setOwnedOccurrence(final Set<Link> ownedOccurrence )
+    {
+        // Start of user code setterInit:ownedOccurrence
+        // End of user code
+        this.ownedOccurrence.clear();
+        if (ownedOccurrence != null)
+        {
+            this.ownedOccurrence.addAll(ownedOccurrence);
+        }
+    
+        // Start of user code setterFinalize:ownedOccurrence
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedUseCase
+    // End of user code
+    public void setOwnedUseCase(final Set<Link> ownedUseCase )
+    {
+        // Start of user code setterInit:ownedUseCase
+        // End of user code
+        this.ownedUseCase.clear();
+        if (ownedUseCase != null)
+        {
+            this.ownedUseCase.addAll(ownedUseCase);
+        }
+    
+        // Start of user code setterFinalize:ownedUseCase
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedFlow
+    // End of user code
+    public void setOwnedFlow(final Set<Link> ownedFlow )
+    {
+        // Start of user code setterInit:ownedFlow
+        // End of user code
+        this.ownedFlow.clear();
+        if (ownedFlow != null)
+        {
+            this.ownedFlow.addAll(ownedFlow);
+        }
+    
+        // Start of user code setterFinalize:ownedFlow
         // End of user code
     }
     

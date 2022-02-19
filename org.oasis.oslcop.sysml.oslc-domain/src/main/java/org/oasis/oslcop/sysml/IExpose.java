@@ -69,7 +69,7 @@ import org.oasis.oslcop.sysml.ITextualRepresentation;
 
 @OslcNamespace(SysmlDomainConstants.EXPOSE_NAMESPACE)
 @OslcName(SysmlDomainConstants.EXPOSE_LOCALNAME)
-@OslcResourceShape(title = "Expose Resource Shape", describes = SysmlDomainConstants.EXPOSE_TYPE)
+@OslcResourceShape(title = "Expose Shape", describes = SysmlDomainConstants.EXPOSE_TYPE)
 public interface IExpose
 {
 

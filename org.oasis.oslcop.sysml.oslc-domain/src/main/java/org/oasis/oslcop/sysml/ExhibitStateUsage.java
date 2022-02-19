@@ -58,7 +58,9 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.StateUsage;
-
+import org.oasis.oslcop.sysml.IEventOccurrenceUsage;
+import org.oasis.oslcop.sysml.IPerformActionUsage;
+import org.oasis.oslcop.sysml.IStep;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.ActionUsage;
@@ -69,33 +71,41 @@ import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.Behavior;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.SysmlClass;
+import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.ConcernUsage;
 import org.oasis.oslcop.sysml.Conjugation;
-import org.oasis.oslcop.sysml.ConnectionUsage;
+import org.oasis.oslcop.sysml.ConnectorAsUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
 import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
-import org.oasis.oslcop.sysml.Generalization;
+import org.oasis.oslcop.sysml.FlowConnectionUsage;
 import org.oasis.oslcop.sysml.SysmlImport;
-import org.oasis.oslcop.sysml.IndividualUsage;
 import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
+import org.oasis.oslcop.sysml.OccurrenceDefinition;
+import org.oasis.oslcop.sysml.OccurrenceUsage;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
+import org.oasis.oslcop.sysml.PortioningFeature;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.StateUsage;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
@@ -103,6 +113,7 @@ import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
 import org.oasis.oslcop.sysml.TypeFeaturing;
 import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.UseCaseUsage;
 import org.oasis.oslcop.sysml.VariantMembership;
 import org.oasis.oslcop.sysml.VerificationCaseUsage;
 import org.oasis.oslcop.sysml.ViewUsage;
@@ -117,14 +128,26 @@ import org.oasis.oslcop.sysml.ViewpointUsage;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.EXHIBITSTATEUSAGE_NAMESPACE)
 @OslcName(SysmlDomainConstants.EXHIBITSTATEUSAGE_LOCALNAME)
-@OslcResourceShape(title = "ExhibitStateUsage Resource Shape", describes = SysmlDomainConstants.EXHIBITSTATEUSAGE_TYPE)
+@OslcResourceShape(title = "ExhibitStateUsage Shape", describes = SysmlDomainConstants.EXHIBITSTATEUSAGE_TYPE)
 public class ExhibitStateUsage
     extends StateUsage
-    implements IExhibitStateUsage
+    implements IExhibitStateUsage, IEventOccurrenceUsage, IPerformActionUsage, IStep
 {
     // Start of user code attributeAnnotation:exhibitedState
     // End of user code
     private Link exhibitedState;
+    // Start of user code attributeAnnotation:eventOccurrence
+    // End of user code
+    private Link eventOccurrence;
+    // Start of user code attributeAnnotation:behavior
+    // End of user code
+    private Set<Link> behavior = new HashSet<Link>();
+    // Start of user code attributeAnnotation:parameter
+    // End of user code
+    private Set<Link> parameter = new HashSet<Link>();
+    // Start of user code attributeAnnotation:performedAction
+    // End of user code
+    private Link performedAction;
     
     // Start of user code classAttributes
     // End of user code
@@ -175,10 +198,20 @@ public class ExhibitStateUsage
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
+    }
+    
+    public void addBehavior(final Link behavior)
+    {
+        this.behavior.add(behavior);
+    }
+    
+    public void addParameter(final Link parameter)
+    {
+        this.parameter.add(parameter);
     }
     
     
@@ -197,6 +230,66 @@ public class ExhibitStateUsage
         return exhibitedState;
     }
     
+    // Start of user code getterAnnotation:eventOccurrence
+    // End of user code
+    @OslcName("eventOccurrence")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "eventOccurrence")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.OCCURRENCEUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Link getEventOccurrence()
+    {
+        // Start of user code getterInit:eventOccurrence
+        // End of user code
+        return eventOccurrence;
+    }
+    
+    // Start of user code getterAnnotation:behavior
+    // End of user code
+    @OslcName("behavior")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "behavior")
+    @OslcOccurs(Occurs.OneOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.BEHAVIOR_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getBehavior()
+    {
+        // Start of user code getterInit:behavior
+        // End of user code
+        return behavior;
+    }
+    
+    // Start of user code getterAnnotation:parameter
+    // End of user code
+    @OslcName("parameter")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "parameter")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getParameter()
+    {
+        // Start of user code getterInit:parameter
+        // End of user code
+        return parameter;
+    }
+    
+    // Start of user code getterAnnotation:performedAction
+    // End of user code
+    @OslcName("performedAction")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "performedAction")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ACTIONUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Link getPerformedAction()
+    {
+        // Start of user code getterInit:performedAction
+        // End of user code
+        return performedAction;
+    }
+    
     
     // Start of user code setterAnnotation:exhibitedState
     // End of user code
@@ -207,6 +300,62 @@ public class ExhibitStateUsage
         this.exhibitedState = exhibitedState;
     
         // Start of user code setterFinalize:exhibitedState
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:eventOccurrence
+    // End of user code
+    public void setEventOccurrence(final Link eventOccurrence )
+    {
+        // Start of user code setterInit:eventOccurrence
+        // End of user code
+        this.eventOccurrence = eventOccurrence;
+    
+        // Start of user code setterFinalize:eventOccurrence
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:behavior
+    // End of user code
+    public void setBehavior(final Set<Link> behavior )
+    {
+        // Start of user code setterInit:behavior
+        // End of user code
+        this.behavior.clear();
+        if (behavior != null)
+        {
+            this.behavior.addAll(behavior);
+        }
+    
+        // Start of user code setterFinalize:behavior
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:parameter
+    // End of user code
+    public void setParameter(final Set<Link> parameter )
+    {
+        // Start of user code setterInit:parameter
+        // End of user code
+        this.parameter.clear();
+        if (parameter != null)
+        {
+            this.parameter.addAll(parameter);
+        }
+    
+        // Start of user code setterFinalize:parameter
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:performedAction
+    // End of user code
+    public void setPerformedAction(final Link performedAction )
+    {
+        // Start of user code setterInit:performedAction
+        // End of user code
+        this.performedAction = performedAction;
+    
+        // Start of user code setterFinalize:performedAction
         // End of user code
     }
     

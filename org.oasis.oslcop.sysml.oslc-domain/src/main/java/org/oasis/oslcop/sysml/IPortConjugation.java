@@ -72,7 +72,7 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.PORTCONJUGATION_NAMESPACE)
 @OslcName(SysmlDomainConstants.PORTCONJUGATION_LOCALNAME)
-@OslcResourceShape(title = "PortConjugation Resource Shape", describes = SysmlDomainConstants.PORTCONJUGATION_TYPE)
+@OslcResourceShape(title = "PortConjugation Shape", describes = SysmlDomainConstants.PORTCONJUGATION_TYPE)
 public interface IPortConjugation
 {
 

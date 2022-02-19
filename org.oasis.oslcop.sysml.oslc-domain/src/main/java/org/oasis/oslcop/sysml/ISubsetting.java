@@ -71,7 +71,7 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.SUBSETTING_NAMESPACE)
 @OslcName(SysmlDomainConstants.SUBSETTING_LOCALNAME)
-@OslcResourceShape(title = "Subsetting Resource Shape", describes = SysmlDomainConstants.SUBSETTING_TYPE)
+@OslcResourceShape(title = "Subsetting Shape", describes = SysmlDomainConstants.SUBSETTING_TYPE)
 public interface ISubsetting
 {
 
@@ -94,7 +94,7 @@ public interface ISubsetting
 
     @OslcName("owningFeature")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningFeature")
-    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)

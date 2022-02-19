@@ -69,7 +69,7 @@ import org.oasis.oslcop.sysml.ITextualRepresentation;
 
 @OslcNamespace(SysmlDomainConstants.ANNOTATINGELEMENT_NAMESPACE)
 @OslcName(SysmlDomainConstants.ANNOTATINGELEMENT_LOCALNAME)
-@OslcResourceShape(title = "AnnotatingElement Resource Shape", describes = SysmlDomainConstants.ANNOTATINGELEMENT_TYPE)
+@OslcResourceShape(title = "AnnotatingElement Shape", describes = SysmlDomainConstants.ANNOTATINGELEMENT_TYPE)
 public interface IAnnotatingElement
 {
 

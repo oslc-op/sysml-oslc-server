@@ -70,26 +70,10 @@ import org.oasis.oslcop.sysml.ITextualRepresentation;
 
 @OslcNamespace(SysmlDomainConstants.DOCUMENTATION_NAMESPACE)
 @OslcName(SysmlDomainConstants.DOCUMENTATION_LOCALNAME)
-@OslcResourceShape(title = "Documentation Resource Shape", describes = SysmlDomainConstants.DOCUMENTATION_TYPE)
+@OslcResourceShape(title = "Documentation Shape", describes = SysmlDomainConstants.DOCUMENTATION_TYPE)
 public interface IDocumentation
 {
 
-
-    @OslcName("documentingComment_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "documentingComment_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.COMMENT_TYPE})
-    @OslcReadOnly(false)
-    public Link getDocumentingComment_comp();
-
-    @OslcName("owningDocumentedElement")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningDocumentedElement")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwningDocumentedElement();
 
     @OslcName("documentingComment")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "documentingComment")
@@ -99,9 +83,16 @@ public interface IDocumentation
     @OslcReadOnly(false)
     public Link getDocumentingComment();
 
+    @OslcName("owningDocumentedElement")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningDocumentedElement")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
+    @OslcReadOnly(false)
+    public Link getOwningDocumentedElement();
 
-    public void setDocumentingComment_comp(final Link documentingComment_comp );
-    public void setOwningDocumentedElement(final Link owningDocumentedElement );
+
     public void setDocumentingComment(final Link documentingComment );
+    public void setOwningDocumentedElement(final Link owningDocumentedElement );
 }
 

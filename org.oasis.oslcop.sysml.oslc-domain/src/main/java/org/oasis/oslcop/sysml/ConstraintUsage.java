@@ -57,7 +57,7 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
-import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.OccurrenceUsage;
 import org.oasis.oslcop.sysml.IBooleanExpression;
 import org.oasis.oslcop.sysml.IExpression;
 import org.oasis.oslcop.sysml.IStep;
@@ -71,35 +71,43 @@ import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.Behavior;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.SysmlClass;
+import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.ConcernUsage;
 import org.oasis.oslcop.sysml.Conjugation;
-import org.oasis.oslcop.sysml.ConnectionUsage;
+import org.oasis.oslcop.sysml.ConnectorAsUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
 import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
+import org.oasis.oslcop.sysml.FlowConnectionUsage;
 import org.oasis.oslcop.sysml.Function;
-import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
-import org.oasis.oslcop.sysml.IndividualUsage;
 import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
+import org.oasis.oslcop.sysml.OccurrenceDefinition;
+import org.oasis.oslcop.sysml.OccurrenceUsage;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
+import org.oasis.oslcop.sysml.PortioningFeature;
 import org.oasis.oslcop.sysml.Predicate;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.StateUsage;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
@@ -107,6 +115,7 @@ import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
 import org.oasis.oslcop.sysml.TypeFeaturing;
 import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.UseCaseUsage;
 import org.oasis.oslcop.sysml.VariantMembership;
 import org.oasis.oslcop.sysml.VerificationCaseUsage;
 import org.oasis.oslcop.sysml.ViewUsage;
@@ -121,23 +130,23 @@ import org.oasis.oslcop.sysml.ViewpointUsage;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.CONSTRAINTUSAGE_NAMESPACE)
 @OslcName(SysmlDomainConstants.CONSTRAINTUSAGE_LOCALNAME)
-@OslcResourceShape(title = "ConstraintUsage Resource Shape", describes = SysmlDomainConstants.CONSTRAINTUSAGE_TYPE)
+@OslcResourceShape(title = "ConstraintUsage Shape", describes = SysmlDomainConstants.CONSTRAINTUSAGE_TYPE)
 public class ConstraintUsage
-    extends Usage
+    extends OccurrenceUsage
     implements IConstraintUsage, IBooleanExpression, IExpression, IStep
 {
     // Start of user code attributeAnnotation:constraintDefinition
     // End of user code
     private Link constraintDefinition;
+    // Start of user code attributeAnnotation:predicate
+    // End of user code
+    private Link predicate;
     // Start of user code attributeAnnotation:behavior
     // End of user code
     private Set<Link> behavior = new HashSet<Link>();
     // Start of user code attributeAnnotation:parameter
     // End of user code
     private Set<Link> parameter = new HashSet<Link>();
-    // Start of user code attributeAnnotation:predicate
-    // End of user code
-    private Link predicate;
     // Start of user code attributeAnnotation:isModelLevelEvaluable
     // End of user code
     private Boolean isModelLevelEvaluable;
@@ -197,7 +206,7 @@ public class ConstraintUsage
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -229,6 +238,21 @@ public class ConstraintUsage
         return constraintDefinition;
     }
     
+    // Start of user code getterAnnotation:predicate
+    // End of user code
+    @OslcName("predicate")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "predicate")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.PREDICATE_TYPE})
+    @OslcReadOnly(false)
+    public Link getPredicate()
+    {
+        // Start of user code getterInit:predicate
+        // End of user code
+        return predicate;
+    }
+    
     // Start of user code getterAnnotation:behavior
     // End of user code
     @OslcName("behavior")
@@ -257,21 +281,6 @@ public class ConstraintUsage
         // Start of user code getterInit:parameter
         // End of user code
         return parameter;
-    }
-    
-    // Start of user code getterAnnotation:predicate
-    // End of user code
-    @OslcName("predicate")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "predicate")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PREDICATE_TYPE})
-    @OslcReadOnly(false)
-    public Link getPredicate()
-    {
-        // Start of user code getterInit:predicate
-        // End of user code
-        return predicate;
     }
     
     // Start of user code getterAnnotation:isModelLevelEvaluable
@@ -331,6 +340,18 @@ public class ConstraintUsage
         // End of user code
     }
     
+    // Start of user code setterAnnotation:predicate
+    // End of user code
+    public void setPredicate(final Link predicate )
+    {
+        // Start of user code setterInit:predicate
+        // End of user code
+        this.predicate = predicate;
+    
+        // Start of user code setterFinalize:predicate
+        // End of user code
+    }
+    
     // Start of user code setterAnnotation:behavior
     // End of user code
     public void setBehavior(final Set<Link> behavior )
@@ -360,18 +381,6 @@ public class ConstraintUsage
         }
     
         // Start of user code setterFinalize:parameter
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:predicate
-    // End of user code
-    public void setPredicate(final Link predicate )
-    {
-        // Start of user code setterInit:predicate
-        // End of user code
-        this.predicate = predicate;
-    
-        // Start of user code setterFinalize:predicate
         // End of user code
     }
     

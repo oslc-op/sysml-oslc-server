@@ -58,12 +58,13 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IComment;
 import org.oasis.oslcop.sysml.IConjugation;
+import org.oasis.oslcop.sysml.IDisjoining;
 import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IFeature;
+import org.oasis.oslcop.sysml.IFeatureChaining;
 import org.oasis.oslcop.sysml.IFeatureMembership;
 import org.oasis.oslcop.sysml.IFeatureTyping;
-import org.oasis.oslcop.sysml.IGeneralization;
 import org.oasis.oslcop.sysml.ISysmlImport;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMetadataFeatureValue;
@@ -72,6 +73,7 @@ import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRedefinition;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ISpecialization;
 import org.oasis.oslcop.sysml.ISubsetting;
 import org.oasis.oslcop.sysml.ITextualRepresentation;
 import org.oasis.oslcop.sysml.IType;
@@ -81,18 +83,10 @@ import org.oasis.oslcop.sysml.ITypeFeaturing;
 
 @OslcNamespace(SysmlDomainConstants.METADATAFEATURE_NAMESPACE)
 @OslcName(SysmlDomainConstants.METADATAFEATURE_LOCALNAME)
-@OslcResourceShape(title = "MetadataFeature Resource Shape", describes = SysmlDomainConstants.METADATAFEATURE_TYPE)
+@OslcResourceShape(title = "MetadataFeature Shape", describes = SysmlDomainConstants.METADATAFEATURE_TYPE)
 public interface IMetadataFeature
 {
 
-
-    @OslcName("metadataFeatureValue_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "metadataFeatureValue_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.METADATAFEATUREVALUE_TYPE})
-    @OslcReadOnly(false)
-    public Link getMetadataFeatureValue_comp();
 
     @OslcName("metadataFeatureValue")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "metadataFeatureValue")
@@ -103,7 +97,6 @@ public interface IMetadataFeature
     public Link getMetadataFeatureValue();
 
 
-    public void setMetadataFeatureValue_comp(final Link metadataFeatureValue_comp );
     public void setMetadataFeatureValue(final Link metadataFeatureValue );
 }
 

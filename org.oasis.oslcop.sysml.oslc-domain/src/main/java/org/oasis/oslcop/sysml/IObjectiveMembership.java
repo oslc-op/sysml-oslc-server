@@ -72,18 +72,10 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.OBJECTIVEMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.OBJECTIVEMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "ObjectiveMembership Resource Shape", describes = SysmlDomainConstants.OBJECTIVEMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "ObjectiveMembership Shape", describes = SysmlDomainConstants.OBJECTIVEMEMBERSHIP_TYPE)
 public interface IObjectiveMembership
 {
 
-
-    @OslcName("ownedObjectiveRequirement_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedObjectiveRequirement_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.REQUIREMENTUSAGE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedObjectiveRequirement_comp();
 
     @OslcName("ownedObjectiveRequirement")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedObjectiveRequirement")
@@ -94,7 +86,6 @@ public interface IObjectiveMembership
     public Link getOwnedObjectiveRequirement();
 
 
-    public void setOwnedObjectiveRequirement_comp(final Link ownedObjectiveRequirement_comp );
     public void setOwnedObjectiveRequirement(final Link ownedObjectiveRequirement );
 }
 

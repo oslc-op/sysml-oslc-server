@@ -70,7 +70,7 @@ import org.oasis.oslcop.sysml.ITextualRepresentation;
 
 @OslcNamespace(SysmlDomainConstants.ANNOTATION_NAMESPACE)
 @OslcName(SysmlDomainConstants.ANNOTATION_LOCALNAME)
-@OslcResourceShape(title = "Annotation Resource Shape", describes = SysmlDomainConstants.ANNOTATION_TYPE)
+@OslcResourceShape(title = "Annotation Shape", describes = SysmlDomainConstants.ANNOTATION_TYPE)
 public interface IAnnotation
 {
 

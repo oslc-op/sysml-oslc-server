@@ -57,16 +57,16 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IBehavior;
-import org.oasis.oslcop.sysml.IBindingConnector;
 import org.oasis.oslcop.sysml.IComment;
 import org.oasis.oslcop.sysml.IConjugation;
+import org.oasis.oslcop.sysml.IDisjoining;
 import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IFeature;
+import org.oasis.oslcop.sysml.IFeatureChaining;
 import org.oasis.oslcop.sysml.IFeatureMembership;
 import org.oasis.oslcop.sysml.IFeatureTyping;
 import org.oasis.oslcop.sysml.IFunction;
-import org.oasis.oslcop.sysml.IGeneralization;
 import org.oasis.oslcop.sysml.ISysmlImport;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
@@ -75,6 +75,7 @@ import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IPredicate;
 import org.oasis.oslcop.sysml.IRedefinition;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ISpecialization;
 import org.oasis.oslcop.sysml.ISubsetting;
 import org.oasis.oslcop.sysml.ITextualRepresentation;
 import org.oasis.oslcop.sysml.IType;
@@ -84,20 +85,19 @@ import org.oasis.oslcop.sysml.ITypeFeaturing;
 
 @OslcNamespace(SysmlDomainConstants.INVARIANT_NAMESPACE)
 @OslcName(SysmlDomainConstants.INVARIANT_LOCALNAME)
-@OslcResourceShape(title = "Invariant Resource Shape", describes = SysmlDomainConstants.INVARIANT_TYPE)
+@OslcResourceShape(title = "Invariant Shape", describes = SysmlDomainConstants.INVARIANT_TYPE)
 public interface IInvariant
 {
 
 
-    @OslcName("assertionConnector")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "assertionConnector")
+    @OslcName("isNegated")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isNegated")
     @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.BINDINGCONNECTOR_TYPE})
+    @OslcValueType(ValueType.Boolean)
     @OslcReadOnly(false)
-    public Link getAssertionConnector();
+    public Boolean isIsNegated();
 
 
-    public void setAssertionConnector(final Link assertionConnector );
+    public void setIsNegated(final Boolean isNegated );
 }
 

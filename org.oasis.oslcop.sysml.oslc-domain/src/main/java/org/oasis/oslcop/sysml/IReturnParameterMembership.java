@@ -71,7 +71,7 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.RETURNPARAMETERMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.RETURNPARAMETERMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "ReturnParameterMembership Resource Shape", describes = SysmlDomainConstants.RETURNPARAMETERMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "ReturnParameterMembership Shape", describes = SysmlDomainConstants.RETURNPARAMETERMEMBERSHIP_TYPE)
 public interface IReturnParameterMembership
 {
 

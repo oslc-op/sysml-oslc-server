@@ -69,7 +69,7 @@ import org.oasis.oslcop.sysml.ITextualRepresentation;
 
 @OslcNamespace(SysmlDomainConstants.DEPENDENCY_NAMESPACE)
 @OslcName(SysmlDomainConstants.DEPENDENCY_LOCALNAME)
-@OslcResourceShape(title = "Dependency Resource Shape", describes = SysmlDomainConstants.DEPENDENCY_TYPE)
+@OslcResourceShape(title = "Dependency Shape", describes = SysmlDomainConstants.DEPENDENCY_TYPE)
 public interface IDependency
 {
 

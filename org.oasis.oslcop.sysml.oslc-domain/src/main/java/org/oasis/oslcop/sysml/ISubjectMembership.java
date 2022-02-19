@@ -72,18 +72,10 @@ import org.oasis.oslcop.sysml.IUsage;
 
 @OslcNamespace(SysmlDomainConstants.SUBJECTMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.SUBJECTMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "SubjectMembership Resource Shape", describes = SysmlDomainConstants.SUBJECTMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "SubjectMembership Shape", describes = SysmlDomainConstants.SUBJECTMEMBERSHIP_TYPE)
 public interface ISubjectMembership
 {
 
-
-    @OslcName("ownedSubjectParameter_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedSubjectParameter_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.USAGE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedSubjectParameter_comp();
 
     @OslcName("ownedSubjectParameter")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedSubjectParameter")
@@ -94,7 +86,6 @@ public interface ISubjectMembership
     public Link getOwnedSubjectParameter();
 
 
-    public void setOwnedSubjectParameter_comp(final Link ownedSubjectParameter_comp );
     public void setOwnedSubjectParameter(final Link ownedSubjectParameter );
 }
 

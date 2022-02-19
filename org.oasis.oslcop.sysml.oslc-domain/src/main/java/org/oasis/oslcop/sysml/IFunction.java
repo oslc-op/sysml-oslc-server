@@ -58,31 +58,39 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IComment;
 import org.oasis.oslcop.sysml.IConjugation;
+import org.oasis.oslcop.sysml.IDisjoining;
 import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IExpression;
 import org.oasis.oslcop.sysml.IFeature;
 import org.oasis.oslcop.sysml.IFeatureMembership;
-import org.oasis.oslcop.sysml.IGeneralization;
 import org.oasis.oslcop.sysml.ISysmlImport;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
 import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ISpecialization;
 import org.oasis.oslcop.sysml.IStep;
-import org.oasis.oslcop.sysml.ISuperclassing;
+import org.oasis.oslcop.sysml.ISubclassification;
 import org.oasis.oslcop.sysml.ITextualRepresentation;
 // Start of user code imports
 // End of user code
 
 @OslcNamespace(SysmlDomainConstants.FUNCTION_NAMESPACE)
 @OslcName(SysmlDomainConstants.FUNCTION_LOCALNAME)
-@OslcResourceShape(title = "Function Resource Shape", describes = SysmlDomainConstants.FUNCTION_TYPE)
+@OslcResourceShape(title = "Function Shape", describes = SysmlDomainConstants.FUNCTION_TYPE)
 public interface IFunction
 {
 
     public void addExpression(final Link expression );
+
+    @OslcName("isModelLevelEvaluable")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isModelLevelEvaluable")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsModelLevelEvaluable();
 
     @OslcName("expression")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "expression")
@@ -101,6 +109,7 @@ public interface IFunction
     public Link getResult();
 
 
+    public void setIsModelLevelEvaluable(final Boolean isModelLevelEvaluable );
     public void setExpression(final Set<Link> expression );
     public void setResult(final Link result );
 }

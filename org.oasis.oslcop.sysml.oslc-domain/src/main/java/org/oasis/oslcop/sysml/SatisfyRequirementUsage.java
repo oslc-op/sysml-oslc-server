@@ -71,32 +71,38 @@ import org.oasis.oslcop.sysml.AnalysisCaseUsage;
 import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.Behavior;
-import org.oasis.oslcop.sysml.BindingConnector;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.SysmlClass;
+import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.ConcernUsage;
 import org.oasis.oslcop.sysml.Conjugation;
-import org.oasis.oslcop.sysml.ConnectionUsage;
+import org.oasis.oslcop.sysml.ConnectorAsUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
 import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
+import org.oasis.oslcop.sysml.FlowConnectionUsage;
 import org.oasis.oslcop.sysml.Function;
-import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
-import org.oasis.oslcop.sysml.IndividualUsage;
 import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
+import org.oasis.oslcop.sysml.OccurrenceDefinition;
+import org.oasis.oslcop.sysml.OccurrenceUsage;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
+import org.oasis.oslcop.sysml.PortioningFeature;
 import org.oasis.oslcop.sysml.Predicate;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.ReferenceUsage;
@@ -104,6 +110,7 @@ import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementDefinition;
 import org.oasis.oslcop.sysml.RequirementUsage;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.StateUsage;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
@@ -111,6 +118,7 @@ import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
 import org.oasis.oslcop.sysml.TypeFeaturing;
 import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.UseCaseUsage;
 import org.oasis.oslcop.sysml.VariantMembership;
 import org.oasis.oslcop.sysml.VerificationCaseUsage;
 import org.oasis.oslcop.sysml.ViewUsage;
@@ -125,7 +133,7 @@ import org.oasis.oslcop.sysml.ViewpointUsage;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.SATISFYREQUIREMENTUSAGE_NAMESPACE)
 @OslcName(SysmlDomainConstants.SATISFYREQUIREMENTUSAGE_LOCALNAME)
-@OslcResourceShape(title = "SatisfyRequirementUsage Resource Shape", describes = SysmlDomainConstants.SATISFYREQUIREMENTUSAGE_TYPE)
+@OslcResourceShape(title = "SatisfyRequirementUsage Shape", describes = SysmlDomainConstants.SATISFYREQUIREMENTUSAGE_TYPE)
 public class SatisfyRequirementUsage
     extends RequirementUsage
     implements ISatisfyRequirementUsage, IAssertConstraintUsage, IBooleanExpression, IExpression, IInvariant, IStep
@@ -136,21 +144,6 @@ public class SatisfyRequirementUsage
     // Start of user code attributeAnnotation:satisfyingFeature
     // End of user code
     private Link satisfyingFeature;
-    // Start of user code attributeAnnotation:predicate
-    // End of user code
-    private Link predicate;
-    // Start of user code attributeAnnotation:assertionConnector
-    // End of user code
-    private Link assertionConnector;
-    // Start of user code attributeAnnotation:assertedConstraint
-    // End of user code
-    private Link assertedConstraint;
-    // Start of user code attributeAnnotation:behavior
-    // End of user code
-    private Set<Link> behavior = new HashSet<Link>();
-    // Start of user code attributeAnnotation:parameter
-    // End of user code
-    private Set<Link> parameter = new HashSet<Link>();
     // Start of user code attributeAnnotation:isModelLevelEvaluable
     // End of user code
     private Boolean isModelLevelEvaluable;
@@ -160,6 +153,21 @@ public class SatisfyRequirementUsage
     // Start of user code attributeAnnotation:result
     // End of user code
     private Link result;
+    // Start of user code attributeAnnotation:assertedConstraint
+    // End of user code
+    private Link assertedConstraint;
+    // Start of user code attributeAnnotation:predicate
+    // End of user code
+    private Link predicate;
+    // Start of user code attributeAnnotation:isNegated
+    // End of user code
+    private Boolean isNegated;
+    // Start of user code attributeAnnotation:behavior
+    // End of user code
+    private Set<Link> behavior = new HashSet<Link>();
+    // Start of user code attributeAnnotation:parameter
+    // End of user code
+    private Set<Link> parameter = new HashSet<Link>();
     
     // Start of user code classAttributes
     // End of user code
@@ -210,7 +218,7 @@ public class SatisfyRequirementUsage
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -257,81 +265,6 @@ public class SatisfyRequirementUsage
         return satisfyingFeature;
     }
     
-    // Start of user code getterAnnotation:predicate
-    // End of user code
-    @OslcName("predicate")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "predicate")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.PREDICATE_TYPE})
-    @OslcReadOnly(false)
-    public Link getPredicate()
-    {
-        // Start of user code getterInit:predicate
-        // End of user code
-        return predicate;
-    }
-    
-    // Start of user code getterAnnotation:assertionConnector
-    // End of user code
-    @OslcName("assertionConnector")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "assertionConnector")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.BINDINGCONNECTOR_TYPE})
-    @OslcReadOnly(false)
-    public Link getAssertionConnector()
-    {
-        // Start of user code getterInit:assertionConnector
-        // End of user code
-        return assertionConnector;
-    }
-    
-    // Start of user code getterAnnotation:assertedConstraint
-    // End of user code
-    @OslcName("assertedConstraint")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "assertedConstraint")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.CONSTRAINTUSAGE_TYPE})
-    @OslcReadOnly(false)
-    public Link getAssertedConstraint()
-    {
-        // Start of user code getterInit:assertedConstraint
-        // End of user code
-        return assertedConstraint;
-    }
-    
-    // Start of user code getterAnnotation:behavior
-    // End of user code
-    @OslcName("behavior")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "behavior")
-    @OslcOccurs(Occurs.OneOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.BEHAVIOR_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getBehavior()
-    {
-        // Start of user code getterInit:behavior
-        // End of user code
-        return behavior;
-    }
-    
-    // Start of user code getterAnnotation:parameter
-    // End of user code
-    @OslcName("parameter")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "parameter")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getParameter()
-    {
-        // Start of user code getterInit:parameter
-        // End of user code
-        return parameter;
-    }
-    
     // Start of user code getterAnnotation:isModelLevelEvaluable
     // End of user code
     @OslcName("isModelLevelEvaluable")
@@ -376,6 +309,80 @@ public class SatisfyRequirementUsage
         return result;
     }
     
+    // Start of user code getterAnnotation:assertedConstraint
+    // End of user code
+    @OslcName("assertedConstraint")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "assertedConstraint")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.CONSTRAINTUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Link getAssertedConstraint()
+    {
+        // Start of user code getterInit:assertedConstraint
+        // End of user code
+        return assertedConstraint;
+    }
+    
+    // Start of user code getterAnnotation:predicate
+    // End of user code
+    @OslcName("predicate")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "predicate")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.PREDICATE_TYPE})
+    @OslcReadOnly(false)
+    public Link getPredicate()
+    {
+        // Start of user code getterInit:predicate
+        // End of user code
+        return predicate;
+    }
+    
+    // Start of user code getterAnnotation:isNegated
+    // End of user code
+    @OslcName("isNegated")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isNegated")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsNegated()
+    {
+        // Start of user code getterInit:isNegated
+        // End of user code
+        return isNegated;
+    }
+    
+    // Start of user code getterAnnotation:behavior
+    // End of user code
+    @OslcName("behavior")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "behavior")
+    @OslcOccurs(Occurs.OneOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.BEHAVIOR_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getBehavior()
+    {
+        // Start of user code getterInit:behavior
+        // End of user code
+        return behavior;
+    }
+    
+    // Start of user code getterAnnotation:parameter
+    // End of user code
+    @OslcName("parameter")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "parameter")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getParameter()
+    {
+        // Start of user code getterInit:parameter
+        // End of user code
+        return parameter;
+    }
+    
     
     // Start of user code setterAnnotation:satisfiedRequirement
     // End of user code
@@ -398,74 +405,6 @@ public class SatisfyRequirementUsage
         this.satisfyingFeature = satisfyingFeature;
     
         // Start of user code setterFinalize:satisfyingFeature
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:predicate
-    // End of user code
-    public void setPredicate(final Link predicate )
-    {
-        // Start of user code setterInit:predicate
-        // End of user code
-        this.predicate = predicate;
-    
-        // Start of user code setterFinalize:predicate
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:assertionConnector
-    // End of user code
-    public void setAssertionConnector(final Link assertionConnector )
-    {
-        // Start of user code setterInit:assertionConnector
-        // End of user code
-        this.assertionConnector = assertionConnector;
-    
-        // Start of user code setterFinalize:assertionConnector
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:assertedConstraint
-    // End of user code
-    public void setAssertedConstraint(final Link assertedConstraint )
-    {
-        // Start of user code setterInit:assertedConstraint
-        // End of user code
-        this.assertedConstraint = assertedConstraint;
-    
-        // Start of user code setterFinalize:assertedConstraint
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:behavior
-    // End of user code
-    public void setBehavior(final Set<Link> behavior )
-    {
-        // Start of user code setterInit:behavior
-        // End of user code
-        this.behavior.clear();
-        if (behavior != null)
-        {
-            this.behavior.addAll(behavior);
-        }
-    
-        // Start of user code setterFinalize:behavior
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:parameter
-    // End of user code
-    public void setParameter(final Set<Link> parameter )
-    {
-        // Start of user code setterInit:parameter
-        // End of user code
-        this.parameter.clear();
-        if (parameter != null)
-        {
-            this.parameter.addAll(parameter);
-        }
-    
-        // Start of user code setterFinalize:parameter
         // End of user code
     }
     
@@ -502,6 +441,74 @@ public class SatisfyRequirementUsage
         this.result = result;
     
         // Start of user code setterFinalize:result
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:assertedConstraint
+    // End of user code
+    public void setAssertedConstraint(final Link assertedConstraint )
+    {
+        // Start of user code setterInit:assertedConstraint
+        // End of user code
+        this.assertedConstraint = assertedConstraint;
+    
+        // Start of user code setterFinalize:assertedConstraint
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:predicate
+    // End of user code
+    public void setPredicate(final Link predicate )
+    {
+        // Start of user code setterInit:predicate
+        // End of user code
+        this.predicate = predicate;
+    
+        // Start of user code setterFinalize:predicate
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:isNegated
+    // End of user code
+    public void setIsNegated(final Boolean isNegated )
+    {
+        // Start of user code setterInit:isNegated
+        // End of user code
+        this.isNegated = isNegated;
+    
+        // Start of user code setterFinalize:isNegated
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:behavior
+    // End of user code
+    public void setBehavior(final Set<Link> behavior )
+    {
+        // Start of user code setterInit:behavior
+        // End of user code
+        this.behavior.clear();
+        if (behavior != null)
+        {
+            this.behavior.addAll(behavior);
+        }
+    
+        // Start of user code setterFinalize:behavior
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:parameter
+    // End of user code
+    public void setParameter(final Set<Link> parameter )
+    {
+        // Start of user code setterInit:parameter
+        // End of user code
+        this.parameter.clear();
+        if (parameter != null)
+        {
+            this.parameter.addAll(parameter);
+        }
+    
+        // Start of user code setterFinalize:parameter
         // End of user code
     }
     

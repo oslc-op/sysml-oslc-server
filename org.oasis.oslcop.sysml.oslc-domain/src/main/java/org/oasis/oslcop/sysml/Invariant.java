@@ -63,16 +63,16 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.Behavior;
-import org.oasis.oslcop.sysml.BindingConnector;
 import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
 import org.oasis.oslcop.sysml.Function;
-import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
@@ -81,6 +81,7 @@ import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Predicate;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
@@ -95,14 +96,14 @@ import org.oasis.oslcop.sysml.TypeFeaturing;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.INVARIANT_NAMESPACE)
 @OslcName(SysmlDomainConstants.INVARIANT_LOCALNAME)
-@OslcResourceShape(title = "Invariant Resource Shape", describes = SysmlDomainConstants.INVARIANT_TYPE)
+@OslcResourceShape(title = "Invariant Shape", describes = SysmlDomainConstants.INVARIANT_TYPE)
 public class Invariant
     extends BooleanExpression
     implements IInvariant
 {
-    // Start of user code attributeAnnotation:assertionConnector
+    // Start of user code attributeAnnotation:isNegated
     // End of user code
-    private Link assertionConnector;
+    private Boolean isNegated;
     
     // Start of user code classAttributes
     // End of user code
@@ -153,38 +154,37 @@ public class Invariant
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
     
-    // Start of user code getterAnnotation:assertionConnector
+    // Start of user code getterAnnotation:isNegated
     // End of user code
-    @OslcName("assertionConnector")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "assertionConnector")
+    @OslcName("isNegated")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isNegated")
     @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.BINDINGCONNECTOR_TYPE})
+    @OslcValueType(ValueType.Boolean)
     @OslcReadOnly(false)
-    public Link getAssertionConnector()
+    public Boolean isIsNegated()
     {
-        // Start of user code getterInit:assertionConnector
+        // Start of user code getterInit:isNegated
         // End of user code
-        return assertionConnector;
+        return isNegated;
     }
     
     
-    // Start of user code setterAnnotation:assertionConnector
+    // Start of user code setterAnnotation:isNegated
     // End of user code
-    public void setAssertionConnector(final Link assertionConnector )
+    public void setIsNegated(final Boolean isNegated )
     {
-        // Start of user code setterInit:assertionConnector
+        // Start of user code setterInit:isNegated
         // End of user code
-        this.assertionConnector = assertionConnector;
+        this.isNegated = isNegated;
     
-        // Start of user code setterFinalize:assertionConnector
+        // Start of user code setterFinalize:isNegated
         // End of user code
     }
     

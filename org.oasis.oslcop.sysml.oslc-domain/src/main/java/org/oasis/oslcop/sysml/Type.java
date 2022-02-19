@@ -64,17 +64,18 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
-import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 // Start of user code imports
 // End of user code
@@ -86,7 +87,7 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.TYPE_NAMESPACE)
 @OslcName(SysmlDomainConstants.TYPE_LOCALNAME)
-@OslcResourceShape(title = "Type Resource Shape", describes = SysmlDomainConstants.TYPE_TYPE)
+@OslcResourceShape(title = "Type Shape", describes = SysmlDomainConstants.TYPE_TYPE)
 public class Type
     extends Namespace
     implements IType
@@ -100,18 +101,21 @@ public class Type
     // Start of user code attributeAnnotation:isConjugated
     // End of user code
     private Boolean isConjugated;
-    // Start of user code attributeAnnotation:ownedGeneralization
+    // Start of user code attributeAnnotation:ownedSpecialization
     // End of user code
-    private Set<Link> ownedGeneralization = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedFeatureMembership_comp
+    private Set<Link> ownedSpecialization = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedFeatureMembership
     // End of user code
-    private Set<Link> ownedFeatureMembership_comp = new HashSet<Link>();
-    // Start of user code attributeAnnotation:feature
-    // End of user code
-    private Set<Link> feature = new HashSet<Link>();
+    private Set<Link> ownedFeatureMembership = new HashSet<Link>();
     // Start of user code attributeAnnotation:ownedFeature
     // End of user code
     private Set<Link> ownedFeature = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedEndFeature
+    // End of user code
+    private Set<Link> ownedEndFeature = new HashSet<Link>();
+    // Start of user code attributeAnnotation:feature
+    // End of user code
+    private Set<Link> feature = new HashSet<Link>();
     // Start of user code attributeAnnotation:input
     // End of user code
     private Set<Link> input = new HashSet<Link>();
@@ -124,9 +128,6 @@ public class Type
     // Start of user code attributeAnnotation:endFeature
     // End of user code
     private Set<Link> endFeature = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedEndFeature
-    // End of user code
-    private Set<Link> ownedEndFeature = new HashSet<Link>();
     // Start of user code attributeAnnotation:ownedConjugator
     // End of user code
     private Link ownedConjugator;
@@ -139,9 +140,12 @@ public class Type
     // Start of user code attributeAnnotation:multiplicity
     // End of user code
     private Link multiplicity;
-    // Start of user code attributeAnnotation:ownedFeatureMembership
+    // Start of user code attributeAnnotation:directedFeature
     // End of user code
-    private Set<Link> ownedFeatureMembership = new HashSet<Link>();
+    private Set<Link> directedFeature = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedDisjoining
+    // End of user code
+    private Set<Link> ownedDisjoining = new HashSet<Link>();
     
     // Start of user code classAttributes
     // End of user code
@@ -192,30 +196,35 @@ public class Type
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
-    public void addOwnedGeneralization(final Link ownedGeneralization)
+    public void addOwnedSpecialization(final Link ownedSpecialization)
     {
-        this.ownedGeneralization.add(ownedGeneralization);
+        this.ownedSpecialization.add(ownedSpecialization);
     }
     
-    public void addOwnedFeatureMembership_comp(final Link ownedFeatureMembership_comp)
+    public void addOwnedFeatureMembership(final Link ownedFeatureMembership)
     {
-        this.ownedFeatureMembership_comp.add(ownedFeatureMembership_comp);
-    }
-    
-    public void addFeature(final Link feature)
-    {
-        this.feature.add(feature);
+        this.ownedFeatureMembership.add(ownedFeatureMembership);
     }
     
     public void addOwnedFeature(final Link ownedFeature)
     {
         this.ownedFeature.add(ownedFeature);
+    }
+    
+    public void addOwnedEndFeature(final Link ownedEndFeature)
+    {
+        this.ownedEndFeature.add(ownedEndFeature);
+    }
+    
+    public void addFeature(final Link feature)
+    {
+        this.feature.add(feature);
     }
     
     public void addInput(final Link input)
@@ -238,11 +247,6 @@ public class Type
         this.endFeature.add(endFeature);
     }
     
-    public void addOwnedEndFeature(final Link ownedEndFeature)
-    {
-        this.ownedEndFeature.add(ownedEndFeature);
-    }
-    
     public void addFeatureMembership(final Link featureMembership)
     {
         this.featureMembership.add(featureMembership);
@@ -253,9 +257,14 @@ public class Type
         this.inheritedFeature.add(inheritedFeature);
     }
     
-    public void addOwnedFeatureMembership(final Link ownedFeatureMembership)
+    public void addDirectedFeature(final Link directedFeature)
     {
-        this.ownedFeatureMembership.add(ownedFeatureMembership);
+        this.directedFeature.add(directedFeature);
+    }
+    
+    public void addOwnedDisjoining(final Link ownedDisjoining)
+    {
+        this.ownedDisjoining.add(ownedDisjoining);
     }
     
     
@@ -301,49 +310,34 @@ public class Type
         return isConjugated;
     }
     
-    // Start of user code getterAnnotation:ownedGeneralization
+    // Start of user code getterAnnotation:ownedSpecialization
     // End of user code
-    @OslcName("ownedGeneralization")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedGeneralization")
+    @OslcName("ownedSpecialization")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedSpecialization")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.GENERALIZATION_TYPE})
+    @OslcRange({SysmlDomainConstants.SPECIALIZATION_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedGeneralization()
+    public Set<Link> getOwnedSpecialization()
     {
-        // Start of user code getterInit:ownedGeneralization
+        // Start of user code getterInit:ownedSpecialization
         // End of user code
-        return ownedGeneralization;
+        return ownedSpecialization;
     }
     
-    // Start of user code getterAnnotation:ownedFeatureMembership_comp
+    // Start of user code getterAnnotation:ownedFeatureMembership
     // End of user code
-    @OslcName("ownedFeatureMembership_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedFeatureMembership_comp")
+    @OslcName("ownedFeatureMembership")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedFeatureMembership")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.FEATUREMEMBERSHIP_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedFeatureMembership_comp()
+    public Set<Link> getOwnedFeatureMembership()
     {
-        // Start of user code getterInit:ownedFeatureMembership_comp
+        // Start of user code getterInit:ownedFeatureMembership
         // End of user code
-        return ownedFeatureMembership_comp;
-    }
-    
-    // Start of user code getterAnnotation:feature
-    // End of user code
-    @OslcName("feature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "feature")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getFeature()
-    {
-        // Start of user code getterInit:feature
-        // End of user code
-        return feature;
+        return ownedFeatureMembership;
     }
     
     // Start of user code getterAnnotation:ownedFeature
@@ -359,6 +353,36 @@ public class Type
         // Start of user code getterInit:ownedFeature
         // End of user code
         return ownedFeature;
+    }
+    
+    // Start of user code getterAnnotation:ownedEndFeature
+    // End of user code
+    @OslcName("ownedEndFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedEndFeature")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedEndFeature()
+    {
+        // Start of user code getterInit:ownedEndFeature
+        // End of user code
+        return ownedEndFeature;
+    }
+    
+    // Start of user code getterAnnotation:feature
+    // End of user code
+    @OslcName("feature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "feature")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getFeature()
+    {
+        // Start of user code getterInit:feature
+        // End of user code
+        return feature;
     }
     
     // Start of user code getterAnnotation:input
@@ -421,21 +445,6 @@ public class Type
         return endFeature;
     }
     
-    // Start of user code getterAnnotation:ownedEndFeature
-    // End of user code
-    @OslcName("ownedEndFeature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedEndFeature")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedEndFeature()
-    {
-        // Start of user code getterInit:ownedEndFeature
-        // End of user code
-        return ownedEndFeature;
-    }
-    
     // Start of user code getterAnnotation:ownedConjugator
     // End of user code
     @OslcName("ownedConjugator")
@@ -496,19 +505,34 @@ public class Type
         return multiplicity;
     }
     
-    // Start of user code getterAnnotation:ownedFeatureMembership
+    // Start of user code getterAnnotation:directedFeature
     // End of user code
-    @OslcName("ownedFeatureMembership")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedFeatureMembership")
+    @OslcName("directedFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "directedFeature")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATUREMEMBERSHIP_TYPE})
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedFeatureMembership()
+    public Set<Link> getDirectedFeature()
     {
-        // Start of user code getterInit:ownedFeatureMembership
+        // Start of user code getterInit:directedFeature
         // End of user code
-        return ownedFeatureMembership;
+        return directedFeature;
+    }
+    
+    // Start of user code getterAnnotation:ownedDisjoining
+    // End of user code
+    @OslcName("ownedDisjoining")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedDisjoining")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.DISJOINING_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedDisjoining()
+    {
+        // Start of user code getterInit:ownedDisjoining
+        // End of user code
+        return ownedDisjoining;
     }
     
     
@@ -548,51 +572,35 @@ public class Type
         // End of user code
     }
     
-    // Start of user code setterAnnotation:ownedGeneralization
+    // Start of user code setterAnnotation:ownedSpecialization
     // End of user code
-    public void setOwnedGeneralization(final Set<Link> ownedGeneralization )
+    public void setOwnedSpecialization(final Set<Link> ownedSpecialization )
     {
-        // Start of user code setterInit:ownedGeneralization
+        // Start of user code setterInit:ownedSpecialization
         // End of user code
-        this.ownedGeneralization.clear();
-        if (ownedGeneralization != null)
+        this.ownedSpecialization.clear();
+        if (ownedSpecialization != null)
         {
-            this.ownedGeneralization.addAll(ownedGeneralization);
+            this.ownedSpecialization.addAll(ownedSpecialization);
         }
     
-        // Start of user code setterFinalize:ownedGeneralization
+        // Start of user code setterFinalize:ownedSpecialization
         // End of user code
     }
     
-    // Start of user code setterAnnotation:ownedFeatureMembership_comp
+    // Start of user code setterAnnotation:ownedFeatureMembership
     // End of user code
-    public void setOwnedFeatureMembership_comp(final Set<Link> ownedFeatureMembership_comp )
+    public void setOwnedFeatureMembership(final Set<Link> ownedFeatureMembership )
     {
-        // Start of user code setterInit:ownedFeatureMembership_comp
+        // Start of user code setterInit:ownedFeatureMembership
         // End of user code
-        this.ownedFeatureMembership_comp.clear();
-        if (ownedFeatureMembership_comp != null)
+        this.ownedFeatureMembership.clear();
+        if (ownedFeatureMembership != null)
         {
-            this.ownedFeatureMembership_comp.addAll(ownedFeatureMembership_comp);
+            this.ownedFeatureMembership.addAll(ownedFeatureMembership);
         }
     
-        // Start of user code setterFinalize:ownedFeatureMembership_comp
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:feature
-    // End of user code
-    public void setFeature(final Set<Link> feature )
-    {
-        // Start of user code setterInit:feature
-        // End of user code
-        this.feature.clear();
-        if (feature != null)
-        {
-            this.feature.addAll(feature);
-        }
-    
-        // Start of user code setterFinalize:feature
+        // Start of user code setterFinalize:ownedFeatureMembership
         // End of user code
     }
     
@@ -609,6 +617,38 @@ public class Type
         }
     
         // Start of user code setterFinalize:ownedFeature
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedEndFeature
+    // End of user code
+    public void setOwnedEndFeature(final Set<Link> ownedEndFeature )
+    {
+        // Start of user code setterInit:ownedEndFeature
+        // End of user code
+        this.ownedEndFeature.clear();
+        if (ownedEndFeature != null)
+        {
+            this.ownedEndFeature.addAll(ownedEndFeature);
+        }
+    
+        // Start of user code setterFinalize:ownedEndFeature
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:feature
+    // End of user code
+    public void setFeature(final Set<Link> feature )
+    {
+        // Start of user code setterInit:feature
+        // End of user code
+        this.feature.clear();
+        if (feature != null)
+        {
+            this.feature.addAll(feature);
+        }
+    
+        // Start of user code setterFinalize:feature
         // End of user code
     }
     
@@ -676,22 +716,6 @@ public class Type
         // End of user code
     }
     
-    // Start of user code setterAnnotation:ownedEndFeature
-    // End of user code
-    public void setOwnedEndFeature(final Set<Link> ownedEndFeature )
-    {
-        // Start of user code setterInit:ownedEndFeature
-        // End of user code
-        this.ownedEndFeature.clear();
-        if (ownedEndFeature != null)
-        {
-            this.ownedEndFeature.addAll(ownedEndFeature);
-        }
-    
-        // Start of user code setterFinalize:ownedEndFeature
-        // End of user code
-    }
-    
     // Start of user code setterAnnotation:ownedConjugator
     // End of user code
     public void setOwnedConjugator(final Link ownedConjugator )
@@ -748,19 +772,35 @@ public class Type
         // End of user code
     }
     
-    // Start of user code setterAnnotation:ownedFeatureMembership
+    // Start of user code setterAnnotation:directedFeature
     // End of user code
-    public void setOwnedFeatureMembership(final Set<Link> ownedFeatureMembership )
+    public void setDirectedFeature(final Set<Link> directedFeature )
     {
-        // Start of user code setterInit:ownedFeatureMembership
+        // Start of user code setterInit:directedFeature
         // End of user code
-        this.ownedFeatureMembership.clear();
-        if (ownedFeatureMembership != null)
+        this.directedFeature.clear();
+        if (directedFeature != null)
         {
-            this.ownedFeatureMembership.addAll(ownedFeatureMembership);
+            this.directedFeature.addAll(directedFeature);
         }
     
-        // Start of user code setterFinalize:ownedFeatureMembership
+        // Start of user code setterFinalize:directedFeature
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedDisjoining
+    // End of user code
+    public void setOwnedDisjoining(final Set<Link> ownedDisjoining )
+    {
+        // Start of user code setterInit:ownedDisjoining
+        // End of user code
+        this.ownedDisjoining.clear();
+        if (ownedDisjoining != null)
+        {
+            this.ownedDisjoining.addAll(ownedDisjoining);
+        }
+    
+        // Start of user code setterFinalize:ownedDisjoining
         // End of user code
     }
     

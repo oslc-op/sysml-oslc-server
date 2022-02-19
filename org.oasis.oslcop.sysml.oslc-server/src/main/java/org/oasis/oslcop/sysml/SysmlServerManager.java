@@ -15,14 +15,58 @@
 
 package org.oasis.oslcop.sysml;
 
+// Start of user code Notice
+//Note: The Lyo code generator is migrating the name of this class from 'SysmlServerManager' to the new shorter name 'RestDelegate'.
+//You are still using the old name. The generator will continue to use this old name until you actively trigger the change.
+//To migrate to the new class name:
+//1. Rename your class to RestDelegate 
+//    * Please rename and do not simply create a copy of the file. The generator needs to detect the file deletion in order to activate the name change.
+//2. Regenerate the code. 
+//    * The generator will generate this class with the new name.
+//    * Besides the class name, the code - including the user clode blocks - remain intact.
+//    * All other class references to the new class name are updated.
+//3. Delete this notice
+// End of user code
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.ServletContextEvent;
-import java.net.URL;
 import java.util.List;
 import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
+import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
+import org.eclipse.lyo.oslc4j.core.model.AbstractResource;
+import org.oasis.oslcop.sysml.servlet.ServiceProviderCatalogSingleton;
+import org.oasis.oslcop.sysml.ServiceProviderInfo;
+import org.oasis.oslcop.sysml.AnnotatingElement;
+import org.oasis.oslcop.sysml.Annotation;
+import org.oasis.oslcop.sysml.SysmlClass;
+import org.oasis.oslcop.sysml.Classifier;
+import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Disjoining;
+import org.oasis.oslcop.sysml.Documentation;
+import org.oasis.oslcop.sysml.Element;
+import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
+import org.oasis.oslcop.sysml.FeatureMembership;
+import org.oasis.oslcop.sysml.FeatureTyping;
+import org.oasis.oslcop.sysml.SysmlImport;
+import org.oasis.oslcop.sysml.Membership;
+import org.oasis.oslcop.sysml.Multiplicity;
+import org.oasis.oslcop.sysml.Namespace;
+import org.eclipse.lyo.oslc.domains.Person;
+import org.oasis.oslcop.sysml.Redefinition;
+import org.oasis.oslcop.sysml.Relationship;
+import org.eclipse.lyo.oslc.domains.am.Resource;
+import org.oasis.oslcop.sysml.Specialization;
+import org.oasis.oslcop.sysml.Subclassification;
+import org.oasis.oslcop.sysml.Subsetting;
+import org.oasis.oslcop.sysml.TextualRepresentation;
+import org.oasis.oslcop.sysml.Type;
+import org.oasis.oslcop.sysml.TypeFeaturing;
 import java.net.URI;
 import java.util.Properties;
 import java.io.FileInputStream;
@@ -40,8 +84,8 @@ import javax.ws.rs.core.Response.Status;
 
 
 // Start of user code imports
-
-import org.oasis.oslcop.sysml.services.StoreService;
+import java.net.URL;
+import org.oasis.oslcop.sysml.services.ProjectCommitSelectionService;
 // End of user code
 
 // Start of user code pre_class_code
@@ -119,6 +163,12 @@ public class SysmlServerManager {
             storePool = new StorePool(initialPoolSize, defaultNamedGraph, sparqlQueryEndpoint, sparqlUpdateEndpoint, userName, password);
         }
         _sparqlQueryEndpoint = sparqlQueryEndpoint;
+        
+        try {
+            ProjectCommitSelectionService.setDefaultServiceProvider();
+        } catch (Exception e) {
+            log.error("problems setting the default ServiecProvider. Might be ok if we are starting with an empty database", e);
+        }
         // End of user code
         
     }
@@ -158,7 +208,7 @@ public class SysmlServerManager {
         return serviceProviderInfos;
     }
 
-    public static List<Subsetting> querySubsettings(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
+    public static List<Subsetting> querySubsettings(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, String prefix, boolean paging, int page, int limit)
     {
         List<Subsetting> resources = null;
         
@@ -166,7 +216,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Subsetting>(store.getResources(StoreService.getSelectedNamedGraph(), Subsetting.class, prefix, where, "", limit+1, page*limit));
+            resources = new ArrayList<Subsetting>(store.getResources(ProjectCommitSelectionService.getSelectedNamedGraph(), Subsetting.class, prefix, where, "", (OSLC4JUtils.hasLyoStorePagingPreciseLimit() ? limit : limit+1), page*limit));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to query resources, with where-string '" + where + "'", e);
             throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -183,7 +233,7 @@ public class SysmlServerManager {
         // End of user code
         return resources;
     }
-    public static List<Subsetting> SubsettingSelector(HttpServletRequest httpServletRequest, final String projectId, String terms)   
+    public static List<Subsetting> SubsettingSelector(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String terms)   
     {
         List<Subsetting> resources = null;
         
@@ -191,7 +241,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Subsetting>(store.getResources(StoreService.getSelectedNamedGraph(), Subsetting.class, "", "", terms, 20, -1));
+            resources = new ArrayList<Subsetting>(store.getResources(ProjectCommitSelectionService.getSelectedNamedGraph(), Subsetting.class, "", "", terms, 20, -1));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to search resources, with search-term '" + terms + "'", e);
             throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -211,113 +261,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<Element> queryElements(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
-    {
-        List<Element> resources = null;
-        
-        // Start of user code queryElements_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        try {
-            resources = new ArrayList<Element>(store.getResources(StoreService.getSelectedNamedGraph(), Element.class, prefix, where, "", limit+1, page*limit));
-        } catch (StoreAccessException | ModelUnmarshallingException e) {
-            log.error("Failed to query resources, with where-string '" + where + "'", e);
-            throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code queryElements_storeFinalize
-        // End of user code
-        
-        // Start of user code queryElements
-        // End of user code
-        return resources;
-    }
-    public static List<Element> ElementSelector(HttpServletRequest httpServletRequest, final String projectId, String terms)   
-    {
-        List<Element> resources = null;
-        
-        // Start of user code ElementSelector_storeInit
-        String selectType = httpServletRequest.getParameter("selectType");
-        String prefix = "rdf=" + "<" + org.apache.jena.vocabulary.RDF.uri + ">";
-        String where = "rdf:type=" + "<" + SysmlDomainConstants.SYSML_NAMSPACE + selectType + ">";
-        // End of user code
-        Store store = storePool.getStore();
-        try {
-            resources = new ArrayList<Element>(store.getResources(StoreService.getSelectedNamedGraph(), Element.class, prefix, where, terms, 20, -1));
-        } catch (StoreAccessException | ModelUnmarshallingException e) {
-            log.error("Failed to search resources, with search-term '" + terms + "'", e);
-            throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code ElementSelector_storeFinalize
-        // End of user code
-        
-        // Start of user code ElementSelector
-        // TODO Implement code to return a set of resources, based on search criteria 
-        // An empty List should imply that no resources where found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return resources;
-    }
-
-
-
-    public static List<SysmlClass> querySysmlClasss(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
-    {
-        List<SysmlClass> resources = null;
-        
-        // Start of user code querySysmlClasss_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        try {
-            resources = new ArrayList<SysmlClass>(store.getResources(StoreService.getSelectedNamedGraph(), SysmlClass.class, prefix, where, "", limit+1, page*limit));
-        } catch (StoreAccessException | ModelUnmarshallingException e) {
-            log.error("Failed to query resources, with where-string '" + where + "'", e);
-            throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code querySysmlClasss_storeFinalize
-        // End of user code
-        
-        // Start of user code querySysmlClasss
-        // TODO Implement code to return a set of resources.
-        // An empty List should imply that no resources where found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return resources;
-    }
-    public static List<SysmlClass> SysmlClassSelector(HttpServletRequest httpServletRequest, final String projectId, String terms)   
-    {
-        List<SysmlClass> resources = null;
-        
-        // Start of user code SysmlClassSelector_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        try {
-            resources = new ArrayList<SysmlClass>(store.getResources(StoreService.getSelectedNamedGraph(), SysmlClass.class, "", "", terms, 20, -1));
-        } catch (StoreAccessException | ModelUnmarshallingException e) {
-            log.error("Failed to search resources, with search-term '" + terms + "'", e);
-            throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code SysmlClassSelector_storeFinalize
-        // End of user code
-        
-        // Start of user code SysmlClassSelector
-        // TODO Implement code to return a set of resources, based on search criteria 
-        // An empty List should imply that no resources where found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return resources;
-    }
-
-
-
-    public static List<Relationship> queryRelationships(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
+    public static List<Relationship> queryRelationships(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, String prefix, boolean paging, int page, int limit)
     {
         List<Relationship> resources = null;
         
@@ -325,7 +269,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Relationship>(store.getResources(StoreService.getSelectedNamedGraph(), Relationship.class, prefix, where, "", limit+1, page*limit));
+            resources = new ArrayList<Relationship>(store.getResources(ProjectCommitSelectionService.getSelectedNamedGraph(), Relationship.class, prefix, where, "", (OSLC4JUtils.hasLyoStorePagingPreciseLimit() ? limit : limit+1), page*limit));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to query resources, with where-string '" + where + "'", e);
             throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -342,7 +286,7 @@ public class SysmlServerManager {
         // End of user code
         return resources;
     }
-    public static List<Relationship> RelationshipSelector(HttpServletRequest httpServletRequest, final String projectId, String terms)   
+    public static List<Relationship> RelationshipSelector(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String terms)   
     {
         List<Relationship> resources = null;
         
@@ -350,7 +294,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Relationship>(store.getResources(StoreService.getSelectedNamedGraph(), Relationship.class, "", "", terms, 20, -1));
+            resources = new ArrayList<Relationship>(store.getResources(ProjectCommitSelectionService.getSelectedNamedGraph(), Relationship.class, "", "", terms, 20, -1));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to search resources, with search-term '" + terms + "'", e);
             throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -370,50 +314,50 @@ public class SysmlServerManager {
 
 
 
-    public static List<Generalization> queryGeneralizations(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
+    public static List<SysmlClass> querySysmlClasss(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, String prefix, boolean paging, int page, int limit)
     {
-        List<Generalization> resources = null;
+        List<SysmlClass> resources = null;
         
-        // Start of user code queryGeneralizations_storeInit
+        // Start of user code querySysmlClasss_storeInit
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Generalization>(store.getResources(StoreService.getSelectedNamedGraph(), Generalization.class, prefix, where, "", limit+1, page*limit));
+            resources = new ArrayList<SysmlClass>(store.getResources(ProjectCommitSelectionService.getSelectedNamedGraph(), SysmlClass.class, prefix, where, "", (OSLC4JUtils.hasLyoStorePagingPreciseLimit() ? limit : limit+1), page*limit));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to query resources, with where-string '" + where + "'", e);
             throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
         } finally {
             storePool.releaseStore(store);
         }
-        // Start of user code queryGeneralizations_storeFinalize
+        // Start of user code querySysmlClasss_storeFinalize
         // End of user code
         
-        // Start of user code queryGeneralizations
+        // Start of user code querySysmlClasss
         // TODO Implement code to return a set of resources.
         // An empty List should imply that no resources where found.
         // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
         // End of user code
         return resources;
     }
-    public static List<Generalization> GeneralizationSelector(HttpServletRequest httpServletRequest, final String projectId, String terms)   
+    public static List<SysmlClass> SysmlClassSelector(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String terms)   
     {
-        List<Generalization> resources = null;
+        List<SysmlClass> resources = null;
         
-        // Start of user code GeneralizationSelector_storeInit
+        // Start of user code SysmlClassSelector_storeInit
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Generalization>(store.getResources(StoreService.getSelectedNamedGraph(), Generalization.class, "", "", terms, 20, -1));
+            resources = new ArrayList<SysmlClass>(store.getResources(ProjectCommitSelectionService.getSelectedNamedGraph(), SysmlClass.class, "", "", terms, 20, -1));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to search resources, with search-term '" + terms + "'", e);
             throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
         } finally {
             storePool.releaseStore(store);
         }
-        // Start of user code GeneralizationSelector_storeFinalize
+        // Start of user code SysmlClassSelector_storeFinalize
         // End of user code
         
-        // Start of user code GeneralizationSelector
+        // Start of user code SysmlClassSelector
         // TODO Implement code to return a set of resources, based on search criteria 
         // An empty List should imply that no resources where found.
         // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
@@ -423,7 +367,7 @@ public class SysmlServerManager {
 
 
 
-    public static List<Feature> queryFeatures(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
+    public static List<Feature> queryFeatures(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, String prefix, boolean paging, int page, int limit)
     {
         List<Feature> resources = null;
         
@@ -431,7 +375,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Feature>(store.getResources(StoreService.getSelectedNamedGraph(), Feature.class, prefix, where, "", limit+1, page*limit));
+            resources = new ArrayList<Feature>(store.getResources(ProjectCommitSelectionService.getSelectedNamedGraph(), Feature.class, prefix, where, "", (OSLC4JUtils.hasLyoStorePagingPreciseLimit() ? limit : limit+1), page*limit));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to query resources, with where-string '" + where + "'", e);
             throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -448,7 +392,7 @@ public class SysmlServerManager {
         // End of user code
         return resources;
     }
-    public static List<Feature> FeatureSelector(HttpServletRequest httpServletRequest, final String projectId, String terms)   
+    public static List<Feature> FeatureSelector(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String terms)   
     {
         List<Feature> resources = null;
         
@@ -456,7 +400,7 @@ public class SysmlServerManager {
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<Feature>(store.getResources(StoreService.getSelectedNamedGraph(), Feature.class, "", "", terms, 20, -1));
+            resources = new ArrayList<Feature>(store.getResources(ProjectCommitSelectionService.getSelectedNamedGraph(), Feature.class, "", "", terms, 20, -1));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to search resources, with search-term '" + terms + "'", e);
             throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
@@ -476,262 +420,50 @@ public class SysmlServerManager {
 
 
 
-    public static List<FeatureMembership> queryFeatureMemberships(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
+    public static List<Element> queryElements(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String where, String prefix, boolean paging, int page, int limit)
     {
-        List<FeatureMembership> resources = null;
+        List<Element> resources = null;
         
-        // Start of user code queryFeatureMemberships_storeInit
+        // Start of user code queryElements_storeInit
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<FeatureMembership>(store.getResources(StoreService.getSelectedNamedGraph(), FeatureMembership.class, prefix, where, "", limit+1, page*limit));
+            resources = new ArrayList<Element>(store.getResources(ProjectCommitSelectionService.getSelectedNamedGraph(), Element.class, prefix, where, "", (OSLC4JUtils.hasLyoStorePagingPreciseLimit() ? limit : limit+1), page*limit));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to query resources, with where-string '" + where + "'", e);
             throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
         } finally {
             storePool.releaseStore(store);
         }
-        // Start of user code queryFeatureMemberships_storeFinalize
+        // Start of user code queryElements_storeFinalize
         // End of user code
         
-        // Start of user code queryFeatureMemberships
-        // TODO Implement code to return a set of resources.
-        // An empty List should imply that no resources where found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
+        // Start of user code queryElements
         // End of user code
         return resources;
     }
-    public static List<FeatureMembership> FeatureMembershipSelector(HttpServletRequest httpServletRequest, final String projectId, String terms)   
+    public static List<Element> ElementSelector(HttpServletRequest httpServletRequest, final String projectId, final String commitId, String terms)   
     {
-        List<FeatureMembership> resources = null;
+        List<Element> resources = null;
         
-        // Start of user code FeatureMembershipSelector_storeInit
+        // Start of user code ElementSelector_storeInit
+        String selectType = httpServletRequest.getParameter("selectType");
+        String prefix = "rdf=" + "<" + org.apache.jena.vocabulary.RDF.uri + ">";
+        String where = "rdf:type=" + "<" + SysmlDomainConstants.SYSML_NAMSPACE + selectType + ">";
         // End of user code
         Store store = storePool.getStore();
         try {
-            resources = new ArrayList<FeatureMembership>(store.getResources(StoreService.getSelectedNamedGraph(), FeatureMembership.class, "", "", terms, 20, -1));
+            resources = new ArrayList<Element>(store.getResources(ProjectCommitSelectionService.getSelectedNamedGraph(), Element.class, "", "", terms, 20, -1));
         } catch (StoreAccessException | ModelUnmarshallingException e) {
             log.error("Failed to search resources, with search-term '" + terms + "'", e);
             throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
         } finally {
             storePool.releaseStore(store);
         }
-        // Start of user code FeatureMembershipSelector_storeFinalize
+        // Start of user code ElementSelector_storeFinalize
         // End of user code
         
-        // Start of user code FeatureMembershipSelector
-        // TODO Implement code to return a set of resources, based on search criteria 
-        // An empty List should imply that no resources where found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return resources;
-    }
-
-
-
-    public static List<FeatureTyping> queryFeatureTypings(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
-    {
-        List<FeatureTyping> resources = null;
-        
-        // Start of user code queryFeatureTypings_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        try {
-            resources = new ArrayList<FeatureTyping>(store.getResources(StoreService.getSelectedNamedGraph(), FeatureTyping.class, prefix, where, "", limit+1, page*limit));
-        } catch (StoreAccessException | ModelUnmarshallingException e) {
-            log.error("Failed to query resources, with where-string '" + where + "'", e);
-            throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code queryFeatureTypings_storeFinalize
-        // End of user code
-        
-        // Start of user code queryFeatureTypings
-        // TODO Implement code to return a set of resources.
-        // An empty List should imply that no resources where found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return resources;
-    }
-    public static List<FeatureTyping> FeatureTypingSelector(HttpServletRequest httpServletRequest, final String projectId, String terms)   
-    {
-        List<FeatureTyping> resources = null;
-        
-        // Start of user code FeatureTypingSelector_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        try {
-            resources = new ArrayList<FeatureTyping>(store.getResources(StoreService.getSelectedNamedGraph(), FeatureTyping.class, "", "", terms, 20, -1));
-        } catch (StoreAccessException | ModelUnmarshallingException e) {
-            log.error("Failed to search resources, with search-term '" + terms + "'", e);
-            throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code FeatureTypingSelector_storeFinalize
-        // End of user code
-        
-        // Start of user code FeatureTypingSelector
-        // TODO Implement code to return a set of resources, based on search criteria 
-        // An empty List should imply that no resources where found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return resources;
-    }
-
-
-
-    public static List<PortUsage> queryPortUsages(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
-    {
-        List<PortUsage> resources = null;
-        
-        // Start of user code queryPortUsages_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        try {
-            resources = new ArrayList<PortUsage>(store.getResources(StoreService.getSelectedNamedGraph(), PortUsage.class, prefix, where, "", limit+1, page*limit));
-        } catch (StoreAccessException | ModelUnmarshallingException e) {
-            log.error("Failed to query resources, with where-string '" + where + "'", e);
-            throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code queryPortUsages_storeFinalize
-        // End of user code
-        
-        // Start of user code queryPortUsages
-        // TODO Implement code to return a set of resources.
-        // An empty List should imply that no resources where found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return resources;
-    }
-    public static List<PortUsage> PortUsageSelector(HttpServletRequest httpServletRequest, final String projectId, String terms)   
-    {
-        List<PortUsage> resources = null;
-        
-        // Start of user code PortUsageSelector_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        try {
-            resources = new ArrayList<PortUsage>(store.getResources(StoreService.getSelectedNamedGraph(), PortUsage.class, "", "", terms, 20, -1));
-        } catch (StoreAccessException | ModelUnmarshallingException e) {
-            log.error("Failed to search resources, with search-term '" + terms + "'", e);
-            throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code PortUsageSelector_storeFinalize
-        // End of user code
-        
-        // Start of user code PortUsageSelector
-        // TODO Implement code to return a set of resources, based on search criteria 
-        // An empty List should imply that no resources where found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return resources;
-    }
-
-
-
-    public static List<AttributeUsage> queryAttributeUsages(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
-    {
-        List<AttributeUsage> resources = null;
-        
-        // Start of user code queryAttributeUsages_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        try {
-            resources = new ArrayList<AttributeUsage>(store.getResources(StoreService.getSelectedNamedGraph(), AttributeUsage.class, prefix, where, "", limit+1, page*limit));
-        } catch (StoreAccessException | ModelUnmarshallingException e) {
-            log.error("Failed to query resources, with where-string '" + where + "'", e);
-            throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code queryAttributeUsages_storeFinalize
-        // End of user code
-        
-        // Start of user code queryAttributeUsages
-        // TODO Implement code to return a set of resources.
-        // An empty List should imply that no resources where found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return resources;
-    }
-    public static List<AttributeUsage> AttributeUsageSelector(HttpServletRequest httpServletRequest, final String projectId, String terms)   
-    {
-        List<AttributeUsage> resources = null;
-        
-        // Start of user code AttributeUsageSelector_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        try {
-            resources = new ArrayList<AttributeUsage>(store.getResources(StoreService.getSelectedNamedGraph(), AttributeUsage.class, "", "", terms, 20, -1));
-        } catch (StoreAccessException | ModelUnmarshallingException e) {
-            log.error("Failed to search resources, with search-term '" + terms + "'", e);
-            throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code AttributeUsageSelector_storeFinalize
-        // End of user code
-        
-        // Start of user code AttributeUsageSelector
-        // TODO Implement code to return a set of resources, based on search criteria 
-        // An empty List should imply that no resources where found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return resources;
-    }
-
-
-
-    public static List<PartUsage> queryPartUsages(HttpServletRequest httpServletRequest, final String projectId, String where, String prefix, boolean paging, int page, int limit)
-    {
-        List<PartUsage> resources = null;
-        
-        // Start of user code queryPartUsages_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        try {
-            resources = new ArrayList<PartUsage>(store.getResources(StoreService.getSelectedNamedGraph(), PartUsage.class, prefix, where, "", limit+1, page*limit));
-        } catch (StoreAccessException | ModelUnmarshallingException e) {
-            log.error("Failed to query resources, with where-string '" + where + "'", e);
-            throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code queryPartUsages_storeFinalize
-        // End of user code
-        
-        // Start of user code queryPartUsages
-        // TODO Implement code to return a set of resources.
-        // An empty List should imply that no resources where found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return resources;
-    }
-    public static List<PartUsage> PartUsageSelector(HttpServletRequest httpServletRequest, final String projectId, String terms)   
-    {
-        List<PartUsage> resources = null;
-        
-        // Start of user code PartUsageSelector_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        try {
-            resources = new ArrayList<PartUsage>(store.getResources(StoreService.getSelectedNamedGraph(), PartUsage.class, "", "", terms, 20, -1));
-        } catch (StoreAccessException | ModelUnmarshallingException e) {
-            log.error("Failed to search resources, with search-term '" + terms + "'", e);
-            throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code PartUsageSelector_storeFinalize
-        // End of user code
-        
-        // Start of user code PartUsageSelector
+        // Start of user code ElementSelector
         // TODO Implement code to return a set of resources, based on search criteria 
         // An empty List should imply that no resources where found.
         // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
@@ -751,7 +483,7 @@ public class SysmlServerManager {
         Store store = storePool.getStore();
         URI uri = SysmlServerResourcesFactory.constructURIForSubsetting(projectId, id);
         try {
-            aResource = store.getResource(StoreService.getSelectedNamedGraph(), uri, Subsetting.class);
+            aResource = store.getResource(ProjectCommitSelectionService.getSelectedNamedGraph(), uri, Subsetting.class);
         } catch (NoSuchElementException e) {
             log.error("Resource: '" + uri + "' not found");
             throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
@@ -779,7 +511,7 @@ public class SysmlServerManager {
         Store store = storePool.getStore();
         URI uri = SysmlServerResourcesFactory.constructURIForElement(projectId, id);
         try {
-            aResource = store.getResource(StoreService.getSelectedNamedGraph(), uri, Element.class);
+            aResource = store.getResource(ProjectCommitSelectionService.getSelectedNamedGraph(), uri, Element.class);
         } catch (NoSuchElementException e) {
             log.error("Resource: '" + uri + "' not found");
             throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
@@ -807,7 +539,7 @@ public class SysmlServerManager {
         Store store = storePool.getStore();
         URI uri = SysmlServerResourcesFactory.constructURIForSysmlClass(projectId, id);
         try {
-            aResource = store.getResource(StoreService.getSelectedNamedGraph(), uri, SysmlClass.class);
+            aResource = store.getResource(ProjectCommitSelectionService.getSelectedNamedGraph(), uri, SysmlClass.class);
         } catch (NoSuchElementException e) {
             log.error("Resource: '" + uri + "' not found");
             throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
@@ -824,7 +556,6 @@ public class SysmlServerManager {
         // TODO Implement code to return a resource
         // return 'null' if the resource was not found.
         // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        //Throw exception here to make sure user implements it.
         // End of user code
         return aResource;
     }
@@ -839,7 +570,7 @@ public class SysmlServerManager {
         Store store = storePool.getStore();
         URI uri = SysmlServerResourcesFactory.constructURIForRelationship(projectId, id);
         try {
-            aResource = store.getResource(StoreService.getSelectedNamedGraph(), uri, Relationship.class);
+            aResource = store.getResource(ProjectCommitSelectionService.getSelectedNamedGraph(), uri, Relationship.class);
         } catch (NoSuchElementException e) {
             log.error("Resource: '" + uri + "' not found");
             throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
@@ -862,38 +593,6 @@ public class SysmlServerManager {
     }
 
 
-    public static Generalization getGeneralization(HttpServletRequest httpServletRequest, final String projectId, final String id)
-    {
-        Generalization aResource = null;
-        
-        // Start of user code getGeneralization_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        URI uri = SysmlServerResourcesFactory.constructURIForGeneralization(projectId, id);
-        try {
-            aResource = store.getResource(StoreService.getSelectedNamedGraph(), uri, Generalization.class);
-        } catch (NoSuchElementException e) {
-            log.error("Resource: '" + uri + "' not found");
-            throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
-        } catch (StoreAccessException | ModelUnmarshallingException  e) {
-            log.error("Failed to get resource: '" + uri + "'", e);
-            throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code getGeneralization_storeFinalize
-        // End of user code
-        
-        // Start of user code getGeneralization
-        // TODO Implement code to return a resource
-        // return 'null' if the resource was not found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        //Throw exception here to make sure user implements it.
-        // End of user code
-        return aResource;
-    }
-
-
     public static Feature getFeature(HttpServletRequest httpServletRequest, final String projectId, final String id)
     {
         Feature aResource = null;
@@ -903,7 +602,7 @@ public class SysmlServerManager {
         Store store = storePool.getStore();
         URI uri = SysmlServerResourcesFactory.constructURIForFeature(projectId, id);
         try {
-            aResource = store.getResource(StoreService.getSelectedNamedGraph(), uri, Feature.class);
+            aResource = store.getResource(ProjectCommitSelectionService.getSelectedNamedGraph(), uri, Feature.class);
         } catch (NoSuchElementException e) {
             log.error("Resource: '" + uri + "' not found");
             throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
@@ -925,171 +624,7 @@ public class SysmlServerManager {
     }
 
 
-    public static FeatureMembership getFeatureMembership(HttpServletRequest httpServletRequest, final String projectId, final String id)
-    {
-        FeatureMembership aResource = null;
-        
-        // Start of user code getFeatureMembership_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        URI uri = SysmlServerResourcesFactory.constructURIForFeatureMembership(projectId, id);
-        try {
-            aResource = store.getResource(StoreService.getSelectedNamedGraph(), uri, FeatureMembership.class);
-        } catch (NoSuchElementException e) {
-            log.error("Resource: '" + uri + "' not found");
-            throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
-        } catch (StoreAccessException | ModelUnmarshallingException  e) {
-            log.error("Failed to get resource: '" + uri + "'", e);
-            throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code getFeatureMembership_storeFinalize
-        // End of user code
-        
-        // Start of user code getFeatureMembership
-        // TODO Implement code to return a resource
-        // return 'null' if the resource was not found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return aResource;
-    }
 
-
-    public static FeatureTyping getFeatureTyping(HttpServletRequest httpServletRequest, final String projectId, final String id)
-    {
-        FeatureTyping aResource = null;
-        
-        // Start of user code getFeatureTyping_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        URI uri = SysmlServerResourcesFactory.constructURIForFeatureTyping(projectId, id);
-        try {
-            aResource = store.getResource(StoreService.getSelectedNamedGraph(), uri, FeatureTyping.class);
-        } catch (NoSuchElementException e) {
-            log.error("Resource: '" + uri + "' not found");
-            throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
-        } catch (StoreAccessException | ModelUnmarshallingException  e) {
-            log.error("Failed to get resource: '" + uri + "'", e);
-            throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code getFeatureTyping_storeFinalize
-        // End of user code
-        
-        // Start of user code getFeatureTyping
-        // TODO Implement code to return a resource
-        // return 'null' if the resource was not found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return aResource;
-    }
-
-
-    public static PortUsage getPortUsage(HttpServletRequest httpServletRequest, final String projectId, final String id)
-    {
-        PortUsage aResource = null;
-        
-        // Start of user code getPortUsage_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        URI uri = SysmlServerResourcesFactory.constructURIForPortUsage(projectId, id);
-        try {
-            aResource = store.getResource(StoreService.getSelectedNamedGraph(), uri, PortUsage.class);
-        } catch (NoSuchElementException e) {
-            log.error("Resource: '" + uri + "' not found");
-            throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
-        } catch (StoreAccessException | ModelUnmarshallingException  e) {
-            log.error("Failed to get resource: '" + uri + "'", e);
-            throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code getPortUsage_storeFinalize
-        // End of user code
-        
-        // Start of user code getPortUsage
-        // TODO Implement code to return a resource
-        // return 'null' if the resource was not found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return aResource;
-    }
-
-
-    public static AttributeUsage getAttributeUsage(HttpServletRequest httpServletRequest, final String projectId, final String id)
-    {
-        AttributeUsage aResource = null;
-        
-        // Start of user code getAttributeUsage_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        URI uri = SysmlServerResourcesFactory.constructURIForAttributeUsage(projectId, id);
-        try {
-            aResource = store.getResource(StoreService.getSelectedNamedGraph(), uri, AttributeUsage.class);
-        } catch (NoSuchElementException e) {
-            log.error("Resource: '" + uri + "' not found");
-            throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
-        } catch (StoreAccessException | ModelUnmarshallingException  e) {
-            log.error("Failed to get resource: '" + uri + "'", e);
-            throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code getAttributeUsage_storeFinalize
-        // End of user code
-        
-        // Start of user code getAttributeUsage
-        // TODO Implement code to return a resource
-        // return 'null' if the resource was not found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return aResource;
-    }
-
-
-    public static PartUsage getPartUsage(HttpServletRequest httpServletRequest, final String projectId, final String id)
-    {
-        PartUsage aResource = null;
-        
-        // Start of user code getPartUsage_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        URI uri = SysmlServerResourcesFactory.constructURIForPartUsage(projectId, id);
-        try {
-            aResource = store.getResource(StoreService.getSelectedNamedGraph(), uri, PartUsage.class);
-        } catch (NoSuchElementException e) {
-            log.error("Resource: '" + uri + "' not found");
-            throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
-        } catch (StoreAccessException | ModelUnmarshallingException  e) {
-            log.error("Failed to get resource: '" + uri + "'", e);
-            throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code getPartUsage_storeFinalize
-        // End of user code
-        
-        // Start of user code getPartUsage
-        // TODO Implement code to return a resource
-        // return 'null' if the resource was not found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return aResource;
-    }
-
-
-
-    public static String getETagFromAttributeUsage(final AttributeUsage aResource)
-    {
-        String eTag = null;
-        // Start of user code getETagFromAttributeUsage
-        // TODO Implement code to return an ETag for a particular resource
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return eTag;
-    }
     public static String getETagFromSysmlClass(final SysmlClass aResource)
     {
         String eTag = null;
@@ -1112,51 +647,6 @@ public class SysmlServerManager {
     {
         String eTag = null;
         // Start of user code getETagFromFeature
-        // TODO Implement code to return an ETag for a particular resource
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return eTag;
-    }
-    public static String getETagFromFeatureMembership(final FeatureMembership aResource)
-    {
-        String eTag = null;
-        // Start of user code getETagFromFeatureMembership
-        // TODO Implement code to return an ETag for a particular resource
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return eTag;
-    }
-    public static String getETagFromFeatureTyping(final FeatureTyping aResource)
-    {
-        String eTag = null;
-        // Start of user code getETagFromFeatureTyping
-        // TODO Implement code to return an ETag for a particular resource
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return eTag;
-    }
-    public static String getETagFromGeneralization(final Generalization aResource)
-    {
-        String eTag = null;
-        // Start of user code getETagFromGeneralization
-        // TODO Implement code to return an ETag for a particular resource
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return eTag;
-    }
-    public static String getETagFromPartUsage(final PartUsage aResource)
-    {
-        String eTag = null;
-        // Start of user code getETagFromPartUsage
-        // TODO Implement code to return an ETag for a particular resource
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
-        // End of user code
-        return eTag;
-    }
-    public static String getETagFromPortUsage(final PortUsage aResource)
-    {
-        String eTag = null;
-        // Start of user code getETagFromPortUsage
         // TODO Implement code to return an ETag for a particular resource
         // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
         // End of user code

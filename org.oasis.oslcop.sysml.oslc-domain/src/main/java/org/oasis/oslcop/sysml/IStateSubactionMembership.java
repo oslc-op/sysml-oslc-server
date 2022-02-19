@@ -72,7 +72,7 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.STATESUBACTIONMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.STATESUBACTIONMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "StateSubactionMembership Resource Shape", describes = SysmlDomainConstants.STATESUBACTIONMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "StateSubactionMembership Shape", describes = SysmlDomainConstants.STATESUBACTIONMEMBERSHIP_TYPE)
 public interface IStateSubactionMembership
 {
 
@@ -85,14 +85,6 @@ public interface IStateSubactionMembership
     @OslcAllowedValue({"entry", "do", "exit"})
     public String getKind();
 
-    @OslcName("action_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "action_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ACTIONUSAGE_TYPE})
-    @OslcReadOnly(false)
-    public Link getAction_comp();
-
     @OslcName("action")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "action")
     @OslcOccurs(Occurs.ExactlyOne)
@@ -103,7 +95,6 @@ public interface IStateSubactionMembership
 
 
     public void setKind(final String kind );
-    public void setAction_comp(final Link action_comp );
     public void setAction(final Link action );
 }
 

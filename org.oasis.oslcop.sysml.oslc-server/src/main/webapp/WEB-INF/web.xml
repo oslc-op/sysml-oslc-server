@@ -10,7 +10,7 @@
         <param-value>http://localhost:8085/</param-value>
         <!-- Start of user code webxml_baseurl
         -->
-        <!-- TODO: Add additional configurations here to avoid them be overridden upon future re-generation -->
+        <!-- <param-value>http://sysml2-oslc-dev.intercax.com:8080/</param-value> -->
         <!-- End of user code
         -->
     </context-param>
@@ -44,7 +44,7 @@
     -->
     <servlet-mapping>
         <servlet-name>JAX-RS Servlet</servlet-name>
-        <url-pattern>/services/*</url-pattern>
+        <url-pattern>/oslc/*</url-pattern>
     </servlet-mapping>
     <filter>
         <display-name>CredentialsFilter</display-name>
@@ -53,7 +53,7 @@
     </filter>
     <filter-mapping>
         <filter-name>CredentialsFilter</filter-name>
-        <url-pattern>/services/*</url-pattern>
+        <url-pattern>/oslc/*</url-pattern>
     </filter-mapping>
     <!-- Start of user code webxml4
     -->

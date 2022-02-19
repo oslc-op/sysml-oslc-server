@@ -82,7 +82,7 @@ import org.oasis.oslcop.sysml.Type;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.TYPEFEATURING_NAMESPACE)
 @OslcName(SysmlDomainConstants.TYPEFEATURING_LOCALNAME)
-@OslcResourceShape(title = "TypeFeaturing Resource Shape", describes = SysmlDomainConstants.TYPEFEATURING_TYPE)
+@OslcResourceShape(title = "TypeFeaturing Shape", describes = SysmlDomainConstants.TYPEFEATURING_TYPE)
 public class TypeFeaturing
     extends Relationship
     implements ITypeFeaturing
@@ -90,12 +90,12 @@ public class TypeFeaturing
     // Start of user code attributeAnnotation:featureOfType
     // End of user code
     private Link featureOfType;
-    // Start of user code attributeAnnotation:featuringType
-    // End of user code
-    private Link featuringType;
     // Start of user code attributeAnnotation:owningFeatureOfType
     // End of user code
     private Link owningFeatureOfType;
+    // Start of user code attributeAnnotation:featuringType
+    // End of user code
+    private Link featuringType;
     
     // Start of user code classAttributes
     // End of user code
@@ -146,7 +146,7 @@ public class TypeFeaturing
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -168,21 +168,6 @@ public class TypeFeaturing
         return featureOfType;
     }
     
-    // Start of user code getterAnnotation:featuringType
-    // End of user code
-    @OslcName("featuringType")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "featuringType")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
-    @OslcReadOnly(false)
-    public Link getFeaturingType()
-    {
-        // Start of user code getterInit:featuringType
-        // End of user code
-        return featuringType;
-    }
-    
     // Start of user code getterAnnotation:owningFeatureOfType
     // End of user code
     @OslcName("owningFeatureOfType")
@@ -198,6 +183,21 @@ public class TypeFeaturing
         return owningFeatureOfType;
     }
     
+    // Start of user code getterAnnotation:featuringType
+    // End of user code
+    @OslcName("featuringType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "featuringType")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
+    @OslcReadOnly(false)
+    public Link getFeaturingType()
+    {
+        // Start of user code getterInit:featuringType
+        // End of user code
+        return featuringType;
+    }
+    
     
     // Start of user code setterAnnotation:featureOfType
     // End of user code
@@ -211,18 +211,6 @@ public class TypeFeaturing
         // End of user code
     }
     
-    // Start of user code setterAnnotation:featuringType
-    // End of user code
-    public void setFeaturingType(final Link featuringType )
-    {
-        // Start of user code setterInit:featuringType
-        // End of user code
-        this.featuringType = featuringType;
-    
-        // Start of user code setterFinalize:featuringType
-        // End of user code
-    }
-    
     // Start of user code setterAnnotation:owningFeatureOfType
     // End of user code
     public void setOwningFeatureOfType(final Link owningFeatureOfType )
@@ -232,6 +220,18 @@ public class TypeFeaturing
         this.owningFeatureOfType = owningFeatureOfType;
     
         // Start of user code setterFinalize:owningFeatureOfType
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:featuringType
+    // End of user code
+    public void setFeaturingType(final Link featuringType )
+    {
+        // Start of user code setterInit:featuringType
+        // End of user code
+        this.featuringType = featuringType;
+    
+        // Start of user code setterFinalize:featuringType
         // End of user code
     }
     

@@ -80,7 +80,7 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.EXPOSE_NAMESPACE)
 @OslcName(SysmlDomainConstants.EXPOSE_LOCALNAME)
-@OslcResourceShape(title = "Expose Resource Shape", describes = SysmlDomainConstants.EXPOSE_TYPE)
+@OslcResourceShape(title = "Expose Shape", describes = SysmlDomainConstants.EXPOSE_TYPE)
 public class Expose
     extends SysmlImport
     implements IExpose
@@ -135,7 +135,7 @@ public class Expose
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

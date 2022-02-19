@@ -73,26 +73,10 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.REQUIREMENTVERIFICATIONMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.REQUIREMENTVERIFICATIONMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "RequirementVerificationMembership Resource Shape", describes = SysmlDomainConstants.REQUIREMENTVERIFICATIONMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "RequirementVerificationMembership Shape", describes = SysmlDomainConstants.REQUIREMENTVERIFICATIONMEMBERSHIP_TYPE)
 public interface IRequirementVerificationMembership
 {
 
-
-    @OslcName("ownedRequirement_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRequirement_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.REQUIREMENTUSAGE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedRequirement_comp();
-
-    @OslcName("verifiedRequirement")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "verifiedRequirement")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.REQUIREMENTUSAGE_TYPE})
-    @OslcReadOnly(false)
-    public Link getVerifiedRequirement();
 
     @OslcName("ownedRequirement")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRequirement")
@@ -102,9 +86,16 @@ public interface IRequirementVerificationMembership
     @OslcReadOnly(false)
     public Link getOwnedRequirement();
 
+    @OslcName("verifiedRequirement")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "verifiedRequirement")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.REQUIREMENTUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Link getVerifiedRequirement();
 
-    public void setOwnedRequirement_comp(final Link ownedRequirement_comp );
-    public void setVerifiedRequirement(final Link verifiedRequirement );
+
     public void setOwnedRequirement(final Link ownedRequirement );
+    public void setVerifiedRequirement(final Link verifiedRequirement );
 }
 

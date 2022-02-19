@@ -62,7 +62,6 @@ import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.Annotation;
-import org.oasis.oslcop.sysml.BindingConnector;
 import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
@@ -83,20 +82,20 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.FEATUREVALUE_NAMESPACE)
 @OslcName(SysmlDomainConstants.FEATUREVALUE_LOCALNAME)
-@OslcResourceShape(title = "FeatureValue Resource Shape", describes = SysmlDomainConstants.FEATUREVALUE_TYPE)
+@OslcResourceShape(title = "FeatureValue Shape", describes = SysmlDomainConstants.FEATUREVALUE_TYPE)
 public class FeatureValue
     extends Membership
     implements IFeatureValue
 {
+    // Start of user code attributeAnnotation:isInitial
+    // End of user code
+    private Boolean isInitial;
+    // Start of user code attributeAnnotation:isDefault
+    // End of user code
+    private Boolean isDefault;
     // Start of user code attributeAnnotation:featureWithValue
     // End of user code
     private Link featureWithValue;
-    // Start of user code attributeAnnotation:value_comp
-    // End of user code
-    private Link value_comp;
-    // Start of user code attributeAnnotation:valueConnector
-    // End of user code
-    private Link valueConnector;
     // Start of user code attributeAnnotation:value
     // End of user code
     private Link value;
@@ -150,12 +149,40 @@ public class FeatureValue
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
+    
+    // Start of user code getterAnnotation:isInitial
+    // End of user code
+    @OslcName("isInitial")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isInitial")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsInitial()
+    {
+        // Start of user code getterInit:isInitial
+        // End of user code
+        return isInitial;
+    }
+    
+    // Start of user code getterAnnotation:isDefault
+    // End of user code
+    @OslcName("isDefault")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isDefault")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsDefault()
+    {
+        // Start of user code getterInit:isDefault
+        // End of user code
+        return isDefault;
+    }
     
     // Start of user code getterAnnotation:featureWithValue
     // End of user code
@@ -170,36 +197,6 @@ public class FeatureValue
         // Start of user code getterInit:featureWithValue
         // End of user code
         return featureWithValue;
-    }
-    
-    // Start of user code getterAnnotation:value_comp
-    // End of user code
-    @OslcName("value_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "value_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
-    @OslcReadOnly(false)
-    public Link getValue_comp()
-    {
-        // Start of user code getterInit:value_comp
-        // End of user code
-        return value_comp;
-    }
-    
-    // Start of user code getterAnnotation:valueConnector
-    // End of user code
-    @OslcName("valueConnector")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "valueConnector")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.BINDINGCONNECTOR_TYPE})
-    @OslcReadOnly(false)
-    public Link getValueConnector()
-    {
-        // Start of user code getterInit:valueConnector
-        // End of user code
-        return valueConnector;
     }
     
     // Start of user code getterAnnotation:value
@@ -218,6 +215,30 @@ public class FeatureValue
     }
     
     
+    // Start of user code setterAnnotation:isInitial
+    // End of user code
+    public void setIsInitial(final Boolean isInitial )
+    {
+        // Start of user code setterInit:isInitial
+        // End of user code
+        this.isInitial = isInitial;
+    
+        // Start of user code setterFinalize:isInitial
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:isDefault
+    // End of user code
+    public void setIsDefault(final Boolean isDefault )
+    {
+        // Start of user code setterInit:isDefault
+        // End of user code
+        this.isDefault = isDefault;
+    
+        // Start of user code setterFinalize:isDefault
+        // End of user code
+    }
+    
     // Start of user code setterAnnotation:featureWithValue
     // End of user code
     public void setFeatureWithValue(final Link featureWithValue )
@@ -227,30 +248,6 @@ public class FeatureValue
         this.featureWithValue = featureWithValue;
     
         // Start of user code setterFinalize:featureWithValue
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:value_comp
-    // End of user code
-    public void setValue_comp(final Link value_comp )
-    {
-        // Start of user code setterInit:value_comp
-        // End of user code
-        this.value_comp = value_comp;
-    
-        // Start of user code setterFinalize:value_comp
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:valueConnector
-    // End of user code
-    public void setValueConnector(final Link valueConnector )
-    {
-        // Start of user code setterInit:valueConnector
-        // End of user code
-        this.valueConnector = valueConnector;
-    
-        // Start of user code setterFinalize:valueConnector
         // End of user code
     }
     

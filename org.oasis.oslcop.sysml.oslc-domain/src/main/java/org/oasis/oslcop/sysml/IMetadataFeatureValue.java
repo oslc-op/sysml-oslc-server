@@ -56,7 +56,6 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.IAnnotation;
-import org.oasis.oslcop.sysml.IBindingConnector;
 import org.oasis.oslcop.sysml.IComment;
 import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
@@ -73,26 +72,10 @@ import org.oasis.oslcop.sysml.ITextualRepresentation;
 
 @OslcNamespace(SysmlDomainConstants.METADATAFEATUREVALUE_NAMESPACE)
 @OslcName(SysmlDomainConstants.METADATAFEATUREVALUE_LOCALNAME)
-@OslcResourceShape(title = "MetadataFeatureValue Resource Shape", describes = SysmlDomainConstants.METADATAFEATUREVALUE_TYPE)
+@OslcResourceShape(title = "MetadataFeatureValue Shape", describes = SysmlDomainConstants.METADATAFEATUREVALUE_TYPE)
 public interface IMetadataFeatureValue
 {
 
-
-    @OslcName("metadataValue_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "metadataValue_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
-    @OslcReadOnly(false)
-    public Link getMetadataValue_comp();
-
-    @OslcName("owningMetadataFeature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningMetadataFeature")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.METADATAFEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwningMetadataFeature();
 
     @OslcName("metadataValue")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "metadataValue")
@@ -102,9 +85,16 @@ public interface IMetadataFeatureValue
     @OslcReadOnly(false)
     public Link getMetadataValue();
 
+    @OslcName("owningMetadataFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningMetadataFeature")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.METADATAFEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Link getOwningMetadataFeature();
 
-    public void setMetadataValue_comp(final Link metadataValue_comp );
-    public void setOwningMetadataFeature(final Link owningMetadataFeature );
+
     public void setMetadataValue(final Link metadataValue );
+    public void setOwningMetadataFeature(final Link owningMetadataFeature );
 }
 

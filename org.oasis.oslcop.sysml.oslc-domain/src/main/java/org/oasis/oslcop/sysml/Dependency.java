@@ -80,7 +80,7 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.DEPENDENCY_NAMESPACE)
 @OslcName(SysmlDomainConstants.DEPENDENCY_LOCALNAME)
-@OslcResourceShape(title = "Dependency Resource Shape", describes = SysmlDomainConstants.DEPENDENCY_TYPE)
+@OslcResourceShape(title = "Dependency Shape", describes = SysmlDomainConstants.DEPENDENCY_TYPE)
 public class Dependency
     extends Relationship
     implements IDependency
@@ -141,7 +141,7 @@ public class Dependency
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

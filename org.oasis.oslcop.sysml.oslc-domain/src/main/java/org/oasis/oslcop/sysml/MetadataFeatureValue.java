@@ -62,7 +62,6 @@ import org.oasis.oslcop.sysml.FeatureValue;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.Annotation;
-import org.oasis.oslcop.sysml.BindingConnector;
 import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
@@ -84,20 +83,17 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.METADATAFEATUREVALUE_NAMESPACE)
 @OslcName(SysmlDomainConstants.METADATAFEATUREVALUE_LOCALNAME)
-@OslcResourceShape(title = "MetadataFeatureValue Resource Shape", describes = SysmlDomainConstants.METADATAFEATUREVALUE_TYPE)
+@OslcResourceShape(title = "MetadataFeatureValue Shape", describes = SysmlDomainConstants.METADATAFEATUREVALUE_TYPE)
 public class MetadataFeatureValue
     extends FeatureValue
     implements IMetadataFeatureValue
 {
-    // Start of user code attributeAnnotation:metadataValue_comp
-    // End of user code
-    private Link metadataValue_comp;
-    // Start of user code attributeAnnotation:owningMetadataFeature
-    // End of user code
-    private Link owningMetadataFeature;
     // Start of user code attributeAnnotation:metadataValue
     // End of user code
     private Link metadataValue;
+    // Start of user code attributeAnnotation:owningMetadataFeature
+    // End of user code
+    private Link owningMetadataFeature;
     
     // Start of user code classAttributes
     // End of user code
@@ -148,42 +144,12 @@ public class MetadataFeatureValue
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
-    
-    // Start of user code getterAnnotation:metadataValue_comp
-    // End of user code
-    @OslcName("metadataValue_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "metadataValue_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
-    @OslcReadOnly(false)
-    public Link getMetadataValue_comp()
-    {
-        // Start of user code getterInit:metadataValue_comp
-        // End of user code
-        return metadataValue_comp;
-    }
-    
-    // Start of user code getterAnnotation:owningMetadataFeature
-    // End of user code
-    @OslcName("owningMetadataFeature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningMetadataFeature")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.METADATAFEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwningMetadataFeature()
-    {
-        // Start of user code getterInit:owningMetadataFeature
-        // End of user code
-        return owningMetadataFeature;
-    }
     
     // Start of user code getterAnnotation:metadataValue
     // End of user code
@@ -200,16 +166,31 @@ public class MetadataFeatureValue
         return metadataValue;
     }
     
-    
-    // Start of user code setterAnnotation:metadataValue_comp
+    // Start of user code getterAnnotation:owningMetadataFeature
     // End of user code
-    public void setMetadataValue_comp(final Link metadataValue_comp )
+    @OslcName("owningMetadataFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningMetadataFeature")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.METADATAFEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Link getOwningMetadataFeature()
     {
-        // Start of user code setterInit:metadataValue_comp
+        // Start of user code getterInit:owningMetadataFeature
         // End of user code
-        this.metadataValue_comp = metadataValue_comp;
+        return owningMetadataFeature;
+    }
     
-        // Start of user code setterFinalize:metadataValue_comp
+    
+    // Start of user code setterAnnotation:metadataValue
+    // End of user code
+    public void setMetadataValue(final Link metadataValue )
+    {
+        // Start of user code setterInit:metadataValue
+        // End of user code
+        this.metadataValue = metadataValue;
+    
+        // Start of user code setterFinalize:metadataValue
         // End of user code
     }
     
@@ -222,18 +203,6 @@ public class MetadataFeatureValue
         this.owningMetadataFeature = owningMetadataFeature;
     
         // Start of user code setterFinalize:owningMetadataFeature
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:metadataValue
-    // End of user code
-    public void setMetadataValue(final Link metadataValue )
-    {
-        // Start of user code setterInit:metadataValue
-        // End of user code
-        this.metadataValue = metadataValue;
-    
-        // Start of user code setterFinalize:metadataValue
         // End of user code
     }
     

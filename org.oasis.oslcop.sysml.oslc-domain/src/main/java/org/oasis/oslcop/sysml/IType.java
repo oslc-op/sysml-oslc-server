@@ -58,39 +58,41 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IComment;
 import org.oasis.oslcop.sysml.IConjugation;
+import org.oasis.oslcop.sysml.IDisjoining;
 import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IFeature;
 import org.oasis.oslcop.sysml.IFeatureMembership;
-import org.oasis.oslcop.sysml.IGeneralization;
 import org.oasis.oslcop.sysml.ISysmlImport;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
 import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ISpecialization;
 import org.oasis.oslcop.sysml.ITextualRepresentation;
 // Start of user code imports
 // End of user code
 
 @OslcNamespace(SysmlDomainConstants.TYPE_NAMESPACE)
 @OslcName(SysmlDomainConstants.TYPE_LOCALNAME)
-@OslcResourceShape(title = "Type Resource Shape", describes = SysmlDomainConstants.TYPE_TYPE)
+@OslcResourceShape(title = "Type Shape", describes = SysmlDomainConstants.TYPE_TYPE)
 public interface IType
 {
 
-    public void addOwnedGeneralization(final Link ownedGeneralization );
-    public void addOwnedFeatureMembership_comp(final Link ownedFeatureMembership_comp );
-    public void addFeature(final Link feature );
+    public void addOwnedSpecialization(final Link ownedSpecialization );
+    public void addOwnedFeatureMembership(final Link ownedFeatureMembership );
     public void addOwnedFeature(final Link ownedFeature );
+    public void addOwnedEndFeature(final Link ownedEndFeature );
+    public void addFeature(final Link feature );
     public void addInput(final Link input );
     public void addOutput(final Link output );
     public void addInheritedMembership(final Link inheritedMembership );
     public void addEndFeature(final Link endFeature );
-    public void addOwnedEndFeature(final Link ownedEndFeature );
     public void addFeatureMembership(final Link featureMembership );
     public void addInheritedFeature(final Link inheritedFeature );
-    public void addOwnedFeatureMembership(final Link ownedFeatureMembership );
+    public void addDirectedFeature(final Link directedFeature );
+    public void addOwnedDisjoining(final Link ownedDisjoining );
 
     @OslcName("isAbstract")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isAbstract")
@@ -113,29 +115,21 @@ public interface IType
     @OslcReadOnly(false)
     public Boolean isIsConjugated();
 
-    @OslcName("ownedGeneralization")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedGeneralization")
+    @OslcName("ownedSpecialization")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedSpecialization")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.GENERALIZATION_TYPE})
+    @OslcRange({SysmlDomainConstants.SPECIALIZATION_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedGeneralization();
+    public Set<Link> getOwnedSpecialization();
 
-    @OslcName("ownedFeatureMembership_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedFeatureMembership_comp")
+    @OslcName("ownedFeatureMembership")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedFeatureMembership")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.FEATUREMEMBERSHIP_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedFeatureMembership_comp();
-
-    @OslcName("feature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "feature")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getFeature();
+    public Set<Link> getOwnedFeatureMembership();
 
     @OslcName("ownedFeature")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedFeature")
@@ -144,6 +138,22 @@ public interface IType
     @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
     public Set<Link> getOwnedFeature();
+
+    @OslcName("ownedEndFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedEndFeature")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedEndFeature();
+
+    @OslcName("feature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "feature")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getFeature();
 
     @OslcName("input")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "input")
@@ -177,14 +187,6 @@ public interface IType
     @OslcReadOnly(false)
     public Set<Link> getEndFeature();
 
-    @OslcName("ownedEndFeature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedEndFeature")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedEndFeature();
-
     @OslcName("ownedConjugator")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedConjugator")
     @OslcOccurs(Occurs.ZeroOrOne)
@@ -217,31 +219,40 @@ public interface IType
     @OslcReadOnly(false)
     public Link getMultiplicity();
 
-    @OslcName("ownedFeatureMembership")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedFeatureMembership")
+    @OslcName("directedFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "directedFeature")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATUREMEMBERSHIP_TYPE})
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedFeatureMembership();
+    public Set<Link> getDirectedFeature();
+
+    @OslcName("ownedDisjoining")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedDisjoining")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.DISJOINING_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedDisjoining();
 
 
     public void setIsAbstract(final Boolean isAbstract );
     public void setIsSufficient(final Boolean isSufficient );
     public void setIsConjugated(final Boolean isConjugated );
-    public void setOwnedGeneralization(final Set<Link> ownedGeneralization );
-    public void setOwnedFeatureMembership_comp(final Set<Link> ownedFeatureMembership_comp );
-    public void setFeature(final Set<Link> feature );
+    public void setOwnedSpecialization(final Set<Link> ownedSpecialization );
+    public void setOwnedFeatureMembership(final Set<Link> ownedFeatureMembership );
     public void setOwnedFeature(final Set<Link> ownedFeature );
+    public void setOwnedEndFeature(final Set<Link> ownedEndFeature );
+    public void setFeature(final Set<Link> feature );
     public void setInput(final Set<Link> input );
     public void setOutput(final Set<Link> output );
     public void setInheritedMembership(final Set<Link> inheritedMembership );
     public void setEndFeature(final Set<Link> endFeature );
-    public void setOwnedEndFeature(final Set<Link> ownedEndFeature );
     public void setOwnedConjugator(final Link ownedConjugator );
     public void setFeatureMembership(final Set<Link> featureMembership );
     public void setInheritedFeature(final Set<Link> inheritedFeature );
     public void setMultiplicity(final Link multiplicity );
-    public void setOwnedFeatureMembership(final Set<Link> ownedFeatureMembership );
+    public void setDirectedFeature(final Set<Link> directedFeature );
+    public void setOwnedDisjoining(final Set<Link> ownedDisjoining );
 }
 

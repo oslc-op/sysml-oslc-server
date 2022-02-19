@@ -60,90 +60,33 @@ import org.oasis.oslcop.sysml.services.ServiceProviderCatalogService;
 import org.oasis.oslcop.sysml.services.ServiceProviderService;
 import org.oasis.oslcop.sysml.services.ResourceShapeService;
 
-import org.oasis.oslcop.sysml.AcceptActionUsage;
-import org.oasis.oslcop.sysml.ActionDefinition;
-import org.oasis.oslcop.sysml.ActionUsage;
-import org.oasis.oslcop.sysml.AllocationDefinition;
-import org.oasis.oslcop.sysml.AllocationUsage;
-import org.oasis.oslcop.sysml.AnalysisCaseDefinition;
-import org.oasis.oslcop.sysml.AnalysisCaseUsage;
 import org.oasis.oslcop.sysml.AnnotatingElement;
 import org.oasis.oslcop.sysml.Annotation;
-import org.oasis.oslcop.sysml.Association;
-import org.oasis.oslcop.sysml.AssociationStructure;
-import org.oasis.oslcop.sysml.AttributeDefinition;
-import org.oasis.oslcop.sysml.AttributeUsage;
-import org.oasis.oslcop.sysml.Behavior;
-import org.oasis.oslcop.sysml.BooleanExpression;
-import org.oasis.oslcop.sysml.CalculationDefinition;
-import org.oasis.oslcop.sysml.CalculationUsage;
-import org.oasis.oslcop.sysml.CaseDefinition;
-import org.oasis.oslcop.sysml.CaseUsage;
 import org.oasis.oslcop.sysml.SysmlClass;
 import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.Comment;
-import org.oasis.oslcop.sysml.ConjugatedPortDefinition;
 import org.oasis.oslcop.sysml.Conjugation;
-import org.oasis.oslcop.sysml.ConnectionDefinition;
-import org.oasis.oslcop.sysml.ConnectionUsage;
-import org.oasis.oslcop.sysml.Connector;
-import org.oasis.oslcop.sysml.ConstraintDefinition;
-import org.oasis.oslcop.sysml.ConstraintUsage;
-import org.oasis.oslcop.sysml.DataType;
-import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
-import org.oasis.oslcop.sysml.EnumerationDefinition;
-import org.oasis.oslcop.sysml.EnumerationUsage;
-import org.oasis.oslcop.sysml.Expression;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
-import org.oasis.oslcop.sysml.Function;
-import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
-import org.oasis.oslcop.sysml.IndividualDefinition;
-import org.oasis.oslcop.sysml.IndividualUsage;
-import org.oasis.oslcop.sysml.InterfaceDefinition;
-import org.oasis.oslcop.sysml.InterfaceUsage;
-import org.oasis.oslcop.sysml.ItemDefinition;
-import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
-import org.oasis.oslcop.sysml.PartDefinition;
-import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
-import org.oasis.oslcop.sysml.PortConjugation;
-import org.oasis.oslcop.sysml.PortDefinition;
-import org.oasis.oslcop.sysml.PortUsage;
-import org.oasis.oslcop.sysml.Predicate;
 import org.oasis.oslcop.sysml.Redefinition;
-import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
-import org.oasis.oslcop.sysml.RenderingDefinition;
-import org.oasis.oslcop.sysml.RenderingUsage;
-import org.oasis.oslcop.sysml.RequirementDefinition;
-import org.oasis.oslcop.sysml.RequirementUsage;
 import org.eclipse.lyo.oslc.domains.am.Resource;
-import org.oasis.oslcop.sysml.StateUsage;
-import org.oasis.oslcop.sysml.Step;
-import org.oasis.oslcop.sysml.Structure;
+import org.oasis.oslcop.sysml.Specialization;
+import org.oasis.oslcop.sysml.Subclassification;
 import org.oasis.oslcop.sysml.Subsetting;
-import org.oasis.oslcop.sysml.Succession;
-import org.oasis.oslcop.sysml.Superclassing;
 import org.oasis.oslcop.sysml.TextualRepresentation;
-import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
 import org.oasis.oslcop.sysml.TypeFeaturing;
-import org.oasis.oslcop.sysml.Usage;
-import org.oasis.oslcop.sysml.VariantMembership;
-import org.oasis.oslcop.sysml.VerificationCaseDefinition;
-import org.oasis.oslcop.sysml.VerificationCaseUsage;
-import org.oasis.oslcop.sysml.ViewDefinition;
-import org.oasis.oslcop.sysml.ViewUsage;
-import org.oasis.oslcop.sysml.ViewpointDefinition;
-import org.oasis.oslcop.sysml.ViewpointUsage;
 import org.eclipse.lyo.oslc.domains.am.Oslc_amDomainConstants;
 import org.eclipse.lyo.oslc.domains.DctermsDomainConstants;
 import org.eclipse.lyo.oslc.domains.FoafDomainConstants;
@@ -155,26 +98,14 @@ import org.oasis.oslcop.sysml.services.ServiceProviderService2;
 import org.oasis.oslcop.sysml.services.ServiceProviderService3;
 import org.oasis.oslcop.sysml.services.ServiceProviderService4;
 import org.oasis.oslcop.sysml.services.ServiceProviderService5;
-import org.oasis.oslcop.sysml.services.ServiceProviderService6;
-import org.oasis.oslcop.sysml.services.ServiceProviderService7;
-import org.oasis.oslcop.sysml.services.ServiceProviderService8;
-import org.oasis.oslcop.sysml.services.ServiceProviderService9;
-import org.oasis.oslcop.sysml.services.ServiceProviderService10;
-import org.oasis.oslcop.sysml.services.ServiceProviderService11;
 import org.oasis.oslcop.sysml.services.SubsettingService;
 import org.oasis.oslcop.sysml.services.ElementService;
 import org.oasis.oslcop.sysml.services.ClassService;
 import org.oasis.oslcop.sysml.services.RelationshipService;
-import org.oasis.oslcop.sysml.services.GeneralizationService;
 import org.oasis.oslcop.sysml.services.FeatureService;
-import org.oasis.oslcop.sysml.services.FeatureMembershipService;
-import org.oasis.oslcop.sysml.services.FeatureTypingService;
-import org.oasis.oslcop.sysml.services.PortUsageService;
-import org.oasis.oslcop.sysml.services.AttributeUsageService;
-import org.oasis.oslcop.sysml.services.PartUsageService;
 
 // Start of user code imports
-import org.oasis.oslcop.sysml.services.StoreService;
+import org.oasis.oslcop.sysml.services.ProjectCommitSelectionService;
 import org.oasis.oslcop.sysml.services.PopulationService;
 // End of user code
 
@@ -182,10 +113,10 @@ import org.oasis.oslcop.sysml.services.PopulationService;
 // End of user code
 
 /**
- * Generated by Lyo Designer 4.2.0.qualifier
+ * Generated by Lyo Designer 4.2.0.202202231217
  */
 
-@OpenAPIDefinition(info = @Info(title = "Sysml Server", version = "1.0.0"), servers = @Server(url = "/sysml_oslc_server/services/"))
+@OpenAPIDefinition(info = @Info(title = "Sysml Server", version = "1.0.0"), servers = @Server(url = "/sysml_oslc_server/oslc/"))
 public class Application extends javax.ws.rs.core.Application {
 
     private static final Set<Class<?>>         RESOURCE_CLASSES                          = new HashSet<Class<?>>();
@@ -210,23 +141,11 @@ public class Application extends javax.ws.rs.core.Application {
         RESOURCE_CLASSES.add(ServiceProviderService3.class);
         RESOURCE_CLASSES.add(ServiceProviderService4.class);
         RESOURCE_CLASSES.add(ServiceProviderService5.class);
-        RESOURCE_CLASSES.add(ServiceProviderService6.class);
-        RESOURCE_CLASSES.add(ServiceProviderService7.class);
-        RESOURCE_CLASSES.add(ServiceProviderService8.class);
-        RESOURCE_CLASSES.add(ServiceProviderService9.class);
-        RESOURCE_CLASSES.add(ServiceProviderService10.class);
-        RESOURCE_CLASSES.add(ServiceProviderService11.class);
         RESOURCE_CLASSES.add(SubsettingService.class);
         RESOURCE_CLASSES.add(ElementService.class);
         RESOURCE_CLASSES.add(ClassService.class);
         RESOURCE_CLASSES.add(RelationshipService.class);
-        RESOURCE_CLASSES.add(GeneralizationService.class);
         RESOURCE_CLASSES.add(FeatureService.class);
-        RESOURCE_CLASSES.add(FeatureMembershipService.class);
-        RESOURCE_CLASSES.add(FeatureTypingService.class);
-        RESOURCE_CLASSES.add(PortUsageService.class);
-        RESOURCE_CLASSES.add(AttributeUsageService.class);
-        RESOURCE_CLASSES.add(PartUsageService.class);
 
         // Catalog resources
         RESOURCE_CLASSES.add(ServiceProviderCatalogService.class);
@@ -249,7 +168,7 @@ public class Application extends javax.ws.rs.core.Application {
         
         // Start of user code Custom Resource Classes
         RESOURCE_CLASSES.add(PopulationService.class);
-        RESOURCE_CLASSES.add(StoreService.class);
+        RESOURCE_CLASSES.add(ProjectCommitSelectionService.class);
         // End of user code
 
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(OslcConstants.PATH_ALLOWED_VALUES,           AllowedValues.class);
@@ -269,90 +188,33 @@ public class Application extends javax.ws.rs.core.Application {
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(OslcConstants.PATH_SERVICE_PROVIDER,         ServiceProvider.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(OslcConstants.PATH_SERVICE_PROVIDER_CATALOG, ServiceProviderCatalog.class);
 
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ACCEPTACTIONUSAGE_PATH, AcceptActionUsage.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ACTIONDEFINITION_PATH, ActionDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ACTIONUSAGE_PATH, ActionUsage.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ALLOCATIONDEFINITION_PATH, AllocationDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ALLOCATIONUSAGE_PATH, AllocationUsage.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ANALYSISCASEDEFINITION_PATH, AnalysisCaseDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ANALYSISCASEUSAGE_PATH, AnalysisCaseUsage.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ANNOTATINGELEMENT_PATH, AnnotatingElement.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ANNOTATION_PATH, Annotation.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ASSOCIATION_PATH, Association.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ASSOCIATIONSTRUCTURE_PATH, AssociationStructure.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ATTRIBUTEDEFINITION_PATH, AttributeDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ATTRIBUTEUSAGE_PATH, AttributeUsage.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.BEHAVIOR_PATH, Behavior.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.BOOLEANEXPRESSION_PATH, BooleanExpression.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.CALCULATIONDEFINITION_PATH, CalculationDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.CALCULATIONUSAGE_PATH, CalculationUsage.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.CASEDEFINITION_PATH, CaseDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.CASEUSAGE_PATH, CaseUsage.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.CLASS_PATH, SysmlClass.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.CLASSIFIER_PATH, Classifier.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.COMMENT_PATH, Comment.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.CONJUGATEDPORTDEFINITION_PATH, ConjugatedPortDefinition.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.CONJUGATION_PATH, Conjugation.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.CONNECTIONDEFINITION_PATH, ConnectionDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.CONNECTIONUSAGE_PATH, ConnectionUsage.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.CONNECTOR_PATH, Connector.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.CONSTRAINTDEFINITION_PATH, ConstraintDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.CONSTRAINTUSAGE_PATH, ConstraintUsage.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.DATATYPE_PATH, DataType.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.DEFINITION_PATH, Definition.class);
+        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.DISJOINING_PATH, Disjoining.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.DOCUMENTATION_PATH, Documentation.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ELEMENT_PATH, Element.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ENUMERATIONDEFINITION_PATH, EnumerationDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ENUMERATIONUSAGE_PATH, EnumerationUsage.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.EXPRESSION_PATH, Expression.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.FEATURE_PATH, Feature.class);
+        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.FEATURECHAINING_PATH, FeatureChaining.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.FEATUREMEMBERSHIP_PATH, FeatureMembership.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.FEATURETYPING_PATH, FeatureTyping.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.FUNCTION_PATH, Function.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.GENERALIZATION_PATH, Generalization.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.IMPORT_PATH, SysmlImport.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.INDIVIDUALDEFINITION_PATH, IndividualDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.INDIVIDUALUSAGE_PATH, IndividualUsage.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.INTERFACEDEFINITION_PATH, InterfaceDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.INTERFACEUSAGE_PATH, InterfaceUsage.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ITEMDEFINITION_PATH, ItemDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ITEMUSAGE_PATH, ItemUsage.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.MEMBERSHIP_PATH, Membership.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.MULTIPLICITY_PATH, Multiplicity.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.NAMESPACE_PATH, Namespace.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.PARTDEFINITION_PATH, PartDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.PARTUSAGE_PATH, PartUsage.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(FoafDomainConstants.PERSON_PATH, Person.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.PORTCONJUGATION_PATH, PortConjugation.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.PORTDEFINITION_PATH, PortDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.PORTUSAGE_PATH, PortUsage.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.PREDICATE_PATH, Predicate.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.REDEFINITION_PATH, Redefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.REFERENCEUSAGE_PATH, ReferenceUsage.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.RELATIONSHIP_PATH, Relationship.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.RENDERINGDEFINITION_PATH, RenderingDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.RENDERINGUSAGE_PATH, RenderingUsage.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.REQUIREMENTDEFINITION_PATH, RequirementDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.REQUIREMENTUSAGE_PATH, RequirementUsage.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(Oslc_amDomainConstants.RESOURCE_PATH, Resource.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.STATEUSAGE_PATH, StateUsage.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.STEP_PATH, Step.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.STRUCTURE_PATH, Structure.class);
+        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.SPECIALIZATION_PATH, Specialization.class);
+        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.SUBCLASSIFICATION_PATH, Subclassification.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.SUBSETTING_PATH, Subsetting.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.SUCCESSION_PATH, Succession.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.SUPERCLASSING_PATH, Superclassing.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.TEXTUALREPRESENTATION_PATH, TextualRepresentation.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.TRANSITIONUSAGE_PATH, TransitionUsage.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.TYPE_PATH, Type.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.TYPEFEATURING_PATH, TypeFeaturing.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.USAGE_PATH, Usage.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.VARIANTMEMBERSHIP_PATH, VariantMembership.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.VERIFICATIONCASEDEFINITION_PATH, VerificationCaseDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.VERIFICATIONCASEUSAGE_PATH, VerificationCaseUsage.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.VIEWDEFINITION_PATH, ViewDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.VIEWUSAGE_PATH, ViewUsage.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.VIEWPOINTDEFINITION_PATH, ViewpointDefinition.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.VIEWPOINTUSAGE_PATH, ViewpointUsage.class);
     }
 
     @Inject
