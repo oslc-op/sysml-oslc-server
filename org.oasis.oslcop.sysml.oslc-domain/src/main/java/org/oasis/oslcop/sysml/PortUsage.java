@@ -57,7 +57,7 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
-import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.OccurrenceUsage;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
@@ -68,34 +68,42 @@ import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.SysmlClass;
+import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.ConcernUsage;
 import org.oasis.oslcop.sysml.Conjugation;
-import org.oasis.oslcop.sysml.ConnectionUsage;
+import org.oasis.oslcop.sysml.ConnectorAsUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
 import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
-import org.oasis.oslcop.sysml.Generalization;
+import org.oasis.oslcop.sysml.FlowConnectionUsage;
 import org.oasis.oslcop.sysml.SysmlImport;
-import org.oasis.oslcop.sysml.IndividualUsage;
 import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
+import org.oasis.oslcop.sysml.OccurrenceDefinition;
+import org.oasis.oslcop.sysml.OccurrenceUsage;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortDefinition;
 import org.oasis.oslcop.sysml.PortUsage;
+import org.oasis.oslcop.sysml.PortioningFeature;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.StateUsage;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
@@ -103,6 +111,7 @@ import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
 import org.oasis.oslcop.sysml.TypeFeaturing;
 import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.UseCaseUsage;
 import org.oasis.oslcop.sysml.VariantMembership;
 import org.oasis.oslcop.sysml.VerificationCaseUsage;
 import org.oasis.oslcop.sysml.ViewUsage;
@@ -117,14 +126,14 @@ import org.oasis.oslcop.sysml.ViewpointUsage;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.PORTUSAGE_NAMESPACE)
 @OslcName(SysmlDomainConstants.PORTUSAGE_LOCALNAME)
-@OslcResourceShape(title = "PortUsage Resource Shape", describes = SysmlDomainConstants.PORTUSAGE_TYPE)
+@OslcResourceShape(title = "PortUsage Shape", describes = SysmlDomainConstants.PORTUSAGE_TYPE)
 public class PortUsage
-    extends Usage
+    extends OccurrenceUsage
     implements IPortUsage
 {
     // Start of user code attributeAnnotation:portDefinition
     // End of user code
-    private Link portDefinition;
+    private Set<Link> portDefinition = new HashSet<Link>();
     // Start of user code attributeAnnotation:portOwningUsage
     // End of user code
     private Link portOwningUsage;
@@ -178,10 +187,15 @@ public class PortUsage
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
+    }
+    
+    public void addPortDefinition(final Link portDefinition)
+    {
+        this.portDefinition.add(portDefinition);
     }
     
     
@@ -189,11 +203,11 @@ public class PortUsage
     // End of user code
     @OslcName("portDefinition")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "portDefinition")
-    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcOccurs(Occurs.OneOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.PORTDEFINITION_TYPE})
     @OslcReadOnly(false)
-    public Link getPortDefinition()
+    public Set<Link> getPortDefinition()
     {
         // Start of user code getterInit:portDefinition
         // End of user code
@@ -218,11 +232,15 @@ public class PortUsage
     
     // Start of user code setterAnnotation:portDefinition
     // End of user code
-    public void setPortDefinition(final Link portDefinition )
+    public void setPortDefinition(final Set<Link> portDefinition )
     {
         // Start of user code setterInit:portDefinition
         // End of user code
-        this.portDefinition = portDefinition;
+        this.portDefinition.clear();
+        if (portDefinition != null)
+        {
+            this.portDefinition.addAll(portDefinition);
+        }
     
         // Start of user code setterFinalize:portDefinition
         // End of user code

@@ -81,7 +81,7 @@ import org.oasis.oslcop.sysml.Type;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.CONJUGATION_NAMESPACE)
 @OslcName(SysmlDomainConstants.CONJUGATION_LOCALNAME)
-@OslcResourceShape(title = "Conjugation Resource Shape", describes = SysmlDomainConstants.CONJUGATION_TYPE)
+@OslcResourceShape(title = "Conjugation Shape", describes = SysmlDomainConstants.CONJUGATION_TYPE)
 public class Conjugation
     extends Relationship
     implements IConjugation
@@ -145,7 +145,7 @@ public class Conjugation
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

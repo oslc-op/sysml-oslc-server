@@ -80,7 +80,7 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.RELATIONSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.RELATIONSHIP_LOCALNAME)
-@OslcResourceShape(title = "Relationship Resource Shape", describes = SysmlDomainConstants.RELATIONSHIP_TYPE)
+@OslcResourceShape(title = "Relationship Shape", describes = SysmlDomainConstants.RELATIONSHIP_TYPE)
 public class Relationship
     extends Element
     implements IRelationship
@@ -97,9 +97,6 @@ public class Relationship
     // Start of user code attributeAnnotation:owningRelatedElement
     // End of user code
     private Link owningRelatedElement;
-    // Start of user code attributeAnnotation:ownedRelatedElement_comp
-    // End of user code
-    private Set<Link> ownedRelatedElement_comp = new HashSet<Link>();
     // Start of user code attributeAnnotation:ownedRelatedElement
     // End of user code
     private Set<Link> ownedRelatedElement = new HashSet<Link>();
@@ -153,7 +150,7 @@ public class Relationship
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -172,11 +169,6 @@ public class Relationship
     public void addSysmlSource(final Link source)
     {
         this.sysmlSource.add(source);
-    }
-    
-    public void addOwnedRelatedElement_comp(final Link ownedRelatedElement_comp)
-    {
-        this.ownedRelatedElement_comp.add(ownedRelatedElement_comp);
     }
     
     public void addOwnedRelatedElement(final Link ownedRelatedElement)
@@ -243,21 +235,6 @@ public class Relationship
         // Start of user code getterInit:owningRelatedElement
         // End of user code
         return owningRelatedElement;
-    }
-    
-    // Start of user code getterAnnotation:ownedRelatedElement_comp
-    // End of user code
-    @OslcName("ownedRelatedElement_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelatedElement_comp")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedRelatedElement_comp()
-    {
-        // Start of user code getterInit:ownedRelatedElement_comp
-        // End of user code
-        return ownedRelatedElement_comp;
     }
     
     // Start of user code getterAnnotation:ownedRelatedElement
@@ -333,22 +310,6 @@ public class Relationship
         this.owningRelatedElement = owningRelatedElement;
     
         // Start of user code setterFinalize:owningRelatedElement
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedRelatedElement_comp
-    // End of user code
-    public void setOwnedRelatedElement_comp(final Set<Link> ownedRelatedElement_comp )
-    {
-        // Start of user code setterInit:ownedRelatedElement_comp
-        // End of user code
-        this.ownedRelatedElement_comp.clear();
-        if (ownedRelatedElement_comp != null)
-        {
-            this.ownedRelatedElement_comp.addAll(ownedRelatedElement_comp);
-        }
-    
-        // Start of user code setterFinalize:ownedRelatedElement_comp
         // End of user code
     }
     

@@ -56,7 +56,6 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.IAnnotation;
-import org.oasis.oslcop.sysml.IBindingConnector;
 import org.oasis.oslcop.sysml.IComment;
 import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
@@ -72,10 +71,24 @@ import org.oasis.oslcop.sysml.ITextualRepresentation;
 
 @OslcNamespace(SysmlDomainConstants.FEATUREVALUE_NAMESPACE)
 @OslcName(SysmlDomainConstants.FEATUREVALUE_LOCALNAME)
-@OslcResourceShape(title = "FeatureValue Resource Shape", describes = SysmlDomainConstants.FEATUREVALUE_TYPE)
+@OslcResourceShape(title = "FeatureValue Shape", describes = SysmlDomainConstants.FEATUREVALUE_TYPE)
 public interface IFeatureValue
 {
 
+
+    @OslcName("isInitial")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isInitial")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsInitial();
+
+    @OslcName("isDefault")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isDefault")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsDefault();
 
     @OslcName("featureWithValue")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "featureWithValue")
@@ -84,22 +97,6 @@ public interface IFeatureValue
     @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
     public Link getFeatureWithValue();
-
-    @OslcName("value_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "value_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
-    @OslcReadOnly(false)
-    public Link getValue_comp();
-
-    @OslcName("valueConnector")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "valueConnector")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.BINDINGCONNECTOR_TYPE})
-    @OslcReadOnly(false)
-    public Link getValueConnector();
 
     @OslcName("value")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "value")
@@ -110,9 +107,9 @@ public interface IFeatureValue
     public Link getValue();
 
 
+    public void setIsInitial(final Boolean isInitial );
+    public void setIsDefault(final Boolean isDefault );
     public void setFeatureWithValue(final Link featureWithValue );
-    public void setValue_comp(final Link value_comp );
-    public void setValueConnector(final Link valueConnector );
     public void setValue(final Link value );
 }
 

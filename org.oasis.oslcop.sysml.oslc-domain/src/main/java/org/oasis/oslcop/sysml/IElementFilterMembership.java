@@ -70,18 +70,10 @@ import org.oasis.oslcop.sysml.ITextualRepresentation;
 
 @OslcNamespace(SysmlDomainConstants.ELEMENTFILTERMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.ELEMENTFILTERMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "ElementFilterMembership Resource Shape", describes = SysmlDomainConstants.ELEMENTFILTERMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "ElementFilterMembership Shape", describes = SysmlDomainConstants.ELEMENTFILTERMEMBERSHIP_TYPE)
 public interface IElementFilterMembership
 {
 
-
-    @OslcName("condition_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "condition_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
-    @OslcReadOnly(false)
-    public Link getCondition_comp();
 
     @OslcName("condition")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "condition")
@@ -92,7 +84,6 @@ public interface IElementFilterMembership
     public Link getCondition();
 
 
-    public void setCondition_comp(final Link condition_comp );
     public void setCondition(final Link condition );
 }
 

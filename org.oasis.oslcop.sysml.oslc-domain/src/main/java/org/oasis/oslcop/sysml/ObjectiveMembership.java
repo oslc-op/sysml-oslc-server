@@ -83,14 +83,11 @@ import org.oasis.oslcop.sysml.Type;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.OBJECTIVEMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.OBJECTIVEMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "ObjectiveMembership Resource Shape", describes = SysmlDomainConstants.OBJECTIVEMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "ObjectiveMembership Shape", describes = SysmlDomainConstants.OBJECTIVEMEMBERSHIP_TYPE)
 public class ObjectiveMembership
     extends FeatureMembership
     implements IObjectiveMembership
 {
-    // Start of user code attributeAnnotation:ownedObjectiveRequirement_comp
-    // End of user code
-    private Link ownedObjectiveRequirement_comp;
     // Start of user code attributeAnnotation:ownedObjectiveRequirement
     // End of user code
     private Link ownedObjectiveRequirement;
@@ -144,27 +141,12 @@ public class ObjectiveMembership
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
-    
-    // Start of user code getterAnnotation:ownedObjectiveRequirement_comp
-    // End of user code
-    @OslcName("ownedObjectiveRequirement_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedObjectiveRequirement_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.REQUIREMENTUSAGE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedObjectiveRequirement_comp()
-    {
-        // Start of user code getterInit:ownedObjectiveRequirement_comp
-        // End of user code
-        return ownedObjectiveRequirement_comp;
-    }
     
     // Start of user code getterAnnotation:ownedObjectiveRequirement
     // End of user code
@@ -181,18 +163,6 @@ public class ObjectiveMembership
         return ownedObjectiveRequirement;
     }
     
-    
-    // Start of user code setterAnnotation:ownedObjectiveRequirement_comp
-    // End of user code
-    public void setOwnedObjectiveRequirement_comp(final Link ownedObjectiveRequirement_comp )
-    {
-        // Start of user code setterInit:ownedObjectiveRequirement_comp
-        // End of user code
-        this.ownedObjectiveRequirement_comp = ownedObjectiveRequirement_comp;
-    
-        // Start of user code setterFinalize:ownedObjectiveRequirement_comp
-        // End of user code
-    }
     
     // Start of user code setterAnnotation:ownedObjectiveRequirement
     // End of user code

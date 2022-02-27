@@ -63,22 +63,25 @@ import org.oasis.oslcop.sysml.IAttributeUsage;
 import org.oasis.oslcop.sysml.ICalculationUsage;
 import org.oasis.oslcop.sysml.ICaseUsage;
 import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IConcernUsage;
 import org.oasis.oslcop.sysml.IConjugation;
-import org.oasis.oslcop.sysml.IConnectionUsage;
+import org.oasis.oslcop.sysml.IConnectorAsUsage;
 import org.oasis.oslcop.sysml.IConstraintUsage;
+import org.oasis.oslcop.sysml.IDisjoining;
 import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IEnumerationUsage;
 import org.oasis.oslcop.sysml.IFeature;
 import org.oasis.oslcop.sysml.IFeatureMembership;
-import org.oasis.oslcop.sysml.IGeneralization;
+import org.oasis.oslcop.sysml.IFlowConnectionUsage;
 import org.oasis.oslcop.sysml.ISysmlImport;
-import org.oasis.oslcop.sysml.IIndividualUsage;
 import org.oasis.oslcop.sysml.IInterfaceUsage;
 import org.oasis.oslcop.sysml.IItemUsage;
+import org.oasis.oslcop.sysml.ILifeClass;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
 import org.oasis.oslcop.sysml.INamespace;
+import org.oasis.oslcop.sysml.IOccurrenceUsage;
 import org.oasis.oslcop.sysml.IPartUsage;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IPortUsage;
@@ -86,11 +89,13 @@ import org.oasis.oslcop.sysml.IReferenceUsage;
 import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.IRenderingUsage;
 import org.oasis.oslcop.sysml.IRequirementUsage;
+import org.oasis.oslcop.sysml.ISpecialization;
 import org.oasis.oslcop.sysml.IStateUsage;
-import org.oasis.oslcop.sysml.ISuperclassing;
+import org.oasis.oslcop.sysml.ISubclassification;
 import org.oasis.oslcop.sysml.ITextualRepresentation;
 import org.oasis.oslcop.sysml.ITransitionUsage;
 import org.oasis.oslcop.sysml.IUsage;
+import org.oasis.oslcop.sysml.IUseCaseUsage;
 import org.oasis.oslcop.sysml.IVariantMembership;
 import org.oasis.oslcop.sysml.IVerificationCaseUsage;
 import org.oasis.oslcop.sysml.IViewUsage;
@@ -100,11 +105,18 @@ import org.oasis.oslcop.sysml.IViewpointUsage;
 
 @OslcNamespace(SysmlDomainConstants.STATEDEFINITION_NAMESPACE)
 @OslcName(SysmlDomainConstants.STATEDEFINITION_LOCALNAME)
-@OslcResourceShape(title = "StateDefinition Resource Shape", describes = SysmlDomainConstants.STATEDEFINITION_TYPE)
+@OslcResourceShape(title = "StateDefinition Shape", describes = SysmlDomainConstants.STATEDEFINITION_TYPE)
 public interface IStateDefinition
 {
 
     public void addState(final Link state );
+
+    @OslcName("isParallel")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isParallel")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsParallel();
 
     @OslcName("state")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "state")
@@ -139,6 +151,7 @@ public interface IStateDefinition
     public Link getExitAction();
 
 
+    public void setIsParallel(final Boolean isParallel );
     public void setState(final Set<Link> state );
     public void setEntryAction(final Link entryAction );
     public void setDoAction(final Link doAction );

@@ -6,14 +6,14 @@ import java.util.List;
 public class ProjectCommitViewModel {
     private final String id;
     private final Boolean selected;
-    private final List<ServiceProviderViewModel> providers;
+    private final String serviceProviderUri;
     private final URI uri;
 
     public ProjectCommitViewModel(String id, Boolean selected,
-                                  List<ServiceProviderViewModel> providers, URI uri) {
+                                  String serviceProviderUri, URI uri) {
         this.id = id;
         this.selected = selected;
-        this.providers = providers;
+        this.serviceProviderUri = serviceProviderUri;
         this.uri = uri;
     }
 
@@ -25,21 +25,12 @@ public class ProjectCommitViewModel {
         return selected;
     }
 
-    public List<ServiceProviderViewModel> getProviders() {
-        return providers;
+    public String getServiceProviderUri() {
+        return serviceProviderUri;
     }
 
     public URI getUri() {
         return uri;
     }
 
-    public static class ServiceProviderViewModel {
-        private final String identifier;
-
-        public String getIdentifier() {
-            return identifier;
-        }
-
-        public ServiceProviderViewModel(String id) {this.identifier = id;}
-    }
 }

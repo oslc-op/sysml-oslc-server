@@ -92,12 +92,12 @@ public class ServiceProviderService
      * @return
      */
     @GET
-    @Path("{projectId}")
+    @Path("{projectId}/commits/{commitId}")
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_JSON_LD, OslcMediaType.TEXT_TURTLE, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
-    public ServiceProvider getServiceProvider(@PathParam("projectId") final String projectId)
+    public ServiceProvider getServiceProvider(@PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId)
     {
         httpServletResponse.addHeader("Oslc-Core-Version","2.0");
-        return ServiceProviderCatalogSingleton.getServiceProvider(httpServletRequest, projectId);
+        return ServiceProviderCatalogSingleton.getServiceProvider(httpServletRequest, projectId, commitId);
     }
 
     /**
@@ -108,11 +108,11 @@ public class ServiceProviderService
      * @param serviceProviderId
      */
     @GET
-    @Path("{projectId}")
+    @Path("{projectId}/commits/{commitId}")
     @Produces(MediaType.TEXT_HTML)
-    public void getHtmlServiceProvider(@PathParam("projectId") final String projectId) throws ServletException, IOException
+    public void getHtmlServiceProvider(@PathParam("projectId") final String projectId, @PathParam("commitId") final String commitId) throws ServletException, IOException
     {
-        ServiceProvider serviceProvider = ServiceProviderCatalogSingleton.getServiceProvider(httpServletRequest, projectId);
+        ServiceProvider serviceProvider = ServiceProviderCatalogSingleton.getServiceProvider(httpServletRequest, projectId, commitId);
         Service [] services = serviceProvider.getServices();
 
         httpServletRequest.setAttribute("serviceProvider", serviceProvider);

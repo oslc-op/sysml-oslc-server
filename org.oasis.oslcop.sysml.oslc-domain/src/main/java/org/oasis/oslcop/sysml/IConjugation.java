@@ -70,7 +70,7 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.CONJUGATION_NAMESPACE)
 @OslcName(SysmlDomainConstants.CONJUGATION_LOCALNAME)
-@OslcResourceShape(title = "Conjugation Resource Shape", describes = SysmlDomainConstants.CONJUGATION_TYPE)
+@OslcResourceShape(title = "Conjugation Shape", describes = SysmlDomainConstants.CONJUGATION_TYPE)
 public interface IConjugation
 {
 

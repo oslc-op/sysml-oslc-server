@@ -80,7 +80,7 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.ELEMENT_NAMESPACE)
 @OslcName(SysmlDomainConstants.ELEMENT_LOCALNAME)
-@OslcResourceShape(title = "Element Resource Shape", describes = SysmlDomainConstants.ELEMENT_TYPE)
+@OslcResourceShape(title = "Element Shape", describes = SysmlDomainConstants.ELEMENT_TYPE)
 public class Element
     extends Resource
     implements IElement
@@ -94,6 +94,9 @@ public class Element
     // Start of user code attributeAnnotation:qualifiedName
     // End of user code
     private String qualifiedName;
+    // Start of user code attributeAnnotation:effectiveName
+    // End of user code
+    private String effectiveName;
     // Start of user code attributeAnnotation:aliasId
     // End of user code
     private Set<String> aliasId = new HashSet<String>();
@@ -103,9 +106,9 @@ public class Element
     // Start of user code attributeAnnotation:owningMembership
     // End of user code
     private Link owningMembership;
-    // Start of user code attributeAnnotation:ownedRelationship_comp
+    // Start of user code attributeAnnotation:ownedRelationship
     // End of user code
-    private Set<Link> ownedRelationship_comp = new HashSet<Link>();
+    private Set<Link> ownedRelationship = new HashSet<Link>();
     // Start of user code attributeAnnotation:owningRelationship
     // End of user code
     private Link owningRelationship;
@@ -118,27 +121,18 @@ public class Element
     // Start of user code attributeAnnotation:ownedElement
     // End of user code
     private Set<Link> ownedElement = new HashSet<Link>();
-    // Start of user code attributeAnnotation:documentation_comp
-    // End of user code
-    private Set<Link> documentation_comp = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedAnnotation_comp
-    // End of user code
-    private Set<Link> ownedAnnotation_comp = new HashSet<Link>();
-    // Start of user code attributeAnnotation:documentationComment
-    // End of user code
-    private Set<Link> documentationComment = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedTextualRepresentation
-    // End of user code
-    private Set<Link> ownedTextualRepresentation = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedRelationship
-    // End of user code
-    private Set<Link> ownedRelationship = new HashSet<Link>();
     // Start of user code attributeAnnotation:documentation
     // End of user code
     private Set<Link> documentation = new HashSet<Link>();
     // Start of user code attributeAnnotation:ownedAnnotation
     // End of user code
     private Set<Link> ownedAnnotation = new HashSet<Link>();
+    // Start of user code attributeAnnotation:documentationComment
+    // End of user code
+    private Set<Link> documentationComment = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedTextualRepresentation
+    // End of user code
+    private Set<Link> ownedTextualRepresentation = new HashSet<Link>();
     
     // Start of user code classAttributes
     // End of user code
@@ -189,7 +183,7 @@ public class Element
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -200,39 +194,14 @@ public class Element
         this.aliasId.add(aliasId);
     }
     
-    public void addOwnedRelationship_comp(final Link ownedRelationship_comp)
+    public void addOwnedRelationship(final Link ownedRelationship)
     {
-        this.ownedRelationship_comp.add(ownedRelationship_comp);
+        this.ownedRelationship.add(ownedRelationship);
     }
     
     public void addOwnedElement(final Link ownedElement)
     {
         this.ownedElement.add(ownedElement);
-    }
-    
-    public void addDocumentation_comp(final Link documentation_comp)
-    {
-        this.documentation_comp.add(documentation_comp);
-    }
-    
-    public void addOwnedAnnotation_comp(final Link ownedAnnotation_comp)
-    {
-        this.ownedAnnotation_comp.add(ownedAnnotation_comp);
-    }
-    
-    public void addDocumentationComment(final Link documentationComment)
-    {
-        this.documentationComment.add(documentationComment);
-    }
-    
-    public void addOwnedTextualRepresentation(final Link ownedTextualRepresentation)
-    {
-        this.ownedTextualRepresentation.add(ownedTextualRepresentation);
-    }
-    
-    public void addOwnedRelationship(final Link ownedRelationship)
-    {
-        this.ownedRelationship.add(ownedRelationship);
     }
     
     public void addDocumentation(final Link documentation)
@@ -243,6 +212,16 @@ public class Element
     public void addOwnedAnnotation(final Link ownedAnnotation)
     {
         this.ownedAnnotation.add(ownedAnnotation);
+    }
+    
+    public void addDocumentationComment(final Link documentationComment)
+    {
+        this.documentationComment.add(documentationComment);
+    }
+    
+    public void addOwnedTextualRepresentation(final Link ownedTextualRepresentation)
+    {
+        this.ownedTextualRepresentation.add(ownedTextualRepresentation);
     }
     
     
@@ -288,6 +267,20 @@ public class Element
         return qualifiedName;
     }
     
+    // Start of user code getterAnnotation:effectiveName
+    // End of user code
+    @OslcName("effectiveName")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "effectiveName")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.String)
+    @OslcReadOnly(false)
+    public String getEffectiveName()
+    {
+        // Start of user code getterInit:effectiveName
+        // End of user code
+        return effectiveName;
+    }
+    
     // Start of user code getterAnnotation:aliasId
     // End of user code
     @OslcName("aliasId")
@@ -331,19 +324,19 @@ public class Element
         return owningMembership;
     }
     
-    // Start of user code getterAnnotation:ownedRelationship_comp
+    // Start of user code getterAnnotation:ownedRelationship
     // End of user code
-    @OslcName("ownedRelationship_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelationship_comp")
+    @OslcName("ownedRelationship")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelationship")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.RELATIONSHIP_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedRelationship_comp()
+    public Set<Link> getOwnedRelationship()
     {
-        // Start of user code getterInit:ownedRelationship_comp
+        // Start of user code getterInit:ownedRelationship
         // End of user code
-        return ownedRelationship_comp;
+        return ownedRelationship;
     }
     
     // Start of user code getterAnnotation:owningRelationship
@@ -406,34 +399,34 @@ public class Element
         return ownedElement;
     }
     
-    // Start of user code getterAnnotation:documentation_comp
+    // Start of user code getterAnnotation:documentation
     // End of user code
-    @OslcName("documentation_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "documentation_comp")
+    @OslcName("documentation")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "documentation")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.DOCUMENTATION_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getDocumentation_comp()
+    public Set<Link> getDocumentation()
     {
-        // Start of user code getterInit:documentation_comp
+        // Start of user code getterInit:documentation
         // End of user code
-        return documentation_comp;
+        return documentation;
     }
     
-    // Start of user code getterAnnotation:ownedAnnotation_comp
+    // Start of user code getterAnnotation:ownedAnnotation
     // End of user code
-    @OslcName("ownedAnnotation_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedAnnotation_comp")
+    @OslcName("ownedAnnotation")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedAnnotation")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.ANNOTATION_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedAnnotation_comp()
+    public Set<Link> getOwnedAnnotation()
     {
-        // Start of user code getterInit:ownedAnnotation_comp
+        // Start of user code getterInit:ownedAnnotation
         // End of user code
-        return ownedAnnotation_comp;
+        return ownedAnnotation;
     }
     
     // Start of user code getterAnnotation:documentationComment
@@ -464,51 +457,6 @@ public class Element
         // Start of user code getterInit:ownedTextualRepresentation
         // End of user code
         return ownedTextualRepresentation;
-    }
-    
-    // Start of user code getterAnnotation:ownedRelationship
-    // End of user code
-    @OslcName("ownedRelationship")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelationship")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.RELATIONSHIP_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedRelationship()
-    {
-        // Start of user code getterInit:ownedRelationship
-        // End of user code
-        return ownedRelationship;
-    }
-    
-    // Start of user code getterAnnotation:documentation
-    // End of user code
-    @OslcName("documentation")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "documentation")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.DOCUMENTATION_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getDocumentation()
-    {
-        // Start of user code getterInit:documentation
-        // End of user code
-        return documentation;
-    }
-    
-    // Start of user code getterAnnotation:ownedAnnotation
-    // End of user code
-    @OslcName("ownedAnnotation")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedAnnotation")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ANNOTATION_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedAnnotation()
-    {
-        // Start of user code getterInit:ownedAnnotation
-        // End of user code
-        return ownedAnnotation;
     }
     
     
@@ -545,6 +493,18 @@ public class Element
         this.qualifiedName = qualifiedName;
     
         // Start of user code setterFinalize:qualifiedName
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:effectiveName
+    // End of user code
+    public void setEffectiveName(final String effectiveName )
+    {
+        // Start of user code setterInit:effectiveName
+        // End of user code
+        this.effectiveName = effectiveName;
+    
+        // Start of user code setterFinalize:effectiveName
         // End of user code
     }
     
@@ -588,19 +548,19 @@ public class Element
         // End of user code
     }
     
-    // Start of user code setterAnnotation:ownedRelationship_comp
+    // Start of user code setterAnnotation:ownedRelationship
     // End of user code
-    public void setOwnedRelationship_comp(final Set<Link> ownedRelationship_comp )
+    public void setOwnedRelationship(final Set<Link> ownedRelationship )
     {
-        // Start of user code setterInit:ownedRelationship_comp
+        // Start of user code setterInit:ownedRelationship
         // End of user code
-        this.ownedRelationship_comp.clear();
-        if (ownedRelationship_comp != null)
+        this.ownedRelationship.clear();
+        if (ownedRelationship != null)
         {
-            this.ownedRelationship_comp.addAll(ownedRelationship_comp);
+            this.ownedRelationship.addAll(ownedRelationship);
         }
     
-        // Start of user code setterFinalize:ownedRelationship_comp
+        // Start of user code setterFinalize:ownedRelationship
         // End of user code
     }
     
@@ -656,35 +616,35 @@ public class Element
         // End of user code
     }
     
-    // Start of user code setterAnnotation:documentation_comp
+    // Start of user code setterAnnotation:documentation
     // End of user code
-    public void setDocumentation_comp(final Set<Link> documentation_comp )
+    public void setDocumentation(final Set<Link> documentation )
     {
-        // Start of user code setterInit:documentation_comp
+        // Start of user code setterInit:documentation
         // End of user code
-        this.documentation_comp.clear();
-        if (documentation_comp != null)
+        this.documentation.clear();
+        if (documentation != null)
         {
-            this.documentation_comp.addAll(documentation_comp);
+            this.documentation.addAll(documentation);
         }
     
-        // Start of user code setterFinalize:documentation_comp
+        // Start of user code setterFinalize:documentation
         // End of user code
     }
     
-    // Start of user code setterAnnotation:ownedAnnotation_comp
+    // Start of user code setterAnnotation:ownedAnnotation
     // End of user code
-    public void setOwnedAnnotation_comp(final Set<Link> ownedAnnotation_comp )
+    public void setOwnedAnnotation(final Set<Link> ownedAnnotation )
     {
-        // Start of user code setterInit:ownedAnnotation_comp
+        // Start of user code setterInit:ownedAnnotation
         // End of user code
-        this.ownedAnnotation_comp.clear();
-        if (ownedAnnotation_comp != null)
+        this.ownedAnnotation.clear();
+        if (ownedAnnotation != null)
         {
-            this.ownedAnnotation_comp.addAll(ownedAnnotation_comp);
+            this.ownedAnnotation.addAll(ownedAnnotation);
         }
     
-        // Start of user code setterFinalize:ownedAnnotation_comp
+        // Start of user code setterFinalize:ownedAnnotation
         // End of user code
     }
     
@@ -717,54 +677,6 @@ public class Element
         }
     
         // Start of user code setterFinalize:ownedTextualRepresentation
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedRelationship
-    // End of user code
-    public void setOwnedRelationship(final Set<Link> ownedRelationship )
-    {
-        // Start of user code setterInit:ownedRelationship
-        // End of user code
-        this.ownedRelationship.clear();
-        if (ownedRelationship != null)
-        {
-            this.ownedRelationship.addAll(ownedRelationship);
-        }
-    
-        // Start of user code setterFinalize:ownedRelationship
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:documentation
-    // End of user code
-    public void setDocumentation(final Set<Link> documentation )
-    {
-        // Start of user code setterInit:documentation
-        // End of user code
-        this.documentation.clear();
-        if (documentation != null)
-        {
-            this.documentation.addAll(documentation);
-        }
-    
-        // Start of user code setterFinalize:documentation
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedAnnotation
-    // End of user code
-    public void setOwnedAnnotation(final Set<Link> ownedAnnotation )
-    {
-        // Start of user code setterInit:ownedAnnotation
-        // End of user code
-        this.ownedAnnotation.clear();
-        if (ownedAnnotation != null)
-        {
-            this.ownedAnnotation.addAll(ownedAnnotation);
-        }
-    
-        // Start of user code setterFinalize:ownedAnnotation
         // End of user code
     }
     

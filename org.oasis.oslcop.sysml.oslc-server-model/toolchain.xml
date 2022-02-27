@@ -2,165 +2,81 @@
 <oslc4j_tc:Toolchain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oslc4j_ai="http://org.eclipse.lyo/oslc4j/adaptorInterface" xmlns:oslc4j_tc="http://org.eclipse.lyo/oslc4j/toolChain">
   <adaptorInterfaces name="Sysml Server">
     <serviceProviderCatalog title="Service Provider Catalog" description="Service Provider Catalog">
-      <serviceProviders title="Sysml Project Commit" description="Sysml Project Commit" serviceNamespace="projects" instanceID="{projectId}">
+      <serviceProviders title="Sysml Project Commit" description="Sysml Project Commit" serviceNamespace="projects" instanceID="{projectId}/commits/{commitId}">
         <services serviceNamespace="relativeToServiceProvider">
           <domainSpecification href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#//@domainSpecifications[name='sysml']"/>
-          <queryCapabilities title="QueryCapability1" label="QueryCapability1" queryBaseURI="query">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkg41HEeuS5oYDZ6mCNA"/>
+          <queryCapabilities title="Subsetting QueryCapability" label="Subsetting QueryCapability" queryBaseURI="query">
+            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_t8oaxZaSEeyc3JTsjx0tWA"/>
           </queryCapabilities>
-          <selectionDialogs title="SelectionDialog1" label="SelectionDialog1" dialogURI="selector" hintWidth="250" hintHeight="250">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkg41HEeuS5oYDZ6mCNA"/>
+          <selectionDialogs title="Subsetting SelectionDialog" label="Subsetting SelectionDialog" dialogURI="selector" hintWidth="250" hintHeight="250">
+            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_t8oaxZaSEeyc3JTsjx0tWA"/>
           </selectionDialogs>
           <persistence store="//@adaptorInterfaces.0/@stores.0"/>
         </services>
         <services serviceNamespace="relativeToServiceProvider">
           <domainSpecification href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#//@domainSpecifications[name='sysml']"/>
-          <queryCapabilities title="QueryCapability1" label="QueryCapability1" queryBaseURI="query">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkdI1HEeuS5oYDZ6mCNA"/>
+          <queryCapabilities title="Relationship QueryCapability" label="Relationship QueryCapability" queryBaseURI="query">
+            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_t8oauZaSEeyc3JTsjx0tWA"/>
           </queryCapabilities>
-          <selectionDialogs title="SelectionDialog1" label="SelectionDialog1" dialogURI="selector" hintWidth="250" hintHeight="250">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkdI1HEeuS5oYDZ6mCNA"/>
+          <selectionDialogs title="Relationship SelectionDialog" label="Relationship SelectionDialog" dialogURI="selector" hintWidth="250" hintHeight="250">
+            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_t8oauZaSEeyc3JTsjx0tWA"/>
           </selectionDialogs>
           <persistence store="//@adaptorInterfaces.0/@stores.0"/>
         </services>
         <services serviceNamespace="relativeToServiceProvider">
           <domainSpecification href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#//@domainSpecifications[name='sysml']"/>
-          <queryCapabilities title="QueryCapability1" label="QueryCapability1" queryBaseURI="query">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkj41HEeuS5oYDZ6mCNA"/>
+          <queryCapabilities title="Class QueryCapability" label="Class QueryCapability" queryBaseURI="query">
+            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_t8oas5aSEeyc3JTsjx0tWA"/>
           </queryCapabilities>
-          <selectionDialogs title="SelectionDialog1" label="SelectionDialog1" dialogURI="selector" hintWidth="250" hintHeight="250">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkj41HEeuS5oYDZ6mCNA"/>
+          <selectionDialogs title="Class SelectionDialog" label="Class SelectionDialog" dialogURI="selector" hintWidth="250" hintHeight="250">
+            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_t8oas5aSEeyc3JTsjx0tWA"/>
           </selectionDialogs>
           <persistence store="//@adaptorInterfaces.0/@stores.0"/>
         </services>
         <services serviceNamespace="relativeToServiceProvider">
           <domainSpecification href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#//@domainSpecifications[name='sysml']"/>
-          <queryCapabilities title="QueryCapability1" label="QueryCapability1" queryBaseURI="query">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkdo1HEeuS5oYDZ6mCNA"/>
+          <queryCapabilities title="Feature QueryCapability" label="Feature QueryCapability" queryBaseURI="query">
+            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_t8oaw5aSEeyc3JTsjx0tWA"/>
           </queryCapabilities>
-          <selectionDialogs title="SelectionDialog1" label="SelectionDialog1" dialogURI="selector" hintWidth="250" hintHeight="250">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkdo1HEeuS5oYDZ6mCNA"/>
+          <selectionDialogs title="Feature SelectionDialog" label="Feature SelectionDialog" dialogURI="selector" hintWidth="250" hintHeight="250">
+            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_t8oaw5aSEeyc3JTsjx0tWA"/>
           </selectionDialogs>
           <persistence store="//@adaptorInterfaces.0/@stores.0"/>
         </services>
         <services serviceNamespace="relativeToServiceProvider">
           <domainSpecification href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#//@domainSpecifications[name='sysml']"/>
-          <queryCapabilities title="QueryCapability1" label="QueryCapability1" queryBaseURI="query">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkfY1HEeuS5oYDZ6mCNA"/>
+          <queryCapabilities title="Element QueryCapability" label="Element QueryCapability" queryBaseURI="query">
+            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_t8oat5aSEeyc3JTsjx0tWA"/>
           </queryCapabilities>
-          <selectionDialogs title="SelectionDialog1" label="SelectionDialog1" dialogURI="selector" hintWidth="250" hintHeight="250">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkfY1HEeuS5oYDZ6mCNA"/>
-          </selectionDialogs>
-          <persistence store="//@adaptorInterfaces.0/@stores.0"/>
-        </services>
-        <services serviceNamespace="relativeToServiceProvider">
-          <domainSpecification href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#//@domainSpecifications[name='sysml']"/>
-          <queryCapabilities title="QueryCapability1" label="QueryCapability1" queryBaseURI="query">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkcY1HEeuS5oYDZ6mCNA"/>
-          </queryCapabilities>
-          <selectionDialogs title="SelectionDialog1" label="SelectionDialog1" dialogURI="selector" hintWidth="250" hintHeight="250">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkcY1HEeuS5oYDZ6mCNA"/>
-          </selectionDialogs>
-          <persistence store="//@adaptorInterfaces.0/@stores.0"/>
-        </services>
-        <services serviceNamespace="relativeToServiceProvider">
-          <domainSpecification href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#//@domainSpecifications[name='sysml']"/>
-          <queryCapabilities title="QueryCapability1" label="QueryCapability1" queryBaseURI="query">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkfo1HEeuS5oYDZ6mCNA"/>
-          </queryCapabilities>
-          <selectionDialogs title="SelectionDialog1" label="SelectionDialog1" dialogURI="selector" hintWidth="250" hintHeight="250">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkfo1HEeuS5oYDZ6mCNA"/>
-          </selectionDialogs>
-          <persistence store="//@adaptorInterfaces.0/@stores.0"/>
-        </services>
-        <services serviceNamespace="relativeToServiceProvider">
-          <domainSpecification href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#//@domainSpecifications[name='sysml']"/>
-          <queryCapabilities title="QueryCapability1" label="QueryCapability1" queryBaseURI="query">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkhI1HEeuS5oYDZ6mCNA"/>
-          </queryCapabilities>
-          <selectionDialogs title="SelectionDialog1" label="SelectionDialog1" dialogURI="selector" hintWidth="250" hintHeight="250">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkhI1HEeuS5oYDZ6mCNA"/>
-          </selectionDialogs>
-          <persistence store="//@adaptorInterfaces.0/@stores.0"/>
-        </services>
-        <services serviceNamespace="relativeToServiceProvider">
-          <domainSpecification href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#//@domainSpecifications[name='sysml']"/>
-          <queryCapabilities title="QueryCapability1" label="QueryCapability1" queryBaseURI="query">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkvI1HEeuS5oYDZ6mCNA"/>
-          </queryCapabilities>
-          <selectionDialogs title="SelectionDialog1" label="SelectionDialog1" dialogURI="selector" hintWidth="250" hintHeight="250">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkvI1HEeuS5oYDZ6mCNA"/>
-          </selectionDialogs>
-          <persistence store="//@adaptorInterfaces.0/@stores.0"/>
-        </services>
-        <services serviceNamespace="relativeToServiceProvider">
-          <domainSpecification href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#//@domainSpecifications[name='sysml']"/>
-          <queryCapabilities title="QueryCapability1" label="QueryCapability1" queryBaseURI="query">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptk2I1HEeuS5oYDZ6mCNA"/>
-          </queryCapabilities>
-          <selectionDialogs title="SelectionDialog1" label="SelectionDialog1" dialogURI="selector" hintWidth="250" hintHeight="250">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptk2I1HEeuS5oYDZ6mCNA"/>
-          </selectionDialogs>
-          <persistence store="//@adaptorInterfaces.0/@stores.0"/>
-        </services>
-        <services serviceNamespace="relativeToServiceProvider">
-          <domainSpecification href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#//@domainSpecifications[name='sysml']"/>
-          <queryCapabilities title="QueryCapability1" label="QueryCapability1" queryBaseURI="query">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkz41HEeuS5oYDZ6mCNA"/>
-          </queryCapabilities>
-          <selectionDialogs title="SelectionDialog1" label="SelectionDialog1" dialogURI="selector" hintWidth="250" hintHeight="250">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkz41HEeuS5oYDZ6mCNA"/>
+          <selectionDialogs title="Element SelectionDialog" label="Element SelectionDialog" dialogURI="selector" hintWidth="250" hintHeight="250">
+            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_t8oat5aSEeyc3JTsjx0tWA"/>
           </selectionDialogs>
           <persistence store="//@adaptorInterfaces.0/@stores.0"/>
         </services>
       </serviceProviders>
     </serviceProviderCatalog>
     <webServices name="SubsettingService" serviceUrlPattern="projects/{projectId}/subsettings" resourceUrlPattern="{id}">
-      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkg41HEeuS5oYDZ6mCNA"/>
+      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_t8oaxZaSEeyc3JTsjx0tWA"/>
       <persistence store="//@adaptorInterfaces.0/@stores.0"/>
     </webServices>
     <webServices name="ElementService" serviceUrlPattern="projects/{projectId}/elements" resourceUrlPattern="{id}">
-      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkdI1HEeuS5oYDZ6mCNA"/>
+      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_t8oat5aSEeyc3JTsjx0tWA"/>
       <persistence store="//@adaptorInterfaces.0/@stores.0"/>
     </webServices>
     <webServices name="ClassService" serviceUrlPattern="projects/{projectId}/classes" resourceUrlPattern="{id}">
-      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkj41HEeuS5oYDZ6mCNA"/>
+      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_t8oas5aSEeyc3JTsjx0tWA"/>
       <persistence store="//@adaptorInterfaces.0/@stores.0"/>
     </webServices>
     <webServices name="RelationshipService" serviceUrlPattern="projects/{projectId}/relationships" resourceUrlPattern="{id}">
-      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkdo1HEeuS5oYDZ6mCNA"/>
-      <persistence store="//@adaptorInterfaces.0/@stores.0"/>
-    </webServices>
-    <webServices name="GeneralizationService" serviceUrlPattern="projects/{projectId}/generalizations" resourceUrlPattern="{id}">
-      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkfY1HEeuS5oYDZ6mCNA"/>
+      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_t8oauZaSEeyc3JTsjx0tWA"/>
       <persistence store="//@adaptorInterfaces.0/@stores.0"/>
     </webServices>
     <webServices name="FeatureService" serviceUrlPattern="projects/{projectId}/features" resourceUrlPattern="{id}">
-      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkcY1HEeuS5oYDZ6mCNA"/>
-      <persistence store="//@adaptorInterfaces.0/@stores.0"/>
-    </webServices>
-    <webServices name="FeatureMembershipService" serviceUrlPattern="projects/{projectId}/featureMemberships" resourceUrlPattern="{id}">
-      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkfo1HEeuS5oYDZ6mCNA"/>
-      <persistence store="//@adaptorInterfaces.0/@stores.0"/>
-    </webServices>
-    <webServices name="FeatureTypingService" serviceUrlPattern="projects/{projectId}/featureTypings" resourceUrlPattern="{id}">
-      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkhI1HEeuS5oYDZ6mCNA"/>
-      <persistence store="//@adaptorInterfaces.0/@stores.0"/>
-    </webServices>
-    <webServices name="PortUsageService" serviceUrlPattern="projects/{projectId}/portUsages" resourceUrlPattern="{id}">
-      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkvI1HEeuS5oYDZ6mCNA"/>
-      <persistence store="//@adaptorInterfaces.0/@stores.0"/>
-    </webServices>
-    <webServices name="AttributeUsageService" serviceUrlPattern="projects/{projectId}/attributeUsages" resourceUrlPattern="{id}">
-      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptk2I1HEeuS5oYDZ6mCNA"/>
-      <persistence store="//@adaptorInterfaces.0/@stores.0"/>
-    </webServices>
-    <webServices name="PartUsageService" serviceUrlPattern="projects/{projectId}/partUsages" resourceUrlPattern="{id}">
-      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_5ptkz41HEeuS5oYDZ6mCNA"/>
+      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_t8oaw5aSEeyc3JTsjx0tWA"/>
       <persistence store="//@adaptorInterfaces.0/@stores.0"/>
     </webServices>
     <specification/>
-    <configuration xsi:type="oslc4j_ai:MavenServerConfiguration" rootServerBaseUrl="http://localhost:8085/" applicationContextPath="/sysml_oslc_server" servletUrlPattern="/services/*" jettyPort="8085">
+    <configuration xsi:type="oslc4j_ai:MavenServerConfiguration" rootServerBaseUrl="http://localhost:8085/" applicationContextPath="/sysml_oslc_server" servletUrlPattern="/oslc/*" generateJspFilesForOslcUI="true" jettyPort="8085">
       <generalConfiguration doNotGenerateFromImportedModels="true" filesBasePath="../org.oasis.oslcop.sysml.oslc-server" javaBasePackageName="org.oasis.oslcop.sysml"/>
       <projectConfiguration xsi:type="oslc4j_ai:MavenProjectConfiguration" lyoVersion="5.0.0-SNAPSHOT" groupId="org.oasis.oslcop.sysml" artifactId="sysml_oslc_server" version="0.1.0-SNAPSHOT"/>
       <authenticationConfiguration applicationName="Sysml Server" oauthRealm="Sysml Server"/>

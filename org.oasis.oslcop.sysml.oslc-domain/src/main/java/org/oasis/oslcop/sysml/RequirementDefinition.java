@@ -69,22 +69,25 @@ import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
 import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.ConcernUsage;
 import org.oasis.oslcop.sysml.Conjugation;
-import org.oasis.oslcop.sysml.ConnectionUsage;
+import org.oasis.oslcop.sysml.ConnectorAsUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
-import org.oasis.oslcop.sysml.Generalization;
+import org.oasis.oslcop.sysml.FlowConnectionUsage;
 import org.oasis.oslcop.sysml.SysmlImport;
-import org.oasis.oslcop.sysml.IndividualUsage;
 import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
+import org.oasis.oslcop.sysml.LifeClass;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
+import org.oasis.oslcop.sysml.OccurrenceUsage;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
@@ -92,11 +95,13 @@ import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.StateUsage;
-import org.oasis.oslcop.sysml.Superclassing;
+import org.oasis.oslcop.sysml.Subclassification;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.UseCaseUsage;
 import org.oasis.oslcop.sysml.VariantMembership;
 import org.oasis.oslcop.sysml.VerificationCaseUsage;
 import org.oasis.oslcop.sysml.ViewUsage;
@@ -111,7 +116,7 @@ import org.oasis.oslcop.sysml.ViewpointUsage;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.REQUIREMENTDEFINITION_NAMESPACE)
 @OslcName(SysmlDomainConstants.REQUIREMENTDEFINITION_LOCALNAME)
-@OslcResourceShape(title = "RequirementDefinition Resource Shape", describes = SysmlDomainConstants.REQUIREMENTDEFINITION_TYPE)
+@OslcResourceShape(title = "RequirementDefinition Shape", describes = SysmlDomainConstants.REQUIREMENTDEFINITION_TYPE)
 public class RequirementDefinition
     extends ConstraintDefinition
     implements IRequirementDefinition
@@ -131,6 +136,15 @@ public class RequirementDefinition
     // Start of user code attributeAnnotation:subjectParameter
     // End of user code
     private Link subjectParameter;
+    // Start of user code attributeAnnotation:framedConcern
+    // End of user code
+    private Set<Link> framedConcern = new HashSet<Link>();
+    // Start of user code attributeAnnotation:actorParameter
+    // End of user code
+    private Set<Link> actorParameter = new HashSet<Link>();
+    // Start of user code attributeAnnotation:stakeholderParameter
+    // End of user code
+    private Set<Link> stakeholderParameter = new HashSet<Link>();
     
     // Start of user code classAttributes
     // End of user code
@@ -181,7 +195,7 @@ public class RequirementDefinition
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -200,6 +214,21 @@ public class RequirementDefinition
     public void addRequiredConstraint(final Link requiredConstraint)
     {
         this.requiredConstraint.add(requiredConstraint);
+    }
+    
+    public void addFramedConcern(final Link framedConcern)
+    {
+        this.framedConcern.add(framedConcern);
+    }
+    
+    public void addActorParameter(final Link actorParameter)
+    {
+        this.actorParameter.add(actorParameter);
+    }
+    
+    public void addStakeholderParameter(final Link stakeholderParameter)
+    {
+        this.stakeholderParameter.add(stakeholderParameter);
     }
     
     
@@ -276,6 +305,51 @@ public class RequirementDefinition
         return subjectParameter;
     }
     
+    // Start of user code getterAnnotation:framedConcern
+    // End of user code
+    @OslcName("framedConcern")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "framedConcern")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.CONCERNUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getFramedConcern()
+    {
+        // Start of user code getterInit:framedConcern
+        // End of user code
+        return framedConcern;
+    }
+    
+    // Start of user code getterAnnotation:actorParameter
+    // End of user code
+    @OslcName("actorParameter")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "actorParameter")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.PARTUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getActorParameter()
+    {
+        // Start of user code getterInit:actorParameter
+        // End of user code
+        return actorParameter;
+    }
+    
+    // Start of user code getterAnnotation:stakeholderParameter
+    // End of user code
+    @OslcName("stakeholderParameter")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "stakeholderParameter")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.PARTUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getStakeholderParameter()
+    {
+        // Start of user code getterInit:stakeholderParameter
+        // End of user code
+        return stakeholderParameter;
+    }
+    
     
     // Start of user code setterAnnotation:reqId
     // End of user code
@@ -346,6 +420,54 @@ public class RequirementDefinition
         this.subjectParameter = subjectParameter;
     
         // Start of user code setterFinalize:subjectParameter
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:framedConcern
+    // End of user code
+    public void setFramedConcern(final Set<Link> framedConcern )
+    {
+        // Start of user code setterInit:framedConcern
+        // End of user code
+        this.framedConcern.clear();
+        if (framedConcern != null)
+        {
+            this.framedConcern.addAll(framedConcern);
+        }
+    
+        // Start of user code setterFinalize:framedConcern
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:actorParameter
+    // End of user code
+    public void setActorParameter(final Set<Link> actorParameter )
+    {
+        // Start of user code setterInit:actorParameter
+        // End of user code
+        this.actorParameter.clear();
+        if (actorParameter != null)
+        {
+            this.actorParameter.addAll(actorParameter);
+        }
+    
+        // Start of user code setterFinalize:actorParameter
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:stakeholderParameter
+    // End of user code
+    public void setStakeholderParameter(final Set<Link> stakeholderParameter )
+    {
+        // Start of user code setterInit:stakeholderParameter
+        // End of user code
+        this.stakeholderParameter.clear();
+        if (stakeholderParameter != null)
+        {
+            this.stakeholderParameter.addAll(stakeholderParameter);
+        }
+    
+        // Start of user code setterFinalize:stakeholderParameter
         // End of user code
     }
     

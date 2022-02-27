@@ -65,14 +65,15 @@ import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.Behavior;
 import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Expression;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
 import org.oasis.oslcop.sysml.Function;
-import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
@@ -80,6 +81,7 @@ import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
@@ -94,7 +96,7 @@ import org.oasis.oslcop.sysml.TypeFeaturing;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.OPERATOREXPRESSION_NAMESPACE)
 @OslcName(SysmlDomainConstants.OPERATOREXPRESSION_LOCALNAME)
-@OslcResourceShape(title = "OperatorExpression Resource Shape", describes = SysmlDomainConstants.OPERATOREXPRESSION_TYPE)
+@OslcResourceShape(title = "OperatorExpression Shape", describes = SysmlDomainConstants.OPERATOREXPRESSION_TYPE)
 public class OperatorExpression
     extends InvocationExpression
     implements IOperatorExpression
@@ -102,9 +104,6 @@ public class OperatorExpression
     // Start of user code attributeAnnotation:operator
     // End of user code
     private String operator;
-    // Start of user code attributeAnnotation:operand_comp
-    // End of user code
-    private Set<Link> operand_comp = new HashSet<Link>();
     // Start of user code attributeAnnotation:operand
     // End of user code
     private Set<Link> operand = new HashSet<Link>();
@@ -158,15 +157,10 @@ public class OperatorExpression
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
-    }
-    
-    public void addOperand_comp(final Link operand_comp)
-    {
-        this.operand_comp.add(operand_comp);
     }
     
     public void addOperand(final Link operand)
@@ -187,21 +181,6 @@ public class OperatorExpression
         // Start of user code getterInit:operator
         // End of user code
         return operator;
-    }
-    
-    // Start of user code getterAnnotation:operand_comp
-    // End of user code
-    @OslcName("operand_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "operand_comp")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOperand_comp()
-    {
-        // Start of user code getterInit:operand_comp
-        // End of user code
-        return operand_comp;
     }
     
     // Start of user code getterAnnotation:operand
@@ -229,22 +208,6 @@ public class OperatorExpression
         this.operator = operator;
     
         // Start of user code setterFinalize:operator
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:operand_comp
-    // End of user code
-    public void setOperand_comp(final Set<Link> operand_comp )
-    {
-        // Start of user code setterInit:operand_comp
-        // End of user code
-        this.operand_comp.clear();
-        if (operand_comp != null)
-        {
-            this.operand_comp.addAll(operand_comp);
-        }
-    
-        // Start of user code setterFinalize:operand_comp
         // End of user code
     }
     

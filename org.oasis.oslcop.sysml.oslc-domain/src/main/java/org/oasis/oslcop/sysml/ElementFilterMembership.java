@@ -81,14 +81,11 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.ELEMENTFILTERMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.ELEMENTFILTERMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "ElementFilterMembership Resource Shape", describes = SysmlDomainConstants.ELEMENTFILTERMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "ElementFilterMembership Shape", describes = SysmlDomainConstants.ELEMENTFILTERMEMBERSHIP_TYPE)
 public class ElementFilterMembership
     extends Membership
     implements IElementFilterMembership
 {
-    // Start of user code attributeAnnotation:condition_comp
-    // End of user code
-    private Link condition_comp;
     // Start of user code attributeAnnotation:condition
     // End of user code
     private Link condition;
@@ -142,27 +139,12 @@ public class ElementFilterMembership
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
-    
-    // Start of user code getterAnnotation:condition_comp
-    // End of user code
-    @OslcName("condition_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "condition_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
-    @OslcReadOnly(false)
-    public Link getCondition_comp()
-    {
-        // Start of user code getterInit:condition_comp
-        // End of user code
-        return condition_comp;
-    }
     
     // Start of user code getterAnnotation:condition
     // End of user code
@@ -179,18 +161,6 @@ public class ElementFilterMembership
         return condition;
     }
     
-    
-    // Start of user code setterAnnotation:condition_comp
-    // End of user code
-    public void setCondition_comp(final Link condition_comp )
-    {
-        // Start of user code setterInit:condition_comp
-        // End of user code
-        this.condition_comp = condition_comp;
-    
-        // Start of user code setterFinalize:condition_comp
-        // End of user code
-    }
     
     // Start of user code setterAnnotation:condition
     // End of user code

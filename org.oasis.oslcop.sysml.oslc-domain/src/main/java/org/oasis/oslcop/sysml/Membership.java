@@ -80,7 +80,7 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.MEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.MEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "Membership Resource Shape", describes = SysmlDomainConstants.MEMBERSHIP_TYPE)
+@OslcResourceShape(title = "Membership Shape", describes = SysmlDomainConstants.MEMBERSHIP_TYPE)
 public class Membership
     extends Relationship
     implements IMembership
@@ -88,6 +88,9 @@ public class Membership
     // Start of user code attributeAnnotation:memberName
     // End of user code
     private String memberName;
+    // Start of user code attributeAnnotation:effectiveMemberName
+    // End of user code
+    private String effectiveMemberName;
     // Start of user code attributeAnnotation:visibility
     // End of user code
     private String visibility;
@@ -97,9 +100,6 @@ public class Membership
     // Start of user code attributeAnnotation:membershipOwningNamespace
     // End of user code
     private Link membershipOwningNamespace;
-    // Start of user code attributeAnnotation:ownedMemberElement_comp
-    // End of user code
-    private Link ownedMemberElement_comp;
     // Start of user code attributeAnnotation:ownedMemberElement
     // End of user code
     private Link ownedMemberElement;
@@ -153,7 +153,7 @@ public class Membership
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -174,6 +174,20 @@ public class Membership
         return memberName;
     }
     
+    // Start of user code getterAnnotation:effectiveMemberName
+    // End of user code
+    @OslcName("effectiveMemberName")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "effectiveMemberName")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.String)
+    @OslcReadOnly(false)
+    public String getEffectiveMemberName()
+    {
+        // Start of user code getterInit:effectiveMemberName
+        // End of user code
+        return effectiveMemberName;
+    }
+    
     // Start of user code getterAnnotation:visibility
     // End of user code
     @OslcName("visibility")
@@ -181,7 +195,7 @@ public class Membership
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.String)
     @OslcReadOnly(false)
-    @OslcAllowedValue({"public", "private", "protected", "package"})
+    @OslcAllowedValue({"private", "protected", "public"})
     public String getVisibility()
     {
         // Start of user code getterInit:visibility
@@ -208,7 +222,7 @@ public class Membership
     // End of user code
     @OslcName("membershipOwningNamespace")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "membershipOwningNamespace")
-    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.NAMESPACE_TYPE})
     @OslcReadOnly(false)
@@ -217,21 +231,6 @@ public class Membership
         // Start of user code getterInit:membershipOwningNamespace
         // End of user code
         return membershipOwningNamespace;
-    }
-    
-    // Start of user code getterAnnotation:ownedMemberElement_comp
-    // End of user code
-    @OslcName("ownedMemberElement_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberElement_comp")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedMemberElement_comp()
-    {
-        // Start of user code getterInit:ownedMemberElement_comp
-        // End of user code
-        return ownedMemberElement_comp;
     }
     
     // Start of user code getterAnnotation:ownedMemberElement
@@ -259,6 +258,18 @@ public class Membership
         this.memberName = memberName;
     
         // Start of user code setterFinalize:memberName
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:effectiveMemberName
+    // End of user code
+    public void setEffectiveMemberName(final String effectiveMemberName )
+    {
+        // Start of user code setterInit:effectiveMemberName
+        // End of user code
+        this.effectiveMemberName = effectiveMemberName;
+    
+        // Start of user code setterFinalize:effectiveMemberName
         // End of user code
     }
     
@@ -295,18 +306,6 @@ public class Membership
         this.membershipOwningNamespace = membershipOwningNamespace;
     
         // Start of user code setterFinalize:membershipOwningNamespace
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedMemberElement_comp
-    // End of user code
-    public void setOwnedMemberElement_comp(final Link ownedMemberElement_comp )
-    {
-        // Start of user code setterInit:ownedMemberElement_comp
-        // End of user code
-        this.ownedMemberElement_comp = ownedMemberElement_comp;
-    
-        // Start of user code setterFinalize:ownedMemberElement_comp
         // End of user code
     }
     

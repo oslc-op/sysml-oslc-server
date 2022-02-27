@@ -64,12 +64,13 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
-import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
@@ -77,6 +78,7 @@ import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
@@ -91,7 +93,7 @@ import org.oasis.oslcop.sysml.TypeFeaturing;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.FEATURE_NAMESPACE)
 @OslcName(SysmlDomainConstants.FEATURE_LOCALNAME)
-@OslcResourceShape(title = "Feature Resource Shape", describes = SysmlDomainConstants.FEATURE_TYPE)
+@OslcResourceShape(title = "Feature Shape", describes = SysmlDomainConstants.FEATURE_TYPE)
 public class Feature
     extends Type
     implements IFeature
@@ -105,24 +107,27 @@ public class Feature
     // Start of user code attributeAnnotation:isComposite
     // End of user code
     private Boolean isComposite;
+    // Start of user code attributeAnnotation:isPortion
+    // End of user code
+    private Boolean isPortion;
+    // Start of user code attributeAnnotation:isDerived
+    // End of user code
+    private Boolean isDerived;
+    // Start of user code attributeAnnotation:isReadOnly
+    // End of user code
+    private Boolean isReadOnly;
     // Start of user code attributeAnnotation:isEnd
     // End of user code
     private Boolean isEnd;
+    // Start of user code attributeAnnotation:direction
+    // End of user code
+    private String direction;
     // Start of user code attributeAnnotation:isNonunique
     // End of user code
     private Boolean isNonunique;
-    // Start of user code attributeAnnotation:ownedTypeFeaturing
-    // End of user code
-    private Set<Link> ownedTypeFeaturing = new HashSet<Link>();
-    // Start of user code attributeAnnotation:owningFeatureMembership
-    // End of user code
-    private Link owningFeatureMembership;
     // Start of user code attributeAnnotation:owningType
     // End of user code
     private Link owningType;
-    // Start of user code attributeAnnotation:endOwningType
-    // End of user code
-    private Link endOwningType;
     // Start of user code attributeAnnotation:sysmlType
     // End of user code
     private Set<Link> sysmlType = new HashSet<Link>();
@@ -132,12 +137,27 @@ public class Feature
     // Start of user code attributeAnnotation:ownedSubsetting
     // End of user code
     private Set<Link> ownedSubsetting = new HashSet<Link>();
+    // Start of user code attributeAnnotation:owningFeatureMembership
+    // End of user code
+    private Link owningFeatureMembership;
+    // Start of user code attributeAnnotation:endOwningType
+    // End of user code
+    private Link endOwningType;
     // Start of user code attributeAnnotation:ownedTyping
     // End of user code
     private Set<Link> ownedTyping = new HashSet<Link>();
     // Start of user code attributeAnnotation:featuringType
     // End of user code
     private Set<Link> featuringType = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedTypeFeaturing
+    // End of user code
+    private Set<Link> ownedTypeFeaturing = new HashSet<Link>();
+    // Start of user code attributeAnnotation:chainingFeature
+    // End of user code
+    private Set<Link> chainingFeature = new HashSet<Link>();
+    // Start of user code attributeAnnotation:ownedFeatureChaining
+    // End of user code
+    private Set<Link> ownedFeatureChaining = new HashSet<Link>();
     
     // Start of user code classAttributes
     // End of user code
@@ -188,15 +208,10 @@ public class Feature
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
-    }
-    
-    public void addOwnedTypeFeaturing(final Link ownedTypeFeaturing)
-    {
-        this.ownedTypeFeaturing.add(ownedTypeFeaturing);
     }
     
     public void addSysmlType(final Link type)
@@ -222,6 +237,21 @@ public class Feature
     public void addFeaturingType(final Link featuringType)
     {
         this.featuringType.add(featuringType);
+    }
+    
+    public void addOwnedTypeFeaturing(final Link ownedTypeFeaturing)
+    {
+        this.ownedTypeFeaturing.add(ownedTypeFeaturing);
+    }
+    
+    public void addChainingFeature(final Link chainingFeature)
+    {
+        this.chainingFeature.add(chainingFeature);
+    }
+    
+    public void addOwnedFeatureChaining(final Link ownedFeatureChaining)
+    {
+        this.ownedFeatureChaining.add(ownedFeatureChaining);
     }
     
     
@@ -267,6 +297,48 @@ public class Feature
         return isComposite;
     }
     
+    // Start of user code getterAnnotation:isPortion
+    // End of user code
+    @OslcName("isPortion")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isPortion")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsPortion()
+    {
+        // Start of user code getterInit:isPortion
+        // End of user code
+        return isPortion;
+    }
+    
+    // Start of user code getterAnnotation:isDerived
+    // End of user code
+    @OslcName("isDerived")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isDerived")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsDerived()
+    {
+        // Start of user code getterInit:isDerived
+        // End of user code
+        return isDerived;
+    }
+    
+    // Start of user code getterAnnotation:isReadOnly
+    // End of user code
+    @OslcName("isReadOnly")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isReadOnly")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsReadOnly()
+    {
+        // Start of user code getterInit:isReadOnly
+        // End of user code
+        return isReadOnly;
+    }
+    
     // Start of user code getterAnnotation:isEnd
     // End of user code
     @OslcName("isEnd")
@@ -279,6 +351,21 @@ public class Feature
         // Start of user code getterInit:isEnd
         // End of user code
         return isEnd;
+    }
+    
+    // Start of user code getterAnnotation:direction
+    // End of user code
+    @OslcName("direction")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "direction")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.String)
+    @OslcReadOnly(false)
+    @OslcAllowedValue({"in", "inout", "out"})
+    public String getDirection()
+    {
+        // Start of user code getterInit:direction
+        // End of user code
+        return direction;
     }
     
     // Start of user code getterAnnotation:isNonunique
@@ -295,36 +382,6 @@ public class Feature
         return isNonunique;
     }
     
-    // Start of user code getterAnnotation:ownedTypeFeaturing
-    // End of user code
-    @OslcName("ownedTypeFeaturing")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedTypeFeaturing")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.TYPEFEATURING_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedTypeFeaturing()
-    {
-        // Start of user code getterInit:ownedTypeFeaturing
-        // End of user code
-        return ownedTypeFeaturing;
-    }
-    
-    // Start of user code getterAnnotation:owningFeatureMembership
-    // End of user code
-    @OslcName("owningFeatureMembership")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningFeatureMembership")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATUREMEMBERSHIP_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwningFeatureMembership()
-    {
-        // Start of user code getterInit:owningFeatureMembership
-        // End of user code
-        return owningFeatureMembership;
-    }
-    
     // Start of user code getterAnnotation:owningType
     // End of user code
     @OslcName("owningType")
@@ -338,21 +395,6 @@ public class Feature
         // Start of user code getterInit:owningType
         // End of user code
         return owningType;
-    }
-    
-    // Start of user code getterAnnotation:endOwningType
-    // End of user code
-    @OslcName("endOwningType")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "endOwningType")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
-    @OslcReadOnly(false)
-    public Link getEndOwningType()
-    {
-        // Start of user code getterInit:endOwningType
-        // End of user code
-        return endOwningType;
     }
     
     // Start of user code getterAnnotation:sysmlType
@@ -400,6 +442,36 @@ public class Feature
         return ownedSubsetting;
     }
     
+    // Start of user code getterAnnotation:owningFeatureMembership
+    // End of user code
+    @OslcName("owningFeatureMembership")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningFeatureMembership")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATUREMEMBERSHIP_TYPE})
+    @OslcReadOnly(false)
+    public Link getOwningFeatureMembership()
+    {
+        // Start of user code getterInit:owningFeatureMembership
+        // End of user code
+        return owningFeatureMembership;
+    }
+    
+    // Start of user code getterAnnotation:endOwningType
+    // End of user code
+    @OslcName("endOwningType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "endOwningType")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
+    @OslcReadOnly(false)
+    public Link getEndOwningType()
+    {
+        // Start of user code getterInit:endOwningType
+        // End of user code
+        return endOwningType;
+    }
+    
     // Start of user code getterAnnotation:ownedTyping
     // End of user code
     @OslcName("ownedTyping")
@@ -428,6 +500,51 @@ public class Feature
         // Start of user code getterInit:featuringType
         // End of user code
         return featuringType;
+    }
+    
+    // Start of user code getterAnnotation:ownedTypeFeaturing
+    // End of user code
+    @OslcName("ownedTypeFeaturing")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedTypeFeaturing")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPEFEATURING_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedTypeFeaturing()
+    {
+        // Start of user code getterInit:ownedTypeFeaturing
+        // End of user code
+        return ownedTypeFeaturing;
+    }
+    
+    // Start of user code getterAnnotation:chainingFeature
+    // End of user code
+    @OslcName("chainingFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "chainingFeature")
+    @OslcOccurs(Occurs.OneOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getChainingFeature()
+    {
+        // Start of user code getterInit:chainingFeature
+        // End of user code
+        return chainingFeature;
+    }
+    
+    // Start of user code getterAnnotation:ownedFeatureChaining
+    // End of user code
+    @OslcName("ownedFeatureChaining")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedFeatureChaining")
+    @OslcOccurs(Occurs.OneOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURECHAINING_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedFeatureChaining()
+    {
+        // Start of user code getterInit:ownedFeatureChaining
+        // End of user code
+        return ownedFeatureChaining;
     }
     
     
@@ -467,6 +584,42 @@ public class Feature
         // End of user code
     }
     
+    // Start of user code setterAnnotation:isPortion
+    // End of user code
+    public void setIsPortion(final Boolean isPortion )
+    {
+        // Start of user code setterInit:isPortion
+        // End of user code
+        this.isPortion = isPortion;
+    
+        // Start of user code setterFinalize:isPortion
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:isDerived
+    // End of user code
+    public void setIsDerived(final Boolean isDerived )
+    {
+        // Start of user code setterInit:isDerived
+        // End of user code
+        this.isDerived = isDerived;
+    
+        // Start of user code setterFinalize:isDerived
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:isReadOnly
+    // End of user code
+    public void setIsReadOnly(final Boolean isReadOnly )
+    {
+        // Start of user code setterInit:isReadOnly
+        // End of user code
+        this.isReadOnly = isReadOnly;
+    
+        // Start of user code setterFinalize:isReadOnly
+        // End of user code
+    }
+    
     // Start of user code setterAnnotation:isEnd
     // End of user code
     public void setIsEnd(final Boolean isEnd )
@@ -476,6 +629,18 @@ public class Feature
         this.isEnd = isEnd;
     
         // Start of user code setterFinalize:isEnd
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:direction
+    // End of user code
+    public void setDirection(final String direction )
+    {
+        // Start of user code setterInit:direction
+        // End of user code
+        this.direction = direction;
+    
+        // Start of user code setterFinalize:direction
         // End of user code
     }
     
@@ -491,34 +656,6 @@ public class Feature
         // End of user code
     }
     
-    // Start of user code setterAnnotation:ownedTypeFeaturing
-    // End of user code
-    public void setOwnedTypeFeaturing(final Set<Link> ownedTypeFeaturing )
-    {
-        // Start of user code setterInit:ownedTypeFeaturing
-        // End of user code
-        this.ownedTypeFeaturing.clear();
-        if (ownedTypeFeaturing != null)
-        {
-            this.ownedTypeFeaturing.addAll(ownedTypeFeaturing);
-        }
-    
-        // Start of user code setterFinalize:ownedTypeFeaturing
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:owningFeatureMembership
-    // End of user code
-    public void setOwningFeatureMembership(final Link owningFeatureMembership )
-    {
-        // Start of user code setterInit:owningFeatureMembership
-        // End of user code
-        this.owningFeatureMembership = owningFeatureMembership;
-    
-        // Start of user code setterFinalize:owningFeatureMembership
-        // End of user code
-    }
-    
     // Start of user code setterAnnotation:owningType
     // End of user code
     public void setOwningType(final Link owningType )
@@ -528,18 +665,6 @@ public class Feature
         this.owningType = owningType;
     
         // Start of user code setterFinalize:owningType
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:endOwningType
-    // End of user code
-    public void setEndOwningType(final Link endOwningType )
-    {
-        // Start of user code setterInit:endOwningType
-        // End of user code
-        this.endOwningType = endOwningType;
-    
-        // Start of user code setterFinalize:endOwningType
         // End of user code
     }
     
@@ -591,6 +716,30 @@ public class Feature
         // End of user code
     }
     
+    // Start of user code setterAnnotation:owningFeatureMembership
+    // End of user code
+    public void setOwningFeatureMembership(final Link owningFeatureMembership )
+    {
+        // Start of user code setterInit:owningFeatureMembership
+        // End of user code
+        this.owningFeatureMembership = owningFeatureMembership;
+    
+        // Start of user code setterFinalize:owningFeatureMembership
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:endOwningType
+    // End of user code
+    public void setEndOwningType(final Link endOwningType )
+    {
+        // Start of user code setterInit:endOwningType
+        // End of user code
+        this.endOwningType = endOwningType;
+    
+        // Start of user code setterFinalize:endOwningType
+        // End of user code
+    }
+    
     // Start of user code setterAnnotation:ownedTyping
     // End of user code
     public void setOwnedTyping(final Set<Link> ownedTyping )
@@ -620,6 +769,54 @@ public class Feature
         }
     
         // Start of user code setterFinalize:featuringType
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedTypeFeaturing
+    // End of user code
+    public void setOwnedTypeFeaturing(final Set<Link> ownedTypeFeaturing )
+    {
+        // Start of user code setterInit:ownedTypeFeaturing
+        // End of user code
+        this.ownedTypeFeaturing.clear();
+        if (ownedTypeFeaturing != null)
+        {
+            this.ownedTypeFeaturing.addAll(ownedTypeFeaturing);
+        }
+    
+        // Start of user code setterFinalize:ownedTypeFeaturing
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:chainingFeature
+    // End of user code
+    public void setChainingFeature(final Set<Link> chainingFeature )
+    {
+        // Start of user code setterInit:chainingFeature
+        // End of user code
+        this.chainingFeature.clear();
+        if (chainingFeature != null)
+        {
+            this.chainingFeature.addAll(chainingFeature);
+        }
+    
+        // Start of user code setterFinalize:chainingFeature
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:ownedFeatureChaining
+    // End of user code
+    public void setOwnedFeatureChaining(final Set<Link> ownedFeatureChaining )
+    {
+        // Start of user code setterInit:ownedFeatureChaining
+        // End of user code
+        this.ownedFeatureChaining.clear();
+        if (ownedFeatureChaining != null)
+        {
+            this.ownedFeatureChaining.addAll(ownedFeatureChaining);
+        }
+    
+        // Start of user code setterFinalize:ownedFeatureChaining
         // End of user code
     }
     

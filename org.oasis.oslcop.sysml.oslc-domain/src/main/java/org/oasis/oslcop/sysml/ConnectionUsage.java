@@ -57,48 +57,56 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
-import org.oasis.oslcop.sysml.PartUsage;
-import org.oasis.oslcop.sysml.IConnector;
-import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ConnectorAsUsage;
+import org.oasis.oslcop.sysml.IItemUsage;
+import org.oasis.oslcop.sysml.IOccurrenceUsage;
+import org.oasis.oslcop.sysml.IPartUsage;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
 import org.oasis.oslcop.sysml.ActionUsage;
 import org.oasis.oslcop.sysml.AllocationUsage;
 import org.oasis.oslcop.sysml.AnalysisCaseUsage;
 import org.oasis.oslcop.sysml.Annotation;
-import org.oasis.oslcop.sysml.Association;
 import org.oasis.oslcop.sysml.AssociationStructure;
 import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.SysmlClass;
+import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.ConcernUsage;
 import org.oasis.oslcop.sysml.Conjugation;
-import org.oasis.oslcop.sysml.ConnectionUsage;
+import org.oasis.oslcop.sysml.ConnectorAsUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
 import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
-import org.oasis.oslcop.sysml.Generalization;
+import org.oasis.oslcop.sysml.FlowConnectionUsage;
 import org.oasis.oslcop.sysml.SysmlImport;
-import org.oasis.oslcop.sysml.IndividualUsage;
 import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
+import org.oasis.oslcop.sysml.OccurrenceDefinition;
+import org.oasis.oslcop.sysml.OccurrenceUsage;
 import org.oasis.oslcop.sysml.PartDefinition;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
+import org.oasis.oslcop.sysml.PortioningFeature;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.StateUsage;
 import org.oasis.oslcop.sysml.Structure;
 import org.oasis.oslcop.sysml.Subsetting;
@@ -107,6 +115,7 @@ import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
 import org.oasis.oslcop.sysml.TypeFeaturing;
 import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.UseCaseUsage;
 import org.oasis.oslcop.sysml.VariantMembership;
 import org.oasis.oslcop.sysml.VerificationCaseUsage;
 import org.oasis.oslcop.sysml.ViewUsage;
@@ -121,50 +130,35 @@ import org.oasis.oslcop.sysml.ViewpointUsage;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.CONNECTIONUSAGE_NAMESPACE)
 @OslcName(SysmlDomainConstants.CONNECTIONUSAGE_LOCALNAME)
-@OslcResourceShape(title = "ConnectionUsage Resource Shape", describes = SysmlDomainConstants.CONNECTIONUSAGE_TYPE)
+@OslcResourceShape(title = "ConnectionUsage Shape", describes = SysmlDomainConstants.CONNECTIONUSAGE_TYPE)
 public class ConnectionUsage
-    extends PartUsage
-    implements IConnectionUsage, IConnector, IRelationship
+    extends ConnectorAsUsage
+    implements IConnectionUsage, IItemUsage, IOccurrenceUsage, IPartUsage
 {
     // Start of user code attributeAnnotation:connectionDefinition
     // End of user code
     private Set<Link> connectionDefinition = new HashSet<Link>();
-    // Start of user code attributeAnnotation:isDirected
+    // Start of user code attributeAnnotation:itemDefinition
     // End of user code
-    private Boolean isDirected;
-    // Start of user code attributeAnnotation:relatedFeature
+    private Set<Link> itemDefinition = new HashSet<Link>();
+    // Start of user code attributeAnnotation:partDefinition
     // End of user code
-    private Set<Link> relatedFeature = new HashSet<Link>();
-    // Start of user code attributeAnnotation:association
+    private Set<Link> partDefinition = new HashSet<Link>();
+    // Start of user code attributeAnnotation:isIndividual
     // End of user code
-    private Set<Link> association = new HashSet<Link>();
-    // Start of user code attributeAnnotation:connectorEnd
+    private Boolean isIndividual;
+    // Start of user code attributeAnnotation:portionKind
     // End of user code
-    private Set<Link> connectorEnd = new HashSet<Link>();
-    // Start of user code attributeAnnotation:sourceFeature
+    private String portionKind;
+    // Start of user code attributeAnnotation:occurrenceDefinition
     // End of user code
-    private Link sourceFeature;
-    // Start of user code attributeAnnotation:targetFeature
+    private Set<Link> occurrenceDefinition = new HashSet<Link>();
+    // Start of user code attributeAnnotation:portioningFeature
     // End of user code
-    private Set<Link> targetFeature = new HashSet<Link>();
-    // Start of user code attributeAnnotation:relatedElement
+    private Link portioningFeature;
+    // Start of user code attributeAnnotation:individualDefinition
     // End of user code
-    private Set<Link> relatedElement = new HashSet<Link>();
-    // Start of user code attributeAnnotation:target
-    // End of user code
-    private Set<Link> target = new HashSet<Link>();
-    // Start of user code attributeAnnotation:sysmlSource
-    // End of user code
-    private Set<Link> sysmlSource = new HashSet<Link>();
-    // Start of user code attributeAnnotation:owningRelatedElement
-    // End of user code
-    private Link owningRelatedElement;
-    // Start of user code attributeAnnotation:ownedRelatedElement_comp
-    // End of user code
-    private Set<Link> ownedRelatedElement_comp = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedRelatedElement
-    // End of user code
-    private Set<Link> ownedRelatedElement = new HashSet<Link>();
+    private Link individualDefinition;
     
     // Start of user code classAttributes
     // End of user code
@@ -215,7 +209,7 @@ public class ConnectionUsage
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -226,49 +220,19 @@ public class ConnectionUsage
         this.connectionDefinition.add(connectionDefinition);
     }
     
-    public void addRelatedFeature(final Link relatedFeature)
+    public void addItemDefinition(final Link itemDefinition)
     {
-        this.relatedFeature.add(relatedFeature);
+        this.itemDefinition.add(itemDefinition);
     }
     
-    public void addAssociation(final Link association)
+    public void addPartDefinition(final Link partDefinition)
     {
-        this.association.add(association);
+        this.partDefinition.add(partDefinition);
     }
     
-    public void addConnectorEnd(final Link connectorEnd)
+    public void addOccurrenceDefinition(final Link occurrenceDefinition)
     {
-        this.connectorEnd.add(connectorEnd);
-    }
-    
-    public void addTargetFeature(final Link targetFeature)
-    {
-        this.targetFeature.add(targetFeature);
-    }
-    
-    public void addRelatedElement(final Link relatedElement)
-    {
-        this.relatedElement.add(relatedElement);
-    }
-    
-    public void addTarget(final Link target)
-    {
-        this.target.add(target);
-    }
-    
-    public void addSysmlSource(final Link source)
-    {
-        this.sysmlSource.add(source);
-    }
-    
-    public void addOwnedRelatedElement_comp(final Link ownedRelatedElement_comp)
-    {
-        this.ownedRelatedElement_comp.add(ownedRelatedElement_comp);
-    }
-    
-    public void addOwnedRelatedElement(final Link ownedRelatedElement)
-    {
-        this.ownedRelatedElement.add(ownedRelatedElement);
+        this.occurrenceDefinition.add(occurrenceDefinition);
     }
     
     
@@ -287,183 +251,108 @@ public class ConnectionUsage
         return connectionDefinition;
     }
     
-    // Start of user code getterAnnotation:isDirected
+    // Start of user code getterAnnotation:itemDefinition
     // End of user code
-    @OslcName("isDirected")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isDirected")
+    @OslcName("itemDefinition")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "itemDefinition")
+    @OslcOccurs(Occurs.OneOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.STRUCTURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getItemDefinition()
+    {
+        // Start of user code getterInit:itemDefinition
+        // End of user code
+        return itemDefinition;
+    }
+    
+    // Start of user code getterAnnotation:partDefinition
+    // End of user code
+    @OslcName("partDefinition")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "partDefinition")
+    @OslcOccurs(Occurs.OneOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.PARTDEFINITION_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getPartDefinition()
+    {
+        // Start of user code getterInit:partDefinition
+        // End of user code
+        return partDefinition;
+    }
+    
+    // Start of user code getterAnnotation:isIndividual
+    // End of user code
+    @OslcName("isIndividual")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isIndividual")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Boolean)
     @OslcReadOnly(false)
-    public Boolean isIsDirected()
+    public Boolean isIsIndividual()
     {
-        // Start of user code getterInit:isDirected
+        // Start of user code getterInit:isIndividual
         // End of user code
-        return isDirected;
+        return isIndividual;
     }
     
-    // Start of user code getterAnnotation:relatedFeature
+    // Start of user code getterAnnotation:portionKind
     // End of user code
-    @OslcName("relatedFeature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "relatedFeature")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcName("portionKind")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "portionKind")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.String)
     @OslcReadOnly(false)
-    public Set<Link> getRelatedFeature()
+    @OslcAllowedValue({"timeslice", "snapshot"})
+    public String getPortionKind()
     {
-        // Start of user code getterInit:relatedFeature
+        // Start of user code getterInit:portionKind
         // End of user code
-        return relatedFeature;
+        return portionKind;
     }
     
-    // Start of user code getterAnnotation:association
+    // Start of user code getterAnnotation:occurrenceDefinition
     // End of user code
-    @OslcName("association")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "association")
+    @OslcName("occurrenceDefinition")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "occurrenceDefinition")
     @OslcOccurs(Occurs.OneOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ASSOCIATION_TYPE})
+    @OslcRange({SysmlDomainConstants.CLASS_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getAssociation()
+    public Set<Link> getOccurrenceDefinition()
     {
-        // Start of user code getterInit:association
+        // Start of user code getterInit:occurrenceDefinition
         // End of user code
-        return association;
+        return occurrenceDefinition;
     }
     
-    // Start of user code getterAnnotation:connectorEnd
+    // Start of user code getterAnnotation:portioningFeature
     // End of user code
-    @OslcName("connectorEnd")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "connectorEnd")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getConnectorEnd()
-    {
-        // Start of user code getterInit:connectorEnd
-        // End of user code
-        return connectorEnd;
-    }
-    
-    // Start of user code getterAnnotation:sourceFeature
-    // End of user code
-    @OslcName("sourceFeature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "sourceFeature")
+    @OslcName("portioningFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "portioningFeature")
     @OslcOccurs(Occurs.ZeroOrOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcRange({SysmlDomainConstants.PORTIONINGFEATURE_TYPE})
     @OslcReadOnly(false)
-    public Link getSourceFeature()
+    public Link getPortioningFeature()
     {
-        // Start of user code getterInit:sourceFeature
+        // Start of user code getterInit:portioningFeature
         // End of user code
-        return sourceFeature;
+        return portioningFeature;
     }
     
-    // Start of user code getterAnnotation:targetFeature
+    // Start of user code getterAnnotation:individualDefinition
     // End of user code
-    @OslcName("targetFeature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "targetFeature")
-    @OslcOccurs(Occurs.OneOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getTargetFeature()
-    {
-        // Start of user code getterInit:targetFeature
-        // End of user code
-        return targetFeature;
-    }
-    
-    // Start of user code getterAnnotation:relatedElement
-    // End of user code
-    @OslcName("relatedElement")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "relatedElement")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getRelatedElement()
-    {
-        // Start of user code getterInit:relatedElement
-        // End of user code
-        return relatedElement;
-    }
-    
-    // Start of user code getterAnnotation:target
-    // End of user code
-    @OslcName("target")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "target")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getTarget()
-    {
-        // Start of user code getterInit:target
-        // End of user code
-        return target;
-    }
-    
-    // Start of user code getterAnnotation:sysmlSource
-    // End of user code
-    @OslcName("source")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "source")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getSysmlSource()
-    {
-        // Start of user code getterInit:sysmlSource
-        // End of user code
-        return sysmlSource;
-    }
-    
-    // Start of user code getterAnnotation:owningRelatedElement
-    // End of user code
-    @OslcName("owningRelatedElement")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningRelatedElement")
+    @OslcName("individualDefinition")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "individualDefinition")
     @OslcOccurs(Occurs.ZeroOrOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
+    @OslcRange({SysmlDomainConstants.OCCURRENCEDEFINITION_TYPE})
     @OslcReadOnly(false)
-    public Link getOwningRelatedElement()
+    public Link getIndividualDefinition()
     {
-        // Start of user code getterInit:owningRelatedElement
+        // Start of user code getterInit:individualDefinition
         // End of user code
-        return owningRelatedElement;
-    }
-    
-    // Start of user code getterAnnotation:ownedRelatedElement_comp
-    // End of user code
-    @OslcName("ownedRelatedElement_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelatedElement_comp")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedRelatedElement_comp()
-    {
-        // Start of user code getterInit:ownedRelatedElement_comp
-        // End of user code
-        return ownedRelatedElement_comp;
-    }
-    
-    // Start of user code getterAnnotation:ownedRelatedElement
-    // End of user code
-    @OslcName("ownedRelatedElement")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelatedElement")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedRelatedElement()
-    {
-        // Start of user code getterInit:ownedRelatedElement
-        // End of user code
-        return ownedRelatedElement;
+        return individualDefinition;
     }
     
     
@@ -483,183 +372,99 @@ public class ConnectionUsage
         // End of user code
     }
     
-    // Start of user code setterAnnotation:isDirected
+    // Start of user code setterAnnotation:itemDefinition
     // End of user code
-    public void setIsDirected(final Boolean isDirected )
+    public void setItemDefinition(final Set<Link> itemDefinition )
     {
-        // Start of user code setterInit:isDirected
+        // Start of user code setterInit:itemDefinition
         // End of user code
-        this.isDirected = isDirected;
-    
-        // Start of user code setterFinalize:isDirected
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:relatedFeature
-    // End of user code
-    public void setRelatedFeature(final Set<Link> relatedFeature )
-    {
-        // Start of user code setterInit:relatedFeature
-        // End of user code
-        this.relatedFeature.clear();
-        if (relatedFeature != null)
+        this.itemDefinition.clear();
+        if (itemDefinition != null)
         {
-            this.relatedFeature.addAll(relatedFeature);
+            this.itemDefinition.addAll(itemDefinition);
         }
     
-        // Start of user code setterFinalize:relatedFeature
+        // Start of user code setterFinalize:itemDefinition
         // End of user code
     }
     
-    // Start of user code setterAnnotation:association
+    // Start of user code setterAnnotation:partDefinition
     // End of user code
-    public void setAssociation(final Set<Link> association )
+    public void setPartDefinition(final Set<Link> partDefinition )
     {
-        // Start of user code setterInit:association
+        // Start of user code setterInit:partDefinition
         // End of user code
-        this.association.clear();
-        if (association != null)
+        this.partDefinition.clear();
+        if (partDefinition != null)
         {
-            this.association.addAll(association);
+            this.partDefinition.addAll(partDefinition);
         }
     
-        // Start of user code setterFinalize:association
+        // Start of user code setterFinalize:partDefinition
         // End of user code
     }
     
-    // Start of user code setterAnnotation:connectorEnd
+    // Start of user code setterAnnotation:isIndividual
     // End of user code
-    public void setConnectorEnd(final Set<Link> connectorEnd )
+    public void setIsIndividual(final Boolean isIndividual )
     {
-        // Start of user code setterInit:connectorEnd
+        // Start of user code setterInit:isIndividual
         // End of user code
-        this.connectorEnd.clear();
-        if (connectorEnd != null)
+        this.isIndividual = isIndividual;
+    
+        // Start of user code setterFinalize:isIndividual
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:portionKind
+    // End of user code
+    public void setPortionKind(final String portionKind )
+    {
+        // Start of user code setterInit:portionKind
+        // End of user code
+        this.portionKind = portionKind;
+    
+        // Start of user code setterFinalize:portionKind
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:occurrenceDefinition
+    // End of user code
+    public void setOccurrenceDefinition(final Set<Link> occurrenceDefinition )
+    {
+        // Start of user code setterInit:occurrenceDefinition
+        // End of user code
+        this.occurrenceDefinition.clear();
+        if (occurrenceDefinition != null)
         {
-            this.connectorEnd.addAll(connectorEnd);
+            this.occurrenceDefinition.addAll(occurrenceDefinition);
         }
     
-        // Start of user code setterFinalize:connectorEnd
+        // Start of user code setterFinalize:occurrenceDefinition
         // End of user code
     }
     
-    // Start of user code setterAnnotation:sourceFeature
+    // Start of user code setterAnnotation:portioningFeature
     // End of user code
-    public void setSourceFeature(final Link sourceFeature )
+    public void setPortioningFeature(final Link portioningFeature )
     {
-        // Start of user code setterInit:sourceFeature
+        // Start of user code setterInit:portioningFeature
         // End of user code
-        this.sourceFeature = sourceFeature;
+        this.portioningFeature = portioningFeature;
     
-        // Start of user code setterFinalize:sourceFeature
+        // Start of user code setterFinalize:portioningFeature
         // End of user code
     }
     
-    // Start of user code setterAnnotation:targetFeature
+    // Start of user code setterAnnotation:individualDefinition
     // End of user code
-    public void setTargetFeature(final Set<Link> targetFeature )
+    public void setIndividualDefinition(final Link individualDefinition )
     {
-        // Start of user code setterInit:targetFeature
+        // Start of user code setterInit:individualDefinition
         // End of user code
-        this.targetFeature.clear();
-        if (targetFeature != null)
-        {
-            this.targetFeature.addAll(targetFeature);
-        }
+        this.individualDefinition = individualDefinition;
     
-        // Start of user code setterFinalize:targetFeature
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:relatedElement
-    // End of user code
-    public void setRelatedElement(final Set<Link> relatedElement )
-    {
-        // Start of user code setterInit:relatedElement
-        // End of user code
-        this.relatedElement.clear();
-        if (relatedElement != null)
-        {
-            this.relatedElement.addAll(relatedElement);
-        }
-    
-        // Start of user code setterFinalize:relatedElement
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:target
-    // End of user code
-    public void setTarget(final Set<Link> target )
-    {
-        // Start of user code setterInit:target
-        // End of user code
-        this.target.clear();
-        if (target != null)
-        {
-            this.target.addAll(target);
-        }
-    
-        // Start of user code setterFinalize:target
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:sysmlSource
-    // End of user code
-    public void setSysmlSource(final Set<Link> source )
-    {
-        // Start of user code setterInit:sysmlSource
-        // End of user code
-        this.sysmlSource.clear();
-        if (source != null)
-        {
-            this.sysmlSource.addAll(source);
-        }
-    
-        // Start of user code setterFinalize:sysmlSource
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:owningRelatedElement
-    // End of user code
-    public void setOwningRelatedElement(final Link owningRelatedElement )
-    {
-        // Start of user code setterInit:owningRelatedElement
-        // End of user code
-        this.owningRelatedElement = owningRelatedElement;
-    
-        // Start of user code setterFinalize:owningRelatedElement
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedRelatedElement_comp
-    // End of user code
-    public void setOwnedRelatedElement_comp(final Set<Link> ownedRelatedElement_comp )
-    {
-        // Start of user code setterInit:ownedRelatedElement_comp
-        // End of user code
-        this.ownedRelatedElement_comp.clear();
-        if (ownedRelatedElement_comp != null)
-        {
-            this.ownedRelatedElement_comp.addAll(ownedRelatedElement_comp);
-        }
-    
-        // Start of user code setterFinalize:ownedRelatedElement_comp
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedRelatedElement
-    // End of user code
-    public void setOwnedRelatedElement(final Set<Link> ownedRelatedElement )
-    {
-        // Start of user code setterInit:ownedRelatedElement
-        // End of user code
-        this.ownedRelatedElement.clear();
-        if (ownedRelatedElement != null)
-        {
-            this.ownedRelatedElement.addAll(ownedRelatedElement);
-        }
-    
-        // Start of user code setterFinalize:ownedRelatedElement
+        // Start of user code setterFinalize:individualDefinition
         // End of user code
     }
     

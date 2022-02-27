@@ -84,20 +84,17 @@ import org.oasis.oslcop.sysml.Type;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.REQUIREMENTVERIFICATIONMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.REQUIREMENTVERIFICATIONMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "RequirementVerificationMembership Resource Shape", describes = SysmlDomainConstants.REQUIREMENTVERIFICATIONMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "RequirementVerificationMembership Shape", describes = SysmlDomainConstants.REQUIREMENTVERIFICATIONMEMBERSHIP_TYPE)
 public class RequirementVerificationMembership
     extends RequirementConstraintMembership
     implements IRequirementVerificationMembership
 {
-    // Start of user code attributeAnnotation:ownedRequirement_comp
-    // End of user code
-    private Link ownedRequirement_comp;
-    // Start of user code attributeAnnotation:verifiedRequirement
-    // End of user code
-    private Link verifiedRequirement;
     // Start of user code attributeAnnotation:ownedRequirement
     // End of user code
     private Link ownedRequirement;
+    // Start of user code attributeAnnotation:verifiedRequirement
+    // End of user code
+    private Link verifiedRequirement;
     
     // Start of user code classAttributes
     // End of user code
@@ -148,26 +145,26 @@ public class RequirementVerificationMembership
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
     
-    // Start of user code getterAnnotation:ownedRequirement_comp
+    // Start of user code getterAnnotation:ownedRequirement
     // End of user code
-    @OslcName("ownedRequirement_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRequirement_comp")
+    @OslcName("ownedRequirement")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRequirement")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.REQUIREMENTUSAGE_TYPE})
     @OslcReadOnly(false)
-    public Link getOwnedRequirement_comp()
+    public Link getOwnedRequirement()
     {
-        // Start of user code getterInit:ownedRequirement_comp
+        // Start of user code getterInit:ownedRequirement
         // End of user code
-        return ownedRequirement_comp;
+        return ownedRequirement;
     }
     
     // Start of user code getterAnnotation:verifiedRequirement
@@ -185,31 +182,16 @@ public class RequirementVerificationMembership
         return verifiedRequirement;
     }
     
-    // Start of user code getterAnnotation:ownedRequirement
+    
+    // Start of user code setterAnnotation:ownedRequirement
     // End of user code
-    @OslcName("ownedRequirement")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRequirement")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.REQUIREMENTUSAGE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedRequirement()
+    public void setOwnedRequirement(final Link ownedRequirement )
     {
-        // Start of user code getterInit:ownedRequirement
+        // Start of user code setterInit:ownedRequirement
         // End of user code
-        return ownedRequirement;
-    }
+        this.ownedRequirement = ownedRequirement;
     
-    
-    // Start of user code setterAnnotation:ownedRequirement_comp
-    // End of user code
-    public void setOwnedRequirement_comp(final Link ownedRequirement_comp )
-    {
-        // Start of user code setterInit:ownedRequirement_comp
-        // End of user code
-        this.ownedRequirement_comp = ownedRequirement_comp;
-    
-        // Start of user code setterFinalize:ownedRequirement_comp
+        // Start of user code setterFinalize:ownedRequirement
         // End of user code
     }
     
@@ -222,18 +204,6 @@ public class RequirementVerificationMembership
         this.verifiedRequirement = verifiedRequirement;
     
         // Start of user code setterFinalize:verifiedRequirement
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedRequirement
-    // End of user code
-    public void setOwnedRequirement(final Link ownedRequirement )
-    {
-        // Start of user code setterInit:ownedRequirement
-        // End of user code
-        this.ownedRequirement = ownedRequirement;
-    
-        // Start of user code setterFinalize:ownedRequirement
         // End of user code
     }
     

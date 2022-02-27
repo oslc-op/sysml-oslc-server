@@ -62,28 +62,35 @@ import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IAttributeUsage;
 import org.oasis.oslcop.sysml.ICalculationUsage;
 import org.oasis.oslcop.sysml.ICaseUsage;
+import org.oasis.oslcop.sysml.ISysmlClass;
+import org.oasis.oslcop.sysml.IClassifier;
 import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IConcernUsage;
 import org.oasis.oslcop.sysml.IConjugation;
-import org.oasis.oslcop.sysml.IConnectionUsage;
+import org.oasis.oslcop.sysml.IConnectorAsUsage;
 import org.oasis.oslcop.sysml.IConstraintUsage;
 import org.oasis.oslcop.sysml.IDefinition;
+import org.oasis.oslcop.sysml.IDisjoining;
 import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IEnumerationUsage;
 import org.oasis.oslcop.sysml.IFeature;
+import org.oasis.oslcop.sysml.IFeatureChaining;
 import org.oasis.oslcop.sysml.IFeatureMembership;
 import org.oasis.oslcop.sysml.IFeatureTyping;
-import org.oasis.oslcop.sysml.IGeneralization;
+import org.oasis.oslcop.sysml.IFlowConnectionUsage;
 import org.oasis.oslcop.sysml.ISysmlImport;
-import org.oasis.oslcop.sysml.IIndividualUsage;
 import org.oasis.oslcop.sysml.IInterfaceUsage;
 import org.oasis.oslcop.sysml.IItemUsage;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
 import org.oasis.oslcop.sysml.INamespace;
+import org.oasis.oslcop.sysml.IOccurrenceDefinition;
+import org.oasis.oslcop.sysml.IOccurrenceUsage;
 import org.oasis.oslcop.sysml.IPartUsage;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IPortUsage;
+import org.oasis.oslcop.sysml.IPortioningFeature;
 import org.oasis.oslcop.sysml.IPredicate;
 import org.oasis.oslcop.sysml.IRedefinition;
 import org.oasis.oslcop.sysml.IReferenceUsage;
@@ -91,6 +98,7 @@ import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.IRenderingUsage;
 import org.oasis.oslcop.sysml.IRequirementDefinition;
 import org.oasis.oslcop.sysml.IRequirementUsage;
+import org.oasis.oslcop.sysml.ISpecialization;
 import org.oasis.oslcop.sysml.IStateUsage;
 import org.oasis.oslcop.sysml.ISubsetting;
 import org.oasis.oslcop.sysml.ITextualRepresentation;
@@ -98,6 +106,7 @@ import org.oasis.oslcop.sysml.ITransitionUsage;
 import org.oasis.oslcop.sysml.IType;
 import org.oasis.oslcop.sysml.ITypeFeaturing;
 import org.oasis.oslcop.sysml.IUsage;
+import org.oasis.oslcop.sysml.IUseCaseUsage;
 import org.oasis.oslcop.sysml.IVariantMembership;
 import org.oasis.oslcop.sysml.IVerificationCaseUsage;
 import org.oasis.oslcop.sysml.IViewUsage;
@@ -107,13 +116,16 @@ import org.oasis.oslcop.sysml.IViewpointUsage;
 
 @OslcNamespace(SysmlDomainConstants.REQUIREMENTUSAGE_NAMESPACE)
 @OslcName(SysmlDomainConstants.REQUIREMENTUSAGE_LOCALNAME)
-@OslcResourceShape(title = "RequirementUsage Resource Shape", describes = SysmlDomainConstants.REQUIREMENTUSAGE_TYPE)
+@OslcResourceShape(title = "RequirementUsage Shape", describes = SysmlDomainConstants.REQUIREMENTUSAGE_TYPE)
 public interface IRequirementUsage
 {
 
     public void addText(final String text );
     public void addRequiredConstraint(final Link requiredConstraint );
     public void addAssumedConstraint(final Link assumedConstraint );
+    public void addFramedConcern(final Link framedConcern );
+    public void addActorParameter(final Link actorParameter );
+    public void addStakeholderParameter(final Link stakeholderParameter );
 
     @OslcName("reqId")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "reqId")
@@ -161,6 +173,30 @@ public interface IRequirementUsage
     @OslcReadOnly(false)
     public Link getSubjectParameter();
 
+    @OslcName("framedConcern")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "framedConcern")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.CONCERNUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getFramedConcern();
+
+    @OslcName("actorParameter")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "actorParameter")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.PARTUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getActorParameter();
+
+    @OslcName("stakeholderParameter")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "stakeholderParameter")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.PARTUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getStakeholderParameter();
+
 
     public void setReqId(final String reqId );
     public void setText(final Set<String> text );
@@ -168,5 +204,8 @@ public interface IRequirementUsage
     public void setRequiredConstraint(final Set<Link> requiredConstraint );
     public void setAssumedConstraint(final Set<Link> assumedConstraint );
     public void setSubjectParameter(final Link subjectParameter );
+    public void setFramedConcern(final Set<Link> framedConcern );
+    public void setActorParameter(final Set<Link> actorParameter );
+    public void setStakeholderParameter(final Set<Link> stakeholderParameter );
 }
 

@@ -81,35 +81,29 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.NAMESPACE_NAMESPACE)
 @OslcName(SysmlDomainConstants.NAMESPACE_LOCALNAME)
-@OslcResourceShape(title = "Namespace Resource Shape", describes = SysmlDomainConstants.NAMESPACE_TYPE)
+@OslcResourceShape(title = "Namespace Shape", describes = SysmlDomainConstants.NAMESPACE_TYPE)
 public class Namespace
     extends Element
     implements INamespace
 {
-    // Start of user code attributeAnnotation:ownedMembership_comp
+    // Start of user code attributeAnnotation:ownedMembership
     // End of user code
-    private Set<Link> ownedMembership_comp = new HashSet<Link>();
+    private Set<Link> ownedMembership = new HashSet<Link>();
     // Start of user code attributeAnnotation:ownedMember
     // End of user code
     private Set<Link> ownedMember = new HashSet<Link>();
     // Start of user code attributeAnnotation:membership
     // End of user code
     private Set<Link> membership = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedImport_comp
+    // Start of user code attributeAnnotation:ownedImport
     // End of user code
-    private Set<Link> ownedImport_comp = new HashSet<Link>();
+    private Set<Link> ownedImport = new HashSet<Link>();
     // Start of user code attributeAnnotation:member
     // End of user code
     private Set<Link> member = new HashSet<Link>();
     // Start of user code attributeAnnotation:importedMembership
     // End of user code
     private Set<Link> importedMembership = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedMembership
-    // End of user code
-    private Set<Link> ownedMembership = new HashSet<Link>();
-    // Start of user code attributeAnnotation:ownedImport
-    // End of user code
-    private Set<Link> ownedImport = new HashSet<Link>();
     
     // Start of user code classAttributes
     // End of user code
@@ -160,15 +154,15 @@ public class Namespace
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
-    public void addOwnedMembership_comp(final Link ownedMembership_comp)
+    public void addOwnedMembership(final Link ownedMembership)
     {
-        this.ownedMembership_comp.add(ownedMembership_comp);
+        this.ownedMembership.add(ownedMembership);
     }
     
     public void addOwnedMember(final Link ownedMember)
@@ -181,9 +175,9 @@ public class Namespace
         this.membership.add(membership);
     }
     
-    public void addOwnedImport_comp(final Link ownedImport_comp)
+    public void addOwnedImport(final Link ownedImport)
     {
-        this.ownedImport_comp.add(ownedImport_comp);
+        this.ownedImport.add(ownedImport);
     }
     
     public void addMember(final Link member)
@@ -196,30 +190,20 @@ public class Namespace
         this.importedMembership.add(importedMembership);
     }
     
-    public void addOwnedMembership(final Link ownedMembership)
-    {
-        this.ownedMembership.add(ownedMembership);
-    }
     
-    public void addOwnedImport(final Link ownedImport)
-    {
-        this.ownedImport.add(ownedImport);
-    }
-    
-    
-    // Start of user code getterAnnotation:ownedMembership_comp
+    // Start of user code getterAnnotation:ownedMembership
     // End of user code
-    @OslcName("ownedMembership_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMembership_comp")
+    @OslcName("ownedMembership")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMembership")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.MEMBERSHIP_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedMembership_comp()
+    public Set<Link> getOwnedMembership()
     {
-        // Start of user code getterInit:ownedMembership_comp
+        // Start of user code getterInit:ownedMembership
         // End of user code
-        return ownedMembership_comp;
+        return ownedMembership;
     }
     
     // Start of user code getterAnnotation:ownedMember
@@ -252,19 +236,19 @@ public class Namespace
         return membership;
     }
     
-    // Start of user code getterAnnotation:ownedImport_comp
+    // Start of user code getterAnnotation:ownedImport
     // End of user code
-    @OslcName("ownedImport_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedImport_comp")
+    @OslcName("ownedImport")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedImport")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.IMPORT_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedImport_comp()
+    public Set<Link> getOwnedImport()
     {
-        // Start of user code getterInit:ownedImport_comp
+        // Start of user code getterInit:ownedImport
         // End of user code
-        return ownedImport_comp;
+        return ownedImport;
     }
     
     // Start of user code getterAnnotation:member
@@ -297,50 +281,20 @@ public class Namespace
         return importedMembership;
     }
     
-    // Start of user code getterAnnotation:ownedMembership
-    // End of user code
-    @OslcName("ownedMembership")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMembership")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.MEMBERSHIP_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedMembership()
-    {
-        // Start of user code getterInit:ownedMembership
-        // End of user code
-        return ownedMembership;
-    }
     
-    // Start of user code getterAnnotation:ownedImport
+    // Start of user code setterAnnotation:ownedMembership
     // End of user code
-    @OslcName("ownedImport")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedImport")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.IMPORT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedImport()
+    public void setOwnedMembership(final Set<Link> ownedMembership )
     {
-        // Start of user code getterInit:ownedImport
+        // Start of user code setterInit:ownedMembership
         // End of user code
-        return ownedImport;
-    }
-    
-    
-    // Start of user code setterAnnotation:ownedMembership_comp
-    // End of user code
-    public void setOwnedMembership_comp(final Set<Link> ownedMembership_comp )
-    {
-        // Start of user code setterInit:ownedMembership_comp
-        // End of user code
-        this.ownedMembership_comp.clear();
-        if (ownedMembership_comp != null)
+        this.ownedMembership.clear();
+        if (ownedMembership != null)
         {
-            this.ownedMembership_comp.addAll(ownedMembership_comp);
+            this.ownedMembership.addAll(ownedMembership);
         }
     
-        // Start of user code setterFinalize:ownedMembership_comp
+        // Start of user code setterFinalize:ownedMembership
         // End of user code
     }
     
@@ -376,19 +330,19 @@ public class Namespace
         // End of user code
     }
     
-    // Start of user code setterAnnotation:ownedImport_comp
+    // Start of user code setterAnnotation:ownedImport
     // End of user code
-    public void setOwnedImport_comp(final Set<Link> ownedImport_comp )
+    public void setOwnedImport(final Set<Link> ownedImport )
     {
-        // Start of user code setterInit:ownedImport_comp
+        // Start of user code setterInit:ownedImport
         // End of user code
-        this.ownedImport_comp.clear();
-        if (ownedImport_comp != null)
+        this.ownedImport.clear();
+        if (ownedImport != null)
         {
-            this.ownedImport_comp.addAll(ownedImport_comp);
+            this.ownedImport.addAll(ownedImport);
         }
     
-        // Start of user code setterFinalize:ownedImport_comp
+        // Start of user code setterFinalize:ownedImport
         // End of user code
     }
     
@@ -421,38 +375,6 @@ public class Namespace
         }
     
         // Start of user code setterFinalize:importedMembership
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedMembership
-    // End of user code
-    public void setOwnedMembership(final Set<Link> ownedMembership )
-    {
-        // Start of user code setterInit:ownedMembership
-        // End of user code
-        this.ownedMembership.clear();
-        if (ownedMembership != null)
-        {
-            this.ownedMembership.addAll(ownedMembership);
-        }
-    
-        // Start of user code setterFinalize:ownedMembership
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:ownedImport
-    // End of user code
-    public void setOwnedImport(final Set<Link> ownedImport )
-    {
-        // Start of user code setterInit:ownedImport
-        // End of user code
-        this.ownedImport.clear();
-        if (ownedImport != null)
-        {
-            this.ownedImport.addAll(ownedImport);
-        }
-    
-        // Start of user code setterFinalize:ownedImport
         // End of user code
     }
     

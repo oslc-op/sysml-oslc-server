@@ -69,34 +69,42 @@ import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.Behavior;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.SysmlClass;
+import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.ConcernUsage;
 import org.oasis.oslcop.sysml.Conjugation;
-import org.oasis.oslcop.sysml.ConnectionUsage;
+import org.oasis.oslcop.sysml.ConnectorAsUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
 import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Expression;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
-import org.oasis.oslcop.sysml.Generalization;
+import org.oasis.oslcop.sysml.FlowConnectionUsage;
 import org.oasis.oslcop.sysml.SysmlImport;
-import org.oasis.oslcop.sysml.IndividualUsage;
 import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
+import org.oasis.oslcop.sysml.OccurrenceDefinition;
+import org.oasis.oslcop.sysml.OccurrenceUsage;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
+import org.oasis.oslcop.sysml.PortioningFeature;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.StateUsage;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
@@ -104,6 +112,7 @@ import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
 import org.oasis.oslcop.sysml.TypeFeaturing;
 import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.UseCaseUsage;
 import org.oasis.oslcop.sysml.VariantMembership;
 import org.oasis.oslcop.sysml.VerificationCaseUsage;
 import org.oasis.oslcop.sysml.ViewUsage;
@@ -118,7 +127,7 @@ import org.oasis.oslcop.sysml.ViewpointUsage;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.ACCEPTACTIONUSAGE_NAMESPACE)
 @OslcName(SysmlDomainConstants.ACCEPTACTIONUSAGE_LOCALNAME)
-@OslcResourceShape(title = "AcceptActionUsage Resource Shape", describes = SysmlDomainConstants.ACCEPTACTIONUSAGE_TYPE)
+@OslcResourceShape(title = "AcceptActionUsage Shape", describes = SysmlDomainConstants.ACCEPTACTIONUSAGE_TYPE)
 public class AcceptActionUsage
     extends ActionUsage
     implements IAcceptActionUsage
@@ -126,6 +135,12 @@ public class AcceptActionUsage
     // Start of user code attributeAnnotation:receiverArgument
     // End of user code
     private Link receiverArgument;
+    // Start of user code attributeAnnotation:payloadParameter
+    // End of user code
+    private Link payloadParameter;
+    // Start of user code attributeAnnotation:payloadArgument
+    // End of user code
+    private Link payloadArgument;
     
     // Start of user code classAttributes
     // End of user code
@@ -176,7 +191,7 @@ public class AcceptActionUsage
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -198,6 +213,36 @@ public class AcceptActionUsage
         return receiverArgument;
     }
     
+    // Start of user code getterAnnotation:payloadParameter
+    // End of user code
+    @OslcName("payloadParameter")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "payloadParameter")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.REFERENCEUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Link getPayloadParameter()
+    {
+        // Start of user code getterInit:payloadParameter
+        // End of user code
+        return payloadParameter;
+    }
+    
+    // Start of user code getterAnnotation:payloadArgument
+    // End of user code
+    @OslcName("payloadArgument")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "payloadArgument")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
+    @OslcReadOnly(false)
+    public Link getPayloadArgument()
+    {
+        // Start of user code getterInit:payloadArgument
+        // End of user code
+        return payloadArgument;
+    }
+    
     
     // Start of user code setterAnnotation:receiverArgument
     // End of user code
@@ -208,6 +253,30 @@ public class AcceptActionUsage
         this.receiverArgument = receiverArgument;
     
         // Start of user code setterFinalize:receiverArgument
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:payloadParameter
+    // End of user code
+    public void setPayloadParameter(final Link payloadParameter )
+    {
+        // Start of user code setterInit:payloadParameter
+        // End of user code
+        this.payloadParameter = payloadParameter;
+    
+        // Start of user code setterFinalize:payloadParameter
+        // End of user code
+    }
+    
+    // Start of user code setterAnnotation:payloadArgument
+    // End of user code
+    public void setPayloadArgument(final Link payloadArgument )
+    {
+        // Start of user code setterInit:payloadArgument
+        // End of user code
+        this.payloadArgument = payloadArgument;
+    
+        // Start of user code setterFinalize:payloadArgument
         // End of user code
     }
     

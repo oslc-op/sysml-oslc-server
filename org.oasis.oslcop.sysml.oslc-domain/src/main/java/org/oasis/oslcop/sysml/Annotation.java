@@ -81,7 +81,7 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.ANNOTATION_NAMESPACE)
 @OslcName(SysmlDomainConstants.ANNOTATION_LOCALNAME)
-@OslcResourceShape(title = "Annotation Resource Shape", describes = SysmlDomainConstants.ANNOTATION_TYPE)
+@OslcResourceShape(title = "Annotation Shape", describes = SysmlDomainConstants.ANNOTATION_TYPE)
 public class Annotation
     extends Relationship
     implements IAnnotation
@@ -145,7 +145,7 @@ public class Annotation
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

@@ -46,12 +46,6 @@ import org.oasis.oslcop.sysml.services.ServiceProviderService2;
 import org.oasis.oslcop.sysml.services.ServiceProviderService3;
 import org.oasis.oslcop.sysml.services.ServiceProviderService4;
 import org.oasis.oslcop.sysml.services.ServiceProviderService5;
-import org.oasis.oslcop.sysml.services.ServiceProviderService6;
-import org.oasis.oslcop.sysml.services.ServiceProviderService7;
-import org.oasis.oslcop.sysml.services.ServiceProviderService8;
-import org.oasis.oslcop.sysml.services.ServiceProviderService9;
-import org.oasis.oslcop.sysml.services.ServiceProviderService10;
-import org.oasis.oslcop.sysml.services.ServiceProviderService11;
 
 // Start of user code imports
 // End of user code
@@ -60,7 +54,7 @@ public class ServiceProvidersFactory
 {
     private static Class<?>[] RESOURCE_CLASSES =
     {
-        ServiceProviderService1.class, ServiceProviderService2.class, ServiceProviderService3.class, ServiceProviderService4.class, ServiceProviderService5.class, ServiceProviderService6.class, ServiceProviderService7.class, ServiceProviderService8.class, ServiceProviderService9.class, ServiceProviderService10.class, ServiceProviderService11.class
+        ServiceProviderService1.class, ServiceProviderService2.class, ServiceProviderService3.class, ServiceProviderService4.class, ServiceProviderService5.class
     };
 
     private ServiceProvidersFactory()
@@ -68,12 +62,14 @@ public class ServiceProvidersFactory
         super();
     }
 
-    public static URI constructURI(final String projectId)
+    public static URI constructURI(final String projectId, final String commitId)
     {
         String basePath = OSLC4JUtils.getServletURI();
         Map<String, Object> pathParameters = new HashMap<String, Object>();
         pathParameters.put("projectId", projectId);
-        String instanceURI = "projects/{projectId}";
+
+        pathParameters.put("commitId", commitId);
+        String instanceURI = "projects/{projectId}/commits/{commitId}";
 
         final UriBuilder builder = UriBuilder.fromUri(basePath);
         return builder.path(instanceURI).buildFromMap(pathParameters);
@@ -81,17 +77,17 @@ public class ServiceProvidersFactory
 
     public static URI constructURI(final ServiceProviderInfo serviceProviderInfo)
     {
-        return constructURI(serviceProviderInfo.projectId);
+        return constructURI(serviceProviderInfo.projectId, serviceProviderInfo.commitId);
     }
 
-    public static String constructIdentifier(final String projectId)
+    public static String constructIdentifier(final String projectId, final String commitId)
     {
-        return projectId;
+        return projectId + "/" + commitId;
     }
 
     public static String constructIdentifier(final ServiceProviderInfo serviceProviderInfo)
     {
-        return constructIdentifier(serviceProviderInfo.projectId);
+        return constructIdentifier(serviceProviderInfo.projectId, serviceProviderInfo.commitId);
     }
 
     public static ServiceProvider createServiceProvider(final ServiceProviderInfo serviceProviderInfo) 
@@ -109,6 +105,8 @@ public class ServiceProvidersFactory
         Publisher publisher = null;
         Map<String, Object> parameterMap = new HashMap<String, Object>();
         parameterMap.put("projectId", serviceProviderInfo.projectId);
+
+        parameterMap.put("commitId", serviceProviderInfo.commitId);
 
         ServiceProvider serviceProvider = ServiceProviderFactory.createServiceProvider(basePath,
                                                     "",

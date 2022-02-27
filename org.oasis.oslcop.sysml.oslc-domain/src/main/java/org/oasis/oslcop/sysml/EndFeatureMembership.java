@@ -82,7 +82,7 @@ import org.oasis.oslcop.sysml.Type;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.ENDFEATUREMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.ENDFEATUREMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "EndFeatureMembership Resource Shape", describes = SysmlDomainConstants.ENDFEATUREMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "EndFeatureMembership Shape", describes = SysmlDomainConstants.ENDFEATUREMEMBERSHIP_TYPE)
 public class EndFeatureMembership
     extends FeatureMembership
     implements IEndFeatureMembership
@@ -137,7 +137,7 @@ public class EndFeatureMembership
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

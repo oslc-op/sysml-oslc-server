@@ -80,7 +80,7 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.ANNOTATINGELEMENT_NAMESPACE)
 @OslcName(SysmlDomainConstants.ANNOTATINGELEMENT_LOCALNAME)
-@OslcResourceShape(title = "AnnotatingElement Resource Shape", describes = SysmlDomainConstants.ANNOTATINGELEMENT_TYPE)
+@OslcResourceShape(title = "AnnotatingElement Shape", describes = SysmlDomainConstants.ANNOTATINGELEMENT_TYPE)
 public class AnnotatingElement
     extends Element
     implements IAnnotatingElement
@@ -141,7 +141,7 @@ public class AnnotatingElement
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

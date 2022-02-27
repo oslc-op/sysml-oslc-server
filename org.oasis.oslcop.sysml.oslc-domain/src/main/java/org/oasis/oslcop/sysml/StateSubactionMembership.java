@@ -83,7 +83,7 @@ import org.oasis.oslcop.sysml.Type;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.STATESUBACTIONMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.STATESUBACTIONMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "StateSubactionMembership Resource Shape", describes = SysmlDomainConstants.STATESUBACTIONMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "StateSubactionMembership Shape", describes = SysmlDomainConstants.STATESUBACTIONMEMBERSHIP_TYPE)
 public class StateSubactionMembership
     extends FeatureMembership
     implements IStateSubactionMembership
@@ -91,9 +91,6 @@ public class StateSubactionMembership
     // Start of user code attributeAnnotation:kind
     // End of user code
     private String kind;
-    // Start of user code attributeAnnotation:action_comp
-    // End of user code
-    private Link action_comp;
     // Start of user code attributeAnnotation:action
     // End of user code
     private Link action;
@@ -147,7 +144,7 @@ public class StateSubactionMembership
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -167,21 +164,6 @@ public class StateSubactionMembership
         // Start of user code getterInit:kind
         // End of user code
         return kind;
-    }
-    
-    // Start of user code getterAnnotation:action_comp
-    // End of user code
-    @OslcName("action_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "action_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ACTIONUSAGE_TYPE})
-    @OslcReadOnly(false)
-    public Link getAction_comp()
-    {
-        // Start of user code getterInit:action_comp
-        // End of user code
-        return action_comp;
     }
     
     // Start of user code getterAnnotation:action
@@ -209,18 +191,6 @@ public class StateSubactionMembership
         this.kind = kind;
     
         // Start of user code setterFinalize:kind
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:action_comp
-    // End of user code
-    public void setAction_comp(final Link action_comp )
-    {
-        // Start of user code setterInit:action_comp
-        // End of user code
-        this.action_comp = action_comp;
-    
-        // Start of user code setterFinalize:action_comp
         // End of user code
     }
     

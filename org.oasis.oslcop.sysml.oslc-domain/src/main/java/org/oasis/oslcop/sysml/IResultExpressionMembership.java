@@ -72,18 +72,10 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.RESULTEXPRESSIONMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.RESULTEXPRESSIONMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "ResultExpressionMembership Resource Shape", describes = SysmlDomainConstants.RESULTEXPRESSIONMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "ResultExpressionMembership Shape", describes = SysmlDomainConstants.RESULTEXPRESSIONMEMBERSHIP_TYPE)
 public interface IResultExpressionMembership
 {
 
-
-    @OslcName("ownedResultExpression_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedResultExpression_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedResultExpression_comp();
 
     @OslcName("ownedResultExpression")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedResultExpression")
@@ -94,7 +86,6 @@ public interface IResultExpressionMembership
     public Link getOwnedResultExpression();
 
 
-    public void setOwnedResultExpression_comp(final Link ownedResultExpression_comp );
     public void setOwnedResultExpression(final Link ownedResultExpression );
 }
 

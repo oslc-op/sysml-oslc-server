@@ -83,7 +83,7 @@ import org.oasis.oslcop.sysml.Type;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.REQUIREMENTCONSTRAINTMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.REQUIREMENTCONSTRAINTMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "RequirementConstraintMembership Resource Shape", describes = SysmlDomainConstants.REQUIREMENTCONSTRAINTMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "RequirementConstraintMembership Shape", describes = SysmlDomainConstants.REQUIREMENTCONSTRAINTMEMBERSHIP_TYPE)
 public class RequirementConstraintMembership
     extends FeatureMembership
     implements IRequirementConstraintMembership
@@ -91,12 +91,12 @@ public class RequirementConstraintMembership
     // Start of user code attributeAnnotation:kind
     // End of user code
     private String kind;
-    // Start of user code attributeAnnotation:constraint_comp
+    // Start of user code attributeAnnotation:ownedConstraint
     // End of user code
-    private Link constraint_comp;
-    // Start of user code attributeAnnotation:constraint
+    private Link ownedConstraint;
+    // Start of user code attributeAnnotation:referencedConstraint
     // End of user code
-    private Link constraint;
+    private Link referencedConstraint;
     
     // Start of user code classAttributes
     // End of user code
@@ -147,7 +147,7 @@ public class RequirementConstraintMembership
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -169,34 +169,34 @@ public class RequirementConstraintMembership
         return kind;
     }
     
-    // Start of user code getterAnnotation:constraint_comp
+    // Start of user code getterAnnotation:ownedConstraint
     // End of user code
-    @OslcName("constraint_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "constraint_comp")
+    @OslcName("ownedConstraint")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedConstraint")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.CONSTRAINTUSAGE_TYPE})
     @OslcReadOnly(false)
-    public Link getConstraint_comp()
+    public Link getOwnedConstraint()
     {
-        // Start of user code getterInit:constraint_comp
+        // Start of user code getterInit:ownedConstraint
         // End of user code
-        return constraint_comp;
+        return ownedConstraint;
     }
     
-    // Start of user code getterAnnotation:constraint
+    // Start of user code getterAnnotation:referencedConstraint
     // End of user code
-    @OslcName("constraint")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "constraint")
+    @OslcName("referencedConstraint")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "referencedConstraint")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.CONSTRAINTUSAGE_TYPE})
     @OslcReadOnly(false)
-    public Link getConstraint()
+    public Link getReferencedConstraint()
     {
-        // Start of user code getterInit:constraint
+        // Start of user code getterInit:referencedConstraint
         // End of user code
-        return constraint;
+        return referencedConstraint;
     }
     
     
@@ -212,27 +212,27 @@ public class RequirementConstraintMembership
         // End of user code
     }
     
-    // Start of user code setterAnnotation:constraint_comp
+    // Start of user code setterAnnotation:ownedConstraint
     // End of user code
-    public void setConstraint_comp(final Link constraint_comp )
+    public void setOwnedConstraint(final Link ownedConstraint )
     {
-        // Start of user code setterInit:constraint_comp
+        // Start of user code setterInit:ownedConstraint
         // End of user code
-        this.constraint_comp = constraint_comp;
+        this.ownedConstraint = ownedConstraint;
     
-        // Start of user code setterFinalize:constraint_comp
+        // Start of user code setterFinalize:ownedConstraint
         // End of user code
     }
     
-    // Start of user code setterAnnotation:constraint
+    // Start of user code setterAnnotation:referencedConstraint
     // End of user code
-    public void setConstraint(final Link constraint )
+    public void setReferencedConstraint(final Link referencedConstraint )
     {
-        // Start of user code setterInit:constraint
+        // Start of user code setterInit:referencedConstraint
         // End of user code
-        this.constraint = constraint;
+        this.referencedConstraint = referencedConstraint;
     
-        // Start of user code setterFinalize:constraint
+        // Start of user code setterFinalize:referencedConstraint
         // End of user code
     }
     

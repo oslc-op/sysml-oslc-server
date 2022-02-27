@@ -72,7 +72,7 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.TRANSITIONFEATUREMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.TRANSITIONFEATUREMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "TransitionFeatureMembership Resource Shape", describes = SysmlDomainConstants.TRANSITIONFEATUREMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "TransitionFeatureMembership Shape", describes = SysmlDomainConstants.TRANSITIONFEATUREMEMBERSHIP_TYPE)
 public interface ITransitionFeatureMembership
 {
 
@@ -85,14 +85,6 @@ public interface ITransitionFeatureMembership
     @OslcAllowedValue({"trigger", "guard", "effect"})
     public String getKind();
 
-    @OslcName("transitionFeature_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "transitionFeature_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.STEP_TYPE})
-    @OslcReadOnly(false)
-    public Link getTransitionFeature_comp();
-
     @OslcName("transitionFeature")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "transitionFeature")
     @OslcOccurs(Occurs.ExactlyOne)
@@ -103,7 +95,6 @@ public interface ITransitionFeatureMembership
 
 
     public void setKind(final String kind );
-    public void setTransitionFeature_comp(final Link transitionFeature_comp );
     public void setTransitionFeature(final Link transitionFeature );
 }
 

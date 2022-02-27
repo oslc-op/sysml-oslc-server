@@ -57,7 +57,7 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
-import org.oasis.oslcop.sysml.Generalization;
+import org.oasis.oslcop.sysml.Specialization;
 
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 
@@ -82,9 +82,9 @@ import org.oasis.oslcop.sysml.Type;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.SUBSETTING_NAMESPACE)
 @OslcName(SysmlDomainConstants.SUBSETTING_LOCALNAME)
-@OslcResourceShape(title = "Subsetting Resource Shape", describes = SysmlDomainConstants.SUBSETTING_TYPE)
+@OslcResourceShape(title = "Subsetting Shape", describes = SysmlDomainConstants.SUBSETTING_TYPE)
 public class Subsetting
-    extends Generalization
+    extends Specialization
     implements ISubsetting
 {
     // Start of user code attributeAnnotation:subsettedFeature
@@ -146,7 +146,7 @@ public class Subsetting
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -187,7 +187,7 @@ public class Subsetting
     // End of user code
     @OslcName("owningFeature")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningFeature")
-    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)

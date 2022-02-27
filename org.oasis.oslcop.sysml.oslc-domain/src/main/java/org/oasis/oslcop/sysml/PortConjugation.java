@@ -83,7 +83,7 @@ import org.oasis.oslcop.sysml.Type;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.PORTCONJUGATION_NAMESPACE)
 @OslcName(SysmlDomainConstants.PORTCONJUGATION_LOCALNAME)
-@OslcResourceShape(title = "PortConjugation Resource Shape", describes = SysmlDomainConstants.PORTCONJUGATION_TYPE)
+@OslcResourceShape(title = "PortConjugation Shape", describes = SysmlDomainConstants.PORTCONJUGATION_TYPE)
 public class PortConjugation
     extends Conjugation
     implements IPortConjugation
@@ -144,7 +144,7 @@ public class PortConjugation
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

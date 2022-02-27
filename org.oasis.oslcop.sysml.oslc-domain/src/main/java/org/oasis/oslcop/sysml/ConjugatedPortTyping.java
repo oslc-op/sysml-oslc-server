@@ -84,7 +84,7 @@ import org.oasis.oslcop.sysml.Type;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.CONJUGATEDPORTTYPING_NAMESPACE)
 @OslcName(SysmlDomainConstants.CONJUGATEDPORTTYPING_LOCALNAME)
-@OslcResourceShape(title = "ConjugatedPortTyping Resource Shape", describes = SysmlDomainConstants.CONJUGATEDPORTTYPING_TYPE)
+@OslcResourceShape(title = "ConjugatedPortTyping Shape", describes = SysmlDomainConstants.CONJUGATEDPORTTYPING_TYPE)
 public class ConjugatedPortTyping
     extends FeatureTyping
     implements IConjugatedPortTyping
@@ -145,7 +145,7 @@ public class ConjugatedPortTyping
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

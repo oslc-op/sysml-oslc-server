@@ -83,6 +83,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
+import org.eclipse.lyo.server.ui.model.PreviewFactory;
 // Start of user code imports
 // End of user code
 
@@ -124,8 +125,13 @@ public class ClassService
         summary = "GET for resources of type {'" + SysmlDomainConstants.CLASS_LOCALNAME + "'}",
         description = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.CLASS_TYPE + "\">" + SysmlDomainConstants.CLASS_LOCALNAME + "</a>" + "'}" +
             ", with respective resource shapes {'" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + SysmlDomainConstants.CLASS_PATH + "\">" + SysmlDomainConstants.CLASS_LOCALNAME + "</a>" + "'}",
-        responses = {
-            @ApiResponse(description = "default response", content = {@Content(mediaType = OslcMediaType.APPLICATION_RDF_XML), @Content(mediaType = OslcMediaType.APPLICATION_XML), @Content(mediaType = OslcMediaType.APPLICATION_JSON), @Content(mediaType = OslcMediaType.TEXT_TURTLE), @Content(mediaType = MediaType.TEXT_HTML), @Content(mediaType = OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML)})
+        responses = {@ApiResponse(description = "default response",
+            content = {@Content(mediaType = OslcMediaType.APPLICATION_RDF_XML), @Content(
+                mediaType = OslcMediaType.APPLICATION_XML), @Content(
+                mediaType = OslcMediaType.APPLICATION_JSON), @Content(
+                mediaType = OslcMediaType.TEXT_TURTLE), @Content(
+                mediaType = MediaType.TEXT_HTML), @Content(
+                mediaType = OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML)})
         }
     )
     public SysmlClass getSysmlClass(
@@ -155,8 +161,13 @@ public class ClassService
         summary = "GET for resources of type {'" + SysmlDomainConstants.CLASS_LOCALNAME + "'}",
         description = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.CLASS_TYPE + "\">" + SysmlDomainConstants.CLASS_LOCALNAME + "</a>" + "'}" +
             ", with respective resource shapes {'" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + SysmlDomainConstants.CLASS_PATH + "\">" + SysmlDomainConstants.CLASS_LOCALNAME + "</a>" + "'}",
-        responses = {
-            @ApiResponse(description = "default response", content = {@Content(mediaType = OslcMediaType.APPLICATION_RDF_XML), @Content(mediaType = OslcMediaType.APPLICATION_XML), @Content(mediaType = OslcMediaType.APPLICATION_JSON), @Content(mediaType = OslcMediaType.TEXT_TURTLE), @Content(mediaType = MediaType.TEXT_HTML), @Content(mediaType = OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML)})
+        responses = {@ApiResponse(description = "default response",
+            content = {@Content(mediaType = OslcMediaType.APPLICATION_RDF_XML), @Content(
+                mediaType = OslcMediaType.APPLICATION_XML), @Content(
+                mediaType = OslcMediaType.APPLICATION_JSON), @Content(
+                mediaType = OslcMediaType.TEXT_TURTLE), @Content(
+                mediaType = MediaType.TEXT_HTML), @Content(
+                mediaType = OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML)})
         }
     )
     public void getSysmlClassAsHtml(
@@ -173,7 +184,10 @@ public class ClassService
             // Start of user code getSysmlClassAsHtml_setAttributes
             // End of user code
 
-            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/sysmlclass.jsp");
+            httpServletRequest.setAttribute("aResource", aSysmlClass);
+            httpServletRequest.setAttribute("resourceTypeName", SysmlDomainConstants.CLASS_LOCALNAME);
+            httpServletRequest.setAttribute("shapeUri", UriBuilder.fromUri(OSLC4JUtils.getServletURI()).path(OslcConstants.PATH_RESOURCE_SHAPES).path(SysmlDomainConstants.CLASS_PATH).build());
+            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/viewresource.jsp");
             rd.forward(httpServletRequest,httpServletResponse);
             return;
         }
@@ -188,8 +202,13 @@ public class ClassService
         summary = "GET for resources of type {'" + SysmlDomainConstants.CLASS_LOCALNAME + "'}",
         description = "GET for resources of type {'" + "<a href=\"" + SysmlDomainConstants.CLASS_TYPE + "\">" + SysmlDomainConstants.CLASS_LOCALNAME + "</a>" + "'}" +
             ", with respective resource shapes {'" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + SysmlDomainConstants.CLASS_PATH + "\">" + SysmlDomainConstants.CLASS_LOCALNAME + "</a>" + "'}",
-        responses = {
-            @ApiResponse(description = "default response", content = {@Content(mediaType = OslcMediaType.APPLICATION_RDF_XML), @Content(mediaType = OslcMediaType.APPLICATION_XML), @Content(mediaType = OslcMediaType.APPLICATION_JSON), @Content(mediaType = OslcMediaType.TEXT_TURTLE), @Content(mediaType = MediaType.TEXT_HTML), @Content(mediaType = OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML)})
+        responses = {@ApiResponse(description = "default response",
+            content = {@Content(mediaType = OslcMediaType.APPLICATION_RDF_XML), @Content(
+                mediaType = OslcMediaType.APPLICATION_XML), @Content(
+                mediaType = OslcMediaType.APPLICATION_JSON), @Content(
+                mediaType = OslcMediaType.TEXT_TURTLE), @Content(
+                mediaType = MediaType.TEXT_HTML), @Content(
+                mediaType = OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML)})
         }
     )
     public Compact getSysmlClassCompact(
@@ -253,7 +272,19 @@ public class ClassService
             // Start of user code getSysmlClassAsHtmlSmallPreview_setAttributes
             // End of user code
 
-            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/sysmlclasssmallpreview.jsp");
+            try {
+                httpServletRequest.setAttribute("resourceTitle", aSysmlClass.toString());
+                ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getOwnedSubclassification", "isIsAbstract", "isIsSufficient", "isIsConjugated", "getOwnedSpecialization", "getOwnedFeatureMembership", "getOwnedFeature", "getOwnedEndFeature", "getFeature", "getInput", "getOutput", "getInheritedMembership", "getEndFeature", "getOwnedConjugator", "getFeatureMembership", "getInheritedFeature", "getMultiplicity", "getDirectedFeature", "getOwnedDisjoining", "getOwnedMembership", "getOwnedMember", "getMembership", "getOwnedImport", "getMember", "getImportedMembership", "getSysmlIdentifier", "getName", "getQualifiedName", "getEffectiveName", "getAliasId", "getHumanId", "getOwningMembership", "getOwnedRelationship", "getOwningRelationship", "getOwningNamespace", "getOwner", "getOwnedElement", "getDocumentation", "getOwnedAnnotation", "getDocumentationComment", "getOwnedTextualRepresentation", "getContributor", "getCreated", "getCreator", "getDescription", "getIdentifier", "getModified", "getSource", "getTitle", "getType", "getInstanceShape", "getServiceProvider", "getShortTitle", "getExternal", "getTrace", "getRefine", "getDerives", "getElaborates", "getSatisfy"));
+                // Start of user code getSysmlClassAsHtmlSmallPreview_setResourceGetterMethods
+                //TODO: modify the set of attributes to show in the preview
+                // End of user code
+                String oslcPreviewDataSetAsString = PreviewFactory.getPreviewAsJsonString(aSysmlClass, getterMethodNames, false);
+                httpServletRequest.setAttribute("resourcePreviewDataSet", oslcPreviewDataSetAsString);
+            } catch (Exception e) {
+                log.error("Could not handle smallPreview", e);
+                throw new WebApplicationException("Could not handle smallPreview", e);
+            }
+            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/uipreview.jsp");
             httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);
@@ -280,7 +311,19 @@ public class ClassService
             // Start of user code getSysmlClassAsHtmlLargePreview_setAttributes
             // End of user code
 
-            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/sysmlclasslargepreview.jsp");
+            try {
+                httpServletRequest.setAttribute("resourceTitle", aSysmlClass.toString());
+                ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getOwnedSubclassification", "isIsAbstract", "isIsSufficient", "isIsConjugated", "getOwnedSpecialization", "getOwnedFeatureMembership", "getOwnedFeature", "getOwnedEndFeature", "getFeature", "getInput", "getOutput", "getInheritedMembership", "getEndFeature", "getOwnedConjugator", "getFeatureMembership", "getInheritedFeature", "getMultiplicity", "getDirectedFeature", "getOwnedDisjoining", "getOwnedMembership", "getOwnedMember", "getMembership", "getOwnedImport", "getMember", "getImportedMembership", "getSysmlIdentifier", "getName", "getQualifiedName", "getEffectiveName", "getAliasId", "getHumanId", "getOwningMembership", "getOwnedRelationship", "getOwningRelationship", "getOwningNamespace", "getOwner", "getOwnedElement", "getDocumentation", "getOwnedAnnotation", "getDocumentationComment", "getOwnedTextualRepresentation", "getContributor", "getCreated", "getCreator", "getDescription", "getIdentifier", "getModified", "getSource", "getTitle", "getType", "getInstanceShape", "getServiceProvider", "getShortTitle", "getExternal", "getTrace", "getRefine", "getDerives", "getElaborates", "getSatisfy"));
+                // Start of user code getSysmlClassAsHtmlLargePreview_setResourceGetterMethods
+                //TODO: modify the set of attributes to show in the preview
+                // End of user code
+                String oslcPreviewDataSetAsString = PreviewFactory.getPreviewAsJsonString(aSysmlClass, getterMethodNames, true);
+                httpServletRequest.setAttribute("resourcePreviewDataSet", oslcPreviewDataSetAsString);
+            } catch (Exception e) {
+                log.error("Could not handle largePreview", e);
+                throw new WebApplicationException("Could not handle largePreview", e);
+            }
+            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/uipreview.jsp");
             httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);

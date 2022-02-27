@@ -67,12 +67,13 @@ import org.oasis.oslcop.sysml.Behavior;
 import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
-import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.ItemFeature;
 import org.oasis.oslcop.sysml.ItemFlowEnd;
@@ -83,6 +84,7 @@ import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
@@ -97,7 +99,7 @@ import org.oasis.oslcop.sysml.TypeFeaturing;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.ITEMFLOW_NAMESPACE)
 @OslcName(SysmlDomainConstants.ITEMFLOW_LOCALNAME)
-@OslcResourceShape(title = "ItemFlow Resource Shape", describes = SysmlDomainConstants.ITEMFLOW_TYPE)
+@OslcResourceShape(title = "ItemFlow Shape", describes = SysmlDomainConstants.ITEMFLOW_TYPE)
 public class ItemFlow
     extends Connector
     implements IItemFlow, IStep
@@ -176,7 +178,7 @@ public class ItemFlow
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -227,7 +229,7 @@ public class ItemFlow
     // End of user code
     @OslcName("itemType")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "itemType")
-    @OslcOccurs(Occurs.OneOrMany)
+    @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.CLASSIFIER_TYPE})
     @OslcReadOnly(false)
@@ -242,7 +244,7 @@ public class ItemFlow
     // End of user code
     @OslcName("targetInputFeature")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "targetInputFeature")
-    @OslcOccurs(Occurs.OneOrMany)
+    @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)
@@ -257,7 +259,7 @@ public class ItemFlow
     // End of user code
     @OslcName("sourceOutputFeature")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "sourceOutputFeature")
-    @OslcOccurs(Occurs.OneOrMany)
+    @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
     @OslcReadOnly(false)

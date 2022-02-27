@@ -64,18 +64,19 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
 import org.oasis.oslcop.sysml.FeatureMembership;
-import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Relationship;
-import org.oasis.oslcop.sysml.Superclassing;
+import org.oasis.oslcop.sysml.Specialization;
+import org.oasis.oslcop.sysml.Subclassification;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 // Start of user code imports
 // End of user code
@@ -87,14 +88,14 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.CLASSIFIER_NAMESPACE)
 @OslcName(SysmlDomainConstants.CLASSIFIER_LOCALNAME)
-@OslcResourceShape(title = "Classifier Resource Shape", describes = SysmlDomainConstants.CLASSIFIER_TYPE)
+@OslcResourceShape(title = "Classifier Shape", describes = SysmlDomainConstants.CLASSIFIER_TYPE)
 public class Classifier
     extends Type
     implements IClassifier
 {
-    // Start of user code attributeAnnotation:ownedSuperclassing
+    // Start of user code attributeAnnotation:ownedSubclassification
     // End of user code
-    private Set<Link> ownedSuperclassing = new HashSet<Link>();
+    private Set<Link> ownedSubclassification = new HashSet<Link>();
     
     // Start of user code classAttributes
     // End of user code
@@ -145,47 +146,47 @@ public class Classifier
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
-    public void addOwnedSuperclassing(final Link ownedSuperclassing)
+    public void addOwnedSubclassification(final Link ownedSubclassification)
     {
-        this.ownedSuperclassing.add(ownedSuperclassing);
+        this.ownedSubclassification.add(ownedSubclassification);
     }
     
     
-    // Start of user code getterAnnotation:ownedSuperclassing
+    // Start of user code getterAnnotation:ownedSubclassification
     // End of user code
-    @OslcName("ownedSuperclassing")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedSuperclassing")
+    @OslcName("ownedSubclassification")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedSubclassification")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.SUPERCLASSING_TYPE})
+    @OslcRange({SysmlDomainConstants.SUBCLASSIFICATION_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedSuperclassing()
+    public Set<Link> getOwnedSubclassification()
     {
-        // Start of user code getterInit:ownedSuperclassing
+        // Start of user code getterInit:ownedSubclassification
         // End of user code
-        return ownedSuperclassing;
+        return ownedSubclassification;
     }
     
     
-    // Start of user code setterAnnotation:ownedSuperclassing
+    // Start of user code setterAnnotation:ownedSubclassification
     // End of user code
-    public void setOwnedSuperclassing(final Set<Link> ownedSuperclassing )
+    public void setOwnedSubclassification(final Set<Link> ownedSubclassification )
     {
-        // Start of user code setterInit:ownedSuperclassing
+        // Start of user code setterInit:ownedSubclassification
         // End of user code
-        this.ownedSuperclassing.clear();
-        if (ownedSuperclassing != null)
+        this.ownedSubclassification.clear();
+        if (ownedSubclassification != null)
         {
-            this.ownedSuperclassing.addAll(ownedSuperclassing);
+            this.ownedSubclassification.addAll(ownedSubclassification);
         }
     
-        // Start of user code setterFinalize:ownedSuperclassing
+        // Start of user code setterFinalize:ownedSubclassification
         // End of user code
     }
     

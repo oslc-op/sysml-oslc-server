@@ -62,25 +62,29 @@ import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IAttributeUsage;
 import org.oasis.oslcop.sysml.ICalculationUsage;
 import org.oasis.oslcop.sysml.ICaseUsage;
+import org.oasis.oslcop.sysml.IClassifier;
 import org.oasis.oslcop.sysml.IComment;
+import org.oasis.oslcop.sysml.IConcernUsage;
 import org.oasis.oslcop.sysml.IConjugation;
-import org.oasis.oslcop.sysml.IConnectionUsage;
+import org.oasis.oslcop.sysml.IConnectorAsUsage;
 import org.oasis.oslcop.sysml.IConstraintUsage;
 import org.oasis.oslcop.sysml.IDefinition;
+import org.oasis.oslcop.sysml.IDisjoining;
 import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IEnumerationUsage;
 import org.oasis.oslcop.sysml.IFeature;
+import org.oasis.oslcop.sysml.IFeatureChaining;
 import org.oasis.oslcop.sysml.IFeatureMembership;
 import org.oasis.oslcop.sysml.IFeatureTyping;
-import org.oasis.oslcop.sysml.IGeneralization;
+import org.oasis.oslcop.sysml.IFlowConnectionUsage;
 import org.oasis.oslcop.sysml.ISysmlImport;
-import org.oasis.oslcop.sysml.IIndividualUsage;
 import org.oasis.oslcop.sysml.IInterfaceUsage;
 import org.oasis.oslcop.sysml.IItemUsage;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
 import org.oasis.oslcop.sysml.INamespace;
+import org.oasis.oslcop.sysml.IOccurrenceUsage;
 import org.oasis.oslcop.sysml.IPartUsage;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IPortUsage;
@@ -89,6 +93,7 @@ import org.oasis.oslcop.sysml.IReferenceUsage;
 import org.oasis.oslcop.sysml.IRelationship;
 import org.oasis.oslcop.sysml.IRenderingUsage;
 import org.oasis.oslcop.sysml.IRequirementUsage;
+import org.oasis.oslcop.sysml.ISpecialization;
 import org.oasis.oslcop.sysml.IStateUsage;
 import org.oasis.oslcop.sysml.ISubsetting;
 import org.oasis.oslcop.sysml.ITextualRepresentation;
@@ -96,6 +101,7 @@ import org.oasis.oslcop.sysml.ITransitionUsage;
 import org.oasis.oslcop.sysml.IType;
 import org.oasis.oslcop.sysml.ITypeFeaturing;
 import org.oasis.oslcop.sysml.IUsage;
+import org.oasis.oslcop.sysml.IUseCaseUsage;
 import org.oasis.oslcop.sysml.IVariantMembership;
 import org.oasis.oslcop.sysml.IVerificationCaseUsage;
 import org.oasis.oslcop.sysml.IViewUsage;
@@ -105,7 +111,7 @@ import org.oasis.oslcop.sysml.IViewpointUsage;
 
 @OslcNamespace(SysmlDomainConstants.USAGE_NAMESPACE)
 @OslcName(SysmlDomainConstants.USAGE_LOCALNAME)
-@OslcResourceShape(title = "Usage Resource Shape", describes = SysmlDomainConstants.USAGE_TYPE)
+@OslcResourceShape(title = "Usage Shape", describes = SysmlDomainConstants.USAGE_TYPE)
 public interface IUsage
 {
 
@@ -117,17 +123,16 @@ public interface IUsage
     public void addNestedTransition(final Link nestedTransition );
     public void addNestedRequirement(final Link nestedRequirement );
     public void addNestedCalculation(final Link nestedCalculation );
-    public void addFlowFeature(final Link flowFeature );
+    public void addDirectedUsage(final Link directedUsage );
     public void addNestedCase(final Link nestedCase );
     public void addNestedAnalysisCase(final Link nestedAnalysisCase );
-    public void addVariantMembership_comp(final Link variantMembership_comp );
+    public void addVariantMembership(final Link variantMembership );
     public void addUsage(final Link usage );
     public void addVariant(final Link variant );
     public void addNestedReference(final Link nestedReference );
     public void addNestedConnection(final Link nestedConnection );
     public void addNestedItem(final Link nestedItem );
     public void addNestedPart(final Link nestedPart );
-    public void addNestedIndividual(final Link nestedIndividual );
     public void addNestedInterface(final Link nestedInterface );
     public void addNestedAttribute(final Link nestedAttribute );
     public void addNestedView(final Link nestedView );
@@ -136,7 +141,11 @@ public interface IUsage
     public void addNestedVerificationCase(final Link nestedVerificationCase );
     public void addNestedEnumeration(final Link nestedEnumeration );
     public void addNestedAllocation(final Link nestedAllocation );
-    public void addVariantMembership(final Link variantMembership );
+    public void addNestedConcern(final Link nestedConcern );
+    public void addNestedOccurrence(final Link nestedOccurrence );
+    public void addDefinition(final Link definition );
+    public void addNestedUseCase(final Link nestedUseCase );
+    public void addNestedFlow(final Link nestedFlow );
 
     @OslcName("isVariation")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isVariation")
@@ -144,6 +153,13 @@ public interface IUsage
     @OslcValueType(ValueType.Boolean)
     @OslcReadOnly(false)
     public Boolean isIsVariation();
+
+    @OslcName("isReference")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isReference")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsReference();
 
     @OslcName("nestedUsage")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedUsage")
@@ -217,13 +233,13 @@ public interface IUsage
     @OslcReadOnly(false)
     public Set<Link> getNestedCalculation();
 
-    @OslcName("flowFeature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "flowFeature")
+    @OslcName("directedUsage")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "directedUsage")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.USAGE_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getFlowFeature();
+    public Set<Link> getDirectedUsage();
 
     @OslcName("nestedCase")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedCase")
@@ -241,13 +257,13 @@ public interface IUsage
     @OslcReadOnly(false)
     public Set<Link> getNestedAnalysisCase();
 
-    @OslcName("variantMembership_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "variantMembership_comp")
+    @OslcName("variantMembership")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "variantMembership")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.VARIANTMEMBERSHIP_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getVariantMembership_comp();
+    public Set<Link> getVariantMembership();
 
     @OslcName("usage")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "usage")
@@ -277,7 +293,7 @@ public interface IUsage
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedConnection")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.CONNECTIONUSAGE_TYPE})
+    @OslcRange({SysmlDomainConstants.CONNECTORASUSAGE_TYPE})
     @OslcReadOnly(false)
     public Set<Link> getNestedConnection();
 
@@ -296,14 +312,6 @@ public interface IUsage
     @OslcRange({SysmlDomainConstants.PARTUSAGE_TYPE})
     @OslcReadOnly(false)
     public Set<Link> getNestedPart();
-
-    @OslcName("nestedIndividual")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedIndividual")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.INDIVIDUALUSAGE_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getNestedIndividual();
 
     @OslcName("nestedInterface")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedInterface")
@@ -369,6 +377,46 @@ public interface IUsage
     @OslcReadOnly(false)
     public Set<Link> getNestedAllocation();
 
+    @OslcName("nestedConcern")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedConcern")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.CONCERNUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getNestedConcern();
+
+    @OslcName("nestedOccurrence")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedOccurrence")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.OCCURRENCEUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getNestedOccurrence();
+
+    @OslcName("definition")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "definition")
+    @OslcOccurs(Occurs.OneOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.CLASSIFIER_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getDefinition();
+
+    @OslcName("nestedUseCase")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedUseCase")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.USECASEUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getNestedUseCase();
+
+    @OslcName("nestedFlow")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "nestedFlow")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FLOWCONNECTIONUSAGE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getNestedFlow();
+
     @OslcName("owningDefinition")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningDefinition")
     @OslcOccurs(Occurs.ZeroOrOne)
@@ -377,16 +425,9 @@ public interface IUsage
     @OslcReadOnly(false)
     public Link getOwningDefinition();
 
-    @OslcName("variantMembership")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "variantMembership")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.VARIANTMEMBERSHIP_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getVariantMembership();
-
 
     public void setIsVariation(final Boolean isVariation );
+    public void setIsReference(final Boolean isReference );
     public void setNestedUsage(final Set<Link> nestedUsage );
     public void setOwningUsage(final Link owningUsage );
     public void setNestedPort(final Set<Link> nestedPort );
@@ -396,17 +437,16 @@ public interface IUsage
     public void setNestedTransition(final Set<Link> nestedTransition );
     public void setNestedRequirement(final Set<Link> nestedRequirement );
     public void setNestedCalculation(final Set<Link> nestedCalculation );
-    public void setFlowFeature(final Set<Link> flowFeature );
+    public void setDirectedUsage(final Set<Link> directedUsage );
     public void setNestedCase(final Set<Link> nestedCase );
     public void setNestedAnalysisCase(final Set<Link> nestedAnalysisCase );
-    public void setVariantMembership_comp(final Set<Link> variantMembership_comp );
+    public void setVariantMembership(final Set<Link> variantMembership );
     public void setUsage(final Set<Link> usage );
     public void setVariant(final Set<Link> variant );
     public void setNestedReference(final Set<Link> nestedReference );
     public void setNestedConnection(final Set<Link> nestedConnection );
     public void setNestedItem(final Set<Link> nestedItem );
     public void setNestedPart(final Set<Link> nestedPart );
-    public void setNestedIndividual(final Set<Link> nestedIndividual );
     public void setNestedInterface(final Set<Link> nestedInterface );
     public void setNestedAttribute(final Set<Link> nestedAttribute );
     public void setNestedView(final Set<Link> nestedView );
@@ -415,7 +455,11 @@ public interface IUsage
     public void setNestedVerificationCase(final Set<Link> nestedVerificationCase );
     public void setNestedEnumeration(final Set<Link> nestedEnumeration );
     public void setNestedAllocation(final Set<Link> nestedAllocation );
+    public void setNestedConcern(final Set<Link> nestedConcern );
+    public void setNestedOccurrence(final Set<Link> nestedOccurrence );
+    public void setDefinition(final Set<Link> definition );
+    public void setNestedUseCase(final Set<Link> nestedUseCase );
+    public void setNestedFlow(final Set<Link> nestedFlow );
     public void setOwningDefinition(final Link owningDefinition );
-    public void setVariantMembership(final Set<Link> variantMembership );
 }
 

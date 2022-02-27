@@ -164,13 +164,13 @@ public class ServiceProviderCatalogSingleton
     }
 
 
-    public static ServiceProvider getServiceProvider(HttpServletRequest httpServletRequest, final String projectId)
+    public static ServiceProvider getServiceProvider(HttpServletRequest httpServletRequest, final String projectId, final String commitId)
     {
         ServiceProvider serviceProvider;
 
         synchronized(serviceProviders)
         {
-            String identifier = ServiceProvidersFactory.constructIdentifier(projectId);
+            String identifier = ServiceProvidersFactory.constructIdentifier(projectId, commitId);
             serviceProvider = serviceProviders.get(identifier);
 
             //One retry refreshing the service providers

@@ -73,7 +73,7 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.CONJUGATEDPORTTYPING_NAMESPACE)
 @OslcName(SysmlDomainConstants.CONJUGATEDPORTTYPING_LOCALNAME)
-@OslcResourceShape(title = "ConjugatedPortTyping Resource Shape", describes = SysmlDomainConstants.CONJUGATEDPORTTYPING_TYPE)
+@OslcResourceShape(title = "ConjugatedPortTyping Shape", describes = SysmlDomainConstants.CONJUGATEDPORTTYPING_TYPE)
 public interface IConjugatedPortTyping
 {
 

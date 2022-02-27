@@ -83,14 +83,11 @@ import org.oasis.oslcop.sysml.Type;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.RESULTEXPRESSIONMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.RESULTEXPRESSIONMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "ResultExpressionMembership Resource Shape", describes = SysmlDomainConstants.RESULTEXPRESSIONMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "ResultExpressionMembership Shape", describes = SysmlDomainConstants.RESULTEXPRESSIONMEMBERSHIP_TYPE)
 public class ResultExpressionMembership
     extends FeatureMembership
     implements IResultExpressionMembership
 {
-    // Start of user code attributeAnnotation:ownedResultExpression_comp
-    // End of user code
-    private Link ownedResultExpression_comp;
     // Start of user code attributeAnnotation:ownedResultExpression
     // End of user code
     private Link ownedResultExpression;
@@ -144,27 +141,12 @@ public class ResultExpressionMembership
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
-    
-    // Start of user code getterAnnotation:ownedResultExpression_comp
-    // End of user code
-    @OslcName("ownedResultExpression_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedResultExpression_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.EXPRESSION_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedResultExpression_comp()
-    {
-        // Start of user code getterInit:ownedResultExpression_comp
-        // End of user code
-        return ownedResultExpression_comp;
-    }
     
     // Start of user code getterAnnotation:ownedResultExpression
     // End of user code
@@ -181,18 +163,6 @@ public class ResultExpressionMembership
         return ownedResultExpression;
     }
     
-    
-    // Start of user code setterAnnotation:ownedResultExpression_comp
-    // End of user code
-    public void setOwnedResultExpression_comp(final Link ownedResultExpression_comp )
-    {
-        // Start of user code setterInit:ownedResultExpression_comp
-        // End of user code
-        this.ownedResultExpression_comp = ownedResultExpression_comp;
-    
-        // Start of user code setterFinalize:ownedResultExpression_comp
-        // End of user code
-    }
     
     // Start of user code setterAnnotation:ownedResultExpression
     // End of user code

@@ -69,14 +69,13 @@ import org.oasis.oslcop.sysml.ITextualRepresentation;
 
 @OslcNamespace(SysmlDomainConstants.RELATIONSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.RELATIONSHIP_LOCALNAME)
-@OslcResourceShape(title = "Relationship Resource Shape", describes = SysmlDomainConstants.RELATIONSHIP_TYPE)
+@OslcResourceShape(title = "Relationship Shape", describes = SysmlDomainConstants.RELATIONSHIP_TYPE)
 public interface IRelationship
 {
 
     public void addRelatedElement(final Link relatedElement );
     public void addTarget(final Link target );
     public void addSysmlSource(final Link source );
-    public void addOwnedRelatedElement_comp(final Link ownedRelatedElement_comp );
     public void addOwnedRelatedElement(final Link ownedRelatedElement );
 
     @OslcName("relatedElement")
@@ -111,14 +110,6 @@ public interface IRelationship
     @OslcReadOnly(false)
     public Link getOwningRelatedElement();
 
-    @OslcName("ownedRelatedElement_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelatedElement_comp")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedRelatedElement_comp();
-
     @OslcName("ownedRelatedElement")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelatedElement")
     @OslcOccurs(Occurs.ZeroOrMany)
@@ -132,7 +123,6 @@ public interface IRelationship
     public void setTarget(final Set<Link> target );
     public void setSysmlSource(final Set<Link> source );
     public void setOwningRelatedElement(final Link owningRelatedElement );
-    public void setOwnedRelatedElement_comp(final Set<Link> ownedRelatedElement_comp );
     public void setOwnedRelatedElement(final Set<Link> ownedRelatedElement );
 }
 

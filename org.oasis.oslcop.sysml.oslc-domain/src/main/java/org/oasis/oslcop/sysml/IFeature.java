@@ -58,12 +58,13 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IComment;
 import org.oasis.oslcop.sysml.IConjugation;
+import org.oasis.oslcop.sysml.IDisjoining;
 import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IFeature;
+import org.oasis.oslcop.sysml.IFeatureChaining;
 import org.oasis.oslcop.sysml.IFeatureMembership;
 import org.oasis.oslcop.sysml.IFeatureTyping;
-import org.oasis.oslcop.sysml.IGeneralization;
 import org.oasis.oslcop.sysml.ISysmlImport;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
@@ -71,6 +72,7 @@ import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRedefinition;
 import org.oasis.oslcop.sysml.IRelationship;
+import org.oasis.oslcop.sysml.ISpecialization;
 import org.oasis.oslcop.sysml.ISubsetting;
 import org.oasis.oslcop.sysml.ITextualRepresentation;
 import org.oasis.oslcop.sysml.IType;
@@ -80,16 +82,18 @@ import org.oasis.oslcop.sysml.ITypeFeaturing;
 
 @OslcNamespace(SysmlDomainConstants.FEATURE_NAMESPACE)
 @OslcName(SysmlDomainConstants.FEATURE_LOCALNAME)
-@OslcResourceShape(title = "Feature Resource Shape", describes = SysmlDomainConstants.FEATURE_TYPE)
+@OslcResourceShape(title = "Feature Shape", describes = SysmlDomainConstants.FEATURE_TYPE)
 public interface IFeature
 {
 
-    public void addOwnedTypeFeaturing(final Link ownedTypeFeaturing );
     public void addSysmlType(final Link type );
     public void addOwnedRedefinition(final Link ownedRedefinition );
     public void addOwnedSubsetting(final Link ownedSubsetting );
     public void addOwnedTyping(final Link ownedTyping );
     public void addFeaturingType(final Link featuringType );
+    public void addOwnedTypeFeaturing(final Link ownedTypeFeaturing );
+    public void addChainingFeature(final Link chainingFeature );
+    public void addOwnedFeatureChaining(final Link ownedFeatureChaining );
 
     @OslcName("isUnique")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isUnique")
@@ -112,12 +116,41 @@ public interface IFeature
     @OslcReadOnly(false)
     public Boolean isIsComposite();
 
+    @OslcName("isPortion")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isPortion")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsPortion();
+
+    @OslcName("isDerived")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isDerived")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsDerived();
+
+    @OslcName("isReadOnly")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isReadOnly")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsReadOnly();
+
     @OslcName("isEnd")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isEnd")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Boolean)
     @OslcReadOnly(false)
     public Boolean isIsEnd();
+
+    @OslcName("direction")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "direction")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.String)
+    @OslcReadOnly(false)
+    @OslcAllowedValue({"in", "inout", "out"})
+    public String getDirection();
 
     @OslcName("isNonunique")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isNonunique")
@@ -126,22 +159,6 @@ public interface IFeature
     @OslcReadOnly(false)
     public Boolean isIsNonunique();
 
-    @OslcName("ownedTypeFeaturing")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedTypeFeaturing")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.TYPEFEATURING_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedTypeFeaturing();
-
-    @OslcName("owningFeatureMembership")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningFeatureMembership")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATUREMEMBERSHIP_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwningFeatureMembership();
-
     @OslcName("owningType")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningType")
     @OslcOccurs(Occurs.ZeroOrOne)
@@ -149,14 +166,6 @@ public interface IFeature
     @OslcRange({SysmlDomainConstants.TYPE_TYPE})
     @OslcReadOnly(false)
     public Link getOwningType();
-
-    @OslcName("endOwningType")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "endOwningType")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
-    @OslcReadOnly(false)
-    public Link getEndOwningType();
 
     @OslcName("type")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "type")
@@ -182,6 +191,22 @@ public interface IFeature
     @OslcReadOnly(false)
     public Set<Link> getOwnedSubsetting();
 
+    @OslcName("owningFeatureMembership")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningFeatureMembership")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATUREMEMBERSHIP_TYPE})
+    @OslcReadOnly(false)
+    public Link getOwningFeatureMembership();
+
+    @OslcName("endOwningType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "endOwningType")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
+    @OslcReadOnly(false)
+    public Link getEndOwningType();
+
     @OslcName("ownedTyping")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedTyping")
     @OslcOccurs(Occurs.ZeroOrMany)
@@ -198,20 +223,50 @@ public interface IFeature
     @OslcReadOnly(false)
     public Set<Link> getFeaturingType();
 
+    @OslcName("ownedTypeFeaturing")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedTypeFeaturing")
+    @OslcOccurs(Occurs.ZeroOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPEFEATURING_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedTypeFeaturing();
+
+    @OslcName("chainingFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "chainingFeature")
+    @OslcOccurs(Occurs.OneOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getChainingFeature();
+
+    @OslcName("ownedFeatureChaining")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedFeatureChaining")
+    @OslcOccurs(Occurs.OneOrMany)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURECHAINING_TYPE})
+    @OslcReadOnly(false)
+    public Set<Link> getOwnedFeatureChaining();
+
 
     public void setIsUnique(final Boolean isUnique );
     public void setIsOrdered(final Boolean isOrdered );
     public void setIsComposite(final Boolean isComposite );
+    public void setIsPortion(final Boolean isPortion );
+    public void setIsDerived(final Boolean isDerived );
+    public void setIsReadOnly(final Boolean isReadOnly );
     public void setIsEnd(final Boolean isEnd );
+    public void setDirection(final String direction );
     public void setIsNonunique(final Boolean isNonunique );
-    public void setOwnedTypeFeaturing(final Set<Link> ownedTypeFeaturing );
-    public void setOwningFeatureMembership(final Link owningFeatureMembership );
     public void setOwningType(final Link owningType );
-    public void setEndOwningType(final Link endOwningType );
     public void setSysmlType(final Set<Link> type );
     public void setOwnedRedefinition(final Set<Link> ownedRedefinition );
     public void setOwnedSubsetting(final Set<Link> ownedSubsetting );
+    public void setOwningFeatureMembership(final Link owningFeatureMembership );
+    public void setEndOwningType(final Link endOwningType );
     public void setOwnedTyping(final Set<Link> ownedTyping );
     public void setFeaturingType(final Set<Link> featuringType );
+    public void setOwnedTypeFeaturing(final Set<Link> ownedTypeFeaturing );
+    public void setChainingFeature(final Set<Link> chainingFeature );
+    public void setOwnedFeatureChaining(final Set<Link> ownedFeatureChaining );
 }
 

@@ -82,7 +82,7 @@ import org.oasis.oslcop.sysml.Type;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.RETURNPARAMETERMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.RETURNPARAMETERMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "ReturnParameterMembership Resource Shape", describes = SysmlDomainConstants.RETURNPARAMETERMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "ReturnParameterMembership Shape", describes = SysmlDomainConstants.RETURNPARAMETERMEMBERSHIP_TYPE)
 public class ReturnParameterMembership
     extends ParameterMembership
     implements IReturnParameterMembership
@@ -137,7 +137,7 @@ public class ReturnParameterMembership
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

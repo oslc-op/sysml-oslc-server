@@ -65,13 +65,14 @@ import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.Behavior;
 import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
 import org.oasis.oslcop.sysml.Function;
-import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
@@ -80,6 +81,7 @@ import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Predicate;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
@@ -94,7 +96,7 @@ import org.oasis.oslcop.sysml.TypeFeaturing;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.BOOLEANEXPRESSION_NAMESPACE)
 @OslcName(SysmlDomainConstants.BOOLEANEXPRESSION_LOCALNAME)
-@OslcResourceShape(title = "BooleanExpression Resource Shape", describes = SysmlDomainConstants.BOOLEANEXPRESSION_TYPE)
+@OslcResourceShape(title = "BooleanExpression Shape", describes = SysmlDomainConstants.BOOLEANEXPRESSION_TYPE)
 public class BooleanExpression
     extends Expression
     implements IBooleanExpression
@@ -152,7 +154,7 @@ public class BooleanExpression
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

@@ -58,18 +58,19 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.IAnnotation;
 import org.oasis.oslcop.sysml.IComment;
 import org.oasis.oslcop.sysml.IConjugation;
+import org.oasis.oslcop.sysml.IDisjoining;
 import org.oasis.oslcop.sysml.IDocumentation;
 import org.oasis.oslcop.sysml.IElement;
 import org.oasis.oslcop.sysml.IFeature;
 import org.oasis.oslcop.sysml.IFeatureMembership;
-import org.oasis.oslcop.sysml.IGeneralization;
 import org.oasis.oslcop.sysml.ISysmlImport;
 import org.oasis.oslcop.sysml.IMembership;
 import org.oasis.oslcop.sysml.IMultiplicity;
 import org.oasis.oslcop.sysml.INamespace;
 import org.eclipse.lyo.oslc.domains.IPerson;
 import org.oasis.oslcop.sysml.IRelationship;
-import org.oasis.oslcop.sysml.ISuperclassing;
+import org.oasis.oslcop.sysml.ISpecialization;
+import org.oasis.oslcop.sysml.ISubclassification;
 import org.oasis.oslcop.sysml.ITextualRepresentation;
 import org.oasis.oslcop.sysml.IType;
 // Start of user code imports
@@ -77,7 +78,7 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.ASSOCIATIONSTRUCTURE_NAMESPACE)
 @OslcName(SysmlDomainConstants.ASSOCIATIONSTRUCTURE_LOCALNAME)
-@OslcResourceShape(title = "AssociationStructure Resource Shape", describes = SysmlDomainConstants.ASSOCIATIONSTRUCTURE_TYPE)
+@OslcResourceShape(title = "AssociationStructure Shape", describes = SysmlDomainConstants.ASSOCIATIONSTRUCTURE_TYPE)
 public interface IAssociationStructure
 {
 

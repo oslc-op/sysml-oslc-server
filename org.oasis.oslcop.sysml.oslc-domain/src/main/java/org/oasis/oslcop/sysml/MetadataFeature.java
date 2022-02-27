@@ -64,12 +64,13 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.Comment;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
-import org.oasis.oslcop.sysml.Generalization;
 import org.oasis.oslcop.sysml.SysmlImport;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.MetadataFeatureValue;
@@ -78,6 +79,7 @@ import org.oasis.oslcop.sysml.Namespace;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
@@ -92,14 +94,11 @@ import org.oasis.oslcop.sysml.TypeFeaturing;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.METADATAFEATURE_NAMESPACE)
 @OslcName(SysmlDomainConstants.METADATAFEATURE_LOCALNAME)
-@OslcResourceShape(title = "MetadataFeature Resource Shape", describes = SysmlDomainConstants.METADATAFEATURE_TYPE)
+@OslcResourceShape(title = "MetadataFeature Shape", describes = SysmlDomainConstants.METADATAFEATURE_TYPE)
 public class MetadataFeature
     extends Feature
     implements IMetadataFeature
 {
-    // Start of user code attributeAnnotation:metadataFeatureValue_comp
-    // End of user code
-    private Link metadataFeatureValue_comp;
     // Start of user code attributeAnnotation:metadataFeatureValue
     // End of user code
     private Link metadataFeatureValue;
@@ -153,27 +152,12 @@ public class MetadataFeature
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
-    
-    // Start of user code getterAnnotation:metadataFeatureValue_comp
-    // End of user code
-    @OslcName("metadataFeatureValue_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "metadataFeatureValue_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.METADATAFEATUREVALUE_TYPE})
-    @OslcReadOnly(false)
-    public Link getMetadataFeatureValue_comp()
-    {
-        // Start of user code getterInit:metadataFeatureValue_comp
-        // End of user code
-        return metadataFeatureValue_comp;
-    }
     
     // Start of user code getterAnnotation:metadataFeatureValue
     // End of user code
@@ -190,18 +174,6 @@ public class MetadataFeature
         return metadataFeatureValue;
     }
     
-    
-    // Start of user code setterAnnotation:metadataFeatureValue_comp
-    // End of user code
-    public void setMetadataFeatureValue_comp(final Link metadataFeatureValue_comp )
-    {
-        // Start of user code setterInit:metadataFeatureValue_comp
-        // End of user code
-        this.metadataFeatureValue_comp = metadataFeatureValue_comp;
-    
-        // Start of user code setterFinalize:metadataFeatureValue_comp
-        // End of user code
-    }
     
     // Start of user code setterAnnotation:metadataFeatureValue
     // End of user code

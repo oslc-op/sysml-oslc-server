@@ -71,77 +71,10 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.FEATUREMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.FEATUREMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "FeatureMembership Resource Shape", describes = SysmlDomainConstants.FEATUREMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "FeatureMembership Shape", describes = SysmlDomainConstants.FEATUREMEMBERSHIP_TYPE)
 public interface IFeatureMembership
 {
 
-
-    @OslcName("isDerived")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isDerived")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Boolean)
-    @OslcReadOnly(false)
-    public Boolean isIsDerived();
-
-    @OslcName("isReadOnly")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isReadOnly")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Boolean)
-    @OslcReadOnly(false)
-    public Boolean isIsReadOnly();
-
-    @OslcName("isComposite")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isComposite")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Boolean)
-    @OslcReadOnly(false)
-    public Boolean isIsComposite();
-
-    @OslcName("isPortion")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isPortion")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Boolean)
-    @OslcReadOnly(false)
-    public Boolean isIsPortion();
-
-    @OslcName("isPort")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isPort")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Boolean)
-    @OslcReadOnly(false)
-    public Boolean isIsPort();
-
-    @OslcName("direction")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "direction")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.String)
-    @OslcReadOnly(false)
-    @OslcAllowedValue({"in", "inout", "out"})
-    public String getDirection();
-
-    @OslcName("memberFeature")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "memberFeature")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Link getMemberFeature();
-
-    @OslcName("ownedMemberFeature_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberFeature_comp")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedMemberFeature_comp();
-
-    @OslcName("owningType")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningType")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwningType();
 
     @OslcName("ownedMemberFeature")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberFeature")
@@ -151,16 +84,25 @@ public interface IFeatureMembership
     @OslcReadOnly(false)
     public Link getOwnedMemberFeature();
 
+    @OslcName("memberFeature")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "memberFeature")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Link getMemberFeature();
 
-    public void setIsDerived(final Boolean isDerived );
-    public void setIsReadOnly(final Boolean isReadOnly );
-    public void setIsComposite(final Boolean isComposite );
-    public void setIsPortion(final Boolean isPortion );
-    public void setIsPort(final Boolean isPort );
-    public void setDirection(final String direction );
-    public void setMemberFeature(final Link memberFeature );
-    public void setOwnedMemberFeature_comp(final Link ownedMemberFeature_comp );
-    public void setOwningType(final Link owningType );
+    @OslcName("owningType")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningType")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.TYPE_TYPE})
+    @OslcReadOnly(false)
+    public Link getOwningType();
+
+
     public void setOwnedMemberFeature(final Link ownedMemberFeature );
+    public void setMemberFeature(final Link memberFeature );
+    public void setOwningType(final Link owningType );
 }
 

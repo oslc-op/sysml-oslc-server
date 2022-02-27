@@ -82,7 +82,7 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.PACKAGE_NAMESPACE)
 @OslcName(SysmlDomainConstants.PACKAGE_LOCALNAME)
-@OslcResourceShape(title = "Package Resource Shape", describes = SysmlDomainConstants.PACKAGE_TYPE)
+@OslcResourceShape(title = "Package Shape", describes = SysmlDomainConstants.PACKAGE_TYPE)
 public class SysmlPackage
     extends Namespace
     implements ISysmlPackage
@@ -140,7 +140,7 @@ public class SysmlPackage
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

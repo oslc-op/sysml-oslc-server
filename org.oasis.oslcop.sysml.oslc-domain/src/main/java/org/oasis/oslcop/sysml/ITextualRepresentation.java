@@ -69,7 +69,7 @@ import org.oasis.oslcop.sysml.ITextualRepresentation;
 
 @OslcNamespace(SysmlDomainConstants.TEXTUALREPRESENTATION_NAMESPACE)
 @OslcName(SysmlDomainConstants.TEXTUALREPRESENTATION_LOCALNAME)
-@OslcResourceShape(title = "TextualRepresentation Resource Shape", describes = SysmlDomainConstants.TEXTUALREPRESENTATION_TYPE)
+@OslcResourceShape(title = "TextualRepresentation Shape", describes = SysmlDomainConstants.TEXTUALREPRESENTATION_TYPE)
 public interface ITextualRepresentation
 {
 

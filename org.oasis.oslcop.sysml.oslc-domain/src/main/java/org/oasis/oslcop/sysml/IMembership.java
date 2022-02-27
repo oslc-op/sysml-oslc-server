@@ -69,7 +69,7 @@ import org.oasis.oslcop.sysml.ITextualRepresentation;
 
 @OslcNamespace(SysmlDomainConstants.MEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.MEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "Membership Resource Shape", describes = SysmlDomainConstants.MEMBERSHIP_TYPE)
+@OslcResourceShape(title = "Membership Shape", describes = SysmlDomainConstants.MEMBERSHIP_TYPE)
 public interface IMembership
 {
 
@@ -81,12 +81,19 @@ public interface IMembership
     @OslcReadOnly(false)
     public String getMemberName();
 
+    @OslcName("effectiveMemberName")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "effectiveMemberName")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.String)
+    @OslcReadOnly(false)
+    public String getEffectiveMemberName();
+
     @OslcName("visibility")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "visibility")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.String)
     @OslcReadOnly(false)
-    @OslcAllowedValue({"public", "private", "protected", "package"})
+    @OslcAllowedValue({"private", "protected", "public"})
     public String getVisibility();
 
     @OslcName("memberElement")
@@ -99,19 +106,11 @@ public interface IMembership
 
     @OslcName("membershipOwningNamespace")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "membershipOwningNamespace")
-    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.NAMESPACE_TYPE})
     @OslcReadOnly(false)
     public Link getMembershipOwningNamespace();
-
-    @OslcName("ownedMemberElement_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberElement_comp")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedMemberElement_comp();
 
     @OslcName("ownedMemberElement")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberElement")
@@ -123,10 +122,10 @@ public interface IMembership
 
 
     public void setMemberName(final String memberName );
+    public void setEffectiveMemberName(final String effectiveMemberName );
     public void setVisibility(final String visibility );
     public void setMemberElement(final Link memberElement );
     public void setMembershipOwningNamespace(final Link membershipOwningNamespace );
-    public void setOwnedMemberElement_comp(final Link ownedMemberElement_comp );
     public void setOwnedMemberElement(final Link ownedMemberElement );
 }
 

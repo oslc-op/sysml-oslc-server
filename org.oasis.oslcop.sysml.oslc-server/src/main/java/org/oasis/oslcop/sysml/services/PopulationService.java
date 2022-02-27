@@ -131,7 +131,7 @@ public class PopulationService
         Map<String, String> parameters = new HashMap<>();
 
         uriTemplate.match(uri.toString(), parameters);
-        parameters.put("commitId", StoreService.getSelectedProjectCommit());
+        parameters.put("commitId", ProjectCommitSelectionService.getSelectedProjectCommitId());
 
         String newTemplate = "projects/{projectId}/commits/{commitId}/{elementType}/{elementId}";
 
@@ -143,13 +143,16 @@ public class PopulationService
         return translated;
     }
 
-    //TODO: Build the URL the same way I build it in translateBack function above.
+    //TODO: it seems that the objects in the json have their host name & port number removed. Is that the case? If not, revert back the changes in code below
+    //http://projects/1c76fce7-c0f6-45d8-aa57-145ddc46382a/commits/2afbba40-41d7-41b0-b6e1-481ad6824516/elements/6a73e4b5-7606-4d70-ab47-d1f73c76a1fd
     static URI translate(URI uri) {
-		if (!uri.getHost().equalsIgnoreCase(JSON_SERVER_HOSTNAME)) {
+		if (!uri.getHost().equalsIgnoreCase("projects")) {
+		//if (!uri.getHost().equalsIgnoreCase(JSON_SERVER_HOSTNAME)) {
 			return uri;
 		}
 		
-	    String template = "http://" + JSON_SERVER_HOSTNAME + ":" + JSON_SERVER_PORT + "/projects/{projectId}/commits/{commitId}/{elementType}/{elementId}";
+	    String template = "http://" + "projects/{projectId}/commits/{commitId}/{elementType}/{elementId}";
+	    //String template = "http://" + JSON_SERVER_HOSTNAME + ":" + JSON_SERVER_PORT + "/projects/{projectId}/commits/{commitId}/{elementType}/{elementId}";
 	    UriTemplate uriTemplate = new UriTemplate(template);
 	    Map<String, String> parameters = new HashMap<>();
 
@@ -268,11 +271,11 @@ public class PopulationService
         return elements;
     }
 
-    private List<Element> storeElements(Project project, ProjectCommit projectCommit) throws IOException, ServletException {
+    private List<Element> storeElements(ProjectCommit projectCommit, URI namedGrahUri) throws IOException, ServletException {
         int elementsLimit = 99999;
         Store store = SysmlServerManager.getStorePool().getStore();
         
-        String projectCommitElementsUrl = "http://" + JSON_SERVER_HOSTNAME + ":" + JSON_SERVER_PORT + "/projects/" + project.getId() + "/commits/" + projectCommit.getId() + "/elements";
+        String projectCommitElementsUrl = "http://" + JSON_SERVER_HOSTNAME + ":" + JSON_SERVER_PORT + "/projects/" + projectCommit.getOwningProject().getId() + "/commits/" + projectCommit.getId() + "/elements";
     	
         List<Element> resources = new ArrayList<Element>();
         List<ObjectNode> elementsAsJson = new ArrayList<ObjectNode>();
@@ -282,6 +285,7 @@ public class PopulationService
         for (ObjectNode elementAsJson : elementsAsJson) {
 			count++;
 			if (count > elementsLimit) {
+			    count = 0;
 				break;
 			}
 			final Model model = ModelFactory.createDefaultModel();
@@ -300,7 +304,9 @@ public class PopulationService
 			model.add(model.createStatement(model.listSubjects().next(), RDF.type, model.createResource(SysmlDomainConstants.ELEMENT_TYPE)));
 			translateObjectUris(model);
 			try {
+				log.trace("        JenaModelHelper to unmarshaled: {}", model.listSubjectsWithProperty(RDF.type).toList().get(0).getURI());
 				Element element =  JenaModelHelper.unmarshalSingle(model, Element.class);
+				log.trace("        JenaModelHelper unmarshaled: {}", element.getAbout());
 				//Manipulate the element so that it has a URI on this server.
 				//Also add any missing properties that we expect. For example, the AM:resource properties, such as am:identifier.
 				//Also, set the shotTitle, since we will use that display each element.
@@ -313,8 +319,9 @@ public class PopulationService
 	                element.setShortTitle(element.getName());
 				}
 				resources.add(element);
-				store.insertResources(StoreService.constructNamedGraphUri(projectCommit.getId()), element);
-				log.info("resource inserted into store:" + element.getAbout());
+				log.trace("        Inserting resource into store: {}", element.getAbout());
+				store.insertResources(namedGrahUri, element);
+				log.trace("        resource inserted into store: {}", element.getAbout());
 			} catch (Exception e) {
 				//TODO: I am getting exceptions because the class property is meant to be Boolean, yet the RDF is NOT boolean? 
 				//WHY? I think I am ignoring mapping of enum attributes, which then default to Boolean in the adaptormodel.
@@ -329,57 +336,45 @@ public class PopulationService
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_JSON_LD, OslcMediaType.TEXT_TURTLE, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
     public Response storeElements() throws IOException, ServletException {
 
-        int serviceProviderLimit = 99;
+        int serviceProviderLimit = 99999;
 		int count = 0;
 
-        log.info("Starting to populate.");
+        log.trace("Starting to populate.");
 
-        
         Store store = SysmlServerManager.getStorePool().getStore();
 
         List<Project> projects = getProjects();
-        log.info("Projects:" + projects.size());
+        log.trace("Projects: {}", projects.size());
         for (Project project : projects) {
             List<ProjectCommit> projectCommits = getProjectCommits(project);
-            log.info("Populating on Project: {} with commits: {}", project.getId(), projectCommits.size());
+            log.trace("Populating on Project: {} with commits: {}", project.getId(), projectCommits.size());
             for (ProjectCommit projectCommit : projectCommits) {
-                log.info("    Populating on ProjectCommit:" + projectCommit.getId());
+                log.trace("    Populating on ProjectCommit: {}", projectCommit.getId());
                 count++;
                 if (count > serviceProviderLimit) {
+                    count = 0;
                     break;
                 }
                 
                 ServiceProviderInfo r = new ServiceProviderInfo();
+                r.name = project.getName(); // + " {project ID: " + project.getId() + ", with Commit ID: " + projectCommit.getId() + "}";
                 r.projectId = project.getId();
-                r.name = "Project:" + r.projectId;
-                if(project.getId() == null || project.getId().isBlank()) {
-                    log.error("Cannot create a URI for a blank Project Id");
-                    continue;
-                }
+                r.commitId = projectCommit.getId();
                 try {
                     ServiceProvider aServiceProvider = ServiceProvidersFactory.createServiceProvider(r);
+                    URI namedGrahUri = aServiceProvider.getAbout();
                     //It could be that the SP already exists from previous project commits. So, we only added it if it does not yet exist
-                    if(projectCommit.getId() == null || projectCommit.getId().isBlank()) {
-                        log.error("Cannot create a URI for a blank Commit Id");
-                        continue;
+                    if (!store.resourceExists(namedGrahUri, aServiceProvider.getAbout())) {
+                        store.updateResources(namedGrahUri, aServiceProvider);
                     }
-                    URI commitUri = StoreService.constructNamedGraphUri(projectCommit.getId());
-                    try {
-                        if (!store.resourceExists(commitUri, aServiceProvider.getAbout())) {
-                            store.updateResources(commitUri, aServiceProvider);
-                        }
-                    } catch (HttpException e) {
-                        log.error("Error connecting to the triplestore. Did you check " +
-                                "store.properties and store-credentials.properties?");
-                    }
+                    storeElements(projectCommit, namedGrahUri);
                 } catch (Exception e) {
                     log.error("Could not handle the SP.", e);
                 }
-                storeElements(project, projectCommit);
-                log.info("Ended populating on ProjectCommit:" + projectCommit.getId());
+                log.trace("Ended populating on ProjectCommit:" + projectCommit.getId());
             }
         }
-    	log.info("Ended population.");
+    	log.trace("Ended population.");
         return Response.ok().build();
     }
 }

@@ -69,20 +69,17 @@ import org.oasis.oslcop.sysml.ITextualRepresentation;
 
 @OslcNamespace(SysmlDomainConstants.ELEMENT_NAMESPACE)
 @OslcName(SysmlDomainConstants.ELEMENT_LOCALNAME)
-@OslcResourceShape(title = "Element Resource Shape", describes = SysmlDomainConstants.ELEMENT_TYPE)
+@OslcResourceShape(title = "Element Shape", describes = SysmlDomainConstants.ELEMENT_TYPE)
 public interface IElement
 {
 
     public void addAliasId(final String aliasId );
-    public void addOwnedRelationship_comp(final Link ownedRelationship_comp );
-    public void addOwnedElement(final Link ownedElement );
-    public void addDocumentation_comp(final Link documentation_comp );
-    public void addOwnedAnnotation_comp(final Link ownedAnnotation_comp );
-    public void addDocumentationComment(final Link documentationComment );
-    public void addOwnedTextualRepresentation(final Link ownedTextualRepresentation );
     public void addOwnedRelationship(final Link ownedRelationship );
+    public void addOwnedElement(final Link ownedElement );
     public void addDocumentation(final Link documentation );
     public void addOwnedAnnotation(final Link ownedAnnotation );
+    public void addDocumentationComment(final Link documentationComment );
+    public void addOwnedTextualRepresentation(final Link ownedTextualRepresentation );
 
     @OslcName("identifier")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "identifier")
@@ -104,6 +101,13 @@ public interface IElement
     @OslcValueType(ValueType.String)
     @OslcReadOnly(false)
     public String getQualifiedName();
+
+    @OslcName("effectiveName")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "effectiveName")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.String)
+    @OslcReadOnly(false)
+    public String getEffectiveName();
 
     @OslcName("aliasId")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "aliasId")
@@ -127,13 +131,13 @@ public interface IElement
     @OslcReadOnly(false)
     public Link getOwningMembership();
 
-    @OslcName("ownedRelationship_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelationship_comp")
+    @OslcName("ownedRelationship")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelationship")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.RELATIONSHIP_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedRelationship_comp();
+    public Set<Link> getOwnedRelationship();
 
     @OslcName("owningRelationship")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningRelationship")
@@ -167,21 +171,21 @@ public interface IElement
     @OslcReadOnly(false)
     public Set<Link> getOwnedElement();
 
-    @OslcName("documentation_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "documentation_comp")
+    @OslcName("documentation")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "documentation")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.DOCUMENTATION_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getDocumentation_comp();
+    public Set<Link> getDocumentation();
 
-    @OslcName("ownedAnnotation_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedAnnotation_comp")
+    @OslcName("ownedAnnotation")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedAnnotation")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.ANNOTATION_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedAnnotation_comp();
+    public Set<Link> getOwnedAnnotation();
 
     @OslcName("documentationComment")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "documentationComment")
@@ -199,48 +203,22 @@ public interface IElement
     @OslcReadOnly(false)
     public Set<Link> getOwnedTextualRepresentation();
 
-    @OslcName("ownedRelationship")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedRelationship")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.RELATIONSHIP_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedRelationship();
-
-    @OslcName("documentation")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "documentation")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.DOCUMENTATION_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getDocumentation();
-
-    @OslcName("ownedAnnotation")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedAnnotation")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ANNOTATION_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedAnnotation();
-
 
     public void setSysmlIdentifier(final String identifier );
     public void setName(final String name );
     public void setQualifiedName(final String qualifiedName );
+    public void setEffectiveName(final String effectiveName );
     public void setAliasId(final Set<String> aliasId );
     public void setHumanId(final String humanId );
     public void setOwningMembership(final Link owningMembership );
-    public void setOwnedRelationship_comp(final Set<Link> ownedRelationship_comp );
+    public void setOwnedRelationship(final Set<Link> ownedRelationship );
     public void setOwningRelationship(final Link owningRelationship );
     public void setOwningNamespace(final Link owningNamespace );
     public void setOwner(final Link owner );
     public void setOwnedElement(final Set<Link> ownedElement );
-    public void setDocumentation_comp(final Set<Link> documentation_comp );
-    public void setOwnedAnnotation_comp(final Set<Link> ownedAnnotation_comp );
-    public void setDocumentationComment(final Set<Link> documentationComment );
-    public void setOwnedTextualRepresentation(final Set<Link> ownedTextualRepresentation );
-    public void setOwnedRelationship(final Set<Link> ownedRelationship );
     public void setDocumentation(final Set<Link> documentation );
     public void setOwnedAnnotation(final Set<Link> ownedAnnotation );
+    public void setDocumentationComment(final Set<Link> documentationComment );
+    public void setOwnedTextualRepresentation(final Set<Link> ownedTextualRepresentation );
 }
 

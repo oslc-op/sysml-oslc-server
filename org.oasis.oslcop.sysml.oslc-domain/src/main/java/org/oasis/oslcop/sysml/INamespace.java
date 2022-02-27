@@ -70,26 +70,24 @@ import org.oasis.oslcop.sysml.ITextualRepresentation;
 
 @OslcNamespace(SysmlDomainConstants.NAMESPACE_NAMESPACE)
 @OslcName(SysmlDomainConstants.NAMESPACE_LOCALNAME)
-@OslcResourceShape(title = "Namespace Resource Shape", describes = SysmlDomainConstants.NAMESPACE_TYPE)
+@OslcResourceShape(title = "Namespace Shape", describes = SysmlDomainConstants.NAMESPACE_TYPE)
 public interface INamespace
 {
 
-    public void addOwnedMembership_comp(final Link ownedMembership_comp );
+    public void addOwnedMembership(final Link ownedMembership );
     public void addOwnedMember(final Link ownedMember );
     public void addMembership(final Link membership );
-    public void addOwnedImport_comp(final Link ownedImport_comp );
+    public void addOwnedImport(final Link ownedImport );
     public void addMember(final Link member );
     public void addImportedMembership(final Link importedMembership );
-    public void addOwnedMembership(final Link ownedMembership );
-    public void addOwnedImport(final Link ownedImport );
 
-    @OslcName("ownedMembership_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMembership_comp")
+    @OslcName("ownedMembership")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMembership")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.MEMBERSHIP_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedMembership_comp();
+    public Set<Link> getOwnedMembership();
 
     @OslcName("ownedMember")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMember")
@@ -107,13 +105,13 @@ public interface INamespace
     @OslcReadOnly(false)
     public Set<Link> getMembership();
 
-    @OslcName("ownedImport_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedImport_comp")
+    @OslcName("ownedImport")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedImport")
     @OslcOccurs(Occurs.ZeroOrMany)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.IMPORT_TYPE})
     @OslcReadOnly(false)
-    public Set<Link> getOwnedImport_comp();
+    public Set<Link> getOwnedImport();
 
     @OslcName("member")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "member")
@@ -131,30 +129,12 @@ public interface INamespace
     @OslcReadOnly(false)
     public Set<Link> getImportedMembership();
 
-    @OslcName("ownedMembership")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMembership")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.MEMBERSHIP_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedMembership();
 
-    @OslcName("ownedImport")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedImport")
-    @OslcOccurs(Occurs.ZeroOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.IMPORT_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getOwnedImport();
-
-
-    public void setOwnedMembership_comp(final Set<Link> ownedMembership_comp );
+    public void setOwnedMembership(final Set<Link> ownedMembership );
     public void setOwnedMember(final Set<Link> ownedMember );
     public void setMembership(final Set<Link> membership );
-    public void setOwnedImport_comp(final Set<Link> ownedImport_comp );
+    public void setOwnedImport(final Set<Link> ownedImport );
     public void setMember(final Set<Link> member );
     public void setImportedMembership(final Set<Link> importedMembership );
-    public void setOwnedMembership(final Set<Link> ownedMembership );
-    public void setOwnedImport(final Set<Link> ownedImport );
 }
 

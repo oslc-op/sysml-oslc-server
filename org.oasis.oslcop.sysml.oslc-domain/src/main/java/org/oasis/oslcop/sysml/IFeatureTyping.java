@@ -71,7 +71,7 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.FEATURETYPING_NAMESPACE)
 @OslcName(SysmlDomainConstants.FEATURETYPING_LOCALNAME)
-@OslcResourceShape(title = "FeatureTyping Resource Shape", describes = SysmlDomainConstants.FEATURETYPING_TYPE)
+@OslcResourceShape(title = "FeatureTyping Shape", describes = SysmlDomainConstants.FEATURETYPING_TYPE)
 public interface IFeatureTyping
 {
 

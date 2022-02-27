@@ -81,20 +81,17 @@ import org.oasis.oslcop.sysml.TextualRepresentation;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.DOCUMENTATION_NAMESPACE)
 @OslcName(SysmlDomainConstants.DOCUMENTATION_LOCALNAME)
-@OslcResourceShape(title = "Documentation Resource Shape", describes = SysmlDomainConstants.DOCUMENTATION_TYPE)
+@OslcResourceShape(title = "Documentation Shape", describes = SysmlDomainConstants.DOCUMENTATION_TYPE)
 public class Documentation
     extends Annotation
     implements IDocumentation
 {
-    // Start of user code attributeAnnotation:documentingComment_comp
-    // End of user code
-    private Link documentingComment_comp;
-    // Start of user code attributeAnnotation:owningDocumentedElement
-    // End of user code
-    private Link owningDocumentedElement;
     // Start of user code attributeAnnotation:documentingComment
     // End of user code
     private Link documentingComment;
+    // Start of user code attributeAnnotation:owningDocumentedElement
+    // End of user code
+    private Link owningDocumentedElement;
     
     // Start of user code classAttributes
     // End of user code
@@ -145,42 +142,12 @@ public class Documentation
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
-    
-    // Start of user code getterAnnotation:documentingComment_comp
-    // End of user code
-    @OslcName("documentingComment_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "documentingComment_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.COMMENT_TYPE})
-    @OslcReadOnly(false)
-    public Link getDocumentingComment_comp()
-    {
-        // Start of user code getterInit:documentingComment_comp
-        // End of user code
-        return documentingComment_comp;
-    }
-    
-    // Start of user code getterAnnotation:owningDocumentedElement
-    // End of user code
-    @OslcName("owningDocumentedElement")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningDocumentedElement")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwningDocumentedElement()
-    {
-        // Start of user code getterInit:owningDocumentedElement
-        // End of user code
-        return owningDocumentedElement;
-    }
     
     // Start of user code getterAnnotation:documentingComment
     // End of user code
@@ -197,16 +164,31 @@ public class Documentation
         return documentingComment;
     }
     
-    
-    // Start of user code setterAnnotation:documentingComment_comp
+    // Start of user code getterAnnotation:owningDocumentedElement
     // End of user code
-    public void setDocumentingComment_comp(final Link documentingComment_comp )
+    @OslcName("owningDocumentedElement")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "owningDocumentedElement")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.ELEMENT_TYPE})
+    @OslcReadOnly(false)
+    public Link getOwningDocumentedElement()
     {
-        // Start of user code setterInit:documentingComment_comp
+        // Start of user code getterInit:owningDocumentedElement
         // End of user code
-        this.documentingComment_comp = documentingComment_comp;
+        return owningDocumentedElement;
+    }
     
-        // Start of user code setterFinalize:documentingComment_comp
+    
+    // Start of user code setterAnnotation:documentingComment
+    // End of user code
+    public void setDocumentingComment(final Link documentingComment )
+    {
+        // Start of user code setterInit:documentingComment
+        // End of user code
+        this.documentingComment = documentingComment;
+    
+        // Start of user code setterFinalize:documentingComment
         // End of user code
     }
     
@@ -219,18 +201,6 @@ public class Documentation
         this.owningDocumentedElement = owningDocumentedElement;
     
         // Start of user code setterFinalize:owningDocumentedElement
-        // End of user code
-    }
-    
-    // Start of user code setterAnnotation:documentingComment
-    // End of user code
-    public void setDocumentingComment(final Link documentingComment )
-    {
-        // Start of user code setterInit:documentingComment
-        // End of user code
-        this.documentingComment = documentingComment;
-    
-        // Start of user code setterFinalize:documentingComment
         // End of user code
     }
     

@@ -68,35 +68,43 @@ import org.oasis.oslcop.sysml.Annotation;
 import org.oasis.oslcop.sysml.AttributeUsage;
 import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
+import org.oasis.oslcop.sysml.SysmlClass;
+import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.ConcernUsage;
 import org.oasis.oslcop.sysml.Conjugation;
-import org.oasis.oslcop.sysml.ConnectionUsage;
+import org.oasis.oslcop.sysml.ConnectorAsUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
 import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Expression;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
-import org.oasis.oslcop.sysml.Generalization;
+import org.oasis.oslcop.sysml.FlowConnectionUsage;
 import org.oasis.oslcop.sysml.SysmlImport;
-import org.oasis.oslcop.sysml.IndividualUsage;
 import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
+import org.oasis.oslcop.sysml.OccurrenceDefinition;
+import org.oasis.oslcop.sysml.OccurrenceUsage;
 import org.oasis.oslcop.sysml.PartDefinition;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
+import org.oasis.oslcop.sysml.PortioningFeature;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.StateUsage;
 import org.oasis.oslcop.sysml.Structure;
 import org.oasis.oslcop.sysml.Subsetting;
@@ -105,6 +113,7 @@ import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
 import org.oasis.oslcop.sysml.TypeFeaturing;
 import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.UseCaseUsage;
 import org.oasis.oslcop.sysml.VariantMembership;
 import org.oasis.oslcop.sysml.VerificationCaseUsage;
 import org.oasis.oslcop.sysml.ViewDefinition;
@@ -120,7 +129,7 @@ import org.oasis.oslcop.sysml.ViewpointUsage;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.VIEWUSAGE_NAMESPACE)
 @OslcName(SysmlDomainConstants.VIEWUSAGE_LOCALNAME)
-@OslcResourceShape(title = "ViewUsage Resource Shape", describes = SysmlDomainConstants.VIEWUSAGE_TYPE)
+@OslcResourceShape(title = "ViewUsage Shape", describes = SysmlDomainConstants.VIEWUSAGE_TYPE)
 public class ViewUsage
     extends PartUsage
     implements IViewUsage
@@ -134,9 +143,9 @@ public class ViewUsage
     // Start of user code attributeAnnotation:exposedNamespace
     // End of user code
     private Set<Link> exposedNamespace = new HashSet<Link>();
-    // Start of user code attributeAnnotation:rendering
+    // Start of user code attributeAnnotation:viewRendering
     // End of user code
-    private Link rendering;
+    private Link viewRendering;
     // Start of user code attributeAnnotation:viewCondition
     // End of user code
     private Set<Link> viewCondition = new HashSet<Link>();
@@ -193,7 +202,7 @@ public class ViewUsage
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
@@ -265,19 +274,19 @@ public class ViewUsage
         return exposedNamespace;
     }
     
-    // Start of user code getterAnnotation:rendering
+    // Start of user code getterAnnotation:viewRendering
     // End of user code
-    @OslcName("rendering")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "rendering")
+    @OslcName("viewRendering")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "viewRendering")
     @OslcOccurs(Occurs.ZeroOrOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.RENDERINGUSAGE_TYPE})
     @OslcReadOnly(false)
-    public Link getRendering()
+    public Link getViewRendering()
     {
-        // Start of user code getterInit:rendering
+        // Start of user code getterInit:viewRendering
         // End of user code
-        return rendering;
+        return viewRendering;
     }
     
     // Start of user code getterAnnotation:viewCondition
@@ -355,15 +364,15 @@ public class ViewUsage
         // End of user code
     }
     
-    // Start of user code setterAnnotation:rendering
+    // Start of user code setterAnnotation:viewRendering
     // End of user code
-    public void setRendering(final Link rendering )
+    public void setViewRendering(final Link viewRendering )
     {
-        // Start of user code setterInit:rendering
+        // Start of user code setterInit:viewRendering
         // End of user code
-        this.rendering = rendering;
+        this.viewRendering = viewRendering;
     
-        // Start of user code setterFinalize:rendering
+        // Start of user code setterFinalize:viewRendering
         // End of user code
     }
     

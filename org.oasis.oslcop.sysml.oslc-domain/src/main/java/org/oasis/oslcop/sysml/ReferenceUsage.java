@@ -59,7 +59,7 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.Usage;
 
-import org.oasis.oslcop.sysml.SysmlDomainConstants;
+
 
 import org.oasis.oslcop.sysml.ActionUsage;
 import org.oasis.oslcop.sysml.AllocationUsage;
@@ -70,24 +70,27 @@ import org.oasis.oslcop.sysml.CalculationUsage;
 import org.oasis.oslcop.sysml.CaseUsage;
 import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.Comment;
+import org.oasis.oslcop.sysml.ConcernUsage;
 import org.oasis.oslcop.sysml.Conjugation;
-import org.oasis.oslcop.sysml.ConnectionUsage;
+import org.oasis.oslcop.sysml.ConnectorAsUsage;
 import org.oasis.oslcop.sysml.ConstraintUsage;
 import org.oasis.oslcop.sysml.Definition;
+import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.EnumerationUsage;
 import org.oasis.oslcop.sysml.Feature;
+import org.oasis.oslcop.sysml.FeatureChaining;
 import org.oasis.oslcop.sysml.FeatureMembership;
 import org.oasis.oslcop.sysml.FeatureTyping;
-import org.oasis.oslcop.sysml.Generalization;
+import org.oasis.oslcop.sysml.FlowConnectionUsage;
 import org.oasis.oslcop.sysml.SysmlImport;
-import org.oasis.oslcop.sysml.IndividualUsage;
 import org.oasis.oslcop.sysml.InterfaceUsage;
 import org.oasis.oslcop.sysml.ItemUsage;
 import org.oasis.oslcop.sysml.Membership;
 import org.oasis.oslcop.sysml.Multiplicity;
 import org.oasis.oslcop.sysml.Namespace;
+import org.oasis.oslcop.sysml.OccurrenceUsage;
 import org.oasis.oslcop.sysml.PartUsage;
 import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.PortUsage;
@@ -96,6 +99,7 @@ import org.oasis.oslcop.sysml.ReferenceUsage;
 import org.oasis.oslcop.sysml.Relationship;
 import org.oasis.oslcop.sysml.RenderingUsage;
 import org.oasis.oslcop.sysml.RequirementUsage;
+import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.StateUsage;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
@@ -103,6 +107,7 @@ import org.oasis.oslcop.sysml.TransitionUsage;
 import org.oasis.oslcop.sysml.Type;
 import org.oasis.oslcop.sysml.TypeFeaturing;
 import org.oasis.oslcop.sysml.Usage;
+import org.oasis.oslcop.sysml.UseCaseUsage;
 import org.oasis.oslcop.sysml.VariantMembership;
 import org.oasis.oslcop.sysml.VerificationCaseUsage;
 import org.oasis.oslcop.sysml.ViewUsage;
@@ -117,14 +122,11 @@ import org.oasis.oslcop.sysml.ViewpointUsage;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.REFERENCEUSAGE_NAMESPACE)
 @OslcName(SysmlDomainConstants.REFERENCEUSAGE_LOCALNAME)
-@OslcResourceShape(title = "ReferenceUsage Resource Shape", describes = SysmlDomainConstants.REFERENCEUSAGE_TYPE)
+@OslcResourceShape(title = "ReferenceUsage Shape", describes = SysmlDomainConstants.REFERENCEUSAGE_TYPE)
 public class ReferenceUsage
     extends Usage
     implements IReferenceUsage
 {
-    // Start of user code attributeAnnotation:referenceType
-    // End of user code
-    private Set<Link> referenceType = new HashSet<Link>();
     
     // Start of user code classAttributes
     // End of user code
@@ -175,49 +177,13 @@ public class ReferenceUsage
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;
     }
     
-    public void addReferenceType(final Link referenceType)
-    {
-        this.referenceType.add(referenceType);
-    }
     
-    
-    // Start of user code getterAnnotation:referenceType
-    // End of user code
-    @OslcName("referenceType")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "referenceType")
-    @OslcOccurs(Occurs.OneOrMany)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.CLASSIFIER_TYPE})
-    @OslcReadOnly(false)
-    public Set<Link> getReferenceType()
-    {
-        // Start of user code getterInit:referenceType
-        // End of user code
-        return referenceType;
-    }
-    
-    
-    // Start of user code setterAnnotation:referenceType
-    // End of user code
-    public void setReferenceType(final Set<Link> referenceType )
-    {
-        // Start of user code setterInit:referenceType
-        // End of user code
-        this.referenceType.clear();
-        if (referenceType != null)
-        {
-            this.referenceType.addAll(referenceType);
-        }
-    
-        // Start of user code setterFinalize:referenceType
-        // End of user code
-    }
     
     
 }

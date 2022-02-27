@@ -69,7 +69,7 @@ import org.oasis.oslcop.sysml.ITextualRepresentation;
 
 @OslcNamespace(SysmlDomainConstants.IMPORT_NAMESPACE)
 @OslcName(SysmlDomainConstants.IMPORT_LOCALNAME)
-@OslcResourceShape(title = "Import Resource Shape", describes = SysmlDomainConstants.IMPORT_TYPE)
+@OslcResourceShape(title = "Import Shape", describes = SysmlDomainConstants.IMPORT_TYPE)
 public interface ISysmlImport
 {
 
@@ -79,8 +79,15 @@ public interface ISysmlImport
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.String)
     @OslcReadOnly(false)
-    @OslcAllowedValue({"public", "private", "protected", "package"})
+    @OslcAllowedValue({"private", "protected", "public"})
     public String getVisibility();
+
+    @OslcName("importedMemberName")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "importedMemberName")
+    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcValueType(ValueType.String)
+    @OslcReadOnly(false)
+    public String getImportedMemberName();
 
     @OslcName("isRecursive")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isRecursive")
@@ -88,6 +95,13 @@ public interface ISysmlImport
     @OslcValueType(ValueType.Boolean)
     @OslcReadOnly(false)
     public Boolean isIsRecursive();
+
+    @OslcName("isImportAll")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "isImportAll")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Boolean)
+    @OslcReadOnly(false)
+    public Boolean isIsImportAll();
 
     @OslcName("importedNamespace")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "importedNamespace")
@@ -99,7 +113,7 @@ public interface ISysmlImport
 
     @OslcName("importOwningNamespace")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "importOwningNamespace")
-    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.NAMESPACE_TYPE})
     @OslcReadOnly(false)
@@ -107,7 +121,9 @@ public interface ISysmlImport
 
 
     public void setVisibility(final String visibility );
+    public void setImportedMemberName(final String importedMemberName );
     public void setIsRecursive(final Boolean isRecursive );
+    public void setIsImportAll(final Boolean isImportAll );
     public void setImportedNamespace(final Link importedNamespace );
     public void setImportOwningNamespace(final Link importOwningNamespace );
 }

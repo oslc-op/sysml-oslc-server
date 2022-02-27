@@ -82,7 +82,7 @@ import org.oasis.oslcop.sysml.Type;
 // End of user code
 @OslcNamespace(SysmlDomainConstants.REDEFINITION_NAMESPACE)
 @OslcName(SysmlDomainConstants.REDEFINITION_LOCALNAME)
-@OslcResourceShape(title = "Redefinition Resource Shape", describes = SysmlDomainConstants.REDEFINITION_TYPE)
+@OslcResourceShape(title = "Redefinition Shape", describes = SysmlDomainConstants.REDEFINITION_TYPE)
 public class Redefinition
     extends Subsetting
     implements IRedefinition
@@ -143,7 +143,7 @@ public class Redefinition
         }
     
         // Start of user code toString_finalize
-        result = getShortTitle();
+ result = getShortTitle();
         // End of user code
     
         return result;

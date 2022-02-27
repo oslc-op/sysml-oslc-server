@@ -71,26 +71,10 @@ import org.oasis.oslcop.sysml.IType;
 
 @OslcNamespace(SysmlDomainConstants.PARAMETERMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.PARAMETERMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "ParameterMembership Resource Shape", describes = SysmlDomainConstants.PARAMETERMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "ParameterMembership Shape", describes = SysmlDomainConstants.PARAMETERMEMBERSHIP_TYPE)
 public interface IParameterMembership
 {
 
-
-    @OslcName("ownedMemberParameter_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberParameter_comp")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedMemberParameter_comp();
-
-    @OslcName("memberParameter")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "memberParameter")
-    @OslcOccurs(Occurs.ExactlyOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
-    @OslcReadOnly(false)
-    public Link getMemberParameter();
 
     @OslcName("ownedMemberParameter")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedMemberParameter")
@@ -100,9 +84,16 @@ public interface IParameterMembership
     @OslcReadOnly(false)
     public Link getOwnedMemberParameter();
 
+    @OslcName("memberParameter")
+    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "memberParameter")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.Resource)
+    @OslcRange({SysmlDomainConstants.FEATURE_TYPE})
+    @OslcReadOnly(false)
+    public Link getMemberParameter();
 
-    public void setOwnedMemberParameter_comp(final Link ownedMemberParameter_comp );
-    public void setMemberParameter(final Link memberParameter );
+
     public void setOwnedMemberParameter(final Link ownedMemberParameter );
+    public void setMemberParameter(final Link memberParameter );
 }
 

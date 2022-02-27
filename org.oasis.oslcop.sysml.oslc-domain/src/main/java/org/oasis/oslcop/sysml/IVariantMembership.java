@@ -70,29 +70,20 @@ import org.oasis.oslcop.sysml.IUsage;
 
 @OslcNamespace(SysmlDomainConstants.VARIANTMEMBERSHIP_NAMESPACE)
 @OslcName(SysmlDomainConstants.VARIANTMEMBERSHIP_LOCALNAME)
-@OslcResourceShape(title = "VariantMembership Resource Shape", describes = SysmlDomainConstants.VARIANTMEMBERSHIP_TYPE)
+@OslcResourceShape(title = "VariantMembership Shape", describes = SysmlDomainConstants.VARIANTMEMBERSHIP_TYPE)
 public interface IVariantMembership
 {
 
 
-    @OslcName("ownedVariantUsage_comp")
-    @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedVariantUsage_comp")
-    @OslcOccurs(Occurs.ZeroOrOne)
-    @OslcValueType(ValueType.Resource)
-    @OslcRange({SysmlDomainConstants.USAGE_TYPE})
-    @OslcReadOnly(false)
-    public Link getOwnedVariantUsage_comp();
-
     @OslcName("ownedVariantUsage")
     @OslcPropertyDefinition(SysmlDomainConstants.SYSML_NAMSPACE + "ownedVariantUsage")
-    @OslcOccurs(Occurs.ZeroOrOne)
+    @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
     @OslcRange({SysmlDomainConstants.USAGE_TYPE})
     @OslcReadOnly(false)
     public Link getOwnedVariantUsage();
 
 
-    public void setOwnedVariantUsage_comp(final Link ownedVariantUsage_comp );
     public void setOwnedVariantUsage(final Link ownedVariantUsage );
 }
 

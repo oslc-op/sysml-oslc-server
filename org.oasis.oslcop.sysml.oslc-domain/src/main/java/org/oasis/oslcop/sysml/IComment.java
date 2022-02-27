@@ -69,7 +69,7 @@ import org.oasis.oslcop.sysml.ITextualRepresentation;
 
 @OslcNamespace(SysmlDomainConstants.COMMENT_NAMESPACE)
 @OslcName(SysmlDomainConstants.COMMENT_LOCALNAME)
-@OslcResourceShape(title = "Comment Resource Shape", describes = SysmlDomainConstants.COMMENT_TYPE)
+@OslcResourceShape(title = "Comment Shape", describes = SysmlDomainConstants.COMMENT_TYPE)
 public interface IComment
 {
 
