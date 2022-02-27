@@ -45,7 +45,7 @@ List<ServiceProvider> serviceProviders = (List<ServiceProvider>) request.getAttr
     <div class="container">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item"><a class="nav-link" href="<c:url value="/"/>"><%= application.getServletContextName() %></a></li>
-        <li class="nav-item"><a class="nav-link" href="<c:url value="/services/catalog/singleton"/>">Service Provider Catalog</a></li>
+        <li class="nav-item"><a class="nav-link" href="<c:url value="/oslc/catalog/singleton"/>">Service Provider Catalog</a></li>
         <li class="nav-item"><a class="nav-link" href="<c:url value="/swagger-ui/index.jsp"/>">Swagger UI</a></li>
       </ul>
     </div>
@@ -54,7 +54,7 @@ List<ServiceProvider> serviceProviders = (List<ServiceProvider>) request.getAttr
 <div class="container">
     <div>
         <h1>ProjectCommits</h1>
-        <p>Selected ProjectCommit: <%=selectedServiceProvider.getAbout().toString()%></p>
+        <p>Selected ProjectCommit: <%= (null == selectedServiceProvider) ? "Not Set" : selectedServiceProvider.getAbout().toString()%></p>
         <p>Select another ProjectCommit from list below</p>
         <p>All Project Commits:</p>
         <ul>
