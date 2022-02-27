@@ -1,16 +1,12 @@
 package org.oasis.oslcop.sysml.services;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -20,26 +16,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Link;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
+import javax.xml.namespace.QName;
 import org.apache.http.Header;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.jena.atlas.web.HttpException;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.RDFReaderI;
 import org.apache.jena.rdf.model.Resource;
@@ -48,27 +40,23 @@ import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.vocabulary.RDF;
 import org.eclipse.lyo.oslc4j.provider.jena.JenaModelHelper;
 import org.eclipse.lyo.store.Store;
-import org.eclipse.lyo.store.StoreAccessException;
 import org.glassfish.jersey.uri.UriTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
-import org.eclipse.lyo.oslc4j.core.exception.OslcCoreApplicationException;
 import org.eclipse.lyo.oslc4j.core.model.OslcMediaType;
 import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
-
+import org.eclipse.lyo.oslc4j.core.model.TypeFactory;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlServerManager;
 import org.oasis.oslcop.sysml.json.Project;
 import org.oasis.oslcop.sysml.json.ProjectCommit;
-import org.oasis.oslcop.sysml.servlet.ServiceProviderCatalogSingleton;
 import org.oasis.oslcop.sysml.servlet.ServiceProvidersFactory;
 import org.oasis.oslcop.sysml.Element;
 import org.oasis.oslcop.sysml.ServiceProviderInfo;
@@ -297,20 +285,44 @@ public class PopulationService
 				log.error("Could not read the json data. Skipping element", e);
 				continue;
 			}
-		
-			//All I have to do is to add "Element" as an RDF type. JMH will then return an instance of the exact subclass of Element, depending on the other rdf:types specified.
-			//JMH will populate the attributes exactly as expected!!!!
-			//So, I just have to populate the LyoStore with that info!!!
-			model.add(model.createStatement(model.listSubjects().next(), RDF.type, model.createResource(SysmlDomainConstants.ELEMENT_TYPE)));
-			translateObjectUris(model);
+
 			try {
-				log.trace("        JenaModelHelper to unmarshaled: {}", model.listSubjectsWithProperty(RDF.type).toList().get(0).getURI());
+	            //We want to add rdf:type for each type in the class hierarchy. 
+	            //This way, when one can queries for Relationships (for example), we want to return all instances of subclasses of Relationships.
+	            //Without this rdf:type, instances of specialized classes will not be found. 
+	            //If we first just add rdf:type to "Element", JMH.unmarshalSingle() will return an instance of the exact subclass of Element, depending on the other rdf:type specified.
+	            //All properties are then populate as expected, with no need for extendedproperties.
+	            //We then add the missing rdf:types.
+	            List<Resource> subjects = model.listSubjects().toList();
+	            if (subjects.size() != 1) {
+	                log.error("Model has more than 1 subject. Would not know how to marshell. Skipping element");
+	                continue;
+	            }
+	            Resource subjectResource = subjects.get(0);
+	            model.add(model.createStatement(subjectResource, RDF.type, model.createResource(SysmlDomainConstants.ELEMENT_TYPE)));
+
+	            log.trace("        JenaModelHelper to unmarshaled: {}", model.listSubjectsWithProperty(RDF.type).toList().get(0).getURI());
 				Element element =  JenaModelHelper.unmarshalSingle(model, Element.class);
-				log.trace("        JenaModelHelper unmarshaled: {}", element.getAbout());
-				//Manipulate the element so that it has a URI on this server.
-				//Also add any missing properties that we expect. For example, the AM:resource properties, such as am:identifier.
-				//Also, set the shotTitle, since we will use that display each element.
+                log.trace("        JenaModelHelper unmarshaled: {}", element.getAbout());
+				
+				Class c = element.getClass();
+                Map<QName, Object> extendedProperties = element.getExtendedProperties();
+                final QName rdfType = new QName(RDF.type.getNameSpace(), RDF.type.getLocalName());
+                ArrayList<URI> types = new ArrayList<URI>();
+                
+				while (null != c.getSuperclass() && (! c.getSuperclass().equals(Element.class))) {
+				    log.trace("super class: {}", c.getSuperclass().getName());
+				    c = c.getSuperclass();
+				    types.add(URI.create(TypeFactory.getQualifiedName(c)));
+				}
+                extendedProperties.put(rdfType, types);
+				element.setExtendedProperties(extendedProperties);
+				
+                //Manipulate the element so that it has a URI on this server.
+                //Also add any missing properties that we expect. For example, the AM:resource properties, such as am:identifier.
+                //Also, set the shotTitle, since we will use that display each element.
 				element.setAbout(translate(element.getAbout()));
+                translateObjectUris(model);
 				element.setIdentifier(element.getSysmlIdentifier());
 				if (null == element.getName()) {
 	                element.setShortTitle("identifier: " + element.getIdentifier());
@@ -336,8 +348,11 @@ public class PopulationService
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_JSON_LD, OslcMediaType.TEXT_TURTLE, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
     public Response storeElements() throws IOException, ServletException {
 
-        int serviceProviderLimit = 99999;
-		int count = 0;
+        int projectLimit = 99999;
+        int projectCount = 0;
+
+        int projectCommitLimit = 99999;
+		int projectCommitCount = 0;
 
         log.trace("Starting to populate.");
 
@@ -346,16 +361,21 @@ public class PopulationService
         List<Project> projects = getProjects();
         log.trace("Projects: {}", projects.size());
         for (Project project : projects) {
+            projectCount++;
+            if (projectCount > projectLimit) {
+                projectCount = 0;
+                break;
+            }
             List<ProjectCommit> projectCommits = getProjectCommits(project);
             log.trace("Populating on Project: {} with commits: {}", project.getId(), projectCommits.size());
             for (ProjectCommit projectCommit : projectCommits) {
-                log.trace("    Populating on ProjectCommit: {}", projectCommit.getId());
-                count++;
-                if (count > serviceProviderLimit) {
-                    count = 0;
+                projectCommitCount++;
+                if (projectCommitCount > projectCommitLimit) {
+                    projectCommitCount = 0;
                     break;
                 }
                 
+                log.trace("    Populating on ProjectCommit: {}", projectCommit.getId());
                 ServiceProviderInfo r = new ServiceProviderInfo();
                 r.name = project.getName(); // + " {project ID: " + project.getId() + ", with Commit ID: " + projectCommit.getId() + "}";
                 r.projectId = project.getId();
