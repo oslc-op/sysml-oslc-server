@@ -287,6 +287,8 @@ public class PopulationService
 			}
 
 			try {
+                translateObjectUris(model);
+
 	            //We want to add rdf:type for each type in the class hierarchy. 
 	            //This way, when one can queries for Relationships (for example), we want to return all instances of subclasses of Relationships.
 	            //Without this rdf:type, instances of specialized classes will not be found. 
@@ -322,7 +324,6 @@ public class PopulationService
                 //Also add any missing properties that we expect. For example, the AM:resource properties, such as am:identifier.
                 //Also, set the shotTitle, since we will use that display each element.
 				element.setAbout(translate(element.getAbout()));
-                translateObjectUris(model);
 				element.setIdentifier(element.getSysmlIdentifier());
 				if (null == element.getName()) {
 	                element.setShortTitle("identifier: " + element.getIdentifier());
@@ -330,6 +331,13 @@ public class PopulationService
 				else {
 	                element.setShortTitle(element.getName());
 				}
+                //We have problems with "'" for now. I tried to simply replace the "'" but this leads to some exception for some reason, 
+                //When I try to insert into store.
+//              if (element.getQualifiedName().contains("'")) {
+//                  log.trace("Found an element with a '");
+//              }
+                element.setQualifiedName("");
+//              element.setQualifiedName(element.getQualifiedName().replaceAll("'", ""));
 				resources.add(element);
 				log.trace("        Inserting resource into store: {}", element.getAbout());
 				store.insertResources(namedGrahUri, element);
@@ -366,6 +374,9 @@ public class PopulationService
                 projectCount = 0;
                 break;
             }
+            //if (!project.getId().equals("07edeeee-67b0-44ba-8bed-5ee4ef134f5f")) {
+            //    continue;
+            //}
             List<ProjectCommit> projectCommits = getProjectCommits(project);
             log.trace("Populating on Project: {} with commits: {}", project.getId(), projectCommits.size());
             for (ProjectCommit projectCommit : projectCommits) {
