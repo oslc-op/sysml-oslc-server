@@ -37,3 +37,6 @@ jsonld/.cache/
 *.component
 sysml-server/.settings/
 .DS_Store
+
+#macOS
+.DS_Store
