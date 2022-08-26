@@ -59,9 +59,9 @@ import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlServerManager;
 import org.oasis.oslcop.sysml.json.Project;
 import org.oasis.oslcop.sysml.json.ProjectCommit;
-import org.oasis.oslcop.sysml.servlet.ServiceProvidersFactory;
+import org.oasis.oslcop.sysml.servlet.ProjectsServiceProvidersFactory;
 import org.oasis.oslcop.sysml.Element;
-import org.oasis.oslcop.sysml.ServiceProviderInfo;
+import org.oasis.oslcop.sysml.ProjectsServiceProviderInfo;
 
 @Path("populate")
 public class PopulationService
@@ -391,12 +391,12 @@ public class PopulationService
                 }
                 
                 log.trace("    Populating on ProjectCommit: {}", projectCommit.getId());
-                ServiceProviderInfo r = new ServiceProviderInfo();
+                ProjectsServiceProviderInfo r = new ProjectsServiceProviderInfo();
                 r.name = project.getName(); // + " {project ID: " + project.getId() + ", with Commit ID: " + projectCommit.getId() + "}";
                 r.projectId = project.getId();
                 r.commitId = projectCommit.getId();
                 try {
-                    ServiceProvider aServiceProvider = ServiceProvidersFactory.createServiceProvider(r);
+                    ServiceProvider aServiceProvider = ProjectsServiceProvidersFactory.createServiceProvider(r);
                     URI namedGrahUri = aServiceProvider.getAbout();
                     //It could be that the SP already exists from previous project commits. So, we only added it if it does not yet exist
                     if (!store.resourceExists(namedGrahUri, aServiceProvider.getAbout())) {

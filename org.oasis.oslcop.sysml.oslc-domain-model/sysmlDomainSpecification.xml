@@ -586,6 +586,6 @@
   <domainPrefixes name="sysml_core"/>
   <configuration xsi:type="oslc4j_ai:MavenSpecificationConfiguration">
     <generalConfiguration doNotGenerateFromImportedModels="true" filesBasePath="../org.oasis.oslcop.sysml.oslc-domain" javaBasePackageName="org.oasis.oslcop.sysml"/>
-    <projectConfiguration xsi:type="oslc4j_ai:MavenProjectConfiguration" lyoVersion="5.0.0-SNAPSHOT" groupId="org.oasis.oslcop.sysml" artifactId="sysml-oslc-domain" version="0.1.0-SNAPSHOT"/>
+    <projectConfiguration xsi:type="oslc4j_ai:MavenProjectConfiguration" lyoVersion="5.0.1-SNAPSHOT" groupId="org.oasis.oslcop.sysml" artifactId="sysml-oslc-domain" version="0.1.0-SNAPSHOT"/>
   </configuration>
 </oslc4j_ai:Specification>

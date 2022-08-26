@@ -36,12 +36,18 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.eclipse.lyo.oslc4j.core.model.Link;
 import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
+import org.eclipse.lyo.oslc.domains.Agent;
 import org.oasis.oslcop.sysml.AnnotatingElement;
 import org.oasis.oslcop.sysml.Annotation;
+import org.eclipse.lyo.oslc.domains.RdfsClass;
 import org.oasis.oslcop.sysml.SysmlClass;
 import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.Comment;
+import org.eclipse.lyo.oslc.domains.config.Component;
+import org.eclipse.lyo.oslc.domains.config.ConceptResource;
+import org.eclipse.lyo.oslc.domains.config.Configuration;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.eclipse.lyo.oslc.domains.config.Contribution;
 import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
@@ -57,12 +63,14 @@ import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
 import org.eclipse.lyo.oslc.domains.am.Resource;
+import org.eclipse.lyo.oslc.domains.config.Selections;
 import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.Subclassification;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
 import org.oasis.oslcop.sysml.TypeFeaturing;
+import org.eclipse.lyo.oslc.domains.config.VersionResource;
 
 // Start of user code imports
 // End of user code
@@ -106,6 +114,30 @@ public class SysmlServerResourcesFactory {
     
     public Link constructLinkForSysmlClass(final String projectId, final String id) {
         return new Link(constructURIForSysmlClass(projectId, id));
+    }
+    
+
+    //methods for Component resource
+    
+    public Component createComponent(final String id) {
+        return new Component(constructURIForComponent(id));
+    }
+    
+    public URI constructURIForComponent(final String id) {
+        Map<String, Object> pathParameters = new HashMap<String, Object>();
+        pathParameters.put("id", id);
+        String instanceURI = "components/{id}";
+    
+        final UriBuilder builder = UriBuilder.fromUri(this.basePath);
+        return builder.path(instanceURI).buildFromMap(pathParameters);
+    }
+    
+    public Link constructLinkForComponent(final String id , final String label) {
+        return new Link(constructURIForComponent(id), label);
+    }
+    
+    public Link constructLinkForComponent(final String id) {
+        return new Link(constructURIForComponent(id));
     }
     
 

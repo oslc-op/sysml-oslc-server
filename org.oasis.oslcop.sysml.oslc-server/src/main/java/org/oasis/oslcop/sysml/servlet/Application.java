@@ -57,15 +57,22 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.servers.Server;
 import org.oasis.oslcop.sysml.services.RootServicesService;
 import org.oasis.oslcop.sysml.services.ServiceProviderCatalogService;
-import org.oasis.oslcop.sysml.services.ServiceProviderService;
+import org.oasis.oslcop.sysml.services.ComponentServiceProviderService;
+import org.oasis.oslcop.sysml.services.ProjectsServiceProviderService;
 import org.oasis.oslcop.sysml.services.ResourceShapeService;
 
+import org.eclipse.lyo.oslc.domains.Agent;
 import org.oasis.oslcop.sysml.AnnotatingElement;
 import org.oasis.oslcop.sysml.Annotation;
+import org.eclipse.lyo.oslc.domains.RdfsClass;
 import org.oasis.oslcop.sysml.SysmlClass;
 import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.Comment;
+import org.eclipse.lyo.oslc.domains.config.Component;
+import org.eclipse.lyo.oslc.domains.config.ConceptResource;
+import org.eclipse.lyo.oslc.domains.config.Configuration;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.eclipse.lyo.oslc.domains.config.Contribution;
 import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
@@ -81,28 +88,34 @@ import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
 import org.eclipse.lyo.oslc.domains.am.Resource;
+import org.eclipse.lyo.oslc.domains.config.Selections;
 import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.Subclassification;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
 import org.oasis.oslcop.sysml.TypeFeaturing;
+import org.eclipse.lyo.oslc.domains.config.VersionResource;
 import org.eclipse.lyo.oslc.domains.am.Oslc_amDomainConstants;
+import org.eclipse.lyo.oslc.domains.config.Oslc_configDomainConstants;
 import org.eclipse.lyo.oslc.domains.DctermsDomainConstants;
 import org.eclipse.lyo.oslc.domains.FoafDomainConstants;
 import org.eclipse.lyo.oslc.domains.jazz_am.Jazz_amDomainConstants;
 import org.eclipse.lyo.oslc4j.core.model.OslcDomainConstants;
+import org.eclipse.lyo.oslc.domains.RdfsDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
-import org.oasis.oslcop.sysml.services.ServiceProviderService1;
-import org.oasis.oslcop.sysml.services.ServiceProviderService2;
-import org.oasis.oslcop.sysml.services.ServiceProviderService3;
-import org.oasis.oslcop.sysml.services.ServiceProviderService4;
-import org.oasis.oslcop.sysml.services.ServiceProviderService5;
+import org.oasis.oslcop.sysml.services.ProjectsServiceProviderService1;
+import org.oasis.oslcop.sysml.services.ProjectsServiceProviderService2;
+import org.oasis.oslcop.sysml.services.ProjectsServiceProviderService3;
+import org.oasis.oslcop.sysml.services.ProjectsServiceProviderService4;
+import org.oasis.oslcop.sysml.services.ProjectsServiceProviderService5;
+import org.oasis.oslcop.sysml.services.ComponentServiceProviderService1;
 import org.oasis.oslcop.sysml.services.SubsettingService;
 import org.oasis.oslcop.sysml.services.ElementService;
 import org.oasis.oslcop.sysml.services.ClassService;
 import org.oasis.oslcop.sysml.services.RelationshipService;
 import org.oasis.oslcop.sysml.services.FeatureService;
+import org.oasis.oslcop.sysml.services.ComponentService;
 
 // Start of user code imports
 import org.oasis.oslcop.sysml.services.ProjectCommitSelectionService;
@@ -136,20 +149,23 @@ public class Application extends javax.ws.rs.core.Application {
     {
         RESOURCE_CLASSES.addAll(JenaProvidersRegistry.getProviders());
         RESOURCE_CLASSES.addAll(Json4JProvidersRegistry.getProviders());
-        RESOURCE_CLASSES.add(ServiceProviderService1.class);
-        RESOURCE_CLASSES.add(ServiceProviderService2.class);
-        RESOURCE_CLASSES.add(ServiceProviderService3.class);
-        RESOURCE_CLASSES.add(ServiceProviderService4.class);
-        RESOURCE_CLASSES.add(ServiceProviderService5.class);
+        RESOURCE_CLASSES.add(ProjectsServiceProviderService1.class);
+        RESOURCE_CLASSES.add(ProjectsServiceProviderService2.class);
+        RESOURCE_CLASSES.add(ProjectsServiceProviderService3.class);
+        RESOURCE_CLASSES.add(ProjectsServiceProviderService4.class);
+        RESOURCE_CLASSES.add(ProjectsServiceProviderService5.class);
+        RESOURCE_CLASSES.add(ComponentServiceProviderService1.class);
         RESOURCE_CLASSES.add(SubsettingService.class);
         RESOURCE_CLASSES.add(ElementService.class);
         RESOURCE_CLASSES.add(ClassService.class);
         RESOURCE_CLASSES.add(RelationshipService.class);
         RESOURCE_CLASSES.add(FeatureService.class);
+        RESOURCE_CLASSES.add(ComponentService.class);
 
         // Catalog resources
         RESOURCE_CLASSES.add(ServiceProviderCatalogService.class);
-        RESOURCE_CLASSES.add(ServiceProviderService.class);
+        RESOURCE_CLASSES.add(ComponentServiceProviderService.class);
+        RESOURCE_CLASSES.add(ProjectsServiceProviderService.class);
         RESOURCE_CLASSES.add(ResourceShapeService.class);
 
         // Swagger resources
@@ -188,12 +204,18 @@ public class Application extends javax.ws.rs.core.Application {
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(OslcConstants.PATH_SERVICE_PROVIDER,         ServiceProvider.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(OslcConstants.PATH_SERVICE_PROVIDER_CATALOG, ServiceProviderCatalog.class);
 
+        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(FoafDomainConstants.AGENT_PATH, Agent.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ANNOTATINGELEMENT_PATH, AnnotatingElement.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ANNOTATION_PATH, Annotation.class);
+        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(RdfsDomainConstants.CLASS_PATH, RdfsClass.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.CLASS_PATH, SysmlClass.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.CLASSIFIER_PATH, Classifier.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.COMMENT_PATH, Comment.class);
+        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(Oslc_configDomainConstants.COMPONENT_PATH, Component.class);
+        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(Oslc_configDomainConstants.CONCEPTRESOURCE_PATH, ConceptResource.class);
+        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(Oslc_configDomainConstants.CONFIGURATION_PATH, Configuration.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.CONJUGATION_PATH, Conjugation.class);
+        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(Oslc_configDomainConstants.CONTRIBUTION_PATH, Contribution.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.DISJOINING_PATH, Disjoining.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.DOCUMENTATION_PATH, Documentation.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.ELEMENT_PATH, Element.class);
@@ -209,12 +231,14 @@ public class Application extends javax.ws.rs.core.Application {
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.REDEFINITION_PATH, Redefinition.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.RELATIONSHIP_PATH, Relationship.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(Oslc_amDomainConstants.RESOURCE_PATH, Resource.class);
+        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(Oslc_configDomainConstants.SELECTIONS_PATH, Selections.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.SPECIALIZATION_PATH, Specialization.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.SUBCLASSIFICATION_PATH, Subclassification.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.SUBSETTING_PATH, Subsetting.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.TEXTUALREPRESENTATION_PATH, TextualRepresentation.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.TYPE_PATH, Type.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(SysmlDomainConstants.TYPEFEATURING_PATH, TypeFeaturing.class);
+        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(Oslc_configDomainConstants.VERSIONRESOURCE_PATH, VersionResource.class);
     }
 
     @Inject

@@ -40,13 +40,20 @@ import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
 import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
 import org.eclipse.lyo.oslc4j.core.model.AbstractResource;
 import org.oasis.oslcop.sysml.servlet.ServiceProviderCatalogSingleton;
-import org.oasis.oslcop.sysml.ServiceProviderInfo;
+import org.oasis.oslcop.sysml.ProjectsServiceProviderInfo;
+import org.oasis.oslcop.sysml.ComponentServiceProviderInfo;
+import org.eclipse.lyo.oslc.domains.Agent;
 import org.oasis.oslcop.sysml.AnnotatingElement;
 import org.oasis.oslcop.sysml.Annotation;
+import org.eclipse.lyo.oslc.domains.RdfsClass;
 import org.oasis.oslcop.sysml.SysmlClass;
 import org.oasis.oslcop.sysml.Classifier;
 import org.oasis.oslcop.sysml.Comment;
+import org.eclipse.lyo.oslc.domains.config.Component;
+import org.eclipse.lyo.oslc.domains.config.ConceptResource;
+import org.eclipse.lyo.oslc.domains.config.Configuration;
 import org.oasis.oslcop.sysml.Conjugation;
+import org.eclipse.lyo.oslc.domains.config.Contribution;
 import org.oasis.oslcop.sysml.Disjoining;
 import org.oasis.oslcop.sysml.Documentation;
 import org.oasis.oslcop.sysml.Element;
@@ -62,12 +69,14 @@ import org.eclipse.lyo.oslc.domains.Person;
 import org.oasis.oslcop.sysml.Redefinition;
 import org.oasis.oslcop.sysml.Relationship;
 import org.eclipse.lyo.oslc.domains.am.Resource;
+import org.eclipse.lyo.oslc.domains.config.Selections;
 import org.oasis.oslcop.sysml.Specialization;
 import org.oasis.oslcop.sysml.Subclassification;
 import org.oasis.oslcop.sysml.Subsetting;
 import org.oasis.oslcop.sysml.TextualRepresentation;
 import org.oasis.oslcop.sysml.Type;
 import org.oasis.oslcop.sysml.TypeFeaturing;
+import org.eclipse.lyo.oslc.domains.config.VersionResource;
 import java.net.URI;
 import java.util.NoSuchElementException;
 import org.eclipse.lyo.store.ModelUnmarshallingException;
@@ -95,8 +104,7 @@ public class SysmlServerManager {
     
     @Inject SysmlServerResourcesFactory resourcesFactory;
     // Start of user code class_attributes
-    private static URI _sparqlQueryEndpoint;
-    private static ServiceProviderInfo[] serviceProviders = null;
+    //private static ServiceProviderInfo[] serviceProviders = null;
     // End of user code
     
     public SysmlServerManager() {
@@ -111,29 +119,42 @@ public class SysmlServerManager {
     //Migrate any user-specific code blocks to the class org.oasis.oslcop.sysml.servlet.ServletListener
     //Any user-specific code should be found in *.lost files.
 
-    public static ServiceProviderInfo[] getServiceProviderInfos(HttpServletRequest httpServletRequest)
+    public static ProjectsServiceProviderInfo[] getProjectsServiceProviderInfos(HttpServletRequest httpServletRequest)
     {
-        ServiceProviderInfo[] serviceProviderInfos = {};
+        ProjectsServiceProviderInfo[] serviceProviderInfos = {};
         
-        // Start of user code "ServiceProviderInfo[] getServiceProviderInfos(...)"
-
+        // Start of user code "ProjectsServiceProviderInfo[] getProjectsServiceProviderInfos(...)"
         //TODO: Need to make this logic robust, and thread-safe
-//        if (null != serviceProviders) {
-//        	return serviceProviders;
+//      if (null != serviceProviders) {
+//        return serviceProviders;
+//      }
+//      List<ServiceProviderInfo> sps = new ArrayList<ServiceProviderInfo>();
+//      List<Project> projects = PopulationService.getProjects();
+//      for (Project project : projects) {
+//        List<ProjectCommit> projectCommits = PopulationService.getProjectCommits(project);
+//          for (ProjectCommit projectCommit : projectCommits) {
+//              ServiceProviderInfo r = new ServiceProviderInfo();
+//              r.projectId = project.getId();
+//              r.name = "Project:" + r.projectId;
+//              sps.add(r);
 //        }
-//        List<ServiceProviderInfo> sps = new ArrayList<ServiceProviderInfo>();
-//        List<Project> projects = PopulationService.getProjects();
-//        for (Project project : projects) {
-//        	List<ProjectCommit> projectCommits = PopulationService.getProjectCommits(project);
-//            for (ProjectCommit projectCommit : projectCommits) {
-//                ServiceProviderInfo r = new ServiceProviderInfo();
-//                r.projectId = project.getId();
-//                r.name = "Project:" + r.projectId;
-//                sps.add(r);
-//    		}
-//		}
-//        serviceProviders = sps.toArray(new ServiceProviderInfo [sps.size()]);
-//        serviceProviderInfos = serviceProviders; 
+//    }
+//      serviceProviders = sps.toArray(new ServiceProviderInfo [sps.size()]);
+//      serviceProviderInfos = serviceProviders; 
+        // End of user code
+        return serviceProviderInfos;
+    }
+    public static ComponentServiceProviderInfo[] getComponentServiceProviderInfos(HttpServletRequest httpServletRequest)
+    {
+        ComponentServiceProviderInfo[] serviceProviderInfos = {};
+        
+        // Start of user code "ComponentServiceProviderInfo[] getComponentServiceProviderInfos(...)"
+        ComponentServiceProviderInfo sp1 = new ComponentServiceProviderInfo();
+        sp1.name = "Components Service Provider";
+        sp1.id = "1";
+
+        serviceProviderInfos = new ComponentServiceProviderInfo[1];
+        serviceProviderInfos[0] = sp1;
         // End of user code
         return serviceProviderInfos;
     }
@@ -403,6 +424,59 @@ public class SysmlServerManager {
 
 
 
+    public List<Component> queryComponents(HttpServletRequest httpServletRequest, String where, String prefix, boolean paging, int page, int limit)
+    {
+        List<Component> resources = null;
+        
+        // Start of user code queryComponents_storeInit
+        // End of user code
+        Store store = storePool.getStore();
+        try {
+            resources = new ArrayList<Component>(store.getResources(storePool.getDefaultNamedGraphUri(), Component.class, prefix, where, "", (OSLC4JUtils.hasLyoStorePagingPreciseLimit() ? limit : limit+1), page*limit));
+        } catch (StoreAccessException | ModelUnmarshallingException e) {
+            log.error("Failed to query resources, with where-string '" + where + "'", e);
+            throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
+        } finally {
+            storePool.releaseStore(store);
+        }
+        // Start of user code queryComponents_storeFinalize
+        // End of user code
+        
+        // Start of user code queryComponents
+        // TODO Implement code to return a set of resources.
+        // An empty List should imply that no resources where found.
+        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
+        // End of user code
+        return resources;
+    }
+    public List<Component> ComponentSelector(HttpServletRequest httpServletRequest, String terms)
+    {
+        List<Component> resources = null;
+        
+        // Start of user code ComponentSelector_storeInit
+        // End of user code
+        Store store = storePool.getStore();
+        try {
+            resources = new ArrayList<Component>(store.getResources((new ProjectCommitSelectionService()).getSelectedNamedGraph(), Component.class, "", "", terms, 20, -1));
+        } catch (StoreAccessException | ModelUnmarshallingException e) {
+            log.error("Failed to search resources, with search-term '" + terms + "'", e);
+            throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
+        } finally {
+            storePool.releaseStore(store);
+        }
+        // Start of user code ComponentSelector_storeFinalize
+        // End of user code
+        
+        // Start of user code ComponentSelector
+        // TODO Implement code to return a set of resources, based on search criteria 
+        // An empty List should imply that no resources where found.
+        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
+        // End of user code
+        return resources;
+    }
+
+
+
 
     public Subsetting getSubsetting(HttpServletRequest httpServletRequest, final String projectId, final String id)
     {
@@ -564,11 +638,53 @@ public class SysmlServerManager {
     }
 
 
+    public Component getComponent(HttpServletRequest httpServletRequest, final String id)
+    {
+        Component aResource = null;
+        
+        // Start of user code getComponent_storeInit
+        // End of user code
+        URI uri = resourcesFactory.constructURIForComponent(id);
+        // Start of user code getComponent_storeSetUri
+        // End of user code
+        Store store = storePool.getStore();
+        try {
+            aResource = store.getResource(storePool.getDefaultNamedGraphUri(), uri, Component.class);
+        } catch (NoSuchElementException e) {
+            log.error("Resource: '" + uri + "' not found");
+            throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
+        } catch (StoreAccessException | ModelUnmarshallingException  e) {
+            log.error("Failed to get resource: '" + uri + "'", e);
+            throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.INTERNAL_SERVER_ERROR);
+        } finally {
+            storePool.releaseStore(store);
+        }
+        // Start of user code getComponent_storeFinalize
+        // End of user code
+        
+        // Start of user code getComponent
+        // TODO Implement code to return a resource
+        // return 'null' if the resource was not found.
+        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
+        // End of user code
+        return aResource;
+    }
+
+
 
     public String getETagFromSysmlClass(final SysmlClass aResource)
     {
         String eTag = null;
         // Start of user code getETagFromSysmlClass
+        // TODO Implement code to return an ETag for a particular resource
+        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
+        // End of user code
+        return eTag;
+    }
+    public String getETagFromComponent(final Component aResource)
+    {
+        String eTag = null;
+        // Start of user code getETagFromComponent
         // TODO Implement code to return an ETag for a particular resource
         // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
         // End of user code

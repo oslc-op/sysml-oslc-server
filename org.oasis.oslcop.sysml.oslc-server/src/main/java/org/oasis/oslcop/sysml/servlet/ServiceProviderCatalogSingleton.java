@@ -36,7 +36,8 @@ import org.eclipse.lyo.oslc4j.core.model.ServiceProviderCatalog;
 import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
 
 import org.oasis.oslcop.sysml.SysmlServerManager;
-import org.oasis.oslcop.sysml.ServiceProviderInfo;
+import org.oasis.oslcop.sysml.ProjectsServiceProviderInfo;
+import org.oasis.oslcop.sysml.ComponentServiceProviderInfo;
 
 // Start of user code imports
 // End of user code
@@ -164,13 +165,37 @@ public class ServiceProviderCatalogSingleton
     }
 
 
-    public static ServiceProvider getServiceProvider(HttpServletRequest httpServletRequest, final String projectId, final String commitId)
+    public static ServiceProvider getProjectsServiceProvider(HttpServletRequest httpServletRequest, final String projectId, final String commitId)
     {
         ServiceProvider serviceProvider;
 
         synchronized(serviceProviders)
         {
-            String identifier = ServiceProvidersFactory.constructIdentifier(projectId, commitId);
+            String identifier = ProjectsServiceProvidersFactory.constructIdentifier(projectId, commitId);
+            serviceProvider = serviceProviders.get(identifier);
+
+            //One retry refreshing the service providers
+            if (serviceProvider == null)
+            {
+                getServiceProviders(httpServletRequest);
+                serviceProvider = serviceProviders.get(identifier);
+            }
+        }
+
+        if (serviceProvider != null)
+        {
+            return serviceProvider;
+        }
+
+        throw new WebApplicationException(Status.NOT_FOUND);
+    }
+    public static ServiceProvider getComponentServiceProvider(HttpServletRequest httpServletRequest, final String id)
+    {
+        ServiceProvider serviceProvider;
+
+        synchronized(serviceProviders)
+        {
+            String identifier = ComponentServiceProvidersFactory.constructIdentifier(id);
             serviceProvider = serviceProviders.get(identifier);
 
             //One retry refreshing the service providers
@@ -218,11 +243,19 @@ public class ServiceProviderCatalogSingleton
             // Start of user code initServiceProviders
             // End of user code
 
-            ServiceProviderInfo [] serviceProviderInfos = SysmlServerManager.getServiceProviderInfos(httpServletRequest);
+            ProjectsServiceProviderInfo [] projectsServiceProviderInfos = SysmlServerManager.getProjectsServiceProviderInfos(httpServletRequest);
             //Register each service provider
-            for (ServiceProviderInfo serviceProviderInfo : serviceProviderInfos) {
-                if (!containsServiceProvider(ServiceProvidersFactory.constructIdentifier(serviceProviderInfo))) {
-                    ServiceProvider aServiceProvider = ServiceProvidersFactory.createServiceProvider(serviceProviderInfo);
+            for (ProjectsServiceProviderInfo serviceProviderInfo : projectsServiceProviderInfos) {
+                if (!containsServiceProvider(ProjectsServiceProvidersFactory.constructIdentifier(serviceProviderInfo))) {
+                    ServiceProvider aServiceProvider = ProjectsServiceProvidersFactory.createServiceProvider(serviceProviderInfo);
+                    register(aServiceProvider);
+                }
+            }
+            ComponentServiceProviderInfo [] componentServiceProviderInfos = SysmlServerManager.getComponentServiceProviderInfos(httpServletRequest);
+            //Register each service provider
+            for (ComponentServiceProviderInfo serviceProviderInfo : componentServiceProviderInfos) {
+                if (!containsServiceProvider(ComponentServiceProvidersFactory.constructIdentifier(serviceProviderInfo))) {
+                    ServiceProvider aServiceProvider = ComponentServiceProvidersFactory.createServiceProvider(serviceProviderInfo);
                     register(aServiceProvider);
                 }
             }
