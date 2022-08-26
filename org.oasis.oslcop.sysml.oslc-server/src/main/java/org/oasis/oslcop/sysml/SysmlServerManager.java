@@ -113,6 +113,42 @@ public class SysmlServerManager {
     
     
     // Start of user code class_methods
+    public List<ServiceProvider> getAllServiceProviders() {
+        return getServiceProviders(null, null, null, -1, -1);
+    }
+
+    public List<ServiceProvider> getServiceProviders(String prefixes, String where, String searchTerms, int limit, int offset) {
+        Store store = storePool.getStore();
+        List<ServiceProvider> serviceProviders = null;
+        try {
+            serviceProviders = store.getResources(null, ServiceProvider.class, prefixes, where, searchTerms, limit, offset);
+        } catch (StoreAccessException | ModelUnmarshallingException e) {
+            log.error("problems getting ServiceProviders from Store.", e);
+        }
+        storePool.releaseStore(store);
+        return serviceProviders;
+    }
+    
+    public ServiceProvider getServiceProvider(final String serviceProviderUri) {
+        Store store = storePool.getStore();
+        ServiceProvider serviceProvider = null;
+        try {
+            serviceProvider = store.getResource(URI.create(serviceProviderUri), URI.create(serviceProviderUri), ServiceProvider.class);
+        } catch (NoSuchElementException | StoreAccessException | ModelUnmarshallingException e) {
+            log.error("problems getting ServiceProvider from Store.", e);
+        }
+        storePool.releaseStore(store);
+        return serviceProvider;
+    }
+    
+    public Component getComponent (final ServiceProvider serviceProvider) {
+        Component c = resourcesFactory.createComponent(serviceProvider.getIdentifier());
+        c.setIdentifier(serviceProvider.getIdentifier());
+        c.setTitle(serviceProvider.getTitle());
+        c.setDescription(serviceProvider.getDescription());
+        return c;
+    }
+    
     // End of user code
 
     //The methods contextInitializeServletListener() and contextDestroyServletListener() no longer exits
@@ -428,24 +464,14 @@ public class SysmlServerManager {
     {
         List<Component> resources = null;
         
-        // Start of user code queryComponents_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        try {
-            resources = new ArrayList<Component>(store.getResources(storePool.getDefaultNamedGraphUri(), Component.class, prefix, where, "", (OSLC4JUtils.hasLyoStorePagingPreciseLimit() ? limit : limit+1), page*limit));
-        } catch (StoreAccessException | ModelUnmarshallingException e) {
-            log.error("Failed to query resources, with where-string '" + where + "'", e);
-            throw new WebApplicationException("Failed to query resources, with where-string '" + where + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code queryComponents_storeFinalize
-        // End of user code
         
         // Start of user code queryComponents
-        // TODO Implement code to return a set of resources.
-        // An empty List should imply that no resources where found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
+        resources = new ArrayList<Component>();
+        List<ServiceProvider> serviceProviders = getServiceProviders(prefix, where, "", (OSLC4JUtils.hasLyoStorePagingPreciseLimit() ? limit : limit+1), page*limit);
+        for (ServiceProvider serviceProvider : serviceProviders) {
+            Component component = resourcesFactory.createComponent(serviceProvider.getIdentifier());
+            resources.add(getComponent(serviceProvider));
+        }
         // End of user code
         return resources;
     }
@@ -453,24 +479,13 @@ public class SysmlServerManager {
     {
         List<Component> resources = null;
         
-        // Start of user code ComponentSelector_storeInit
-        // End of user code
-        Store store = storePool.getStore();
-        try {
-            resources = new ArrayList<Component>(store.getResources((new ProjectCommitSelectionService()).getSelectedNamedGraph(), Component.class, "", "", terms, 20, -1));
-        } catch (StoreAccessException | ModelUnmarshallingException e) {
-            log.error("Failed to search resources, with search-term '" + terms + "'", e);
-            throw new WebApplicationException("Failed to search resources, with search-term '" + terms + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code ComponentSelector_storeFinalize
-        // End of user code
         
         // Start of user code ComponentSelector
-        // TODO Implement code to return a set of resources, based on search criteria 
-        // An empty List should imply that no resources where found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
+        resources = new ArrayList<Component>();
+        List<ServiceProvider> serviceProviders = getServiceProviders("", "", terms, 20, -1);
+        for (ServiceProvider serviceProvider : serviceProviders) {
+            resources.add(getComponent(serviceProvider));
+        }
         // End of user code
         return resources;
     }
@@ -642,30 +657,15 @@ public class SysmlServerManager {
     {
         Component aResource = null;
         
-        // Start of user code getComponent_storeInit
-        // End of user code
-        URI uri = resourcesFactory.constructURIForComponent(id);
-        // Start of user code getComponent_storeSetUri
-        // End of user code
-        Store store = storePool.getStore();
-        try {
-            aResource = store.getResource(storePool.getDefaultNamedGraphUri(), uri, Component.class);
-        } catch (NoSuchElementException e) {
-            log.error("Resource: '" + uri + "' not found");
-            throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.NOT_FOUND);
-        } catch (StoreAccessException | ModelUnmarshallingException  e) {
-            log.error("Failed to get resource: '" + uri + "'", e);
-            throw new WebApplicationException("Failed to get resource: '" + uri + "'", e, Status.INTERNAL_SERVER_ERROR);
-        } finally {
-            storePool.releaseStore(store);
-        }
-        // Start of user code getComponent_storeFinalize
-        // End of user code
         
         // Start of user code getComponent
-        // TODO Implement code to return a resource
-        // return 'null' if the resource was not found.
-        // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
+        List<ServiceProvider> serviceProviders = getAllServiceProviders();
+        for (ServiceProvider serviceProvider : serviceProviders) {
+            if (serviceProvider.getIdentifier().equals(id)) {
+                aResource = getComponent(serviceProvider);
+                break;
+            }
+        }
         // End of user code
         return aResource;
     }

@@ -63,7 +63,6 @@
           <selectionDialogs title="Component SelectionDialog" label="Component SelectionDialog" dialogURI="selector" hintWidth="250" hintHeight="250">
             <resourceTypes href="../org.eclipse.lyo.tools.domainmodels/oslcDomainSpecifications.xml#_BrY_wBe1Ee2Qoa8h9kRCOQ"/>
           </selectionDialogs>
-          <persistence store="//@adaptorInterfaces.0/@stores.0"/>
         </services>
       </serviceProviders>
     </serviceProviderCatalog>
@@ -89,7 +88,6 @@
     </webServices>
     <webServices name="ComponentService" serviceUrlPattern="components" resourceUrlPattern="{id}">
       <resourceTypes href="../org.eclipse.lyo.tools.domainmodels/oslcDomainSpecifications.xml#_BrY_wBe1Ee2Qoa8h9kRCOQ"/>
-      <persistence store="//@adaptorInterfaces.0/@stores.0"/>
     </webServices>
     <specification/>
     <configuration xsi:type="oslc4j_ai:MavenServerConfiguration" rootServerBaseUrl="http://localhost:8085/" applicationContextPath="/sysml_oslc_server" servletUrlPattern="/oslc/*" generateJspFilesForOslcUI="true" jettyPort="8085">

@@ -23,6 +23,7 @@ import org.eclipse.lyo.store.ModelUnmarshallingException;
 import org.eclipse.lyo.store.Store;
 import org.eclipse.lyo.store.StoreAccessException;
 import org.eclipse.lyo.store.StorePool;
+import org.oasis.oslcop.sysml.SysmlServerManager;
 import org.oasis.oslcop.sysml.servlet.ServiceProviderCatalogSingleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,7 @@ public class ProjectCommitSelectionService
     private static final Logger log = LoggerFactory.getLogger(ProjectCommitSelectionService.class);
 
     @Inject StorePool storePool;
+    @Inject  private SysmlServerManager delegate;
 
     private static ServiceProvider selectedServiceProvider = null;
     private static String selectedProjectCommitId = null;
@@ -73,20 +75,11 @@ public class ProjectCommitSelectionService
         return selectedProjectCommitId;
     }
 
-    private List<ServiceProvider> getAllServiceProviders() throws IOException, ServletException, StoreAccessException, ModelUnmarshallingException {
-        Store store = storePool.getStore();
-        List<ServiceProvider> serviceProviders = store.getResources(null, ServiceProvider.class, null, null, null, -1, -1);
-        storePool.releaseStore(store);
-        return serviceProviders;
-    }
-
-    private void setServiceProvider(final String serviceProviderUri) throws URISyntaxException, StoreAccessException, ModelUnmarshallingException {
+    private void setServiceProvider(final String serviceProviderUri) throws URISyntaxException {
         for (ServiceProvider serviceProvider : ServiceProviderCatalogSingleton.getServiceProviders(null)) {
             ServiceProviderCatalogSingleton.deregister(serviceProvider);
         }
-        Store store = storePool.getStore();
-        ServiceProvider serviceProvider = store.getResource(URI.create(serviceProviderUri), URI.create(serviceProviderUri), ServiceProvider.class);
-        storePool.releaseStore(store);
+        ServiceProvider serviceProvider = delegate.getServiceProvider(serviceProviderUri);
         ServiceProviderCatalogSingleton.register(serviceProvider);
         setSelectedServiceProvider(serviceProvider);
     }
@@ -94,7 +87,7 @@ public class ProjectCommitSelectionService
     private void setDefaultServiceProvider() {
         try {
             log.trace("Setting the default ServiecProvider. Should be only done once.");
-            List<ServiceProvider> serviceProviders = getAllServiceProviders();
+            List<ServiceProvider> serviceProviders = delegate.getAllServiceProviders();
             if (serviceProviders.size() > 0) {
                 setServiceProvider(serviceProviders.get(0).getAbout().toString());
             }
@@ -104,8 +97,8 @@ public class ProjectCommitSelectionService
     }
 
     @GET
-    public void getProjectCommits() throws IOException, ServletException, StoreAccessException, ModelUnmarshallingException {
-        List<ServiceProvider> serviceProviders = getAllServiceProviders();
+    public void getProjectCommits() throws ServletException, IOException {
+        List<ServiceProvider> serviceProviders = delegate.getAllServiceProviders();
         httpServletRequest.setAttribute("serviceProviders", serviceProviders);
         httpServletRequest.setAttribute("selectedServiceProvider", selectedServiceProvider);
         RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/projectCommits.jsp");
