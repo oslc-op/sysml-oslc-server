@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -75,7 +76,7 @@ import org.eclipse.lyo.oslc4j.core.model.Link;
 import org.eclipse.lyo.oslc4j.core.model.AbstractResource;
 
 import org.oasis.oslcop.sysml.SysmlServerManager;
-import org.oasis.oslcop.sysml.SysmlServerConstants;
+import org.oasis.oslcop.sysml.ServerConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.servlet.ServiceProviderCatalogSingleton;
 import org.oasis.oslcop.sysml.Feature;
@@ -95,6 +96,7 @@ public class FeatureService
     @Context private HttpServletRequest httpServletRequest;
     @Context private HttpServletResponse httpServletResponse;
     @Context private UriInfo uriInfo;
+    @Inject  private SysmlServerManager delegate;
 
     private static final Logger log = LoggerFactory.getLogger(FeatureService.class);
 
@@ -141,13 +143,13 @@ public class FeatureService
         // Start of user code getResource_init
         // End of user code
 
-        final Feature aFeature = SysmlServerManager.getFeature(httpServletRequest, projectId, id);
+        final Feature aFeature = delegate.getFeature(httpServletRequest, projectId, id);
 
         if (aFeature != null) {
             // Start of user code getFeature
             // End of user code
-            httpServletResponse.setHeader("ETag", SysmlServerManager.getETagFromFeature(aFeature));
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
+            httpServletResponse.setHeader("ETag", delegate.getETagFromFeature(aFeature));
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             return aFeature;
         }
 
@@ -177,7 +179,7 @@ public class FeatureService
         // Start of user code getFeatureAsHtml_init
         // End of user code
 
-        final Feature aFeature = SysmlServerManager.getFeature(httpServletRequest, projectId, id);
+        final Feature aFeature = delegate.getFeature(httpServletRequest, projectId, id);
 
         if (aFeature != null) {
             httpServletRequest.setAttribute("aFeature", aFeature);
@@ -225,7 +227,7 @@ public class FeatureService
         //TODO: adjust the preview height & width values from the default values provided above.
         // End of user code
 
-        final Feature aFeature = SysmlServerManager.getFeature(httpServletRequest, projectId, id);
+        final Feature aFeature = delegate.getFeature(httpServletRequest, projectId, id);
 
         if (aFeature != null) {
             final Compact compact = new Compact();
@@ -248,7 +250,7 @@ public class FeatureService
             largePreview.setDocument(UriBuilder.fromUri(aFeature.getAbout()).path("largePreview").build());
             compact.setLargePreview(largePreview);
 
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             return compact;
         }
@@ -265,7 +267,7 @@ public class FeatureService
         // Start of user code getFeatureAsHtmlSmallPreview_init
         // End of user code
 
-        final Feature aFeature = SysmlServerManager.getFeature(httpServletRequest, projectId, id);
+        final Feature aFeature = delegate.getFeature(httpServletRequest, projectId, id);
 
         if (aFeature != null) {
             httpServletRequest.setAttribute("aFeature", aFeature);
@@ -285,7 +287,7 @@ public class FeatureService
                 throw new WebApplicationException("Could not handle smallPreview", e);
             }
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/uipreview.jsp");
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);
             return;
@@ -304,7 +306,7 @@ public class FeatureService
         // Start of user code getFeatureAsHtmlLargePreview_init
         // End of user code
 
-        final Feature aFeature = SysmlServerManager.getFeature(httpServletRequest, projectId, id);
+        final Feature aFeature = delegate.getFeature(httpServletRequest, projectId, id);
 
         if (aFeature != null) {
             httpServletRequest.setAttribute("aFeature", aFeature);
@@ -324,7 +326,7 @@ public class FeatureService
                 throw new WebApplicationException("Could not handle largePreview", e);
             }
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/uipreview.jsp");
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);
             return;

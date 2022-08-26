@@ -86,8 +86,9 @@ public class ServletListener implements ServletContextListener  {
 
         logger.info("servletListner contextInitialized.");
 
-        // Establish connection to data backbone etc ...
-        SysmlServerManager.contextInitializeServletListener(servletContextEvent);
+        // Start of user code contextInitialized_mid
+        // TODO Implement code to establish connection to data backbone etc ...
+        // End of user code
         
         // Start of user code contextInitialized_final
         // End of user code
@@ -98,13 +99,7 @@ public class ServletListener implements ServletContextListener  {
     {
         // Start of user code contextDestroyed_init
         // End of user code
-
-        // Shutdown connections to data backbone etc...
-        SysmlServerManager.contextDestroyServletListener(servletContextEvent);
-
         
-        // Start of user code contextDestroyed_final
-        // End of user code
     }
 
     // Start of user code class_methods

@@ -44,7 +44,7 @@ import org.eclipse.lyo.oslc4j.core.model.OslcConstants;
 import org.eclipse.lyo.oslc4j.core.model.OslcMediaType;
 import org.eclipse.lyo.oslc4j.core.model.ServiceProviderCatalog;
 
-import org.oasis.oslcop.sysml.SysmlServerConstants;
+import org.oasis.oslcop.sysml.ServerConstants;
 import org.oasis.oslcop.sysml.SysmlServerManager;
 import org.oasis.oslcop.sysml.servlet.ServiceProviderCatalogSingleton;
 
@@ -108,7 +108,7 @@ public class ServiceProviderCatalogService
         ServiceProviderCatalog catalog =  ServiceProviderCatalogSingleton.getServiceProviderCatalog(httpServletRequest);
 
         if (catalog != null) {
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION,"2.0");
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION,"2.0");
             return catalog;
         }
 

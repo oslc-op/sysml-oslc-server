@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,6 +41,7 @@ import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.vocabulary.RDF;
 import org.eclipse.lyo.oslc4j.provider.jena.JenaModelHelper;
 import org.eclipse.lyo.store.Store;
+import org.eclipse.lyo.store.StorePool;
 import org.glassfish.jersey.uri.UriTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,6 +70,8 @@ public class PopulationService
     @Context private HttpServletResponse httpServletResponse;
     @Context private UriInfo uriInfo;
 
+    @Inject StorePool storePool;
+    
     private static final Logger log = LoggerFactory.getLogger(PopulationService.class);
 
     //TODO: Throughout this class, need better way to construct the URIs. Use UriBuilder.
@@ -119,7 +123,7 @@ public class PopulationService
         Map<String, String> parameters = new HashMap<>();
 
         uriTemplate.match(uri.toString(), parameters);
-        parameters.put("commitId", ProjectCommitSelectionService.getSelectedProjectCommitId());
+        parameters.put("commitId", (new ProjectCommitSelectionService()).getSelectedProjectCommitId());
 
         String newTemplate = "projects/{projectId}/commits/{commitId}/{elementType}/{elementId}";
 
@@ -261,7 +265,7 @@ public class PopulationService
 
     private List<Element> storeElements(ProjectCommit projectCommit, URI namedGrahUri) throws IOException, ServletException {
         int elementsLimit = 99999;
-        Store store = SysmlServerManager.getStorePool().getStore();
+        Store store = storePool.getStore();
         
         String projectCommitElementsUrl = "http://" + JSON_SERVER_HOSTNAME + ":" + JSON_SERVER_PORT + "/projects/" + projectCommit.getOwningProject().getId() + "/commits/" + projectCommit.getId() + "/elements";
     	
@@ -364,7 +368,7 @@ public class PopulationService
 
         log.trace("Starting to populate.");
 
-        Store store = SysmlServerManager.getStorePool().getStore();
+        Store store = storePool.getStore();
 
         List<Project> projects = getProjects();
         log.trace("Projects: {}", projects.size());

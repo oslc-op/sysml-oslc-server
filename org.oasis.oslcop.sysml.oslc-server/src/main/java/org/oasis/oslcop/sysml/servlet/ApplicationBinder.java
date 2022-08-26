@@ -17,12 +17,29 @@
 
 package org.oasis.oslcop.sysml.servlet;
 
+import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.glassfish.hk2.api.Factory;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
+import javax.inject.Singleton;
 
+import org.oasis.oslcop.sysml.SysmlServerManager;
+import org.oasis.oslcop.sysml.SysmlServerResourcesFactory;
+import java.net.URI;
+import java.net.URL;
+import java.util.Optional;
+import java.util.Map;
+import java.util.Properties;
+import java.io.FileNotFoundException;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.lang.SecurityException;
+import java.net.URISyntaxException;
+import org.eclipse.lyo.store.StorePool;
+
+import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
 // Start of user code imports
 // End of user code
 
@@ -48,7 +65,88 @@ public class ApplicationBinder extends AbstractBinder {
     protected void configure() {
         log.info("HK2 contract binding start");
     
-    }
-
+        bindAsContract(SysmlServerManager.class).in(Singleton.class);
+        bindFactory(new ResourcesFactoryFactory()).to(SysmlServerResourcesFactory.class).in(Singleton.class);
     
+        bindFactory(new StorePoolFactory()).to(StorePool.class).in(Singleton.class);
+    }
+    private final class ResourcesFactoryFactory implements Factory<SysmlServerResourcesFactory> {
+        @Override
+        public SysmlServerResourcesFactory provide() {
+            return new SysmlServerResourcesFactory(OSLC4JUtils.getServletURI());
+        }
+    
+        @Override
+        public void dispose(SysmlServerResourcesFactory instance) {
+        }
+    }
+    private final class StorePoolFactory implements Factory<StorePool> {
+    
+        private Optional<String> getPropertyFromEnvironment(String envKey) {
+            final Map<String, String> env = System.getenv();
+            if(env.containsKey(envKey)) {
+                log.info("Found env variable with key {}", envKey);
+                return Optional.of(env.get(envKey));
+            }
+            return Optional.empty();
+        }
+    
+        private Optional<String> getPropertyFromFile(Properties properties, String key) {
+            if(properties.containsKey(key)) {
+                log.info("Found property with key {}", key);
+                return Optional.of(properties.getProperty(key));
+            }
+            return Optional.empty();
+        }
+    
+        private StorePool initializeStorePool() {
+            //For each store configuration setting, first try to load it from an environment variable.
+            //If no such variable exists, try to load from the properties file - if such a file exists.
+            //Raise an exception of any of the necessary settings are missing from both the environment and properties file.
+            Properties lyoStoreProperties = new Properties();
+            URL lyoStorePropertiesFile = ApplicationBinder.class.getResource("/store.properties");
+            try {
+                if (null != lyoStorePropertiesFile) {
+                    lyoStoreProperties.load(new FileInputStream(lyoStorePropertiesFile.getFile()));
+                }
+                else {
+                    log.info("Failed to read properties file for Store configuration. Hopefully, settings are available via Environment variables.");
+                }
+            } catch (FileNotFoundException | SecurityException e) {
+                log.info("Failed to read properties file for Store configuration. Hopefully, settings are available via Environment variables.", e);
+            }
+            catch (IOException e) {
+                log.error("Failed to initialize Store. properties file for Store configuration could not be loaded.", e);
+                throw new RuntimeException(e);
+            }        
+    
+            int initialPoolSize = Integer.parseInt(getPropertyFromEnvironment("LYO_STORE_INITIAL_POOL_SIZE")
+                    .orElseGet(() -> getPropertyFromFile(lyoStoreProperties, "initialPoolSize").orElseThrow()));
+            URI defaultNamedGraph = URI.create(getPropertyFromEnvironment("LYO_STORE_DEFAULT_NAMED_GRAPH")
+                    .orElseGet(() -> getPropertyFromFile(lyoStoreProperties, "defaultNamedGraph").orElseThrow()));
+            URI sparqlQueryEndpoint = URI.create(getPropertyFromEnvironment("LYO_STORE_SPARQL_QUERY_ENDPOINT")
+                    .orElseGet(() -> getPropertyFromFile(lyoStoreProperties, "sparqlQueryEndpoint").orElseThrow()));
+            URI sparqlUpdateEndpoint = URI.create(getPropertyFromEnvironment("LYO_STORE_SPARQL_UPDATE_ENDPOINT")
+                    .orElseGet(() -> getPropertyFromFile(lyoStoreProperties, "sparqlUpdateEndpoint").orElseThrow()));
+    
+            String userName = null;
+            String password = null;
+            StorePool storePool = new StorePool(initialPoolSize, defaultNamedGraph, sparqlQueryEndpoint, sparqlUpdateEndpoint, userName, password);
+            return storePool;
+        }
+    
+        @Override
+        public StorePool provide() {
+            // Start of user code StoreInitialise
+            // End of user code
+            StorePool storePool = initializeStorePool();
+            // Start of user code StoreFinalize
+            // End of user code
+            return storePool;
+        }
+    
+        @Override
+        public void dispose(StorePool instance) {
+        }
+    }
 }

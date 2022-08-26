@@ -72,158 +72,139 @@ import org.oasis.oslcop.sysml.TypeFeaturing;
 
 public class SysmlServerResourcesFactory {
 
+    private String basePath;
+
     // Start of user code class_attributes
     // End of user code
-    
+
+    public SysmlServerResourcesFactory(String basePath) {
+        this.basePath = basePath;
+    }
+
     // Start of user code class_methods
     // End of user code
 
     //methods for SysmlClass resource
     
-    public static SysmlClass createSysmlClass(final String projectId, final String id)
-    {
+    public SysmlClass createSysmlClass(final String projectId, final String id) {
         return new SysmlClass(constructURIForSysmlClass(projectId, id));
     }
     
-    public static URI constructURIForSysmlClass(final String projectId, final String id)
-    {
-        String basePath = OSLC4JUtils.getServletURI();
+    public URI constructURIForSysmlClass(final String projectId, final String id) {
         Map<String, Object> pathParameters = new HashMap<String, Object>();
         pathParameters.put("projectId", projectId);
         pathParameters.put("id", id);
         String instanceURI = "projects/{projectId}/classes/{id}";
     
-        final UriBuilder builder = UriBuilder.fromUri(basePath);
+        final UriBuilder builder = UriBuilder.fromUri(this.basePath);
         return builder.path(instanceURI).buildFromMap(pathParameters);
     }
     
-    public static Link constructLinkForSysmlClass(final String projectId, final String id , final String label)
-    {
+    public Link constructLinkForSysmlClass(final String projectId, final String id , final String label) {
         return new Link(constructURIForSysmlClass(projectId, id), label);
     }
     
-    public static Link constructLinkForSysmlClass(final String projectId, final String id)
-    {
+    public Link constructLinkForSysmlClass(final String projectId, final String id) {
         return new Link(constructURIForSysmlClass(projectId, id));
     }
     
 
     //methods for Element resource
     
-    public static Element createElement(final String projectId, final String id)
-    {
+    public Element createElement(final String projectId, final String id) {
         return new Element(constructURIForElement(projectId, id));
     }
     
-    public static URI constructURIForElement(final String projectId, final String id)
-    {
-        String basePath = OSLC4JUtils.getServletURI();
+    public URI constructURIForElement(final String projectId, final String id) {
         Map<String, Object> pathParameters = new HashMap<String, Object>();
         pathParameters.put("projectId", projectId);
         pathParameters.put("id", id);
         String instanceURI = "projects/{projectId}/elements/{id}";
     
-        final UriBuilder builder = UriBuilder.fromUri(basePath);
+        final UriBuilder builder = UriBuilder.fromUri(this.basePath);
         return builder.path(instanceURI).buildFromMap(pathParameters);
     }
     
-    public static Link constructLinkForElement(final String projectId, final String id , final String label)
-    {
+    public Link constructLinkForElement(final String projectId, final String id , final String label) {
         return new Link(constructURIForElement(projectId, id), label);
     }
     
-    public static Link constructLinkForElement(final String projectId, final String id)
-    {
+    public Link constructLinkForElement(final String projectId, final String id) {
         return new Link(constructURIForElement(projectId, id));
     }
     
 
     //methods for Feature resource
     
-    public static Feature createFeature(final String projectId, final String id)
-    {
+    public Feature createFeature(final String projectId, final String id) {
         return new Feature(constructURIForFeature(projectId, id));
     }
     
-    public static URI constructURIForFeature(final String projectId, final String id)
-    {
-        String basePath = OSLC4JUtils.getServletURI();
+    public URI constructURIForFeature(final String projectId, final String id) {
         Map<String, Object> pathParameters = new HashMap<String, Object>();
         pathParameters.put("projectId", projectId);
         pathParameters.put("id", id);
         String instanceURI = "projects/{projectId}/features/{id}";
     
-        final UriBuilder builder = UriBuilder.fromUri(basePath);
+        final UriBuilder builder = UriBuilder.fromUri(this.basePath);
         return builder.path(instanceURI).buildFromMap(pathParameters);
     }
     
-    public static Link constructLinkForFeature(final String projectId, final String id , final String label)
-    {
+    public Link constructLinkForFeature(final String projectId, final String id , final String label) {
         return new Link(constructURIForFeature(projectId, id), label);
     }
     
-    public static Link constructLinkForFeature(final String projectId, final String id)
-    {
+    public Link constructLinkForFeature(final String projectId, final String id) {
         return new Link(constructURIForFeature(projectId, id));
     }
     
 
     //methods for Relationship resource
     
-    public static Relationship createRelationship(final String projectId, final String id)
-    {
+    public Relationship createRelationship(final String projectId, final String id) {
         return new Relationship(constructURIForRelationship(projectId, id));
     }
     
-    public static URI constructURIForRelationship(final String projectId, final String id)
-    {
-        String basePath = OSLC4JUtils.getServletURI();
+    public URI constructURIForRelationship(final String projectId, final String id) {
         Map<String, Object> pathParameters = new HashMap<String, Object>();
         pathParameters.put("projectId", projectId);
         pathParameters.put("id", id);
         String instanceURI = "projects/{projectId}/relationships/{id}";
     
-        final UriBuilder builder = UriBuilder.fromUri(basePath);
+        final UriBuilder builder = UriBuilder.fromUri(this.basePath);
         return builder.path(instanceURI).buildFromMap(pathParameters);
     }
     
-    public static Link constructLinkForRelationship(final String projectId, final String id , final String label)
-    {
+    public Link constructLinkForRelationship(final String projectId, final String id , final String label) {
         return new Link(constructURIForRelationship(projectId, id), label);
     }
     
-    public static Link constructLinkForRelationship(final String projectId, final String id)
-    {
+    public Link constructLinkForRelationship(final String projectId, final String id) {
         return new Link(constructURIForRelationship(projectId, id));
     }
     
 
     //methods for Subsetting resource
     
-    public static Subsetting createSubsetting(final String projectId, final String id)
-    {
+    public Subsetting createSubsetting(final String projectId, final String id) {
         return new Subsetting(constructURIForSubsetting(projectId, id));
     }
     
-    public static URI constructURIForSubsetting(final String projectId, final String id)
-    {
-        String basePath = OSLC4JUtils.getServletURI();
+    public URI constructURIForSubsetting(final String projectId, final String id) {
         Map<String, Object> pathParameters = new HashMap<String, Object>();
         pathParameters.put("projectId", projectId);
         pathParameters.put("id", id);
         String instanceURI = "projects/{projectId}/subsettings/{id}";
     
-        final UriBuilder builder = UriBuilder.fromUri(basePath);
+        final UriBuilder builder = UriBuilder.fromUri(this.basePath);
         return builder.path(instanceURI).buildFromMap(pathParameters);
     }
     
-    public static Link constructLinkForSubsetting(final String projectId, final String id , final String label)
-    {
+    public Link constructLinkForSubsetting(final String projectId, final String id , final String label) {
         return new Link(constructURIForSubsetting(projectId, id), label);
     }
     
-    public static Link constructLinkForSubsetting(final String projectId, final String id)
-    {
+    public Link constructLinkForSubsetting(final String projectId, final String id) {
         return new Link(constructURIForSubsetting(projectId, id));
     }
     

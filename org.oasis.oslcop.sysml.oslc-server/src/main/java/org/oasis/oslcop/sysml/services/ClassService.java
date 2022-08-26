@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -75,7 +76,7 @@ import org.eclipse.lyo.oslc4j.core.model.Link;
 import org.eclipse.lyo.oslc4j.core.model.AbstractResource;
 
 import org.oasis.oslcop.sysml.SysmlServerManager;
-import org.oasis.oslcop.sysml.SysmlServerConstants;
+import org.oasis.oslcop.sysml.ServerConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.servlet.ServiceProviderCatalogSingleton;
 import org.oasis.oslcop.sysml.SysmlClass;
@@ -95,6 +96,7 @@ public class ClassService
     @Context private HttpServletRequest httpServletRequest;
     @Context private HttpServletResponse httpServletResponse;
     @Context private UriInfo uriInfo;
+    @Inject  private SysmlServerManager delegate;
 
     private static final Logger log = LoggerFactory.getLogger(ClassService.class);
 
@@ -141,13 +143,13 @@ public class ClassService
         // Start of user code getResource_init
         // End of user code
 
-        final SysmlClass aSysmlClass = SysmlServerManager.getSysmlClass(httpServletRequest, projectId, id);
+        final SysmlClass aSysmlClass = delegate.getSysmlClass(httpServletRequest, projectId, id);
 
         if (aSysmlClass != null) {
             // Start of user code getSysmlClass
             // End of user code
-            httpServletResponse.setHeader("ETag", SysmlServerManager.getETagFromSysmlClass(aSysmlClass));
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
+            httpServletResponse.setHeader("ETag", delegate.getETagFromSysmlClass(aSysmlClass));
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             return aSysmlClass;
         }
 
@@ -177,7 +179,7 @@ public class ClassService
         // Start of user code getSysmlClassAsHtml_init
         // End of user code
 
-        final SysmlClass aSysmlClass = SysmlServerManager.getSysmlClass(httpServletRequest, projectId, id);
+        final SysmlClass aSysmlClass = delegate.getSysmlClass(httpServletRequest, projectId, id);
 
         if (aSysmlClass != null) {
             httpServletRequest.setAttribute("aSysmlClass", aSysmlClass);
@@ -225,7 +227,7 @@ public class ClassService
         //TODO: adjust the preview height & width values from the default values provided above.
         // End of user code
 
-        final SysmlClass aSysmlClass = SysmlServerManager.getSysmlClass(httpServletRequest, projectId, id);
+        final SysmlClass aSysmlClass = delegate.getSysmlClass(httpServletRequest, projectId, id);
 
         if (aSysmlClass != null) {
             final Compact compact = new Compact();
@@ -248,7 +250,7 @@ public class ClassService
             largePreview.setDocument(UriBuilder.fromUri(aSysmlClass.getAbout()).path("largePreview").build());
             compact.setLargePreview(largePreview);
 
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             return compact;
         }
@@ -265,7 +267,7 @@ public class ClassService
         // Start of user code getSysmlClassAsHtmlSmallPreview_init
         // End of user code
 
-        final SysmlClass aSysmlClass = SysmlServerManager.getSysmlClass(httpServletRequest, projectId, id);
+        final SysmlClass aSysmlClass = delegate.getSysmlClass(httpServletRequest, projectId, id);
 
         if (aSysmlClass != null) {
             httpServletRequest.setAttribute("aSysmlClass", aSysmlClass);
@@ -285,7 +287,7 @@ public class ClassService
                 throw new WebApplicationException("Could not handle smallPreview", e);
             }
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/uipreview.jsp");
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);
             return;
@@ -304,7 +306,7 @@ public class ClassService
         // Start of user code getSysmlClassAsHtmlLargePreview_init
         // End of user code
 
-        final SysmlClass aSysmlClass = SysmlServerManager.getSysmlClass(httpServletRequest, projectId, id);
+        final SysmlClass aSysmlClass = delegate.getSysmlClass(httpServletRequest, projectId, id);
 
         if (aSysmlClass != null) {
             httpServletRequest.setAttribute("aSysmlClass", aSysmlClass);
@@ -324,7 +326,7 @@ public class ClassService
                 throw new WebApplicationException("Could not handle largePreview", e);
             }
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/uipreview.jsp");
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);
             return;

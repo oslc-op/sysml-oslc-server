@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -75,7 +76,7 @@ import org.eclipse.lyo.oslc4j.core.model.Link;
 import org.eclipse.lyo.oslc4j.core.model.AbstractResource;
 
 import org.oasis.oslcop.sysml.SysmlServerManager;
-import org.oasis.oslcop.sysml.SysmlServerConstants;
+import org.oasis.oslcop.sysml.ServerConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.servlet.ServiceProviderCatalogSingleton;
 import org.oasis.oslcop.sysml.Subsetting;
@@ -95,6 +96,7 @@ public class SubsettingService
     @Context private HttpServletRequest httpServletRequest;
     @Context private HttpServletResponse httpServletResponse;
     @Context private UriInfo uriInfo;
+    @Inject  private SysmlServerManager delegate;
 
     private static final Logger log = LoggerFactory.getLogger(SubsettingService.class);
 
@@ -141,13 +143,13 @@ public class SubsettingService
         // Start of user code getResource_init
         // End of user code
 
-        final Subsetting aSubsetting = SysmlServerManager.getSubsetting(httpServletRequest, projectId, id);
+        final Subsetting aSubsetting = delegate.getSubsetting(httpServletRequest, projectId, id);
 
         if (aSubsetting != null) {
             // Start of user code getSubsetting
             // End of user code
-            httpServletResponse.setHeader("ETag", SysmlServerManager.getETagFromSubsetting(aSubsetting));
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
+            httpServletResponse.setHeader("ETag", delegate.getETagFromSubsetting(aSubsetting));
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             return aSubsetting;
         }
 
@@ -177,7 +179,7 @@ public class SubsettingService
         // Start of user code getSubsettingAsHtml_init
         // End of user code
 
-        final Subsetting aSubsetting = SysmlServerManager.getSubsetting(httpServletRequest, projectId, id);
+        final Subsetting aSubsetting = delegate.getSubsetting(httpServletRequest, projectId, id);
 
         if (aSubsetting != null) {
             httpServletRequest.setAttribute("aSubsetting", aSubsetting);
@@ -225,7 +227,7 @@ public class SubsettingService
         //TODO: adjust the preview height & width values from the default values provided above.
         // End of user code
 
-        final Subsetting aSubsetting = SysmlServerManager.getSubsetting(httpServletRequest, projectId, id);
+        final Subsetting aSubsetting = delegate.getSubsetting(httpServletRequest, projectId, id);
 
         if (aSubsetting != null) {
             final Compact compact = new Compact();
@@ -248,7 +250,7 @@ public class SubsettingService
             largePreview.setDocument(UriBuilder.fromUri(aSubsetting.getAbout()).path("largePreview").build());
             compact.setLargePreview(largePreview);
 
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             return compact;
         }
@@ -265,7 +267,7 @@ public class SubsettingService
         // Start of user code getSubsettingAsHtmlSmallPreview_init
         // End of user code
 
-        final Subsetting aSubsetting = SysmlServerManager.getSubsetting(httpServletRequest, projectId, id);
+        final Subsetting aSubsetting = delegate.getSubsetting(httpServletRequest, projectId, id);
 
         if (aSubsetting != null) {
             httpServletRequest.setAttribute("aSubsetting", aSubsetting);
@@ -274,7 +276,7 @@ public class SubsettingService
 
             try {
                 httpServletRequest.setAttribute("resourceTitle", aSubsetting.toString());
-                ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getSubsettedFeature", "getSubsettingFeature", "getOwningFeature", "getGeneral", "getSpecific", "getOwningType", "getRelatedElement", "getTarget", "getSysmlSource", "getOwningRelatedElement", "getOwnedRelatedElement", "getSysmlIdentifier", "getName", "getQualifiedName", "getEffectiveName", "getAliasId", "getHumanId", "getOwningMembership", "getOwnedRelationship", "getOwningRelationship", "getOwningNamespace", "getOwner", "getOwnedElement", "getDocumentation", "getOwnedAnnotation", "getDocumentationComment", "getOwnedTextualRepresentation", "getContributor", "getCreated", "getCreator", "getDescription", "getIdentifier", "getModified", "getSource", "getTitle", "getType", "getInstanceShape", "getServiceProvider", "getShortTitle", "getExternal", "getTrace", "getRefine", "getDerives", "getElaborates", "getSatisfy"));
+                ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getSubsettedFeature", "getSubsettingFeature", "getOwningFeature", "getGeneral", "getSpecific", "getOwningType", "getRelatedElement", "getTarget", "getSysmlSource", "getOwningRelatedElement", "getOwnedRelatedElement", "getSysmlIdentifier", "getName", "getQualifiedName", "getEffectiveName", "getAliasId", "getHumanId", "getOwningMembership", "getOwnedRelationship", "getOwningRelationship", "getOwningNamespace", "getOwner", "getOwnedElement", "getDocumentation", "getOwnedAnnotation", "getDocumentationComment", "getOwnedTextualRepresentation", "getContributor", "getCreated", "getCreator", "getDescription", "getIdentifier", "getModified", "getDctermsSource", "getTitle", "getType", "getInstanceShape", "getServiceProvider", "getShortTitle", "getExternal", "getTrace", "getRefine", "getDerives", "getElaborates", "getSatisfy"));
                 // Start of user code getSubsettingAsHtmlSmallPreview_setResourceGetterMethods
                 //TODO: modify the set of attributes to show in the preview
                 // End of user code
@@ -285,7 +287,7 @@ public class SubsettingService
                 throw new WebApplicationException("Could not handle smallPreview", e);
             }
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/uipreview.jsp");
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);
             return;
@@ -304,7 +306,7 @@ public class SubsettingService
         // Start of user code getSubsettingAsHtmlLargePreview_init
         // End of user code
 
-        final Subsetting aSubsetting = SysmlServerManager.getSubsetting(httpServletRequest, projectId, id);
+        final Subsetting aSubsetting = delegate.getSubsetting(httpServletRequest, projectId, id);
 
         if (aSubsetting != null) {
             httpServletRequest.setAttribute("aSubsetting", aSubsetting);
@@ -313,7 +315,7 @@ public class SubsettingService
 
             try {
                 httpServletRequest.setAttribute("resourceTitle", aSubsetting.toString());
-                ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getSubsettedFeature", "getSubsettingFeature", "getOwningFeature", "getGeneral", "getSpecific", "getOwningType", "getRelatedElement", "getTarget", "getSysmlSource", "getOwningRelatedElement", "getOwnedRelatedElement", "getSysmlIdentifier", "getName", "getQualifiedName", "getEffectiveName", "getAliasId", "getHumanId", "getOwningMembership", "getOwnedRelationship", "getOwningRelationship", "getOwningNamespace", "getOwner", "getOwnedElement", "getDocumentation", "getOwnedAnnotation", "getDocumentationComment", "getOwnedTextualRepresentation", "getContributor", "getCreated", "getCreator", "getDescription", "getIdentifier", "getModified", "getSource", "getTitle", "getType", "getInstanceShape", "getServiceProvider", "getShortTitle", "getExternal", "getTrace", "getRefine", "getDerives", "getElaborates", "getSatisfy"));
+                ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getSubsettedFeature", "getSubsettingFeature", "getOwningFeature", "getGeneral", "getSpecific", "getOwningType", "getRelatedElement", "getTarget", "getSysmlSource", "getOwningRelatedElement", "getOwnedRelatedElement", "getSysmlIdentifier", "getName", "getQualifiedName", "getEffectiveName", "getAliasId", "getHumanId", "getOwningMembership", "getOwnedRelationship", "getOwningRelationship", "getOwningNamespace", "getOwner", "getOwnedElement", "getDocumentation", "getOwnedAnnotation", "getDocumentationComment", "getOwnedTextualRepresentation", "getContributor", "getCreated", "getCreator", "getDescription", "getIdentifier", "getModified", "getDctermsSource", "getTitle", "getType", "getInstanceShape", "getServiceProvider", "getShortTitle", "getExternal", "getTrace", "getRefine", "getDerives", "getElaborates", "getSatisfy"));
                 // Start of user code getSubsettingAsHtmlLargePreview_setResourceGetterMethods
                 //TODO: modify the set of attributes to show in the preview
                 // End of user code
@@ -324,7 +326,7 @@ public class SubsettingService
                 throw new WebApplicationException("Could not handle largePreview", e);
             }
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/uipreview.jsp");
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);
             return;

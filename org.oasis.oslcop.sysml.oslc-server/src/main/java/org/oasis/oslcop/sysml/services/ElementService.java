@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -75,7 +76,7 @@ import org.eclipse.lyo.oslc4j.core.model.Link;
 import org.eclipse.lyo.oslc4j.core.model.AbstractResource;
 
 import org.oasis.oslcop.sysml.SysmlServerManager;
-import org.oasis.oslcop.sysml.SysmlServerConstants;
+import org.oasis.oslcop.sysml.ServerConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.servlet.ServiceProviderCatalogSingleton;
 import org.oasis.oslcop.sysml.Element;
@@ -95,6 +96,7 @@ public class ElementService
     @Context private HttpServletRequest httpServletRequest;
     @Context private HttpServletResponse httpServletResponse;
     @Context private UriInfo uriInfo;
+    @Inject  private SysmlServerManager delegate;
 
     private static final Logger log = LoggerFactory.getLogger(ElementService.class);
 
@@ -141,13 +143,13 @@ public class ElementService
         // Start of user code getResource_init
         // End of user code
 
-        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, id);
+        final Element aElement = delegate.getElement(httpServletRequest, projectId, id);
 
         if (aElement != null) {
             // Start of user code getElement
             // End of user code
-            httpServletResponse.setHeader("ETag", SysmlServerManager.getETagFromElement(aElement));
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
+            httpServletResponse.setHeader("ETag", delegate.getETagFromElement(aElement));
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             return aElement;
         }
 
@@ -177,7 +179,7 @@ public class ElementService
         // Start of user code getElementAsHtml_init
         // End of user code
 
-        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, id);
+        final Element aElement = delegate.getElement(httpServletRequest, projectId, id);
 
         if (aElement != null) {
             httpServletRequest.setAttribute("aElement", aElement);
@@ -227,7 +229,7 @@ public class ElementService
         //TODO: adjust the preview height & width values from the default values provided above.
         // End of user code
 
-        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, id);
+        final Element aElement = delegate.getElement(httpServletRequest, projectId, id);
 
         if (aElement != null) {
             final Compact compact = new Compact();
@@ -250,7 +252,7 @@ public class ElementService
             largePreview.setDocument(UriBuilder.fromUri(aElement.getAbout()).path("largePreview").build());
             compact.setLargePreview(largePreview);
 
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             return compact;
         }
@@ -267,7 +269,7 @@ public class ElementService
         // Start of user code getElementAsHtmlSmallPreview_init
         // End of user code
 
-        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, id);
+        final Element aElement = delegate.getElement(httpServletRequest, projectId, id);
 
         if (aElement != null) {
             httpServletRequest.setAttribute("aElement", aElement);
@@ -303,7 +305,7 @@ public class ElementService
                 throw new WebApplicationException("Could not handle smallPreview", e);
             }
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/uipreview.jsp");
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);
             return;
@@ -322,7 +324,7 @@ public class ElementService
         // Start of user code getElementAsHtmlLargePreview_init
         // End of user code
 
-        final Element aElement = SysmlServerManager.getElement(httpServletRequest, projectId, id);
+        final Element aElement = delegate.getElement(httpServletRequest, projectId, id);
 
         if (aElement != null) {
             httpServletRequest.setAttribute("aElement", aElement);
@@ -358,7 +360,7 @@ public class ElementService
                 throw new WebApplicationException("Could not handle largePreview", e);
             }
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslcop/sysml/uipreview.jsp");
-            httpServletResponse.addHeader(SysmlServerConstants.HDR_OSLC_VERSION, SysmlServerConstants.OSLC_VERSION_V2);
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);
             return;

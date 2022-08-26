@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -77,7 +78,7 @@ import org.eclipse.lyo.oslc4j.core.model.Link;
 import org.eclipse.lyo.oslc4j.core.model.AbstractResource;
 
 import org.oasis.oslcop.sysml.SysmlServerManager;
-import org.oasis.oslcop.sysml.SysmlServerConstants;
+import org.oasis.oslcop.sysml.ServerConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.SysmlDomainConstants;
 import org.oasis.oslcop.sysml.servlet.ServiceProviderCatalogSingleton;
@@ -117,13 +118,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 // Start of user code pre_class_code
 // End of user code
-@OslcService(SysmlDomainConstants.SYSML_DOMAIN)
+@OslcService(SysmlDomainConstants.SYSML_NAMSPACE)
 @Path("projects/{projectId}/commits/{commitId}/service3/sysmlClasss")
 public class ServiceProviderService3
 {
     @Context private HttpServletRequest httpServletRequest;
     @Context private HttpServletResponse httpServletResponse;
     @Context private UriInfo uriInfo;
+    @Inject  private SysmlServerManager delegate;
 
     private static final Logger log = LoggerFactory.getLogger(ServiceProviderService3.class);
 
@@ -191,7 +193,7 @@ public class ServiceProviderService3
         // Here additional logic can be implemented that complements main action taken in SysmlServerManager
         // End of user code
 
-        List<SysmlClass> resources = SysmlServerManager.querySysmlClasss(httpServletRequest, projectId, commitId, where, prefix, paging, page, pageSize);
+        List<SysmlClass> resources = delegate.querySysmlClasss(httpServletRequest, projectId, commitId, where, prefix, paging, page, pageSize);
         UriBuilder uriBuilder = UriBuilder.fromUri(uriInfo.getAbsolutePath())
             .queryParam("oslc.paging", "true")
             .queryParam("oslc.pageSize", pageSize)
@@ -247,7 +249,7 @@ public class ServiceProviderService3
         // Start of user code querySysmlClasssAsHtml
         // End of user code
 
-        List<SysmlClass> resources = SysmlServerManager.querySysmlClasss(httpServletRequest, projectId, commitId, where, prefix, paging, page, pageSize);
+        List<SysmlClass> resources = delegate.querySysmlClasss(httpServletRequest, projectId, commitId, where, prefix, paging, page, pageSize);
 
         if (resources!= null) {
             // Start of user code querySysmlClasssAsHtml_setAttributes
@@ -306,7 +308,7 @@ public class ServiceProviderService3
 
         if (terms != null ) {
             httpServletRequest.setAttribute("terms", terms);
-            final List<SysmlClass> resources = SysmlServerManager.SysmlClassSelector(httpServletRequest, projectId, commitId, terms);
+            final List<SysmlClass> resources = delegate.SysmlClassSelector(httpServletRequest, projectId, commitId, terms);
             if (resources!= null) {
                 JSONArray resourceArray = new JSONArray();
                 for (SysmlClass resource : resources) {
