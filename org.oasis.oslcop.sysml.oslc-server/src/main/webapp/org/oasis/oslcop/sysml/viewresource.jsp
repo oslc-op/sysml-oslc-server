@@ -130,7 +130,7 @@
 
         <div class="row mt-3">
             <div class="col">
-                <h3>Resource-specific properties</h3>
+                <h3>Resource-specific properties for <%= aResource.getClass().getSimpleName()%></h3>
             </div>
         </div>
         <ul class="nav nav-tabs">
