@@ -1,0 +1,164 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#isLibraryElement">
+    <rdfs:comment>&lt;p&gt;Whether this Element is contained in the ownership tree of a library model.&lt;/p&gt;</rdfs:comment>
+    <rdfs:label>isLibraryElement</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#ownedRelationship">
+    <rdfs:comment>&lt;p&gt;The Relationships for which this Element is the &lt;tt&gt;owningRelatedElement&lt;/tt&gt;.&lt;/p&gt;</rdfs:comment>
+    <rdfs:label>ownedRelationship</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#Relationship">
+    <rdfs:comment>&lt;p&gt;A &lt;code&gt;Relationship&lt;/code&gt; is an &lt;code&gt;Element&lt;/code&gt; that relates other &lt;code&gt;Element&lt;s/code&gt;. Some of its &lt;code&gt;relatedElements&lt;/code&gt; may be owned, in which case those &lt;code&gt;ownedRelatedElements&lt;/code&gt; will be deleted from a model if their &lt;code&gt;owningRelationship&lt;/code&gt; is. A &lt;code&gt;Relationship&lt;/code&gt; may also be owned by another &lt;code&gt;Element&lt;/code&gt;, in which case the &lt;code&gt;ownedRelatedElements&lt;/code&gt; of the &lt;code&gt;Relationship&lt;/code&gt; are also considered to be transitively owned by the &lt;code&gt;owningRelatedElement&lt;/code&gt; of the Relationship.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;relatedElements&lt;/code&gt; of a Relationship are divided into &lt;code&gt;source&lt;/code&gt; and &lt;code&gt;target&lt;/code&gt; &lt;code&gt;Elements&lt;/code&gt;. The &lt;code&gt;Relationship&lt;/code&gt; is considered to be directed from the &lt;code&gt;source&lt;/code&gt; to the &lt;code&gt;target&lt;/code&gt; &lt;code&gt;Elements&lt;/code&gt;. An undirected &lt;code&gt;Relationship&lt;/code&gt; may have either all &lt;code&gt;source&lt;/code&gt; or all &lt;code&gt;target&lt;/code&gt; &lt;code&gt;Elements&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;A &amp;quot;relationship &lt;code&gt;Element&lt;/code&gt;&amp;quot; in the abstract syntax is generically any &lt;code&gt;Element&lt;/code&gt; that is an instance of either &lt;code&gt;Relationship&lt;/code&gt; or a direct or indirect specialization of &lt;code&gt;Relationship&lt;/code&gt;. Any other kind of &lt;code&gt;Element&lt;/code&gt; is a &amp;quot;non-relationship &lt;code&gt;Element&lt;/code&gt;&amp;quot;. It is a convention of that non-relationship &lt;code&gt;Elements&lt;/code&gt; are &lt;em&gt;only&lt;/em&gt; related via reified relationship &lt;code&gt;Elements&lt;/code&gt;. Any meta-associations directly between non-relationship &lt;code&gt;Elements&lt;/code&gt; must be derived from underlying reified &lt;code&gt;Relationship&lt;/code&gt;.&lt;/p&gt;
+
+relatedElement = source-&gt;union(target)</rdfs:comment>
+    <rdfs:label>Relationship</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#declaredName">
+    <rdfs:comment>&lt;p&gt;The declared name of this &lt;code&gt;Element&lt;/code&gt;.&lt;/p&gt;
+</rdfs:comment>
+    <rdfs:label>declaredName</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#ownedRelatedElement">
+    <rdfs:comment>&lt;p&gt;The &lt;tt&gt;relatedElements&lt;/tt&gt; of this Relationship that are owned by the Relationship.&lt;/p&gt;</rdfs:comment>
+    <rdfs:label>ownedRelatedElement</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#owningRelatedElement">
+    <rdfs:comment>&lt;p&gt;The &lt;tt&gt;relatedElement&lt;/tt&gt; of this Relationship that owns the Relationship, if any.&lt;/p&gt;</rdfs:comment>
+    <rdfs:label>owningRelatedElement</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#owningMembership">
+    <rdfs:comment>&lt;p&gt;The &lt;code&gt;owningRelationship&lt;/code&gt; of this Element, if that Relationship is a Membership.&lt;/p&gt;
+</rdfs:comment>
+    <rdfs:label>owningMembership</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#textualRepresentation">
+    <rdfs:comment>&lt;p&gt;The &lt;code&gt;textualRepresentations&lt;/code&gt; that annotate this Element.&lt;/p&gt;</rdfs:comment>
+    <rdfs:label>textualRepresentation</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#isImpliedIncluded">
+    <rdfs:comment>&lt;p&gt;Whether all necessary implied Relationships have been included in the &lt;code&gt;ownedRelationships&lt;/code&gt; of this Element. This property may be true, even if there are not actually any &lt;code&gt;ownedRelationships&lt;/code&gt; with &lt;code&gt;isImplied = true&lt;/code&gt;, meaning that no such Relationships are actually implied for this Element. However, if it is false, then &lt;code&gt;ownedRelationships&lt;/code&gt; may &lt;em&gt;not&lt;/em&gt; contain any implied Relationships. That is, either &lt;em&gt;all&lt;/em&gt; required implied Relationships must be included, or none of them.&lt;/p&gt;</rdfs:comment>
+    <rdfs:label>isImpliedIncluded</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#aliasIds">
+    <rdfs:comment>&lt;p&gt;Various alternative identifiers for this Element. Generally, these will be set by tools.&lt;/p&gt;</rdfs:comment>
+    <rdfs:label>aliasIds</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#owningNamespace">
+    <rdfs:comment>&lt;p&gt;The Namespace that owns this Element, derived as the &lt;code&gt;membershipOwningNamespace&lt;/code&gt; of the &lt;code&gt;owningMembership&lt;/code&gt; of this Element, if any.&lt;/p&gt;
+</rdfs:comment>
+    <rdfs:label>owningNamespace</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#name">
+    <rdfs:comment>&lt;p&gt;The name to be used for this &lt;code&gt;Element&lt;/code&gt; during name resolution within its &lt;code&gt;owningNamespace&lt;/code&gt;. This is derived using the &lt;code&gt;effectiveName()&lt;/code&gt; operation. By default, it is the same as the &lt;code&gt;declaredName&lt;/code&gt;, but this is overridden for certain kinds of &lt;code&gt;Elements&lt;/code&gt; to compute a &lt;code&gt;name&lt;/code&gt; even when the &lt;code&gt;declaredName&lt;/code&gt; is null.&lt;/p&gt;</rdfs:comment>
+    <rdfs:label>name</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#target">
+    <rdfs:comment>&lt;p&gt;The &lt;code&gt;relatedElements&lt;/code&gt; to which this Relationship is considered to be directed.&lt;/p&gt;
+</rdfs:comment>
+    <rdfs:label>target</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#ownedAnnotation">
+    <rdfs:comment>&lt;p&gt;The &lt;code&gt;ownedRelationships&lt;/code&gt; of this Element that are Annotations, for which this Element is the &lt;code&gt;annotatedElement&lt;/code&gt;.&lt;/code&gt;</rdfs:comment>
+    <rdfs:label>ownedAnnotation</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#shortName">
+    <rdfs:comment>&lt;p&gt;The short name to be used for this &lt;code&gt;Element&lt;/code&gt; during name resolution within its &lt;code&gt;owningNamespace&lt;/code&gt;. This is derived using the &lt;code&gt;effectiveShortName()&lt;/code&gt; operation. By default, it is the same as the &lt;code&gt;declaredShortName&lt;/code&gt;, but this is overridden for certain kinds of &lt;code&gt;Elements&lt;/code&gt; to compute a &lt;code&gt;shortName&lt;/code&gt; even when the &lt;code&gt;declaredName&lt;/code&gt; is null.&lt;/p&gt;</rdfs:comment>
+    <rdfs:label>shortName</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#qualifiedName">
+    <rdfs:comment>&lt;p&gt;The full ownership-qualified name of this &lt;code&gt;Element&lt;/code&gt;, represented in a form that is valid according to the KerML textual concrete syntax for qualified names (including use of unrestricted name notation and escaped characters, as necessary). The &lt;code&gt;qualifiedName&lt;/code&gt; is null if this &lt;code&gt;Element&lt;/code&gt; has no &lt;code&gt;owningNamespace&lt;/code&gt; or if there is not a complete ownership chain of named &lt;code&gt;Namespaces&lt;/code&gt; from a root &lt;code&gt;Namespace&lt;/code&gt; to this &lt;code&gt;Element&lt;/code&gt;.&lt;/p&gt;</rdfs:comment>
+    <rdfs:label>qualifiedName</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#source">
+    <rdfs:comment>&lt;p&gt;The &lt;code&gt;relatedElements&lt;/c ode&gt; from which this Relationship is considered to be directed.&lt;/p&gt;</rdfs:comment>
+    <rdfs:label>source</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#owningRelationship">
+    <rdfs:comment>&lt;p&gt;The Relationship for which this Element is an &lt;tt&gt;ownedRelatedElement&lt;/tt&gt;, if any.&lt;/p&gt;
+</rdfs:comment>
+    <rdfs:label>owningRelationship</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#declaredShortName">
+    <rdfs:comment>&lt;p&gt;An optional alternative name for the &lt;code&gt;Element&lt;/code&gt; that is intended to be shorter or in some way more succinct than its primary &lt;code&gt;name&lt;/code&gt;. It may act as a modeler-specified identifier for the &lt;code&gt;Element&lt;/code&gt;, though it is then the responsibility of the modeler to maintain the uniqueness of this identifier within a model or relative to some other context.&lt;/p&gt; 
+</rdfs:comment>
+    <rdfs:label>declaredShortName</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#Element">
+    <rdfs:comment>&lt;p&gt;An &lt;code&gt;Element&lt;/code&gt; is a constituent of a model that is uniquely identified relative to all other &lt;code&gt;Elements&lt;/code&gt;. It can have &lt;code&gt;Relationships&lt;/code&gt; with other &lt;code&gt;Elements&lt;/code&gt;. Some of these &lt;code&gt;Relationships&lt;/code&gt; might imply ownership of other &lt;code&gt;Elements&lt;/code&gt;, which means that if an &lt;code&gt;Element&lt;/code&gt; is deleted from a model, then so are all the &lt;code&gt;Elements&lt;/code&gt; that it owns.&lt;/p&gt;
+
+ownedElement = ownedRelationship.ownedRelatedElement
+owner = owningRelationship.owningRelatedElement
+qualifiedName =
+    if owningNamespace = null then null
+    else if owningNamespace.owner = null then escapedName()
+    else if owningNamespace.qualifiedName = null then null
+    else owningNamespace.qualifiedName + '::' + escapedName()
+    endif endif endif
+documentation = ownedElement-&gt;selectByKind(Documentation)
+ownedAnnotation = ownedRelationship-&gt;selectByKind(Annotation)-&gt;
+    select(a | a.annotatedElement = self)
+name = effectiveName()
+ownedRelationship-&gt;exists(isImplied) implies isImpliedIncluded
+isLibraryElement = libraryNamespace() &lt;&gt;null
+
+shortName = effectiveShortName()</rdfs:comment>
+    <rdfs:label>Element</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#ownedElement">
+    <rdfs:comment>&lt;p&gt;The Elements owned by this Element, derived as the &lt;tt&gt;ownedRelatedElements&lt;/tt&gt; of the &lt;tt&gt;ownedRelationships&lt;/tt&gt; of this Element.&lt;/p&gt;
+</rdfs:comment>
+    <rdfs:label>ownedElement</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#relatedElement">
+    <rdfs:comment>&lt;p&gt;The Elements that are related by this Relationship, derived as the union of the &lt;code&gt;source&lt;/code&gt; and &lt;code&gt;target&lt;/code&gt; Elements of the Relationship.&lt;/p&gt;</rdfs:comment>
+    <rdfs:label>relatedElement</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#isImplied">
+    <rdfs:comment>&lt;p&gt;Whether this Relationship was generated by tooling to meet semantic rules, rather than being directly created by a modeler.&lt;/p&gt;</rdfs:comment>
+    <rdfs:label>isImplied</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#elementId">
+    <rdfs:comment>&lt;p&gt;The globally unique identifier for this Element. This is intended to be set by tooling, and it must not change during the lifetime of the Element.&lt;/p&gt;</rdfs:comment>
+    <rdfs:label>elementId</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#owner">
+    <rdfs:comment>&lt;p&gt;The owner of this Element, derived as the &lt;code&gt;owningRelatedElement&lt;/code&gt; of the &lt;code&gt;owningRelationship&lt;/code&gt; of this Element, if any.&lt;/p&gt;</rdfs:comment>
+    <rdfs:label>owner</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.omg.org/spec/SysML/20230201/vocab/core#documentation">
+    <rdfs:comment>&lt;p&gt;The Documentation owned by this Element.&lt;/p&gt;</rdfs:comment>
+    <rdfs:label>documentation</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+</rdf:RDF>
