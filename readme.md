@@ -25,22 +25,22 @@ Alternatively, do a manual install:
    1. this is necessary if changes are made to the classes in the sysml-domain, which the sysml-server depends on.
    1. This is also necessary when running for the first time.
 2. run `mvn jetty:run-war` on the project `org.oasis.oslcop.sysml.oslc-server-model`
-3. If the first time you are running the server, populate the database by calling http://localhost:8085/sysml_oslc_server/services/populate
-   1. If you already have the data in the triplestore, **make sure to select active version via http://localhost:8085/sysml_oslc_server/services/store/projectCommits** (WARN: the page will take quite a long time to load).
-4. Browse the data starting with the catalog http://localhost:8085/sysml_oslc_server/services/catalog/singleton
+3. If the first time you are running the server, populate the database by calling http://localhost:8085/sysml_oslc_server/oslc/populate
+   1. If you already have the data in the triplestore, **make sure to select active version via http://localhost:8085/sysml_oslc_server/oslc/store/projectCommits** (WARN: the page will take quite a long time to load).
+4. Browse the data starting with the catalog http://localhost:8085/sysml_oslc_server/oslc/catalog/singleton
 
 ## Query
 
 Example queries we can execute (if you chose version `11609e2b-a4df-4a64-9e61-a45660c28542`):
 
-http://localhost:8085/sysml_oslc_server/services/projects/23561420-ef88-4249-bf99-651670ff438f/service6/features/query
+http://localhost:8085/sysml_oslc_server/oslc/projects/23561420-ef88-4249-bf99-651670ff438f/service6/features/query
 
 - `oslc.where sysml:identifier="5bc41f66-4d42-41da-b7a3-92af54dab320"`
 - `oslc.prefix sysml=<http://omg.org/ns/sysml#>`
 
 ## Info
 
-The domain-classes are based on the ecore file, located underhttps
+The domain-classes are based on the ecore file, located under:
 
 - Repo: https://github.com/ModelDriven/SysML-v2-Pilot-Implementation.git
 - filePath: org.omg.sysml\model\SysML.ecore
@@ -49,9 +49,9 @@ The Swagger Docs for the REST server has base: http://sysml2-dev.intercax.com:90
 
 ## Developer Info - Manual steps when re-generating model and code
 
-The SysML domain classes are generated, based on an Lyo model that is itself transformed from the Sysml EMF model.
+The SysML domain classes are generated, based on a Lyo model that is itself transformed from the Sysml EMF model.
 
-There are currently 3 manual steps that need to be handled when regenerting the code.
+There are currently 3 manual steps that need to be handled when re-generating the code.
 
 - The first can be automated in the future.
 - The second is due to a limitation in LyoDesigner.
@@ -61,22 +61,22 @@ There are currently 3 manual steps that need to be handled when regenerting the 
 
 Before generating the java classes, the generated Lyo model is manually modified to:
 
-1. Make Element a sub-class of OSLC_AM:Resource.
+1. Make Element a subclass of `oslc_am:Resource`.
 1. Configure the generator to NOT generate the AM classes (since these are already included as a maven dependency)
 
 ### 2.
 
-After generating the domain classes, we need to change the "toString()" method on each resource to make it print the resources better.
+After generating the domain classes, we need to change the `toString()` method on each resource to make it print the resources better.
 
-Tips: Use Notepad++ to search/replace on all \*.java files.
+Tips: Use Notepad++ to search/replace on all `*.java` files.
 
-- Find: // Start of user code toString_finalize\n // End of user code
-- Replace: // Start of user code toString_finalize\n result = getShortTitle();\n // End of user code
+- Find: `// Start of user code toString_finalize\n // End of user code`
+- Replace: `// Start of user code toString_finalize\n result = getShortTitle();\n // End of user code`
 
 ### 3.
 
-In the generated jsp pages, there are calls to getDctermsType(), getDctermsIdentifier() and getDctermsSource(), but these methods do not exist.
-They would have existed if the OSLC AM resources were generated. But because we are including the library as it is previously generated, the methods should be really getType(), getIdentifier() and getSource()
+In the generated JSP pages, there are calls to `getDctermsType()`, `getDctermsIdentifier()` and `getDctermsSource()`, but these methods do not exist.
+They would have existed if the OSLC AM resources were generated. But because we are including the library as it is previously generated, the methods should be really `getType()`, `getIdentifier()` and `getSource()`
 
 # License
 
