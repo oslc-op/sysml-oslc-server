@@ -25,8 +25,13 @@ Alternatively, do a manual install:
    1. this is necessary if changes are made to the classes in the sysml-domain, which the sysml-server depends on.
    1. This is also necessary when running for the first time.
 2. run `mvn jetty:run-war` on the project `org.oasis.oslcop.sysml.oslc-server-model`
-3. If the first time you are running the server, populate the database by calling http://localhost:8085/sysml_oslc_server/oslc/populate
-   1. If you already have the data in the triplestore, **make sure to select active version via http://localhost:8085/sysml_oslc_server/oslc/store/projectCommits** (WARN: the page will take quite a long time to load).
+3. If the first time you are running the server, you need to populate the database with some data. You have 2 alternatives: 
+   1. Populate the data from a Json server (as defined in the properties-file `org.oasis.oslcop.sysml.oslc-server\src\main\resources\jsonServer.properties`)
+      1. Call http://localhost:8085/sysml_oslc_server/oslc/populate
+      1. If you already have the data in the triplestore, **make sure to select active version via http://localhost:8085/sysml_oslc_server/oslc/store/projectCommits** (WARN: the page will take quite a long time to load).
+   1. Populate the data from a triplestore backup file `data\SysML2data.nq` 
+      1. Unzip the file `data\SysML2data.nq`
+      1. Use Postman to make a POST request to http://localhost:3030/ds/data. Set the request body to be "binary", and select the file `data\SysML2data.nq` as the body.
 4. Browse the data starting with the catalog http://localhost:8085/sysml_oslc_server/oslc/catalog/singleton
 
 ## Query
