@@ -74,7 +74,10 @@ List<ServiceProvider> serviceProviders = (List<ServiceProvider>) request.getAttr
                 <%
                 String[] split = serviceProvider.getIdentifier().split("/");
                 String projectId = split[0];
-                String projectCommitId = split[1];
+                String projectCommitId = "n/a";
+                if (split.length > 1) {
+                    projectCommitId = split[1];
+                }
                 %>
                 <li>Project ID: <%=projectId%></li>
                 <li>Commit ID: <%=projectCommitId%></li>
