@@ -27,11 +27,14 @@ jobs:
           - jdk: '24'
             distribution: 'zulu'
             experimental: true
+          - jdk: '25-ea'
+            distribution: 'zulu'
+            experimental: true
     continue-on-error: ${{ matrix.experimental }}
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK {{ matrix.jdk }}
+      - name: Set up JDK ${{ matrix.jdk }}
         uses: actions/setup-java@v4
         with:
           distribution: ${{ matrix.distribution }}
