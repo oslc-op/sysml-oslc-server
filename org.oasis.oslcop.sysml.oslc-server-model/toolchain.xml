@@ -16,10 +16,10 @@
         <services serviceNamespace="relativeToServiceProvider">
           <domainSpecification href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#//@domainSpecifications[name='sysml']"/>
           <queryCapabilities title="Relationship QueryCapability" label="Relationship QueryCapability" queryBaseURI="query">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_WPgXhKy3Ee2q-pB7bLvWSg"/>
+            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_U0wy9s3tEe61gtZUNCcKpg"/>
           </queryCapabilities>
           <selectionDialogs title="Relationship SelectionDialog" label="Relationship SelectionDialog" dialogURI="selector" hintWidth="250" hintHeight="250">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_WPgXhKy3Ee2q-pB7bLvWSg"/>
+            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_U0wy9s3tEe61gtZUNCcKpg"/>
           </selectionDialogs>
           <persistence store="//@adaptorInterfaces.0/@stores.0"/>
         </services>
@@ -79,7 +79,7 @@
       <persistence store="//@adaptorInterfaces.0/@stores.0"/>
     </webServices>
     <webServices name="RelationshipService" serviceUrlPattern="projects/{projectId}/relationships" resourceUrlPattern="{id}">
-      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_WPgXhKy3Ee2q-pB7bLvWSg"/>
+      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_U0wy9s3tEe61gtZUNCcKpg"/>
       <persistence store="//@adaptorInterfaces.0/@stores.0"/>
     </webServices>
     <webServices name="FeatureService" serviceUrlPattern="projects/{projectId}/features" resourceUrlPattern="{id}">
