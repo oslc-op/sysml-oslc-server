@@ -26,10 +26,10 @@
         <services serviceNamespace="relativeToServiceProvider">
           <domainSpecification href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#//@domainSpecifications[name='sysml']"/>
           <queryCapabilities title="Class QueryCapability" label="Class QueryCapability" queryBaseURI="query">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_WPgXnKy3Ee2q-pB7bLvWSg"/>
+            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_U0wL4s3tEe61gtZUNCcKpg"/>
           </queryCapabilities>
           <selectionDialogs title="Class SelectionDialog" label="Class SelectionDialog" dialogURI="selector" hintWidth="250" hintHeight="250">
-            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_WPgXnKy3Ee2q-pB7bLvWSg"/>
+            <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_U0wL4s3tEe61gtZUNCcKpg"/>
           </selectionDialogs>
           <persistence store="//@adaptorInterfaces.0/@stores.0"/>
         </services>
@@ -75,7 +75,7 @@
       <persistence store="//@adaptorInterfaces.0/@stores.0"/>
     </webServices>
     <webServices name="ClassService" serviceUrlPattern="projects/{projectId}/classes" resourceUrlPattern="{id}">
-      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_WPgXnKy3Ee2q-pB7bLvWSg"/>
+      <resourceTypes href="../org.oasis.oslcop.sysml.oslc-domain-model/sysmlDomainSpecification.xml#_U0wL4s3tEe61gtZUNCcKpg"/>
       <persistence store="//@adaptorInterfaces.0/@stores.0"/>
     </webServices>
     <webServices name="RelationshipService" serviceUrlPattern="projects/{projectId}/relationships" resourceUrlPattern="{id}">
