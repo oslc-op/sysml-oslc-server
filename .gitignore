@@ -40,3 +40,6 @@ sysml-server/.settings/
 
 #macOS
 .DS_Store
+
+# Maven overlays
+overlays/
